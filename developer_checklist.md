@@ -7,6 +7,9 @@ Retrouvez ici tous les éléments à prendre en compte pour un bon développemen
 * et la [doc officielle Solidity](https://docs.soliditylang.org/en/latest/)
 * Pour le reste se reporter aux sites de chaque application (Truffle, Ganache...) ainsi qu'aux nombreuses chaînes YouTube disponible.
 
+### Editeur de code
+* Visual Studio Code avec les extensions Solidity de Juan Blanco (permet l'insertion automatique de la doc NatSpec en tapant les premières lettres de NatSpec - apparaît dès la première lettre "n")
+
 ### Style
 Pour s'assurer que les smart contracts sont bien écrits, consulter le [Style Guide](https://docs.soliditylang.org/en/latest/style-guide.html)
 Sous Remix, installer Solhint Linter disponible depuis le plugin manager.
@@ -17,12 +20,14 @@ Rappel de quelques grandes règles de styling
 * Ordre de déclaration des éléments dans un smart contract (info de François) : struct, enum, variable global, event, modifier, constructeur, fallback, fonctions external/public/internal/private
 
 ### Sécurité et Optimisation
-https://docs.soliditylang.org/en/latest/security-considerations.html
+* https://docs.soliditylang.org/en/latest/security-considerations.html
+* Reentrancy
+* Gas limit dans les boucles for
 
 ### Test Unitaires
 Nous utiliserons Mocha et Chai
 
 ### Documentation techique
-* La documentation générée par 
+* La documentation générée par le plugin Remix "ETHDOC - Documentation Generator" devrait suffire. A noter qu'il ne génère que la doc 
 
 ### GitHub - branches et pull requests
