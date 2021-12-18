@@ -11,13 +11,18 @@ Retrouvez ici tous les éléments à prendre en compte pour un bon développemen
 Pour s'assurer que les smart contracts sont bien écrits, consulter le [Style Guide](https://docs.soliditylang.org/en/latest/style-guide.html)
 Sous Remix, installer Solhint Linter disponible depuis le plugin manager.
 Rappel de quelques grandes règles de styling
+* Indentation 4 espaces (éviter les tabulations)
+* 2 lignes vides avant chaque déclaration de contract, 1 ligne avant chaque déclaration
+* Taille maximale d'une ligne = 79 caractères ([recommendations PEP 8)](https://www.python.org/dev/peps/pep-0008/#maximum-line-length)
+* Ordre de déclaration des éléments dans un smart contract (info de François) : struct, enum, variable global, event, modifier, constructeur, fallback, fonctions external/public/internal/private
 
-### Sécurité
-
-### Optimisation
+### Sécurité et Optimisation
+https://docs.soliditylang.org/en/latest/security-considerations.html
 
 ### Test Unitaires
+Nous utiliserons Mocha et Chai
 
 ### Documentation techique
+* La documentation générée par 
 
 ### GitHub - branches et pull requests
