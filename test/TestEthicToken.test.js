@@ -1,4 +1,4 @@
-const { BN,expectRevert , expectEvent } = require('@openzeppelin/test-helpers');
+const { BN, expectRevert , expectEvent } = require('@openzeppelin/test-helpers');
 const { expect } = require('chai');
 const ERC20EOC = artifacts.require('EthicToken');
 
@@ -24,7 +24,6 @@ contract('ERC20EOC', function (accounts) {
         expect(await this.TokenInstance.symbol()).to.equal(_symbol);
     });
 
-
     it('Has a decimal value of 18', async function () {
         expect(await this.TokenInstance.decimals()).to.be.bignumber.equal(_decimals);
     });
@@ -45,6 +44,7 @@ contract('ERC20EOC', function (accounts) {
         expect(balanceOwnerAfterTransfer).to.be.bignumber.equal(balanceOwnerBeforeTransfer.sub(amount));
         expect(balanceRecipientAfterTransfer).to.be.bignumber.equal(balanceRecipientBeforeTransfer.add(amount));
     });
+
     it('Checking transferFrom and approve', async function (){
         let balanceOwnerBeforeTransfer = await this.TokenInstance.balanceOf(owner);
         let balanceRecipientBeforeTransfer = await this.TokenInstance.balanceOf(recipient);
@@ -55,6 +55,5 @@ contract('ERC20EOC', function (accounts) {
         let balanceRecipientAfterTransfer = await this.TokenInstance.balanceOf(recipient);
         expect(balanceOwnerAfterTransfer).to.be.bignumber.equal(balanceOwnerBeforeTransfer.sub(amount));
         expect(balanceRecipientAfterTransfer).to.be.bignumber.equal(balanceRecipientBeforeTransfer.add(amount));
-      });
-
-     });
+    });
+});
