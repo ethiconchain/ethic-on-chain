@@ -1,5 +1,5 @@
-var SimpleStorage = artifacts.require("./SimpleStorage.sol");
+var EthicToken = artifacts.require("./EthicToken.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
+  deployer.deploy(EthicToken,"10000000");
 };
