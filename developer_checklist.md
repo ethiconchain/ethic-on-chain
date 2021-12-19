@@ -21,10 +21,21 @@ Rappel de quelques grandes règles de styling
 * Taille maximale d'une ligne = 79 caractères ([recommendations PEP 8)](https://www.python.org/dev/peps/pep-0008/#maximum-line-length)
 * Ordre de déclaration des éléments dans un smart contract (info de François) : struct, enum, variable global, event, modifier, constructeur, fallback, fonctions external/public/internal/private
 
-### Sécurité et Optimisation
+### Sécurité
 * https://docs.soliditylang.org/en/latest/security-considerations.html
 * Reentrancy
 * Gas limit dans les boucles for
+
+### Optimisation
+* Regroupement des variables : les smart contrats solidity comportent des emplacements contigus de 32 octets (256 bits) utilisés pour le stockage. Lorsque nous arrangeons les variables de manière à ce que plusieurs d'entre elles tiennent dans un seul emplacement, on parle de “variable packing”. Attention, on parle de type précis, par exemple un uint128 n'est pas de même type qu'un uint256. Même chose à l'intérieur d'une structure !
+* Initialisation de variables : pas besoin d'initialiser les variables avec leur valeur par défaut (pas de 0 pour les int, pas false pour les bool)
+* Messages d'erreur : utiliser des messages courts, aller à l'essentiel (du moment que ça reste clair bien entendu)
+* Eviter les contrôles répétitifs (exemple : plus besoin de tester certains overflow depuis Solidity 0.8 où même SafeMath n'est plus nécessaire)
+* Fonctions internes : privilégier l'appel à des fonctions internes à l'intérieur d'un contrat, moins coûteuses.
+* Privilégier le Mapping à l'Array
+* Privilégier les variables de taille fixe, toujours moins chères que les variables dynamiques.
+* Penser à supprimer les variables non utilisées dès que possible = remboursement de Gas.
+* Storage/Memory : ne pas hésiter à passer par des variables de type memory en phase de calcul/maipulation (boucles ou autre) et n'affecter à une variable de type storage qu'à la fin
 
 ### Test Unitaires
 Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/)
