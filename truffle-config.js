@@ -32,7 +32,7 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.8.7", // Récupérer la version exacte de solc-bin (par défaut : la  version de truffle)
+      version: "0.8.10", // Récupérer la version exacte de solc-bin (par défaut : la  version de truffle)
       settings: {  // Voir les documents de solidity pour des conseils sur l'optimisation et l'evmVersion
         optimizer: {
         enabled: false,
