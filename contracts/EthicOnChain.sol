@@ -2,24 +2,29 @@
 pragma solidity 0.8.10;
  
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+
+/// @title EthicOnChain 
+/// @author Lahcen E. Dev
+/// @notice EthicOnChain contract to manage NPOs, Projects and Donors
 contract EthicOnChain {
     
-    struct NPO{
+    struct NPO {
         string name;
         string denomination;
         string npoAdress;
         string object;
         string npoType;
-        mapping (uint => Project) Projects;
+        mapping (uint => Project) projects;
     }
 
-    struct Donor{
+    struct Donor {
         string name;
         string surName;
         string addressDonor;
     }
 
-    struct Project{
+    struct Project {
         address ownerNpo;
         ProjectCause cause;
         string title;
@@ -27,14 +32,13 @@ contract EthicOnChain {
         string city;
         uint startDate;
         uint endDate;
+        uint campaignStartDate;
+        uint campaignDurationInDays;
         uint32 minAmount;
         uint32 maxAmount;
-        uint CampaignStartDate;
-        uint CampaignDurationInDays;
-    }   
-   
+    }      
 
-    enum ProjectCause{
+    enum ProjectCause {
         LutteContreLapauvreteEtExclusion,
         EnvironnementEtLesAnimaux,
         Education,
@@ -44,44 +48,38 @@ contract EthicOnChain {
         InfrastructureRoutiere
     }
 
-
-    enum ProjectStatus{
+    enum ProjectStatus {
         ProjectProposal, 
         WaitingOpening,
         OpenFundRaising,
         CloseFundRaising
     }
 
+    mapping (address => NPO) public npoAddresses; //Mapping of all NPO 
+    mapping ( uint => address) private npoMap;
+    uint32 private npoCount;
 
-    mapping (address => NPO) public AddressNpo; //Mapping of all NPO 
-    mapping ( uint => address) private NpoMap;
-    uint32 NbNpo;
-
-    Project [] public ProjectProposal;
+    Project [] public projectProposal;
     
-    event addNewNpo(address _addressNpo,string _name,string _domination);
-    event addNewProject(string _name, uint _startDate,uint _endDate,uint _min,uint _max);
+    event NpoAdded(address _addressNpo, string _name, string _domination);
+    event ProjectAdded(string _name, uint _startDate, uint _endDate, uint _min, uint _max);
 
-/// @notice Explain to an end user what this does
-/// @dev Explain to a developer any extra details
-/// @param _name name of Npo
-/// @param _denomination a parameter just like in doxygen (must be followed by parameter name)
-/// @param _npoAddress addres
-/// @param _object a parameter just like in doxygen (must be followed by parameter name)
-/// @param _npoType a parameter just like in doxygen (must be followed by parameter name)
-/// @param _address a parameter just like in doxygen (must be followed by parameter name)
-
-
-    function addNpo(string memory _name,string memory _denomination,string memory _npoAddress,string memory _object,string memory _npoType,address _address) public {
-        AddressNpo[_address].name=_name;
-        AddressNpo[_address].denomination=_denomination;
-        AddressNpo[_address].npoAdress=_npoAddress;
-        AddressNpo[_address].object=_object;
-        AddressNpo[_address].npoType=_npoType;
-        NpoMap[NbNpo]=_address;
-        NbNpo++;
+    /// @dev Add an NPO
+    /// @param _name name of Npo
+    /// @param _denomination name of the NPO
+    /// @param _npoAddress geographical address of the NPO
+    /// @param _object object/purpose of the NPO
+    /// @param _npoType type of the NPO
+    /// @param _address the wallet address of the NPO
+    function addNpo(string memory _name, string memory _denomination, string memory _npoAddress,
+                    string memory _object, string memory _npoType, address _address) public {
+        npoAddresses[_address].name = _name;
+        npoAddresses[_address].denomination = _denomination;
+        npoAddresses[_address].npoAdress = _npoAddress;
+        npoAddresses[_address].object = _object;
+        npoAddresses[_address].npoType = _npoType;
+        npoMap[npoCount] = _address;
+        npoCount++;
     }
-
-
 
 }
