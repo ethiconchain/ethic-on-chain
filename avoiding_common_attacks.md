@@ -1,2 +1,3 @@
 ## avoiding_common_attacks.md
-Ce document doit expliquer les mesures de sécurité qui ont été prises.
+A détailler = https://ecole.alyra.fr/mod/page/view.php?id=900
+Tester également l'utilisation d'un outil comme [Mythril](https://github.com/ConsenSys/mythril)
