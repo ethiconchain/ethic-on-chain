@@ -1,0 +1,26 @@
+{
+  "name": "ethic-on-chain",
+  "version": "1.0.0",
+  "description": "Ethic-On-Chain est une plateforme de crowdfunding de projets philanthropiques qui met en relation donateur et fondation tout en garantissant la transparence et le respect de la réglementation.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethiconchain/ethic-on-chain.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ethiconchain/ethic-on-chain/issues"
+  },
+  "homepage": "https://github.com/ethiconchain/ethic-on-chain#readme",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.0.0",
+    "dotenv": "^10.0.0"
+  }
+}
