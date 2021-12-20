@@ -84,8 +84,8 @@ A REVOIR ENTRE TOUS LES MEMBRES DE L'EQUIPE !
 
 #### Tight Variable Packing
 
-- Utilisation : PEUT-ETRE si nous avons le temps
-- Considéré comme un "Could". Nous reverrions alors comment est écrit le contrat.
+- Utilisation : OUI
+- Les smart contrats solidity comportent des emplacements contigus de 32 octets (256 bits) utilisés pour le stockage. Lorsque nous arrangeons les variables de manière à ce que plusieurs d'entre elles tiennent dans un seul emplacement, on parle de “variable packing”. Attention, on parle de type précis, par exemple un uint128 n'est pas de même type qu'un uint256.
 
 #### Memory Array Building
 
