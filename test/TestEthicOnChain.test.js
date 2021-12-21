@@ -83,8 +83,8 @@ contract('EthicOnChain', function (accounts) {
     it('Add Project - Increase projectCount', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination,_npoAddress,_object,_npoType,_NpoAddressOne);
         await this.InstanceEthicOnChain.addProject( _title,_description,_city, _startDate, _endDate, _minAmount, _maxAmount, _campaignStartDate, _campaignDurationInDays,{from: _NpoAddressOne});
-        let InformationNpo= await this.InstanceEthicOnChain.npoAddresses(_NpoAddressOne);
-        let verifAddress=InformationNpo.projectCount;
+        let InformationNpo = await this.InstanceEthicOnChain.npoAddresses(_NpoAddressOne);
+        let verifAddress = InformationNpo.projectCount;
         expect(verifAddress).to.be.bignumber.equal(_projectIndex);   
     });
 
