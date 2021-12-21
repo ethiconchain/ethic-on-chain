@@ -73,12 +73,12 @@ contract EthicOnChain is Ownable {
         string memory _object,
         string memory _npoType,
         address _address) public onlyOwner {
-        //Verification that the data has been entered correctly
-        require (bytes(_denomination).length >=3,"more than 3 characters-denomination");
-        require (bytes(_npoAddress).length >=8,"more than 8 characters-npoAddress");
-        require (bytes(_object).length >=10,"more than 10 characters-object");
-        require (bytes(_npoType).length >=5,"more than 5 characters-npoType");
-        require (bytes(npoAddresses[_address].denomination).length ==0,"The address is already registered");
+        // Mandatory fields
+        require(bytes(_denomination).length > 0, unicode"La dénomination est obligatoire");
+        require(bytes(_npoAddress).length > 0, "L'adresse est obligatoire");
+        require(bytes(_object).length > 0, "L'objet est obligatoire");
+        require(bytes(_npoType).length > 0, "Le type est obligatoire");
+        require(bytes(npoAddresses[_address].denomination).length == 0, unicode"NPO déjà enregistré");
         
         npoAddresses[_address].denomination = _denomination;
         npoAddresses[_address].npoAddress = _npoAddress;
@@ -110,22 +110,20 @@ contract EthicOnChain is Ownable {
         uint32 _minAmount,
         uint32 _maxAmount
     ) public {
-        require (bytes(npoAddresses[msg.sender].denomination).length !=0,"The address is not registered");
-        //Verification that the data has been entered correctly
-        require (bytes(_title).length >=3,"more than 3 characters-title");
-        require (bytes(_description).length >=10,"more than 10 characters-description");
-        require (bytes(_city).length >=3,"more than 3 characters-city");
-        //Verification that the data concerning dates and prices have been entered correctly
-        require (_startDate >=1,"Must be greater than 1-StartDate");
-        require (_endDate >=1,"Must be greater than 1-EndDate");
-        require ( _minAmount >=1,"Must be greater than 1-minAmount");
-        require ( _maxAmount >=1,"Must be greater than 1-maxAmount");
-        require (_campaignStartDate >=1,"Must be greater than 1-CampaignStartDate");
-        require (_campaignDurationInDays >=1,"Must be greater than 1-CampaignDurationInDays");
-        //Verification that the start is before 
-        require (_startDate < _endDate,"Error the start date must begin before ");
-        require (_minAmount < _maxAmount,"The minimum price must be lower than the maximum");
-        require (_campaignStartDate < _campaignDurationInDays,"The campaign must start before the end of the year");
+        require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
+        // Mandatory fields
+        require(bytes(_title).length > 0, "Le titre est obligatoire");
+        require(bytes(_description).length > 0, "La description est obligatoire");
+        require(bytes(_city).length > 0, "La ville est obligatoire");
+        require(_startDate > 0, unicode"Date de début de projet obligatoire");
+        require(_endDate > 0, "Date de fin de projet obligatoire");
+        require(_minAmount > 0, "Montant minimal obligatoire");
+        require(_maxAmount > 0, "Montant maximal obligatoire");
+        require(_campaignStartDate > 0, unicode"Date de début de campagne obligatoire");
+        require(_campaignDurationInDays > 0, unicode"Durée de campagne obligatoire");
+        // Comparisons
+        require(_startDate < _endDate, unicode"La date début de projet doit être avant la fin");
+        require(_minAmount < _maxAmount, unicode"Le montant minimal doit être inférieur au montant maximal");
 
         npoAddresses[msg.sender].projects[npoAddresses[msg.sender].projectCount] = Project(
             ProjectCause.LutteContreLaPauvreteEtExclusion,

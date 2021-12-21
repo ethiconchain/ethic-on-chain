@@ -16,8 +16,8 @@ contract('EthicOnChain', function (accounts) {
     const _title = 'AidePourEnfants';
     const _description = "Ce projet a pour bur d'aider les enfants";
     const _city = "Paris";
-    const _startDate = new BN(10);
-    const _endDate = new BN(10);
+    const _startDate = new BN(3600000); // 1h since 01-JAN-1970 Unix Epoch date
+    const _endDate = new BN(7200000); // 2h since 01-JAN-1970 Unix Epoch date, the aim is to check that end date is higher than start date
     const _minAmount = new BN(10);
     const _maxAmount = new BN(10);
     const _campaignStartDate = new BN(10);
@@ -58,7 +58,7 @@ contract('EthicOnChain', function (accounts) {
 
     it('Add Project  ', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination, _npoAddress, _object, _npoType, _NpoAddressOne);
-        await this.InstanceEthicOnChain.addProject(_title, _description, _city, _startDate, _endDate, _minAmount, _maxAmount, _campaignStartDate, _campaignDurationInDays, { from: _NpoAddressOne });
+        await this.InstanceEthicOnChain.addProject(_title, _description, _city, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _NpoAddressOne });
         let InformationNewProject = await this.InstanceEthicOnChain.getProject(_projectOneIndex, _NpoAddressOne);
         let verifTitle = InformationNewProject.title;
         let verifDescription = InformationNewProject.description;
@@ -82,7 +82,7 @@ contract('EthicOnChain', function (accounts) {
 
     it('Add Project - Increase projectCount', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination, _npoAddress, _object, _npoType, _NpoAddressOne);
-        await this.InstanceEthicOnChain.addProject(_title, _description, _city, _startDate, _endDate, _minAmount, _maxAmount, _campaignStartDate, _campaignDurationInDays, { from: _NpoAddressOne });
+        await this.InstanceEthicOnChain.addProject(_title, _description, _city, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _NpoAddressOne });
         let InformationNpo = await this.InstanceEthicOnChain.npoAddresses(_NpoAddressOne);
         let verifAddress = InformationNpo.projectCount;
         expect(verifAddress).to.be.bignumber.equal(_projectIndex);
