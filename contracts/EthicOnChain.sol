@@ -70,7 +70,9 @@ contract EthicOnChain {
     function addNpo(
         string memory _denomination,
         string memory _npoAddress,
-        string memory _object,string memory _npoType,address _address) public {
+        string memory _object,
+        string memory _npoType,
+        address _address) public {
         
         npoAddresses[_address].denomination=_denomination;
         npoAddresses[_address].npoAddress=_npoAddress;
