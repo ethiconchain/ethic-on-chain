@@ -56,6 +56,7 @@ Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/
 * Cloner la branche master de Etchi-on-chain en local.
 * Lancer un npm i(nstall) qui lira le package.json et fera les installations node_modules nécessaires.
 * Pour compiler seulement lancer la commande : truffle compile
+* Pour tester seulement lancer la commande : truffle test --compile-none
 * Pour compiler et tester lancer la commande : truffle test
 * Pour compiler, tester et déployer, passer par Ganache : truffle deploy --network=develop --reset
 * Quand les tests passent en local vous pouvez passer à un tesnet.
