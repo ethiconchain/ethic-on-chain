@@ -38,7 +38,7 @@ contract EthicOnChain {
     }      
 
     enum ProjectCause {
-        LutteContreLapauvreteEtExclusion,
+        LutteContreLaPauvreteEtExclusion,
         EnvironnementEtLesAnimaux,
         Education,
         ArtEtLaCulture,
@@ -58,8 +58,8 @@ contract EthicOnChain {
     mapping (uint => address) private npoMap;
     uint32 private npoCount; 
     
-    event NpoAdded(address _addressNpo,string _name);
-    event ProjectAdded(string _title, uint _startDate,uint _endDate,uint _minAmount,uint _maxAmount);
+    event NpoAdded(address _addressNpo, string _name);
+    event ProjectAdded(string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
     
     /// @dev The administrator can add a new NPO
     /// @param _denomination Demonination of the NPO
@@ -74,13 +74,13 @@ contract EthicOnChain {
         string memory _npoType,
         address _address) public {
         
-        npoAddresses[_address].denomination=_denomination;
-        npoAddresses[_address].npoAddress=_npoAddress;
-        npoAddresses[_address].object=_object;
-        npoAddresses[_address].npoType=_npoType;
-        npoMap[npoCount]=_address;
+        npoAddresses[_address].denomination = _denomination;
+        npoAddresses[_address].npoAddress = _npoAddress;
+        npoAddresses[_address].object = _object;
+        npoAddresses[_address].npoType = _npoType;
+        npoMap[npoCount] = _address;
         npoCount++;
-        emit NpoAdded(_address,_denomination);
+        emit NpoAdded(_address, _denomination);
     }
  
     /// @dev This function will allow to add a project, the owner will be the one who calls the function. 
@@ -105,8 +105,8 @@ contract EthicOnChain {
         uint32 _maxAmount
     ) public {
         
-        npoAddresses[msg.sender].projects[npoAddresses[msg.sender].projectCount]=Project(
-            ProjectCause.LutteContreLapauvreteEtExclusion,
+        npoAddresses[msg.sender].projects[npoAddresses[msg.sender].projectCount] = Project(
+            ProjectCause.LutteContreLaPauvreteEtExclusion,
             _title,
             _description,
             _city,
@@ -118,14 +118,13 @@ contract EthicOnChain {
             _maxAmount
         );
         npoAddresses[msg.sender].projectCount++;
-        emit ProjectAdded( _title,  _startDate,_endDate,_minAmount, _maxAmount);
+        emit ProjectAdded(_title,  _startDate, _endDate, _minAmount, _maxAmount);
     } 
 
     /// @dev This function allows to return a project of type Project according to the ERC address of the NPO and the index.
     /// @param _id index of the project list that the address has
     /// @param _addressNpo NPO's ERC20 address
     /// @return Documents the return variables of a contract’s function state variable
-
     function getProject(uint _id, address _addressNpo) public view returns(Project memory) {
         return npoAddresses[_addressNpo].projects[_id];
     }
