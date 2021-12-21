@@ -1,4 +1,4 @@
-const { BN, expectRevert , expectEvent } = require('@openzeppelin/test-helpers');
+const { BN, expectRevert, expectEvent } = require('@openzeppelin/test-helpers');
 const { expect } = require('chai');
 const ERC20EOC = artifacts.require('EthicToken');
 
@@ -13,7 +13,7 @@ contract('ERC20EOC', function (accounts) {
     const spender = accounts[2];
 
     beforeEach(async function () {
-        this.TokenInstance = await ERC20EOC.new(_initialsupply,{from: owner});
+        this.TokenInstance = await ERC20EOC.new(_initialsupply, { from: owner });
     });
 
     it('Has a name', async function () {
@@ -34,23 +34,23 @@ contract('ERC20EOC', function (accounts) {
         expect(balanceOwner).to.be.bignumber.equal(totalSupply);
     });
 
-    it('Checking transfer', async function (){
+    it('Checking transfer', async function () {
         let balanceOwnerBeforeTransfer = await this.TokenInstance.balanceOf(owner);
         let balanceRecipientBeforeTransfer = await this.TokenInstance.balanceOf(recipient);
         let amount = new BN(10);
-        await this.TokenInstance.transfer(recipient, amount, {from: owner});
+        await this.TokenInstance.transfer(recipient, amount, { from: owner });
         let balanceOwnerAfterTransfer = await this.TokenInstance.balanceOf(owner);
         let balanceRecipientAfterTransfer = await this.TokenInstance.balanceOf(recipient);
         expect(balanceOwnerAfterTransfer).to.be.bignumber.equal(balanceOwnerBeforeTransfer.sub(amount));
         expect(balanceRecipientAfterTransfer).to.be.bignumber.equal(balanceRecipientBeforeTransfer.add(amount));
     });
 
-    it('Checking transferFrom and approve', async function (){
+    it('Checking transferFrom and approve', async function () {
         let balanceOwnerBeforeTransfer = await this.TokenInstance.balanceOf(owner);
         let balanceRecipientBeforeTransfer = await this.TokenInstance.balanceOf(recipient);
         let amount = new BN(10);
-        await this.TokenInstance.approve(spender, amount, {from: owner});
-        await this.TokenInstance.transferFrom(owner, recipient, amount, {from: spender});
+        await this.TokenInstance.approve(spender, amount, { from: owner });
+        await this.TokenInstance.transferFrom(owner, recipient, amount, { from: spender });
         let balanceOwnerAfterTransfer = await this.TokenInstance.balanceOf(owner);
         let balanceRecipientAfterTransfer = await this.TokenInstance.balanceOf(recipient);
         expect(balanceOwnerAfterTransfer).to.be.bignumber.equal(balanceOwnerBeforeTransfer.sub(amount));
