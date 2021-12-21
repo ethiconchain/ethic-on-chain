@@ -2,12 +2,12 @@
 pragma solidity 0.8.11;
  
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title EthicOnChain 
 /// @author Lahcen E. Dev
 /// @notice EthicOnChain contract to manage NPOs, Projects and Donors
-contract EthicOnChain {
+contract EthicOnChain is Ownable {
     
     struct NPO {
         string denomination;
@@ -72,7 +72,13 @@ contract EthicOnChain {
         string memory _npoAddress,
         string memory _object,
         string memory _npoType,
-        address _address) public {
+        address _address) public onlyOwner {
+        //Verification that the data has been entered correctly
+        require (bytes(_denomination).length >=3,"more than 3 characters-denomination");
+        require (bytes(_npoAddress).length >=8,"more than 8 characters-npoAddress");
+        require (bytes(_object).length >=10,"more than 10 characters-object");
+        require (bytes(_npoType).length >=5,"more than 5 characters-npoType");
+        require (bytes(npoAddresses[_address].denomination).length ==0,"The address is already registered");
         
         npoAddresses[_address].denomination = _denomination;
         npoAddresses[_address].npoAddress = _npoAddress;
@@ -104,7 +110,23 @@ contract EthicOnChain {
         uint32 _minAmount,
         uint32 _maxAmount
     ) public {
-        
+        require (bytes(npoAddresses[msg.sender].denomination).length !=0,"The address is not registered");
+        //Verification that the data has been entered correctly
+        require (bytes(_title).length >=3,"more than 3 characters-title");
+        require (bytes(_description).length >=10,"more than 10 characters-description");
+        require (bytes(_city).length >=3,"more than 3 characters-city");
+        //Verification that the data concerning dates and prices have been entered correctly
+        require (_startDate >=1,"Must be greater than 1-StartDate");
+        require (_endDate >=1,"Must be greater than 1-EndDate");
+        require ( _minAmount >=1,"Must be greater than 1-minAmount");
+        require ( _maxAmount >=1,"Must be greater than 1-maxAmount");
+        require (_campaignStartDate >=1,"Must be greater than 1-CampaignStartDate");
+        require (_campaignDurationInDays >=1,"Must be greater than 1-CampaignDurationInDays");
+        //Verification that the start is before 
+        require (_startDate < _endDate,"Error the start date must begin before ");
+        require (_minAmount < _maxAmount,"The minimum price must be lower than the maximum");
+        require (_campaignStartDate < _campaignDurationInDays,"The campaign must start before the end of the year");
+
         npoAddresses[msg.sender].projects[npoAddresses[msg.sender].projectCount] = Project(
             ProjectCause.LutteContreLaPauvreteEtExclusion,
             _title,
