@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/ethiconchain/ethic-on-chain#readme",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.4.1",
+    "@openzeppelin/test-helpers": "^0.5.15",
     "@truffle/hdwallet-provider": "^2.0.0",
     "dotenv": "^10.0.0"
   }

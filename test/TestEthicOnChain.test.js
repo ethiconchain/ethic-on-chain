@@ -11,7 +11,7 @@ contract('EthicOnChain', function (accounts) {
     const _object = "mobilité durable, sport et santé, éducation et solidarité, protection de l'environnement, culture et patrimoine";
     const _npoType = 'Fondation d’entreprise';
     const _NpoAddressOne = accounts[1];
-    const _nbProjectOne = new BN(0);
+    const _projectOneIndex = new BN(0);
 
     const _title = 'AidePourEnfants';
     const _description = "Ce projet a pour bur d'aider les enfants";
@@ -20,18 +20,13 @@ contract('EthicOnChain', function (accounts) {
     const _endDate = new BN(10);
     const _minAmount = new BN(10);
     const _maxAmount = new BN(10);
-    const _CampaignStartDate = new BN(10);
-    const _CampaignDurationInDays = new BN(10);
-    const _nbProjectIndex = new BN(1);
-
-
-
-
+    const _campaignStartDate = new BN(10);
+    const _campaignDurationInDays = new BN(10);
+    const _projectIndex = new BN(1);
 
     beforeEach(async function () {
         this.InstanceEthicOnChain = await EthicOnChain.new({from: owner});
     });
-
 
     it('Add NPO - NAME', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination,_npoAddress,_object,_npoType,_NpoAddressOne);
@@ -54,45 +49,43 @@ contract('EthicOnChain', function (accounts) {
         expect(verifNpoType).to.equal(_npoType);   
     });
 
-    it('Add NPO - NbProject', async function () {
+    it('Add NPO - projectCount', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination,_npoAddress,_object,_npoType,_NpoAddressOne);
         let InformationNpo= await this.InstanceEthicOnChain.npoAddresses(_NpoAddressOne);
-        let verifAddress=InformationNpo.nbProject;
-        expect(verifAddress).to.be.bignumber.equal(_nbProjectOne);   
+        let verifAddress=InformationNpo.projectCount;
+        expect(verifAddress).to.be.bignumber.equal(_projectOneIndex);
     });
-
 
     it('Add Project  ', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination,_npoAddress,_object,_npoType,_NpoAddressOne);
-        await this.InstanceEthicOnChain.addProject( _title,_description,_city, _startDate, _endDate, _minAmount, _maxAmount, _CampaignStartDate, _CampaignDurationInDays,{from: _NpoAddressOne});
-        let InformationNewProject= await this.InstanceEthicOnChain.getProject(_nbProjectOne,_NpoAddressOne);
+        await this.InstanceEthicOnChain.addProject( _title,_description,_city, _startDate, _endDate, _minAmount, _maxAmount, _campaignStartDate, _campaignDurationInDays,{from: _NpoAddressOne});
+        let InformationNewProject= await this.InstanceEthicOnChain.getProject(_projectOneIndex,_NpoAddressOne);
         let verifTitle=InformationNewProject.title;
         let verifDescription=InformationNewProject.description;
         let verifCity=InformationNewProject.city;
         let verifStartDate=InformationNewProject.startDate;
         let verifEndDate=InformationNewProject.endDate;
-        let verifMinAmount=InformationNewProject.minAmount;
-        let verifMaxAmount=InformationNewProject.maxAmount;
         let verifCampaignStartDate=InformationNewProject.campaignStartDate;
         let verifCampaignDurationInDays=InformationNewProject.campaignDurationInDays;
+        let verifMinAmount=InformationNewProject.minAmount;
+        let verifMaxAmount=InformationNewProject.maxAmount;
         expect(verifTitle).to.equal(_title);   
         expect(verifDescription).to.equal(_description);   
         expect(verifCity).to.equal(_city);   
         expect(verifStartDate).to.be.bignumber.equal(_startDate);  
         expect(verifEndDate).to.be.bignumber.equal(_endDate);  
+        expect(verifCampaignStartDate).to.be.bignumber.equal(_campaignStartDate);  
+        expect(verifCampaignDurationInDays).to.be.bignumber.equal(_campaignDurationInDays);  
         expect(verifMinAmount).to.be.bignumber.equal(_minAmount);  
         expect(verifMaxAmount).to.be.bignumber.equal(_maxAmount);  
-        expect(verifCampaignStartDate).to.be.bignumber.equal(_CampaignStartDate);  
-        expect(verifCampaignDurationInDays).to.be.bignumber.equal(_CampaignDurationInDays);  
     });
 
-    it('Add Project - Increase NbProject', async function () {
+    it('Add Project - Increase projectCount', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination,_npoAddress,_object,_npoType,_NpoAddressOne);
-        await this.InstanceEthicOnChain.addProject( _title,_description,_city, _startDate, _endDate, _minAmount, _maxAmount, _CampaignStartDate, _CampaignDurationInDays,{from: _NpoAddressOne});
+        await this.InstanceEthicOnChain.addProject( _title,_description,_city, _startDate, _endDate, _minAmount, _maxAmount, _campaignStartDate, _campaignDurationInDays,{from: _NpoAddressOne});
         let InformationNpo= await this.InstanceEthicOnChain.npoAddresses(_NpoAddressOne);
-        let verifAddress=InformationNpo.nbProject;
-        expect(verifAddress).to.be.bignumber.equal(_nbProjectIndex);   
+        let verifAddress=InformationNpo.projectCount;
+        expect(verifAddress).to.be.bignumber.equal(_projectIndex);   
     });
-
 
 });
