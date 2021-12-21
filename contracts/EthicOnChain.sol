@@ -10,9 +10,8 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract EthicOnChain {
     
     struct NPO {
-        string name;
         string denomination;
-        string npoAdress;
+        string npoAddress;
         string object;
         string npoType;
         mapping (uint => Project) projects;
@@ -66,22 +65,21 @@ contract EthicOnChain {
 
     
     /// @dev The administrator can add a new NPO
-    /// @param _name Name of the NPO
     /// @param _denomination Demonination of the NPO
-    /// @param _npoAdress Postal address of the NPO
+    /// @param _npoAddress Postal address of the NPO
     /// @param _object object of NPO
     /// @param _npoType Type of npo organization
     /// @param _address the ERC20 address of the npo
 
-    function addNpo(string memory _name,string memory _denomination,string memory _npoAdress,string memory _object,string memory _npoType,address _address) public {
-        npoAddresses[_address].name=_name;
+    function addNpo(string memory _denomination,string memory _npoAddress,string memory _object,string memory _npoType,address _address) public {
+        
         npoAddresses[_address].denomination=_denomination;
-        npoAddresses[_address].npoAdress=_npoAdress;
+        npoAddresses[_address].npoAddress=_npoAddress;
         npoAddresses[_address].object=_object;
         npoAddresses[_address].npoType=_npoType;
         npoMap[nbNpo]=_address;
         nbNpo++;
-        emit addNewNpo(_address,_name);
+        emit addNewNpo(_address,_denomination);
     }
 
  
