@@ -63,5 +63,6 @@ Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/
 * Pour compiler et tester lancer la commande : truffle test
 * Pour compiler, tester et déployer, passer par Ganache : truffle deploy --network=develop --reset
 * Quand les tests passent en local vous pouvez passer à un tesnet.
+* N.B. : par définition le compte 0 est le owner du smart contract. Les comptes 1 à 4 sont définis comme donateurs, confère le script [2_deploy_contracts.js](migrations/2_deploy_contracts.js) où l'on affecte des tokens pour chaque donateur tant que le projet ne gère pas de swap ETH/EOC.
 
 #### Front React / déploiement
