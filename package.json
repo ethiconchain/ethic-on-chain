@@ -1,6 +1,6 @@
 {
   "name": "ethic-on-chain",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Ethic-On-Chain est une plateforme de crowdfunding de projets philanthropiques qui met en relation donateur et fondation tout en garantissant la transparence et le respect de la réglementation.",
   "main": "truffle-config.js",
   "directories": {

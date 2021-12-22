@@ -11,20 +11,29 @@ module.exports = {
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "5777",       // Any network (default: none)
     },
+    development: {
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 8545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+    },
     rinkeby: {
-      provider: function() {
+      provider: function () {
         return new HDWalletProvider(`${process.env.MNEMONIC}`, `https://rinkeby.infura.io/v3/${process.env.IDINFURA}`)
       },
       network_id: 4,
     },
     ropsten: {
-      provider: function() {
-        return new HDWalletProvider(`${process.env.MNEMONIC}`, `https://ropsten.infura.io/v3/${process.env.IDINFURA}`)
-      },
-      network_id: 3
+      provider: () =>
+        new HDWalletProvider({
+          mnemonic: `${process.env.MNEMONIC}`,
+          providerOrUrl: `https://ropsten.infura.io/v3/${process.env.INFURAID}`,
+          // numberOfAddresses: 1,
+          addressIndex: 0
+        }),
+      network_id: 3,
     },
     kovan: {
-      provider: function() {
+      provider: function () {
         return new HDWalletProvider(`${process.env.MNEMONIC}`, `https://kovan.infura.io/v3/${process.env.IDINFURA}`)
       },
       network_id: 42
@@ -35,8 +44,8 @@ module.exports = {
       version: "0.8.11", // Récupérer la version exacte de solc-bin (par défaut : la  version de truffle)
       settings: {  // Voir les documents de solidity pour des conseils sur l'optimisation et l'evmVersion
         optimizer: {
-        enabled: false,
-        runs: 200
+          enabled: false,
+          runs: 200
         },
       }
     },
