@@ -52,17 +52,32 @@ Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/
 * Nous garderons en priorité les commentaires pour "Request Changes" donc utiliser cette option au moment de l'envoi.
 * Quelques [Branch protection rules](https://github.com/ethiconchain/ethic-on-chain/settings/branches) sont définies sur Github pour éviter les mauvaises manipulations ("dont-merge-without-pull-request" (Require a pull request before merging) et "branch-up-to-date" (Require branches to be up to date before merging))
 
-### Installation/validation en local
+### Installation/validation
 
 #### Smart Contract
 
+En local
 * Cloner la branche master de Ethic-on-chain en local.
 * Lancer un npm i(nstall) qui lira le package.json et fera les installations node_modules nécessaires.
 * Pour compiler seulement lancer la commande : truffle compile
 * Pour tester seulement lancer la commande : truffle test --compile-none
 * Pour compiler et tester lancer la commande : truffle test
 * Pour compiler, tester et déployer, passer par Ganache : truffle deploy --network=develop --reset
+
+Sur un testnet
 * Quand les tests passent en local vous pouvez passer à un tesnet.
 * N.B. : par définition le compte 0 est le owner du smart contract. Les comptes 1 à 4 sont définis comme donateurs, confère le script [2_deploy_contracts.js](migrations/2_deploy_contracts.js) où l'on affecte des tokens pour chaque donateur tant que le projet ne gère pas de swap ETH/EOC.
 
 #### Front React / déploiement
+* Se placer sur le répertoire client
+* Pour une installation/test locale, lancer un npm i(nstall) puis npm run start
+
+Pour déployer sur Netlify
+* Créer préalablement un compte sur Netlify
+* Créer une site et l'associer à la repository github ethic-on-chain
+* Indiquer les éléments suivant
+* Base directory: client
+* Build command: CI=false npm run build
+* Publish directory: client/build
+* Vous pouvez laisser le reste par défaut
+* Pour plus d'information vous reporter à la documentation netlify [Deploy with Git](https://docs.netlify.com/site-deploys/create-deploys/) contenant une vidéo [Netlify Tutorial –Deploying from Git](https://www.youtube.com/watch?v=4h8B080Mv4U&t=105s)

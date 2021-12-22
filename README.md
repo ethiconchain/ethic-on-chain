@@ -13,9 +13,10 @@ TODO = ajouter/valider ici les fonctionalités au fur et à mesure qu'elles sont
 Un fichier [developer_checklist.md](developer_checklist.md) a été créé dans le but de vous donner un maximum d'informations
 
 #### Installation
-Voir [developer_checklist.md](developer_checklist.md) / section "Installation/validation en local"
+Voir [developer_checklist.md](developer_checklist.md) / section "Installation/validation"
 
 #### Exécution de la dapp
+Voir [developer_checklist.md](developer_checklist.md) / section "Installation/validation"
 
 #### Lancement des tests
-Voir [developer_checklist.md](developer_checklist.md) / section "Installation/validation en local"
+Voir [developer_checklist.md](developer_checklist.md) / section "Installation/validation"
