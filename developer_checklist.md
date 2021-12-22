@@ -53,10 +53,16 @@ Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/
 * Quelques [Branch protection rules](https://github.com/ethiconchain/ethic-on-chain/settings/branches) sont définies sur Github pour éviter les mauvaises manipulations ("dont-merge-without-pull-request" (Require a pull request before merging) et "branch-up-to-date" (Require branches to be up to date before merging))
 
 ### Installation/validation en local
-* Cloner la branche master de Etchi-on-chain en local.
+
+#### Smart Contract
+
+* Cloner la branche master de Ethic-on-chain en local.
 * Lancer un npm i(nstall) qui lira le package.json et fera les installations node_modules nécessaires.
 * Pour compiler seulement lancer la commande : truffle compile
 * Pour tester seulement lancer la commande : truffle test --compile-none
 * Pour compiler et tester lancer la commande : truffle test
 * Pour compiler, tester et déployer, passer par Ganache : truffle deploy --network=develop --reset
 * Quand les tests passent en local vous pouvez passer à un tesnet.
+* N.B. : par définition le compte 0 est le owner du smart contract. Les comptes 1 à 4 sont définis comme donateurs, confère le script [2_deploy_contracts.js](migrations/2_deploy_contracts.js) où l'on affecte des tokens pour chaque donateur tant que le projet ne gère pas de swap ETH/EOC.
+
+#### Front React / déploiement
