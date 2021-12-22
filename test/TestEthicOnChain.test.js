@@ -18,10 +18,10 @@ contract('EthicOnChain', function (accounts) {
     const _city = "Paris";
     const _startDate = new BN(3600000); // 1h since 01-JAN-1970 Unix Epoch date
     const _endDate = new BN(7200000); // 2h since 01-JAN-1970 Unix Epoch date, the aim is to check that end date is higher than start date
-    const _minAmount = new BN(10);
-    const _maxAmount = new BN(10);
+    const _minAmount = new BN(100);
+    const _maxAmount = new BN(360);
     const _campaignStartDate = new BN(10);
-    const _campaignDurationInDays = new BN(10);
+    const _campaignDurationInDays = new BN(115);
     const _projectIndex = new BN(1);
 
     beforeEach(async function () {
