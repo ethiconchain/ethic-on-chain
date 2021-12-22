@@ -66,3 +66,14 @@ Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/
 * N.B. : par définition le compte 0 est le owner du smart contract. Les comptes 1 à 4 sont définis comme donateurs, confère le script [2_deploy_contracts.js](migrations/2_deploy_contracts.js) où l'on affecte des tokens pour chaque donateur tant que le projet ne gère pas de swap ETH/EOC.
 
 #### Front React / déploiement
+* Se placer sur le répertoire client
+* Pour une installation/test locale, lancer un npm i(nstall) puis npm run start
+
+Pour déployer sur Netlify
+* Créer préalablement un compte sur Netlify
+* Créer une site et l'associer à la repository github ethic-on-chain
+* Indiquer les éléments suivant
+* Base directory: client
+* Build command: CI=false npm run build
+* Vous pouvez le reste par défaut
+* Pour plus d'information vous reporter à la documentation netlify [Deploy with Git](https://docs.netlify.com/site-deploys/create-deploys/) contenant une vidéo [Netlify Tutorial –Deploying from Git](https://www.youtube.com/watch?v=4h8B080Mv4U&t=105s)
