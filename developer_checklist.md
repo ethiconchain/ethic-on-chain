@@ -53,6 +53,9 @@ Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/
 * Quelques [Branch protection rules](https://github.com/ethiconchain/ethic-on-chain/settings/branches) sont définies sur Github pour éviter les mauvaises manipulations ("dont-merge-without-pull-request" (Require a pull request before merging) et "branch-up-to-date" (Require branches to be up to date before merging))
 
 ### Installation/validation en local
+
+#### Smart Contract
+
 * Cloner la branche master de Etchi-on-chain en local.
 * Lancer un npm i(nstall) qui lira le package.json et fera les installations node_modules nécessaires.
 * Pour compiler seulement lancer la commande : truffle compile
@@ -60,3 +63,5 @@ Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/
 * Pour compiler et tester lancer la commande : truffle test
 * Pour compiler, tester et déployer, passer par Ganache : truffle deploy --network=develop --reset
 * Quand les tests passent en local vous pouvez passer à un tesnet.
+
+#### Front React / déploiement

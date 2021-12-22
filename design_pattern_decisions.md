@@ -11,7 +11,7 @@ Ce document liste tous les Patterns Solidity issus de https://fravoll.github.io/
 
 - Utilisation : OUI
 - L'utilisation des require() semble évidente pour tout développeur Solidity avec un minimum de connaissance Solidity voire une expérience similaire avec tout autre langage.
-- Exemple d'utilisation : ...
+- Exemple d'utilisation : [EthicOnChain.sol](contracts/EthicOnChain.sol), fonction addNpo.
 
 #### State Machine
 
@@ -34,7 +34,7 @@ Ce document liste tous les Patterns Solidity issus de https://fravoll.github.io/
 
 - Utilisation : OUI
 - Nous avons besoin de gérer un concept de droit d'accès par utilisateur (RBAC - Role-Based Access Control), suivant les rôles (NPO, Donateur)
-- Exemple d'utilisation : ...
+- Exemple d'utilisation : [EthicOnChain.sol](contracts/EthicOnChain.sol), fonction addProject : la fonction ne peut être appelée/utilisée que si l'appelant (msg.sender) est listé dans les NPO.
 
 #### Access Restriction
 
@@ -47,7 +47,6 @@ Ce document liste tous les Patterns Solidity issus de https://fravoll.github.io/
 #### Secure Ether Transfer
 
 - Utilisation : OUI
-- We will use it in the way we need to think which method (among send, transfer and call.value) is the most appropriate if we have to send tokens.
 - nous devons réfléchir à la meilleure méthode / la plus appropriée en cas de transfert de tokens (parmi les méthodes send, transfer et call.value)
 - Exemple d'utilisation : ...
 
@@ -86,6 +85,7 @@ A REVOIR ENTRE TOUS LES MEMBRES DE L'EQUIPE !
 
 - Utilisation : OUI
 - Les smart contrats solidity comportent des emplacements contigus de 32 octets (256 bits) utilisés pour le stockage. Lorsque nous arrangeons les variables de manière à ce que plusieurs d'entre elles tiennent dans un seul emplacement, on parle de “variable packing”. Attention, on parle de type précis, par exemple un uint128 n'est pas de même type qu'un uint256.
+- Exemple d'utilisation : [EthicOnChain.sol](contracts/EthicOnChain.sol), struct Project, les variables minAmount et maxAmount (de type uint32) étaient initialement placées avant les variables campaignStartDate et campaignEndDate (de type uint), elles ont été placées après car pas du même type.
 
 #### Memory Array Building
 
