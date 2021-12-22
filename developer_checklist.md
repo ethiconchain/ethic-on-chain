@@ -56,7 +56,7 @@ Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/
 
 #### Smart Contract
 
-* Cloner la branche master de Etchi-on-chain en local.
+* Cloner la branche master de Ethic-on-chain en local.
 * Lancer un npm i(nstall) qui lira le package.json et fera les installations node_modules nécessaires.
 * Pour compiler seulement lancer la commande : truffle compile
 * Pour tester seulement lancer la commande : truffle test --compile-none
