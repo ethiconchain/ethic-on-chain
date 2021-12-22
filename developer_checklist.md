@@ -75,5 +75,6 @@ Pour déployer sur Netlify
 * Indiquer les éléments suivant
 * Base directory: client
 * Build command: CI=false npm run build
+* Publish directory: client/build
 * Vous pouvez le reste par défaut
 * Pour plus d'information vous reporter à la documentation netlify [Deploy with Git](https://docs.netlify.com/site-deploys/create-deploys/) contenant une vidéo [Netlify Tutorial –Deploying from Git](https://www.youtube.com/watch?v=4h8B080Mv4U&t=105s)
