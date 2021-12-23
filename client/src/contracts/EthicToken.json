@@ -10583,10 +10583,61 @@
   },
   "networks": {
     "3": {
-      "events": {},
+      "events": {
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0x16fAA87464D4c03C0fd60c3Ac8693B6E3019f738",
-      "transactionHash": "0x661d05eb1c1650d2cb9e4cadd6117346d85dc04b56ca1fbe2f3eeb66569eef89"
+      "address": "0x53e74B05b2e2BA2FE8e11D4fb49a7c7B4abdCA46",
+      "transactionHash": "0x8374a33efbdb5b8be1e640e0bbbf63b0214a7958eece0cfa6ab5464c4fcaa686"
     },
     "5777": {
       "events": {
@@ -10642,12 +10693,12 @@
         }
       },
       "links": {},
-      "address": "0x3f2bdB8708f420Cd775CF32E805e354fE5Dca3BD",
-      "transactionHash": "0x6b81c56b33042fdcbb8a02fe61dae3528023700d501aa6acf0f55c3ec8cb55d0"
+      "address": "0xc0D0bA73Ed57a019E788Da8c6A0f2A1682058742",
+      "transactionHash": "0xba8470edc2d7dbffc40b474e1ce254e2ddf763268c76321fc9b60b8df2c4c124"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2021-12-22T14:36:13.659Z",
+  "updatedAt": "2021-12-23T10:59:41.536Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev",
