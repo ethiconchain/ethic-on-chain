@@ -68,14 +68,14 @@ module.exports = async function(deployer, _network, accounts) {
                                     NpoFondationMichelin);
   console.log("NPO 'Fondation Michelin' créé");
 
-                                    await EthicOnChainContract.addNpo("Fondation Assistance aux Animaux",
+  await EthicOnChainContract.addNpo("Fondation Assistance aux Animaux",
                                     "77410 Charmentray",
                                     "Défense des animaux maltraités et abandonnés",
                                     "Oeuvre ou organisme d’intérêt général",
                                     NpoFondationAssistance);
   console.log("NPO 'Fondation Assistance aux Animaux' créé");
 
-                                    await EthicOnChainContract.addNpo("WFP",
+  await EthicOnChainContract.addNpo("WFP",
                                     "Via Cesare Giulio Viola, 68, 00148 Rome RM, Italy",
                                     "Lutte contre la faim dans le monde",
                                     "Fondation internationale",
