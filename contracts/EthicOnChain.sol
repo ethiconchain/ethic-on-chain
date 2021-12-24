@@ -212,4 +212,44 @@ contract EthicOnChain is Ownable {
         IERC20(eocTokenAddress).transferFrom(msg.sender, address(this), _donationAmount);
         //TODO PLUS TARD creation d'un escrow contract pour ne pas verser tous les tokens dans le même contrat général
     }
+
+    /// @dev  get all projects
+    /// @return returns an array of all Project
+    function getProjects() public view returns(Project [] memory) {
+        uint taille = projectCount;
+        Project [] memory result= new Project[](taille);
+        uint j;
+        for(uint i;i<taille;i++){
+            result[j]=projectMap[i];     
+            j++;    
+        }
+        return result;
+    }
+
+    /// @dev  get all NPOs
+    /// @return returns an array of all NPOs
+    function getNpos() public view returns(NPO [] memory) {
+        uint taille = npoCount;
+        NPO [] memory result= new NPO[](taille);
+        uint j;
+        for(uint i;i<taille;i++){
+            result[j]=npoAddresses[npoMap[i]];     
+            j++;    
+        }
+        return result;
+    }
+    /// @dev Allows to know all the projects of a single NPO
+    /// @param _addressNpo id which represents the index
+    /// @return Returns an array of all projects of a single NPO
+    function getProjectsPerNpo(address _addressNpo) public view  returns(Project [] memory ) {
+        uint taille = npoAddresses[_addressNpo].projectIds.length;
+        Project [] memory result= new Project[](taille);
+        uint j;
+        for(uint i;i<taille;i++){
+            uint index =npoAddresses[_addressNpo].projectIds[i];
+            result[j]=getProject(index);     
+            j++;    
+        }
+        return result;
+    }
 }
