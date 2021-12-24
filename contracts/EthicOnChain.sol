@@ -91,10 +91,10 @@ contract EthicOnChain is Ownable {
     // EOC Token address
     address eocTokenAddress;
 
-    event NpoAdded(uint npoId, address _npoErc20Address, string _denomination);
-    event DonorAdded(uint donorId, address _donorErc20Address, string _donorName);
+    event NpoAdded(uint _poId, address _npoErc20Address, string _denomination);
+    event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
-    event DonationAdded(uint donationId);
+    event DonationAdded(uint _donationId, uint _projectId, uint _donorId, uint _donationDate, uint32 donationAmount);
     
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
@@ -240,6 +240,7 @@ contract EthicOnChain is Ownable {
         // le contrat à transférer les tokens de l'addresse du donateur vers l'adresse du contrat
         IERC20(eocTokenAddress).transferFrom(msg.sender, address(this), _donationAmount);
         //TODO PLUS TARD creation d'un escrow contract pour ne pas verser tous les tokens dans le même contrat général
+        emit DonationAdded(newDonation.donationId, newDonation.projectId, newDonation.donorId, newDonation.donationDate, newDonation.donationAmount);
     }
 
     /// @dev  get an NPO via its erc20 address
@@ -276,7 +277,7 @@ contract EthicOnChain is Ownable {
 
     /// @dev  get a Donor via its id
     /// @param _donorId id of the Donor
-    /// @return returns the corresponding NPO struct
+    /// @return returns the corresponding Donor struct
     function getDonor(uint _donorId) public view returns(Donor memory) {
         return donorAddresses[donorMap[_donorId]];
     }
