@@ -56,14 +56,15 @@ contract('EthicOnChain', function (accounts) {
     it('Add NPO - projectCount', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination, _npoAddress, _object, _npoType, _newNpoAddress);
         let InformationNpo = await this.InstanceEthicOnChain.npoAddresses(_newNpoAddress);
-        let verifAddress = InformationNpo.projectIds.length;
-        expect(verifAddress).to.be.bignumber.equal(_projectOneIndex);
+        let verifProjectIds = InformationNpo.projectIds;
+console.log(verifProjectIds);
+        expect(verifProjectIds).to.be.null;
     });
 
     it('Add Project  ', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination, _npoAddress, _object, _npoType, _newNpoAddress);
         await this.InstanceEthicOnChain.addProject(_title, _description, _city, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _newNpoAddress });
-        let InformationNewProject = await this.InstanceEthicOnChain.getProject(_projectOneIndex, _newNpoAddress);
+        let InformationNewProject = await this.InstanceEthicOnChain.getProject(_projectOneIndex);
         let verifTitle = InformationNewProject.title;
         let verifDescription = InformationNewProject.description;
         let verifCity = InformationNewProject.city;
@@ -88,8 +89,8 @@ contract('EthicOnChain', function (accounts) {
         await this.InstanceEthicOnChain.addNpo(_denomination, _npoAddress, _object, _npoType, _newNpoAddress);
         await this.InstanceEthicOnChain.addProject(_title, _description, _city, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _newNpoAddress });
         let InformationNpo = await this.InstanceEthicOnChain.npoAddresses(_newNpoAddress);
-        let verifAddress = InformationNpo.projectCount;
-        expect(verifAddress).to.be.bignumber.equal(_projectIndex);
+        let verifCount = InformationNpo.projectIds.length;
+        expect(verifCount).to.be.bignumber.equal(_projectIndex);
     });
 
 });
