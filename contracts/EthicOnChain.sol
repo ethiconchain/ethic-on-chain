@@ -221,6 +221,9 @@ contract EthicOnChain is Ownable {
         require(donationDonor.donorErc20Address != address(0), unicode"Vous n'êtes pas enregistré en tant que donateur"); // concept de KYC
         Project storage donationProject = projectMap[_projectId];
         require(bytes(donationProject.title).length != 0, "Projet inconnu");
+        // donation possible seulement si dans période de campagne
+        uint campaignEndDate = donationProject.campaignStartDate + donationProject.campaignDurationInDays * 1 days;
+        require(block.timestamp > donationProject.campaignStartDate && block.timestamp < campaignEndDate, "La donation n'est possible que pendant la campagne");
 
         Donation storage newDonation = donationMap[donationCount];
         newDonation.donationId = donationCount;
