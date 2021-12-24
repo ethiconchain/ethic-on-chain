@@ -10,10 +10,12 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract EthicOnChain is Ownable {
     
     struct NPO {
+        uint npoId;
         string denomination;
         string npoAddress;
         string object;
         string npoType;
+        uint[] projectIds;
     }
 
     struct Donor {
@@ -111,6 +113,7 @@ contract EthicOnChain is Ownable {
         require(bytes(npoAddresses[_address].denomination).length == 0, unicode"NPO déjà enregistré");
         
         NPO storage newNpo = npoAddresses[_address];
+        newNpo.npoId = npoCount;
         newNpo.denomination = _denomination;
         newNpo.npoAddress = _npoAddress;
         newNpo.object = _object;
@@ -141,7 +144,8 @@ contract EthicOnChain is Ownable {
         uint32 _minAmount,
         uint32 _maxAmount
     ) public {
-        require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
+        NPO storage projectNpo = npoAddresses[msg.sender];
+        require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         // Mandatory fields
         require(bytes(_title).length > 0, "Le titre est obligatoire");
         require(bytes(_description).length > 0, "La description est obligatoire");
@@ -169,6 +173,7 @@ contract EthicOnChain is Ownable {
         newProject.campaignDurationInDays = _campaignDurationInDays;
         newProject.minAmount = _minAmount;
         newProject.maxAmount = _maxAmount;
+        projectNpo.projectIds.push(projectCount);
 
         projectCount++;
         emit ProjectAdded(newProject.projectId, _title,  _startDate, _endDate, _minAmount, _maxAmount);
@@ -186,7 +191,8 @@ contract EthicOnChain is Ownable {
     /// @param _donationAmount amount of the donation in EOC tokens
     function addDonation(uint _projectId, uint32 _donationAmount) public {
         //TODO = prévoir un map des donors et vérifier que msg.sender présent parmi les donateurs ? (KYC)
-        require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
+        Project storage donationProject = projectMap[_projectId];
+        require(bytes(donationProject.title).length != 0, "Projet inconnu");
 
         Donation storage newDonation = donationMap[donationCount];
         newDonation.donationId = donationCount;
@@ -197,7 +203,6 @@ contract EthicOnChain is Ownable {
         
         //TODO = update Donor.donation.push quand on aura défini un donorMap // mise à jour de l'historique des donations pour le donateur
         
-        Project storage donationProject = projectMap[_projectId];
         donationProject.projectBalance += _donationAmount; // mise à jour de la balance du projet
         donationProject.donationIds.push(donationCount); // mise à jour de l'historique des donations pour le projet
         donationCount++;
