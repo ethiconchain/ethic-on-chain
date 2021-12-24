@@ -53,15 +53,7 @@ contract('EthicOnChain', function (accounts) {
         expect(verifNpoType).to.equal(_npoType);
     });
 
-    it('Add NPO - projectCount', async function () {
-        await this.InstanceEthicOnChain.addNpo(_denomination, _npoAddress, _object, _npoType, _newNpoAddress);
-        let InformationNpo = await this.InstanceEthicOnChain.npoAddresses(_newNpoAddress);
-        let verifProjectIds = InformationNpo.projectIds;
-console.log(verifProjectIds);
-        expect(verifProjectIds).to.be.null;
-    });
-
-    it('Add Project  ', async function () {
+    it('Add Project', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination, _npoAddress, _object, _npoType, _newNpoAddress);
         await this.InstanceEthicOnChain.addProject(_title, _description, _city, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _newNpoAddress });
         let InformationNewProject = await this.InstanceEthicOnChain.getProject(_projectOneIndex);
@@ -88,9 +80,9 @@ console.log(verifProjectIds);
     it('Add Project - Increase projectCount', async function () {
         await this.InstanceEthicOnChain.addNpo(_denomination, _npoAddress, _object, _npoType, _newNpoAddress);
         await this.InstanceEthicOnChain.addProject(_title, _description, _city, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _newNpoAddress });
-        let InformationNpo = await this.InstanceEthicOnChain.npoAddresses(_newNpoAddress);
-        let verifCount = InformationNpo.projectIds.length;
-        expect(verifCount).to.be.bignumber.equal(_projectIndex);
-    });
+        let InformationNpo = await this.InstanceEthicOnChain.getNpos();
+        let verifCount = InformationNpo[0].projectIds.length;
+        expect(new BN(verifCount)).to.be.bignumber.equal(_projectIndex);
+    });    
 
 });
