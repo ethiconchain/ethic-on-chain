@@ -1,8 +1,11 @@
 const { BN, expectRevert, expectEvent } = require('@openzeppelin/test-helpers');
 const { expect } = require('chai');
+const ERC20EOC = artifacts.require('EthicToken');
 const EthicOnChain = artifacts.require('EthicOnChain');
 
 contract('EthicOnChain', function (accounts) {
+
+    const _initialsupply = new BN(10000000);
 
     const owner = accounts[0];
 
@@ -25,7 +28,8 @@ contract('EthicOnChain', function (accounts) {
     const _projectIndex = new BN(1);
 
     beforeEach(async function () {
-        this.InstanceEthicOnChain = await EthicOnChain.new({ from: owner });
+        this.TokenInstance = await ERC20EOC.new(_initialsupply, { from: owner });
+        this.InstanceEthicOnChain = await EthicOnChain.new(this.TokenInstance.address, { from: owner });
     });
 
     it('Add NPO - NAME', async function () {

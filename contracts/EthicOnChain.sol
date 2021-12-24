@@ -14,28 +14,39 @@ contract EthicOnChain is Ownable {
         string npoAddress;
         string object;
         string npoType;
-        mapping (uint => Project) projects;
-        uint projectCount;
     }
 
     struct Donor {
         string name;
         string surName;
         string addressDonor;
+        uint[] donationIds;
     }
 
     struct Project {
-        ProjectCause cause;
-        string title;
-        string description;
-        string city;
+        uint projectId; // clé primaire
         uint startDate;
         uint endDate;
         uint campaignStartDate;
         uint campaignDurationInDays;
+        address npoErc20Address;
+        ProjectCause cause;
+        string title;
+        string description;
+        string city;
         uint32 minAmount;
         uint32 maxAmount;
-    }      
+        uint32 projectBalance;
+        uint[] donationIds;
+    } 
+
+    struct Donation {
+        uint donationId; // clé primaire
+        uint projectId;
+        uint donationDate;
+        uint32 donationAmount;
+        address donorAddress;
+    }     
 
     enum ProjectCause {
         LutteContreLaPauvreteEtExclusion,
@@ -54,13 +65,32 @@ contract EthicOnChain is Ownable {
         CloseFundRaising
     }
 
+    // NPOs
     mapping (address => NPO) public npoAddresses; //Mapping of all NPO 
     mapping (uint => address) private npoMap;
-    uint32 private npoCount; 
+    uint private npoCount; 
+
+    // Projects
+    mapping (uint => Project) projectMap;
+    uint projectCount;
     
+    // Donations
+    mapping (uint => Donation) private donationMap;
+    uint private donationCount;
+
+    // EOC Token address
+    address eocTokenAddress;
+
     event NpoAdded(address _addressNpo, string _name);
-    event ProjectAdded(string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
+    event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
+    event DonationAdded(uint donationId);
     
+    /// @dev Initialise the deployed EOC token address for swap
+    /// @param _eocTokenAddress EOC Token address
+    constructor(address _eocTokenAddress) {
+       eocTokenAddress =  _eocTokenAddress;
+    }
+
     /// @dev The administrator can add a new NPO
     /// @param _denomination Demonination of the NPO
     /// @param _npoAddress Postal address of the NPO
@@ -80,10 +110,11 @@ contract EthicOnChain is Ownable {
         require(bytes(_npoType).length > 0, "Le type est obligatoire");
         require(bytes(npoAddresses[_address].denomination).length == 0, unicode"NPO déjà enregistré");
         
-        npoAddresses[_address].denomination = _denomination;
-        npoAddresses[_address].npoAddress = _npoAddress;
-        npoAddresses[_address].object = _object;
-        npoAddresses[_address].npoType = _npoType;
+        NPO storage newNpo = npoAddresses[_address];
+        newNpo.denomination = _denomination;
+        newNpo.npoAddress = _npoAddress;
+        newNpo.object = _object;
+        newNpo.npoType = _npoType;
         npoMap[npoCount] = _address;
         npoCount++;
         emit NpoAdded(_address, _denomination);
@@ -125,28 +156,55 @@ contract EthicOnChain is Ownable {
         require(_startDate < _endDate, unicode"La date début de projet doit être avant la fin");
         require(_minAmount < _maxAmount, unicode"Le montant minimal doit être inférieur au montant maximal");
 
-        npoAddresses[msg.sender].projects[npoAddresses[msg.sender].projectCount] = Project(
-            ProjectCause.LutteContreLaPauvreteEtExclusion,
-            _title,
-            _description,
-            _city,
-            _startDate,
-            _endDate,
-            _campaignStartDate,
-            _campaignDurationInDays,
-            _minAmount,
-            _maxAmount
-        );
-        npoAddresses[msg.sender].projectCount++;
-        emit ProjectAdded(_title,  _startDate, _endDate, _minAmount, _maxAmount);
+        Project storage newProject = projectMap[projectCount];
+        newProject.projectId = projectCount;
+        newProject.npoErc20Address = msg.sender;
+        newProject.title = _title;
+        // TODO = voir comment gérer le Project Cause en fonction de son enum
+        newProject.description = _description;
+        newProject.city = _city;
+        newProject.startDate = _startDate;
+        newProject.endDate = _endDate;
+        newProject.campaignStartDate = _campaignStartDate;
+        newProject.campaignDurationInDays = _campaignDurationInDays;
+        newProject.minAmount = _minAmount;
+        newProject.maxAmount = _maxAmount;
+
+        projectCount++;
+        emit ProjectAdded(newProject.projectId, _title,  _startDate, _endDate, _minAmount, _maxAmount);
     } 
 
-    /// @dev This function allows to return a project of type Project according to the ERC address of the NPO and the index.
-    /// @param _id index of the project list that the address has
-    /// @param _addressNpo NPO's ERC20 address
+    /// @dev Returns a project of type Project according to the ERC address of the NPO and the index.
+    /// @param _projectId project unique id
     /// @return Documents the return variables of a contract’s function state variable
-    function getProject(uint _id, address _addressNpo) public view returns(Project memory) {
-        return npoAddresses[_addressNpo].projects[_id];
+    function getProject(uint _projectId) public view returns(Project memory) {
+        return projectMap[_projectId];
     }
 
+    /// @dev Add a Donation struct in global donationMap
+    /// @param _projectId id of the project for which the donation is done
+    /// @param _donationAmount amount of the donation in EOC tokens
+    function addDonation(uint _projectId, uint32 _donationAmount) public {
+        //TODO = prévoir un map des donors et vérifier que msg.sender présent parmi les donateurs ? (KYC)
+        require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
+
+        Donation storage newDonation = donationMap[donationCount];
+        newDonation.donationId = donationCount;
+        newDonation.projectId = _projectId;
+        newDonation.donationDate = block.timestamp;
+        newDonation.donationAmount = _donationAmount;
+        newDonation.donorAddress = msg.sender;
+        
+        //TODO = update Donor.donation.push quand on aura défini un donorMap // mise à jour de l'historique des donations pour le donateur
+        
+        Project storage donationProject = projectMap[_projectId];
+        donationProject.projectBalance += _donationAmount; // mise à jour de la balance du projet
+        donationProject.donationIds.push(donationCount); // mise à jour de l'historique des donations pour le projet
+        donationCount++;
+        
+        // transfer amount from Donor to the Contract
+        // Donor will have first approved (minimum = amount) the contract to transfer tokens from its address
+        IERC20(eocTokenAddress).transferFrom(msg.sender, address(this), _donationAmount);
+        //TODO PLUS TARD creation d'un escrow contract pour ne pas verser tous les tokens dans le même contrat général
+    }
 }

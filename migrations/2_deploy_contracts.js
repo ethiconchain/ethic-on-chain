@@ -50,7 +50,8 @@ module.exports = async function(deployer, _network, accounts) {
   /// EthicOnChain et NPOs ///
   ////////////////////////////
   
-  await deployer.deploy(EthicOnChain);
+  // l'adresse du token EOC déployé doit être transmise au contrat EthicOnChain pour les transferts (donations et withdrawals)
+  await deployer.deploy(EthicOnChain, TokenEOC.address);
   
   const EthicOnChainContract = await EthicOnChain.deployed();
 
