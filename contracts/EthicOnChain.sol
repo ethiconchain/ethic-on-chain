@@ -48,9 +48,9 @@ contract EthicOnChain is Ownable {
     struct Donation {
         uint donationId; // clé primaire
         uint projectId;
+        uint donorId;
         uint donationDate;
         uint32 donationAmount;
-        address donorAddress;
     }     
 
     enum ProjectCause {
@@ -217,27 +217,79 @@ contract EthicOnChain is Ownable {
     /// @param _projectId id of the project for which the donation is done
     /// @param _donationAmount amount of the donation in EOC tokens
     function addDonation(uint _projectId, uint32 _donationAmount) public {
-        //TODO = prévoir un map des donors et vérifier que msg.sender présent parmi les donateurs ? (KYC)
+        Donor storage donationDonor = donorAddresses[msg.sender];
+        require(donationDonor.donorErc20Address != address(0), unicode"Vous n'êtes pas enregistré en tant que donateur"); // concept de KYC
         Project storage donationProject = projectMap[_projectId];
         require(bytes(donationProject.title).length != 0, "Projet inconnu");
 
         Donation storage newDonation = donationMap[donationCount];
         newDonation.donationId = donationCount;
         newDonation.projectId = _projectId;
+        newDonation.donorId = donationDonor.donorId;
         newDonation.donationDate = block.timestamp;
         newDonation.donationAmount = _donationAmount;
-        newDonation.donorAddress = msg.sender;
         
-        //TODO = update Donor.donation.push quand on aura défini un donorMap // mise à jour de l'historique des donations pour le donateur
+        donationDonor.donationIds.push(donationCount); // mise à jour de l'historique des donations pour le donateur
         
         donationProject.projectBalance += _donationAmount; // mise à jour de la balance du projet
         donationProject.donationIds.push(donationCount); // mise à jour de l'historique des donations pour le projet
         donationCount++;
         
-        // transfer amount from Donor to the Contract
-        // Donor will have first approved (minimum = amount) the contract to transfer tokens from its address
+        // transfert de la donation du donateur vers le contrat
+        // le donateur devra avoir préalablement approuvé (fonction approve du token - un minimum = le montant à transférer)
+        // le contrat à transférer les tokens de l'addresse du donateur vers l'adresse du contrat
         IERC20(eocTokenAddress).transferFrom(msg.sender, address(this), _donationAmount);
         //TODO PLUS TARD creation d'un escrow contract pour ne pas verser tous les tokens dans le même contrat général
+    }
+
+    /// @dev  get an NPO via its erc20 address
+    /// @param _npoErc20Address erc20 address of the NPO
+    /// @return returns the corresponding NPO struct
+    function getNpo(address _npoErc20Address) public view returns(NPO memory) {
+        return npoAddresses[_npoErc20Address];
+    }
+
+    /// @dev  get an NPO via its id
+    /// @param _npoId id of the NPO
+    /// @return returns the corresponding NPO struct
+    function getNpo(uint _npoId) public view returns(NPO memory) {
+        return npoAddresses[npoMap[_npoId]];
+    }
+
+    /// @dev  get all NPOs
+    /// @return returns an array of all NPOs
+    function getNpos() public view returns(NPO [] memory) {
+        uint arraySize = npoCount;
+        NPO [] memory result= new NPO[](arraySize);
+        for(uint i; i < arraySize; i++) {
+            result[i] = npoAddresses[npoMap[i]];     
+        }
+        return result;
+    }
+
+    /// @dev  get a Donor via its erc20 address
+    /// @param _donorErc20Address erc20 address of the Donor
+    /// @return returns the corresponding Donor struct
+    function getDonor(address _donorErc20Address) public view returns(Donor memory) {
+        return donorAddresses[_donorErc20Address];
+    }
+
+    /// @dev  get a Donor via its id
+    /// @param _donorId id of the Donor
+    /// @return returns the corresponding NPO struct
+    function getDonor(uint _donorId) public view returns(Donor memory) {
+        return donorAddresses[donorMap[_donorId]];
+    }
+
+    /// @dev  get all Donors
+    /// @return returns an array of all Donors
+    function getDonors() public view returns(Donor [] memory) {
+        uint arraySize = donorCount;
+        Donor [] memory result = new Donor[](arraySize);
+        for(uint i; i < arraySize; i++) {
+            result[i] = donorAddresses[donorMap[i]];     
+        }
+        return result;
     }
 
     /// @dev Returns a single Project
@@ -252,31 +304,21 @@ contract EthicOnChain is Ownable {
     function getProjects() public view returns(Project [] memory) {
         uint arraySize = projectCount;
         Project [] memory result= new Project[](arraySize);
-        for(uint i; i < arraySize; i++){
-            result[i]=projectMap[i];     
+        for(uint i; i < arraySize; i++) {
+            result[i] = projectMap[i];     
         }
         return result;
     }
 
-    /// @dev  get all NPOs
-    /// @return returns an array of all NPOs
-    function getNpos() public view returns(NPO [] memory) {
-        uint arraySize = npoCount;
-        NPO [] memory result= new NPO[](arraySize);
-        for(uint i; i < arraySize; i++){
-            result[i]=npoAddresses[npoMap[i]];     
-        }
-        return result;
-    }
     /// @dev Allows to know all the projects of a single NPO
     /// @param _addressNpo id which represents the index
     /// @return Returns an array of all projects of a single NPO
     function getProjectsPerNpo(address _addressNpo) public view  returns(Project [] memory ) {
         uint arraySize = npoAddresses[_addressNpo].projectIds.length;
         Project [] memory result= new Project[](arraySize);
-        for(uint i; i < arraySize; i++){
-            uint index =npoAddresses[_addressNpo].projectIds[i];
-            result[i]=getProject(index);     
+        for(uint i; i < arraySize; i++) {
+            uint index = npoAddresses[_addressNpo].projectIds[i];
+            result[i] = getProject(index);     
         }
         return result;
     }
