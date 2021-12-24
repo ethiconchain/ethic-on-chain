@@ -179,13 +179,6 @@ contract EthicOnChain is Ownable {
         emit ProjectAdded(newProject.projectId, _title,  _startDate, _endDate, _minAmount, _maxAmount);
     } 
 
-    /// @dev Returns a project of type Project according to the ERC address of the NPO and the index.
-    /// @param _projectId project unique id
-    /// @return Documents the return variables of a contract’s function state variable
-    function getProject(uint _projectId) public view returns(Project memory) {
-        return projectMap[_projectId];
-    }
-
     /// @dev Add a Donation struct in global donationMap
     /// @param _projectId id of the project for which the donation is done
     /// @param _donationAmount amount of the donation in EOC tokens
@@ -213,15 +206,20 @@ contract EthicOnChain is Ownable {
         //TODO PLUS TARD creation d'un escrow contract pour ne pas verser tous les tokens dans le même contrat général
     }
 
+    /// @dev Returns a single Project
+    /// @param _projectId project unique id
+    /// @return the Project struct instance corresponding to _projectId
+    function getProject(uint _projectId) public view returns(Project memory) {
+        return projectMap[_projectId];
+    }
+
     /// @dev  get all projects
     /// @return returns an array of all Project
     function getProjects() public view returns(Project [] memory) {
-        uint taille = projectCount;
-        Project [] memory result= new Project[](taille);
-        uint j;
-        for(uint i;i<taille;i++){
-            result[j]=projectMap[i];     
-            j++;    
+        uint arraySize = projectCount;
+        Project [] memory result= new Project[](arraySize);
+        for(uint i; i < arraySize; i++){
+            result[i]=projectMap[i];     
         }
         return result;
     }
@@ -229,12 +227,10 @@ contract EthicOnChain is Ownable {
     /// @dev  get all NPOs
     /// @return returns an array of all NPOs
     function getNpos() public view returns(NPO [] memory) {
-        uint taille = npoCount;
-        NPO [] memory result= new NPO[](taille);
-        uint j;
-        for(uint i;i<taille;i++){
-            result[j]=npoAddresses[npoMap[i]];     
-            j++;    
+        uint arraySize = npoCount;
+        NPO [] memory result= new NPO[](arraySize);
+        for(uint i; i < arraySize; i++){
+            result[i]=npoAddresses[npoMap[i]];     
         }
         return result;
     }
@@ -242,13 +238,11 @@ contract EthicOnChain is Ownable {
     /// @param _addressNpo id which represents the index
     /// @return Returns an array of all projects of a single NPO
     function getProjectsPerNpo(address _addressNpo) public view  returns(Project [] memory ) {
-        uint taille = npoAddresses[_addressNpo].projectIds.length;
-        Project [] memory result= new Project[](taille);
-        uint j;
-        for(uint i;i<taille;i++){
+        uint arraySize = npoAddresses[_addressNpo].projectIds.length;
+        Project [] memory result= new Project[](arraySize);
+        for(uint i; i < arraySize; i++){
             uint index =npoAddresses[_addressNpo].projectIds[i];
-            result[j]=getProject(index);     
-            j++;    
+            result[i]=getProject(index);     
         }
         return result;
     }
