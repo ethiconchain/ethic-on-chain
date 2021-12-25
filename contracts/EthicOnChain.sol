@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title EthicOnChain 
-/// @author Lahcen E. Dev
+/// @author Lahcen E. Dev / Jérôme Gauthier
 /// @notice EthicOnChain contract to manage NPOs, Projects and Donors
 contract EthicOnChain is Ownable {
     
@@ -39,9 +39,9 @@ contract EthicOnChain is Ownable {
         string title;
         string description;
         string geographicalArea;
-        uint32 minAmount;
-        uint32 maxAmount;
-        uint32 projectBalance;
+        uint minAmount;
+        uint maxAmount;
+        uint projectBalance;
         uint[] donationIds;
     } 
 
@@ -50,7 +50,7 @@ contract EthicOnChain is Ownable {
         uint projectId;
         uint donorId;
         uint donationDate;
-        uint32 donationAmount;
+        uint donationAmount;
     }     
 
     enum ProjectCause {
@@ -94,7 +94,7 @@ contract EthicOnChain is Ownable {
     event NpoAdded(uint _poId, address _npoErc20Address, string _denomination);
     event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
-    event DonationAdded(uint _donationId, uint _projectId, uint _donorId, uint _donationDate, uint32 donationAmount);
+    event DonationAdded(uint _donationId, uint _projectId, uint _donorId, uint _donationDate, uint donationAmount);
     
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
@@ -177,8 +177,8 @@ contract EthicOnChain is Ownable {
         uint _endDate,
         uint _campaignStartDate,
         uint _campaignDurationInDays,
-        uint32 _minAmount,
-        uint32 _maxAmount
+        uint _minAmount,
+        uint _maxAmount
     ) public {
         NPO storage projectNpo = npoAddresses[msg.sender];
         require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
@@ -217,14 +217,15 @@ contract EthicOnChain is Ownable {
     /// @dev Add a Donation struct in global donationMap
     /// @param _projectId id of the project for which the donation is done
     /// @param _donationAmount amount of the donation in EOC tokens
-    function addDonation(uint _projectId, uint32 _donationAmount) public {
+    function addDonation(uint _projectId, uint _donationAmount) public {
         Donor storage donationDonor = donorAddresses[msg.sender];
         require(donationDonor.donorErc20Address != address(0), unicode"Vous n'êtes pas enregistré en tant que donateur"); // concept de KYC
         Project storage donationProject = projectMap[_projectId];
-        //require(bytes(donationProject.title).length != 0, "Projet inconnu");
+        require(bytes(donationProject.title).length != 0, "Projet inconnu");
         // donation possible seulement si dans période de campagne
         uint campaignEndDate = donationProject.campaignStartDate + donationProject.campaignDurationInDays * 1 days;
-        //require(block.timestamp > donationProject.campaignStartDate && block.timestamp < campaignEndDate, "La donation n'est possible que pendant la campagne");
+        require(block.timestamp > donationProject.campaignStartDate, unicode"La campagne n'est pas commencée");
+        require(block.timestamp < campaignEndDate, unicode"La campagne est terminée");
 
         Donation storage newDonation = donationMap[donationCount];
         newDonation.donationId = donationCount;
@@ -280,6 +281,7 @@ contract EthicOnChain is Ownable {
     }
 
     /// @dev  get a Donor via its id
+
     /// @param _donorId id of the Donor
     /// @return returns the corresponding Donor struct
     function getDonor(uint _donorId) public view returns(Donor memory) {
@@ -313,6 +315,32 @@ contract EthicOnChain is Ownable {
             result[i] = projectMap[i];     
         }
         return result;
+    }
+    /// @dev  get Donation by id
+    /// param _id index pour retrouver la donation a retourner
+    /// @return a struct donation 
+    function getDonation(uint _id) public view returns(Donation memory) {
+        return donationMap[_id];
+    }
+
+    /// @dev Allows to know all the donations of a single donor
+    /// @param _addressNpo id which represents the index
+    /// @return Returns an array of all donation of a single donor
+    function getDonationPerDonor(address _addressNpo) public view  returns(Donation [] memory ) {
+        uint arraySize = donorAddresses[_addressNpo].donationIds.length;
+        Donation [] memory result= new Donation[](arraySize);
+        for(uint i; i < arraySize; i++) {
+            uint index = donorAddresses[_addressNpo].donationIds[i];
+            result[i] = getDonation(index);     
+        }
+        return result;
+    }
+
+
+    /// @dev  get date
+    /// @return date block.timestamp
+    function getTime() public view returns(uint) {
+        return block.timestamp;
     }
 
     /// @dev Allows to know all the projects of a single NPO

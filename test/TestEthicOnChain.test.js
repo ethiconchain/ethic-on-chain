@@ -23,9 +23,14 @@ contract('EthicOnChain', function (accounts) {
     const _endDate = new BN(7200000); // 2h since 01-JAN-1970 Unix Epoch date, the aim is to check that end date is higher than start date
     const _minAmount = new BN(100);
     const _maxAmount = new BN(360);
-    const _campaignStartDate = new BN(10);
-    const _campaignDurationInDays = new BN(115);
+    const _campaignStartDate = new BN(3600000); ;
+    const _campaignDurationInDays = new BN(11005);
     const _projectIndex = new BN(1);
+
+    const _newDonorErc20Address = accounts[1];
+    const _nameDonor = "Jeff";
+    const _surNameDonor = 'Besos';
+    const _donorAddress = '19 place de la république, 63000 Clermont-Ferrand';
 
     beforeEach(async function () {
         this.TokenInstance = await ERC20EOC.new(_initialsupply, { from: owner });
@@ -83,6 +88,93 @@ contract('EthicOnChain', function (accounts) {
         let InformationNpo = await this.InstanceEthicOnChain.getNpos();
         let verifCount = InformationNpo[0].projectIds.length;
         expect(new BN(verifCount)).to.be.bignumber.equal(_projectIndex);
-    });    
+    });  
+
+    it('Add Donation', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
+        const time =await this.InstanceEthicOnChain.getTime();
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, time, time+1000, time, time, _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _nameDonor, _surNameDonor, _donorAddress);
+        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
+        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(10), { from : accounts[0]} );
+        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
+        let verifBalance = InformationProject.projectBalance;
+        let InformationDonation = await this.InstanceEthicOnChain.getDonation(new BN(0));
+        const donationId = InformationDonation.donationId;
+        const projectId = InformationDonation.projectId;
+        const donorId = InformationDonation.donorId;
+        const donationDate = InformationDonation.donationDate;
+        const donationAmount = InformationDonation.donationAmount;
+        expect(verifBalance).to.be.bignumber.equal(new BN(10));
+        expect(donationId).to.be.bignumber.equal(new BN(0));
+        expect(projectId).to.be.bignumber.equal(new BN(0));
+        expect(donorId).to.be.bignumber.equal(new BN(0));
+        //expect(donationDate).to.be.bignumber.equal( ?? );
+        expect(donationAmount).to.be.bignumber.equal(new BN(10));
+
+    });
+
+    it('Add Donor', async function () {
+        await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _nameDonor, _surNameDonor, _donorAddress);
+        let InformationNewDonor = await this.InstanceEthicOnChain.getDonor(_newDonorErc20Address);
+        verifName = InformationNewDonor.name;
+        verifSurName = InformationNewDonor.surName;
+        verifPostalAddress = InformationNewDonor.postalAddress;
+        expect(verifName).to.equal(_nameDonor);
+        expect(verifSurName).to.equal(_surNameDonor);
+        expect(verifPostalAddress).to.equal(_donorAddress);
+
+    });
+
+    it('Event For AddNpo', async function () {
+        const receipt =await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
+        expectEvent(receipt, "NpoAdded", { _poId: _projectOneIndex,_npoErc20Address:_newNpoErc20Address, _denomination:_denomination});
+    });  
+
+    it('Event For AddDonor', async function () {
+        const receipt = await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _nameDonor, _surNameDonor, _donorAddress);
+        expectEvent(receipt, "DonorAdded", { 
+            _donorId: new BN(0),
+            _donorErc20Address:_newDonorErc20Address,
+            _donorName:_nameDonor
+        });
+    });  
+
+    it('Event For DonorAdded', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
+        const receipt = await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        expectEvent(receipt, "ProjectAdded", {
+             _projectId: _projectOneIndex,
+             _title:_title, 
+             _startDate:_startDate,
+             _endDate:_endDate,
+             _minAmount:_minAmount,
+             _maxAmount:_maxAmount
+        });
+    });  
+    it('Event For DonationAdded', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
+        const time =await this.InstanceEthicOnChain.getTime();
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, time, time+1000, time, time, _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _nameDonor, _surNameDonor, _donorAddress);
+        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
+        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
+        const amount =new BN(10);
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,amount, { from : accounts[0]} );
+        const receipt= await this.InstanceEthicOnChain.addDonation(new BN(0), amount, { from : accounts[0]} );
+        const InformationDonation= await this.InstanceEthicOnChain.getDonation(new BN(0));
+
+        expectEvent(receipt, "DonationAdded", {
+            _donationId: InformationDonation.donationId,
+            _projectId:InformationDonation.projectId, 
+            _donorId:InformationDonation.donorId,
+            _donationDate:InformationDonation.donationDate,
+            donationAmount:InformationDonation.donationAmount
+        });
+    });  
+    
+    
 
 });
