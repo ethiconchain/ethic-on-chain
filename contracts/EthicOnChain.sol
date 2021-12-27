@@ -258,7 +258,7 @@ contract EthicOnChain is Ownable {
     /// @dev  get an NPO via its id
     /// @param _npoId id of the NPO
     /// @return returns the corresponding NPO struct
-    function getNpo(uint _npoId) public view returns(NPO memory) {
+    function getNpo(uint _npoId) internal view returns(NPO memory) {
         return npoAddresses[npoMap[_npoId]];
     }
 
@@ -268,7 +268,7 @@ contract EthicOnChain is Ownable {
         uint arraySize = npoCount;
         NPO [] memory result= new NPO[](arraySize);
         for(uint i; i < arraySize; i++) {
-            result[i] = npoAddresses[npoMap[i]];     
+            result[i] = getNpo(i);     
         }
         return result;
     }
@@ -281,10 +281,9 @@ contract EthicOnChain is Ownable {
     }
 
     /// @dev  get a Donor via its id
-
     /// @param _donorId id of the Donor
     /// @return returns the corresponding Donor struct
-    function getDonor(uint _donorId) public view returns(Donor memory) {
+    function getDonor(uint _donorId) internal view returns(Donor memory) {
         return donorAddresses[donorMap[_donorId]];
     }
 
@@ -294,7 +293,7 @@ contract EthicOnChain is Ownable {
         uint arraySize = donorCount;
         Donor [] memory result = new Donor[](arraySize);
         for(uint i; i < arraySize; i++) {
-            result[i] = donorAddresses[donorMap[i]];     
+            result[i] = getDonor(i);     
         }
         return result;
     }
