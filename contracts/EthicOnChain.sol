@@ -268,7 +268,7 @@ contract EthicOnChain is Ownable {
         uint arraySize = npoCount;
         NPO [] memory result= new NPO[](arraySize);
         for(uint i; i < arraySize; i++) {
-            result[i] = getNpo(i);     
+            result[i] = getNpoByIndex(i);     
         }
         return result;
     }
@@ -293,7 +293,7 @@ contract EthicOnChain is Ownable {
         uint arraySize = donorCount;
         Donor [] memory result = new Donor[](arraySize);
         for(uint i; i < arraySize; i++) {
-            result[i] = getDonor(i);     
+            result[i] = getDonorByIndex(i);     
         }
         return result;
     }
