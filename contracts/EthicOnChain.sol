@@ -337,12 +337,6 @@ contract EthicOnChain is Ownable {
     }
 
 
-    /// @dev  get date
-    /// @return date block.timestamp
-    function getTime() public view returns(uint) {
-        return block.timestamp;
-    }
-
     /// @dev Allows to know all the projects of a single NPO
     /// @param _addressNpo id which represents the index
     /// @return Returns an array of all projects of a single NPO
