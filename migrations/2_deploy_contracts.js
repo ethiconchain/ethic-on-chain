@@ -46,40 +46,72 @@ module.exports = async function(deployer, _network, accounts) {
   console.log("Montant de la balance de Leonardo", DonorLeonardoBalance.toString());
   console.log("Montant de la balance de Elon", DonorElonBalance.toString());
 
+  ////////////////////
+  /// EthicOnChain ///
+  ////////////////////
+  
+  // l'adresse du token EOC déployé doit être transmise au contrat EthicOnChain pour les transferts (donations et withdrawals)
+  await deployer.deploy(EthicOnChain, TokenEOC.address);
+  
+  const EthicOnChainContract = await EthicOnChain.deployed();
+
   ////////////////////////////
   /// EthicOnChain et NPOs ///
   ////////////////////////////
   
-  await deployer.deploy(EthicOnChain);
-  
-  const EthicOnChainContract = await EthicOnChain.deployed();
-
-  await EthicOnChainContract.addNpo("La Fondation pour les Musées de France",
+  await EthicOnChainContract.addNpo(NpoFondationMusees,
+                                    "La Fondation pour les Musées de France",
                                     "40 avenue Hoche 75008 Paris",
                                     "Rénovation de musée",
-                                    "Musée de France",
-                                    NpoFondationMusees);
+                                    "Musée de France");
   console.log("NPO 'La Fondation pour les Musées de France' créé");
 
-  await EthicOnChainContract.addNpo("Fondation Michelin",
+  await EthicOnChainContract.addNpo(NpoFondationMichelin,
+                                    "Fondation Michelin",
                                     "23 Pl. des Carmes Dechaux, 63000 Clermont-Ferrand",
                                     "Mobilité durable, sport et santé, éducation et solidarité, protection de l'environnement, culture et patrimoine",
-                                    "Fondation d’entreprise",
-                                    NpoFondationMichelin);
+                                    "Fondation d’entreprise");
   console.log("NPO 'Fondation Michelin' créé");
 
-                                    await EthicOnChainContract.addNpo("Fondation Assistance aux Animaux",
+  await EthicOnChainContract.addNpo(NpoFondationAssistance,
+                                    "Fondation Assistance aux Animaux",
                                     "77410 Charmentray",
                                     "Défense des animaux maltraités et abandonnés",
-                                    "Oeuvre ou organisme d’intérêt général",
-                                    NpoFondationAssistance);
+                                    "Oeuvre ou organisme d’intérêt général");
   console.log("NPO 'Fondation Assistance aux Animaux' créé");
 
-                                    await EthicOnChainContract.addNpo("WFP",
+  await EthicOnChainContract.addNpo(NpoWfp,
+                                    "WFP",
                                     "Via Cesare Giulio Viola, 68, 00148 Rome RM, Italy",
                                     "Lutte contre la faim dans le monde",
-                                    "Fondation internationale",
-                                    NpoWfp);
+                                    "Fondation internationale");
   console.log("NPO 'WFP' créé");
+
+  //////////////////////////////
+  /// EthicOnChain et Donors ///
+  //////////////////////////////
+  await EthicOnChainContract.addDonor(DonorJeff,
+                                      "Bezos",
+                                      "Jeff",
+                                      "42e rue New York");
+  console.log("Donateur 'Jeff' créé");
+
+  await EthicOnChainContract.addDonor(DonorBill,
+                                      "Gates",
+                                      "Bill",
+                                      "Medina - Etat de Washington");
+  console.log("Donateur 'Bill' créé");
+
+  await EthicOnChainContract.addDonor(DonorLeonardo,
+                                      "Di Caprio",
+                                      "Leonardo",
+                                      "Los Feliz Los Angeles");
+  console.log("Donateur 'Leonardo' créé");
+
+  await EthicOnChainContract.addDonor(DonorElon,
+                                      "Musk",
+                                      "Elon",
+                                      "3500 Deer Creek Road Palo Alto, CA 94304 United States");
+  console.log("Donateur 'Leonardo' créé");
 
 };
