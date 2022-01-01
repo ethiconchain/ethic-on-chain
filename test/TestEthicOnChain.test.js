@@ -121,22 +121,27 @@ contract('EthicOnChain', function (accounts) {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea,new BN(""), _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount,{from: _newNpoErc20Address}),"Date de début de projet obligatoire");
     });
+    
     it('Require a endDate for a project - ExpectRevert', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, new BN(""), _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount,{from: _newNpoErc20Address}),"Date de fin de projet obligatoire");
     });
+    
     it('Require a minAmount for a project - ExpectRevert', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, new BN(""), _maxAmount,{from: _newNpoErc20Address}),"Montant minimal obligatoire");
     });
+    
     it('Require a maxAmount for a project - ExpectRevert', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, new BN(""),{from: _newNpoErc20Address}),"Montant maximal obligatoire");
     });
+    
     it('Require a campaignStartDate for a project - ExpectRevert', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, new BN(""), _campaignDurationInDays, _minAmount, _maxAmount,{from: _newNpoErc20Address}),"Date de début de campagne obligatoire");
     });
+    
     it('Require a campaignDurationDate for a project - ExpectRevert', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, new BN(""), _minAmount, _maxAmount,{from: _newNpoErc20Address}),"Durée de campagne obligatoire");
@@ -156,8 +161,6 @@ contract('EthicOnChain', function (accounts) {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _maxAmount, _minAmount,{from: _newNpoErc20Address}),"Le montant minimal doit être inférieur au montant maximal");
     });
-    
-
 
     it('Add Project - Increase projectCount', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
@@ -215,8 +218,6 @@ contract('EthicOnChain', function (accounts) {
         await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
         expectRevert(this.InstanceEthicOnChain.addDonation(new BN(0), new BN(10), { from : accounts[0]} ),"La campagne n'est pas commencée");
     });
-
-
     
     it('Add Donor', async function () {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _nameDonor, _surNameDonor, _donorAddress);
@@ -229,6 +230,7 @@ contract('EthicOnChain', function (accounts) {
         expect(verifPostalAddress).to.equal(_donorAddress);
 
     });
+    
     it('Add Donor already registered', async function () {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _nameDonor, _surNameDonor, _donorAddress);
         expectRevert(this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _nameDonor, _surNameDonor, _donorAddress),"Donor déjà enregistré");
@@ -260,6 +262,7 @@ contract('EthicOnChain', function (accounts) {
              _maxAmount:_maxAmount
         });
     });  
+    
     it('Event For DonationAdded', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         let blockLastest = await web3.eth.getBlock("latest");
@@ -280,7 +283,5 @@ contract('EthicOnChain', function (accounts) {
             donationAmount:InformationDonation.donationAmount
         });
     });  
-    
-    
 
 });

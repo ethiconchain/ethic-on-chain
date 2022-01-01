@@ -17,7 +17,7 @@ contract EthicOnChain is Ownable {
         string object;
         string npoType;
         uint[] projectIds;
-        uint[] retraitIds;
+        uint[] withdrawalIds;
     }
 
     struct Donor {
@@ -44,7 +44,7 @@ contract EthicOnChain is Ownable {
         uint maxAmount;
         uint projectBalance;
         uint[] donationIds;
-        uint[] retraitIds;
+        uint[] withdrawalIds;
     } 
 
     struct Donation {
@@ -55,12 +55,12 @@ contract EthicOnChain is Ownable {
         uint donationAmount;
     }     
 
-    struct Retrait {
-        uint retraitId;
+    struct Withdrawal {
+        uint withdrawalId;
         uint projectId;
         string title;
-        uint montant;
-        uint retraitDate;
+        uint amount;
+        uint withdrawalDate;
         string description;
     }
 
@@ -99,9 +99,9 @@ contract EthicOnChain is Ownable {
     mapping (uint => Donation) private donationMap;
     uint private donationCount;
 
-    // Retrait Informations
-    mapping (uint => Retrait) private retraitMap;
-    uint private retraitCount;
+    // Withdrawal Informations
+    mapping (uint => Withdrawal) private withdrawalMap;
+    uint private withdrawalCount;
 
     // EOC Token address
     address eocTokenAddress;
@@ -110,7 +110,8 @@ contract EthicOnChain is Ownable {
     event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
     event DonationAdded(uint _donationId, uint _projectId, uint _donorId, uint _donationDate, uint donationAmount);
-    event WithdrawAdded(uint _amount, address _addressRecipent);
+    event WithdrawalAdded(uint _amount, address _addressRecipent);
+    
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
     constructor(address _eocTokenAddress) {
@@ -270,33 +271,33 @@ contract EthicOnChain is Ownable {
     /// @param _projectId id of the project for which the donation is done
 
     function WithdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
-        NPO storage retraitNpo = npoAddresses[msg.sender];
+        NPO storage withdrawalNpo = npoAddresses[msg.sender];
         
         uint indexProject = npoAddresses[msg.sender].projectIds[_projectId];
         require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         require(bytes(projectMap[indexProject].title).length != 0, "Projet inconnu");
         uint256 balance = projectMap[indexProject].projectBalance;
-        require(balance > 0, unicode"La balance du projet est de 0"); 
+        require(balance - _amount >= 0, "Balance insuffisante");
         // Widthdraw possible si seulement la campagne est terminée
         //uint campaignEndDate = projectMap[indexProject].campaignStartDate + projectMap[indexProject].campaignDurationInDays * 1 days;
         require(block.timestamp > projectMap[indexProject].campaignStartDate, unicode"La campagne n'est pas commencée");
         //require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
 
-        Retrait storage newRetrait = retraitMap[retraitCount];
-        newRetrait.retraitId = donationCount;
-        newRetrait.projectId = _projectId;
-        newRetrait.title = _title;
-        newRetrait.montant = _amount;
-        newRetrait.retraitDate = block.timestamp;
-        newRetrait.description = _description;
+        Withdrawal storage newWithdrawal = withdrawalMap[withdrawalCount];
+        newWithdrawal.withdrawalId = donationCount;
+        newWithdrawal.projectId = _projectId;
+        newWithdrawal.title = _title;
+        newWithdrawal.amount = _amount;
+        newWithdrawal.withdrawalDate = block.timestamp;
+        newWithdrawal.description = _description;
         
-        retraitNpo.retraitIds.push(retraitCount); // mise à jour de l'historique des donations pour le donateur
+        withdrawalNpo.withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le NPO
         
         projectMap[indexProject].projectBalance -= _amount; // mise à jour de la balance du projet
-        projectMap[indexProject].retraitIds.push(retraitCount); // mise à jour de l'historique des donations pour le projet
-        retraitCount++;
+        projectMap[indexProject].withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le projet
+        withdrawalCount++;
         IERC20(eocTokenAddress).transfer(msg.sender,_amount);
-        emit WithdrawAdded(_amount,msg.sender);
+        emit WithdrawalAdded(_amount,msg.sender);
     }
 
     /// @dev  get an NPO via its erc20 address
@@ -400,22 +401,22 @@ contract EthicOnChain is Ownable {
         return result;
     }
 
-    /// @dev  get Retrait by id
-    /// param _id index pour retrouver le retrait a retourner
+    /// @dev  get Withdrawal by id
+    /// param _id index pour retrouver le withdrawal a retourner
     /// @return a struct retait 
-    function getRetrait(uint _id) public view returns(Retrait memory) {
-        return retraitMap[_id];
+    function getWithdrawal(uint _id) public view returns(Withdrawal memory) {
+        return withdrawalMap[_id];
     }
 
     /// @dev Allows to know all the donations of a single donor
     /// @param _addressNpo id which represents the index
     /// @return Returns an array of all donation of a single donor
-    function getRetraitPerNpo(address _addressNpo) public view  returns(Retrait [] memory ) {
-        uint arraySize = npoAddresses[_addressNpo].retraitIds.length;
-        Retrait [] memory result= new Retrait[](arraySize);
+    function getWithdrawalPerNpo(address _addressNpo) public view  returns(Withdrawal [] memory ) {
+        uint arraySize = npoAddresses[_addressNpo].withdrawalIds.length;
+        Withdrawal [] memory result= new Withdrawal[](arraySize);
         for(uint i; i < arraySize; i++) {
-            uint index = npoAddresses[_addressNpo].retraitIds[i];
-            result[i] = getRetrait(index);     
+            uint index = npoAddresses[_addressNpo].withdrawalIds[i];
+            result[i] = getWithdrawal(index);     
         }
         return result;
     }
