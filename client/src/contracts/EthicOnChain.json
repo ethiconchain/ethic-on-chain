@@ -61111,6 +61111,162 @@
     "version": "0.8.11+commit.d7f03943.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {
+        "0x5b01b3cbb79f6d6de617795637d44cf4ec173dab689fb0804ab8dbbd88f4302b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_donationId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_projectId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_donorId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_donationDate",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "donationAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "DonationAdded",
+          "type": "event"
+        },
+        "0xf1a73eeb2b4ddced9fb956e389a13618a37205f30bf1694dbf5ba71b1bbfc25c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_donorId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_donorErc20Address",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_donorName",
+              "type": "string"
+            }
+          ],
+          "name": "DonorAdded",
+          "type": "event"
+        },
+        "0x1a9e41b629a15a636da77b06f2707c109021423f307b3f34f33ded411423ef14": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_poId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_npoErc20Address",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_denomination",
+              "type": "string"
+            }
+          ],
+          "name": "NpoAdded",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0xf9702874e260ae597ee7c3acbf77aad0ce01f26c14650d5afbc5b43a62b34af3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_projectId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_title",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_startDate",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_endDate",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_minAmount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_maxAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProjectAdded",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x996f77B0b15E7Cb074F54C167913F7dF7be7Da89",
+      "transactionHash": "0x04592e2c8cc8bfe91f825be6f91f840b0685fba82b7de22b76a1710ff96cfb3a"
+    },
     "5777": {
       "events": {
         "0x7a0427304abe94a12e55c1d339f314aec4e8ba727a577443d3675ae0e079cd3f": {
@@ -61362,7 +61518,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-02T08:24:49.864Z",
+  "updatedAt": "2022-01-02T16:53:00.022Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",

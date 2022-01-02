@@ -10583,10 +10583,61 @@
   },
   "networks": {
     "3": {
-      "events": {},
+      "events": {
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0x16fAA87464D4c03C0fd60c3Ac8693B6E3019f738",
-      "transactionHash": "0x661d05eb1c1650d2cb9e4cadd6117346d85dc04b56ca1fbe2f3eeb66569eef89"
+      "address": "0x98C4E3b6b7aA243D7A1139e836cF618875916f5F",
+      "transactionHash": "0xd736900fa299de4b9fb67117500613e06859117034295c73ae407b3ca8e9f3c1"
     },
     "5777": {
       "events": {
@@ -10647,7 +10698,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-02T08:24:49.817Z",
+  "updatedAt": "2022-01-02T16:52:59.983Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev",

@@ -30,7 +30,7 @@ export default function CreateProject(props) {
   const [timeValueBegin, setTimeValueBegin] = useState(null)
   const [timeValueEnd, setTimeValueEnd] = useState(null)
   const [timeValueCampaign, setTimeValueCampaign] = useState(null)
-  
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -64,7 +64,8 @@ export default function CreateProject(props) {
     try {
       const { contract, accounts } = data;
       await contract.methods.addProject(title, description, zone, timeValueBegin.toString(), timeValueEnd.toString(), timeValueCampaign.toString(), nbDays, amoutMin, amoutMax).send({ from: accounts[0] })
-        .then(x => console.log('ADD >>', x))
+        .then(x => navigate('/mesprojets'))
+
       // navigate('/mesprojets')
     } catch (error) {
       console.log(error)
