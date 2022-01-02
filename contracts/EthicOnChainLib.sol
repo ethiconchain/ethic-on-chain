@@ -32,14 +32,14 @@ library EthicOnChainLib {
         uint endDate;
         uint campaignStartDate;
         uint campaignDurationInDays;
+        uint minAmount;
+        uint maxAmount;
+        uint projectBalance;
         address npoErc20Address;
         ProjectCause cause;
         string title;
         string description;
         string geographicalArea;
-        uint minAmount;
-        uint maxAmount;
-        uint projectBalance;
         uint[] donationIds;
         uint[] withdrawalIds;
     } 
@@ -55,9 +55,9 @@ library EthicOnChainLib {
     struct Withdrawal {
         uint withdrawalId;
         uint projectId;
-        string title;
         uint amount;
         uint withdrawalDate;
+        string title;
         string description;
     }
 
