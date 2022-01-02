@@ -216,9 +216,8 @@ contract EthicOnChain is Ownable {
     /// @dev Allows an NPO to withdraw funds from a project 
     /// @param _projectId id of the project for which the donation is done
 
-    function WithdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
+    function withdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
         EthicOnChainLib.NPO storage withdrawalNpo = npoAddresses[msg.sender];
-        
         uint indexProject = npoAddresses[msg.sender].projectIds[_projectId];
         require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         require(bytes(projectMap[indexProject].title).length != 0, "Projet inconnu");
