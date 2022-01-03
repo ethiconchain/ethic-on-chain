@@ -1,22 +1,27 @@
-## README.md
-Ethic-On-Chain est une plateforme de crowdfunding de projets philanthropiques qui met en relation donateur et fondation tout en garantissant la transparence et le respect de la réglementation.
+![Cover](./images/readme/githubReadmeHeader.png)
 
-### Fonctionalités
-TODO = ajouter/valider ici les fonctionalités au fur et à mesure qu'elles sont ajoutées. Pour le moment les lignes ci-dessous entre parenthèses sont des exemples, non définitifs
-* Création d'un Token ERC20 EOC - EthicOnChain
-* Gestion (gestion = CRUD create/read/update/delete) des NPO (non profit organisation)
-* Gestion des donateurs
-* Gestion des projets d'un NPO
-* Validation d'un projet
+# Présentation
+*Ethic-On-Chain* est une plateforme de crowdfunding de projets philanthropiques qui met en relation donateur et fondation tout en garantissant la transparence et le respect de la réglementation.
 
-### Technique
+## Fonctionalités
+*TODO* = ajouter/valider ici les fonctionalités au fur et à mesure qu'elles sont ajoutées. Pour le moment les lignes ci-dessous entre parenthèses sont des exemples, non définitifs
+
+|FONCTIONALITÉS|DÉFINITIF ?|COMMENTAIRE|
+|:---|---|:---|
+|Création d'un Token ERC20|OUI|EOC - EthicOnChain|
+|Gestion des NPO (non profit organisation)|NON|(gestion = CRUD create/read/update/delete)|
+|Gestion des donateurs|OUI||
+|Gestion des projets d'un NPO|OUI|no comment|
+|Validation d'un projet|OUI|no comment|
+
+## Technique
 Un fichier [developer_checklist.md](developer_checklist.md) a été créé dans le but de vous donner un maximum d'informations
 
-#### Installation
-Voir [developer_checklist.md](developer_checklist.md) / section "Installation/validation"
+|ÉTAPE|FICHIER|SECTION|
+|---:|:---|:---|
+|Installation de la dapp|Voir [developer_checklist.md](developer_checklist.md)|Installation/validation|
+|Exécution de la dapp|Voir [developer_checklist.md](developer_checklist.md)|Installation/validation|
+|Lancement des tests|Voir [developer_checklist.md](developer_checklist.md)|Installation/validation|
 
-#### Exécution de la dapp
-Voir [developer_checklist.md](developer_checklist.md) / section "Installation/validation"
 
-#### Lancement des tests
-Voir [developer_checklist.md](developer_checklist.md) / section "Installation/validation"
+![Cover](./images/readme/githubReadmeFooter.png)
