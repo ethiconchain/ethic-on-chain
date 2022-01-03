@@ -1,4 +1,4 @@
-![Cover](https://github.com/ethiconchain/ethic-on-chain/blob/master/images/readme/githubReadmeHeader.png)
+![Cover](./images/readme/githubReadmeHeader.png)
 
 # Présentation
 *Ethic-On-Chain* est une plateforme de crowdfunding de projets philanthropiques qui met en relation donateur et fondation tout en garantissant la transparence et le respect de la réglementation.
