@@ -236,7 +236,6 @@ contract('EthicOnChain', function (accounts) {
         expectRevert(this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _nameDonor, _surNameDonor, _donorAddress),"Donor déjà enregistré");
     });
 
-
     it('WithdrawTokens', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         let blockLastest = await web3.eth.getBlock("latest");
@@ -264,7 +263,7 @@ contract('EthicOnChain', function (accounts) {
         expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(1), new BN(500),_title,_description, { from : _newNpoErc20Address} ),"Projet inconnu");
     });
 
-    it('Add WithdrawTokens- Require Revert whithdraw > Balance', async function () {
+    it('Add WithdrawTokens- Require Revert withdraw > Balance', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         let blockLastest = await web3.eth.getBlock("latest");
         await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+1000, blockLastest.timestamp, blockLastest.timestamp, _minAmount, _maxAmount, { from: _newNpoErc20Address });
@@ -275,8 +274,6 @@ contract('EthicOnChain', function (accounts) {
         await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(250), { from : accounts[0]} );
         expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(300),_title,_description, { from : _newNpoErc20Address} ),"Balance insuffisante");
     });
-
-
 
     it('Event For AddNpo', async function () {
         const receipt =await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
@@ -326,7 +323,7 @@ contract('EthicOnChain', function (accounts) {
         });
     });  
 
-        it('Event For WithdrawalAdded', async function () {
+    it('Event For WithdrawalAdded', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoAddress, _object, _npoType);
         let blockLastest = await web3.eth.getBlock("latest");
         await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+1000, blockLastest.timestamp, blockLastest.timestamp, _minAmount, _maxAmount, { from: _newNpoErc20Address });
@@ -341,6 +338,5 @@ contract('EthicOnChain', function (accounts) {
             _amount: amount,
             _addressRecipent:_newNpoErc20Address, 
         });
-        
     });  
 });
