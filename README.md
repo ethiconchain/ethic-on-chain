@@ -24,4 +24,4 @@ Un fichier [developer_checklist.md](developer_checklist.md) a été créé dans 
 |Lancement des tests|Voir [developer_checklist.md](developer_checklist.md)|Installation/validation|
 
 
-![Cover](https://github.com/ethiconchain/ethic-on-chain/blob/master/images/readme/githubReadmeFooter.png)
+![Cover](./images/readme/githubReadmeFooter.png)
