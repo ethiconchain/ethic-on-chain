@@ -1,21 +1,111 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useNavigate } from 'react-router-dom';
+
 import EthicOnChainContract from "./contracts/EthicOnChain.json";
+import EthicTokenContract from "./contracts/EthicToken.json";
 import getWeb3 from "./getWeb3";
 
 import "./App.css";
+import LayoutAdmin from "./components/LayoutAdmin";
+import LayoutNpo from "./components/LayoutNpo";
+import LayoutDonor from "./components/LayoutDonor";
+import ViewProjects from "./pages/admin/ViewProjects";
+import ViewNpos from "./pages/admin/ViewNpos";
+import ViewDonors from "./pages/admin/ViewDonors";
+import Historic from "./pages/Historic";
+import MakeDonation from "./pages/donor/MakeDonation";
+import MyDonations from "./pages/donor/MyDonations";
+import CreateProject from "./pages/npo/CreateProject";
+import MyProjects from "./pages/npo/MyProjects";
 
-class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#653442',
+    },
+    secondary: {
+      // main: '#8C914E',
+      main: '#11cb5f',
+    },
+  },
+  typography: {
+    fontFamily: 'Mulish',
+    fontWeightLight: 400,
+    fontWeightRegular: 500,
+    fontWeightMedium: 600,
+    fontWeightBold: 700,
+  }
+});
 
-  componentDidMount = async () => {
+const App = () => {
+  let navigate = useNavigate();
+  const addressZero = "0x0000000000000000000000000000000000000000"
+  const [data, setData] = useState({
+    web3: null,
+    accounts: null,
+    contract: null,
+    isAdmin: null,
+    isNpo: null,
+    isDonor: null
+  });
+  const [allNpos, setAllNpos] = useState(null)
+  const [allDonors, setAllDonors] = useState(null)
+
+  const [actualAccount, setActualAccount] = useState(null)
+  const [balance0, setBalance0] = useState(0)
+  const [balanceActualAccount, setBalanceActualAccount] = useState(0)
+
+  const msToDate = (x) => new Date(+x).toLocaleDateString()
+
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  useEffect(() => {
+    window.ethereum.on('accountsChanged', (accounts) => {
+      setActualAccount(accounts[0])
+      // reload la page aprés changement de compte dans Metamask
+      navigate("/")
+      window.location.reload()
+    });
+  });
+
+
+  useEffect(() => {
+    console.log(`Npos`, allNpos)
+  }, [allNpos]);
+  useEffect(() => {
+    console.log(`Donors`, allDonors)
+  }, [allDonors]);
+
+  // useEffect(() => {
+  //   if (data.accounts && !actualAccount) {
+  //     setActualAccount(data.accounts)
+  //   }
+  // }, [data.accounts]);
+
+  // useEffect(() => {
+  //   if (data.accounts) {
+  //     getBalanceOwner(data.accounts.toString())
+  //     return () => getBalanceOwner()
+  //   }
+  // }, [data.accounts]);
+
+  // useEffect(() => {
+  //   if (actualAccount) {
+  //     console.log(`actualAccount`, actualAccount)
+  //     getBalanceActualAccount(actualAccount.toString())
+  //     return () => getBalanceActualAccount()
+  //   }
+  // }, [actualAccount]);
+
+  const init = async () => {
     try {
-      // Get network provider and web3 instance.
       const web3 = await getWeb3();
-
-      // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
-
-      // Get the contract instance.
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = EthicOnChainContract.networks[networkId];
       const instance = new web3.eth.Contract(
@@ -23,11 +113,29 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      const account = accounts[0];
+      let isAnAdmin = false;
+      let isANpo = false;
+      let isADonor = false;
+      let Admin = await instance.methods.owner().call()
+        .then(x => x.toUpperCase())
+      Admin === account.toUpperCase() ? isAnAdmin = true : isAnAdmin = false
+
+      await instance.methods.getNpos().call()
+        .then(x => setAllNpos(x))
+      await instance.methods.getDonors().call()
+        .then(x => setAllDonors(x))
+
+      await instance.methods.getNpo(account).call()
+        .then(x => x[1] !== addressZero ? isANpo = true : isANpo = false)
+      // .then(x => console.log('getNpo', x))
+      await instance.methods.getDonor(account).call()
+        .then(x => x[1] !== addressZero ? isADonor = true : isADonor = false)
+      // .then(x => console.log('getDonor', x))
+
+      setData({ web3, accounts, contract: instance, isAdmin: isAnAdmin, isNpo: isANpo, isDonor: isADonor });
+
     } catch (error) {
-      // Catch any errors for any of the above operations.
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
       );
@@ -35,29 +143,62 @@ class App extends Component {
     }
   };
 
-  runExample = async () => {
-    const { accounts, contract } = this.state;
+  const getNpos = async () => {
+    const { contract } = data
+    await contract.methods.getNpos().call()
+      .then(x => setAllNpos(x))
+  }
 
-    // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+  const getDonors = async () => {
+    const { contract } = data
+    await contract.methods.getDonors().call()
+      .then(x => setAllDonors(x))
+  }
 
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
 
-    // Update state with the result.
-    this.setState({ storageValue: response });
+  const getBalanceOwner = async (acc) => {
+    const { contract } = data
+    await contract.methods.balanceOf(acc).call()
+      .then(a => setBalance0(web3.utils.fromWei(a)))
   };
 
-  render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
-    return (
-      <div className="App">
-        <h3>Account : {this.state.accounts}</h3>
-      </div>
-    );
-  }
+  const getBalanceActualAccount = async (acc) => {
+    const { contract } = data
+    await contract.methods.balanceOf(acc).call()
+      .then(a => setBalanceActualAccount(web3.utils.fromWei(a)))
+  };
+
+
+
+  const { web3, isAdmin, isDonor, isNpo } = data
+  return !web3 ? (
+    <div>Loading Web3, accounts, and contract...</div>
+  ) : (
+    <ThemeProvider theme={theme}>
+      <Routes>
+        {isAdmin &&
+          <Route path="/" element={<LayoutAdmin />}>
+            <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
+            <Route path="/npos" element={<ViewNpos data={data} />} />
+            <Route path="/donateurs" element={<ViewDonors data={data} />} />
+            <Route path="/historique" element={<Historic data={data} />} />
+          </Route>}
+        {isNpo &&
+          <Route path="/" element={<LayoutNpo />}>
+            <Route path="/mesprojets" element={<MyProjects data={data} msToDate={msToDate} />} />
+            <Route path="/creerprojet" element={<CreateProject data={data} />} />
+            <Route path="/historique" element={<Historic data={data} />} />
+          </Route>}
+        {isDonor &&
+          <Route path="/" element={<LayoutDonor />}>
+            <Route path="/mesdons" element={<MyDonations data={data} />} />
+            <Route path="/faireundon" element={<MakeDonation data={data} />} />
+            <Route path="/historique" element={<Historic data={data} />} />
+          </Route>}
+      </Routes>
+    </ThemeProvider>
+  );
+
 }
 
 export default App;
