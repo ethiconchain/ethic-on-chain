@@ -1,4 +1,5 @@
 var EthicToken = artifacts.require("./EthicToken.sol");
+var EthicOnChainLib = artifacts.require("./EthicOnChainLib.sol");
 var EthicOnChain = artifacts.require("./EthicOnChain.sol");
 
 module.exports = async function(deployer, _network, accounts) {
@@ -50,10 +51,17 @@ module.exports = async function(deployer, _network, accounts) {
   /// EthicOnChain ///
   ////////////////////
   
+  // déploiement de la librairie en premier
+  await deployer.deploy(EthicOnChainLib);
+  const EthicOnChainLibrary = await EthicOnChainLib.deployed();
+  console.log("Librairie EthicOnChainLib déployée");
+  await deployer.link(EthicOnChainLib, EthicOnChain);
+  console.log("EthicOnChainLib liée à EthicOnChain");
+
   // l'adresse du token EOC déployé doit être transmise au contrat EthicOnChain pour les transferts (donations et withdrawals)
   await deployer.deploy(EthicOnChain, TokenEOC.address);
-  
   const EthicOnChainContract = await EthicOnChain.deployed();
+  console.log("Contrat EthicOnChain déployé");
 
   ////////////////////////////
   /// EthicOnChain et NPOs ///
@@ -112,6 +120,6 @@ module.exports = async function(deployer, _network, accounts) {
                                       "Musk",
                                       "Elon",
                                       "3500 Deer Creek Road Palo Alto, CA 94304 United States");
-  console.log("Donateur 'Leonardo' créé");
+  console.log("Donateur 'Elon' créé");
 
 };

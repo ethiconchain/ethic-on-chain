@@ -3,56 +3,13 @@ pragma solidity 0.8.11;
  
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./EthicOnChainLib.sol";
 
 /// @title EthicOnChain 
 /// @author Lahcen E. Dev / Jérôme Gauthier
 /// @notice EthicOnChain contract to manage NPOs, Projects and Donors
 contract EthicOnChain is Ownable {
     
-    struct NPO {
-        uint npoId;
-        address npoErc20Address;
-        string denomination;
-        string postalAddress;
-        string object;
-        string npoType;
-        uint[] projectIds;
-    }
-
-    struct Donor {
-        uint donorId;
-        address donorErc20Address;
-        string name;
-        string surName;
-        string postalAddress;
-        uint[] donationIds;
-    }
-
-    struct Project {
-        uint projectId; // clé primaire
-        uint startDate;
-        uint endDate;
-        uint campaignStartDate;
-        uint campaignDurationInDays;
-        address npoErc20Address;
-        ProjectCause cause;
-        string title;
-        string description;
-        string geographicalArea;
-        uint minAmount;
-        uint maxAmount;
-        uint projectBalance;
-        uint[] donationIds;
-    } 
-
-    struct Donation {
-        uint donationId; // clé primaire
-        uint projectId;
-        uint donorId;
-        uint donationDate;
-        uint donationAmount;
-    }     
-
     enum ProjectCause {
         LutteContreLaPauvreteEtExclusion,
         EnvironnementEtLesAnimaux,
@@ -71,22 +28,26 @@ contract EthicOnChain is Ownable {
     }
 
     // NPOs
-    mapping (address => NPO) public npoAddresses; //Mapping of all NPO 
+    mapping (address => EthicOnChainLib.NPO) public npoAddresses; //Mapping of all NPO 
     mapping (uint => address) private npoMap;
     uint private npoCount; 
 
     // Donors
-    mapping (address => Donor) public donorAddresses; //Mapping of all donors 
+    mapping (address => EthicOnChainLib.Donor) public donorAddresses; //Mapping of all donors 
     mapping (uint => address) private donorMap;
     uint private donorCount; 
     
     // Projects
-    mapping (uint => Project) projectMap;
+    mapping (uint => EthicOnChainLib.Project) projectMap;
     uint projectCount;
     
     // Donations
-    mapping (uint => Donation) private donationMap;
+    mapping (uint => EthicOnChainLib.Donation) private donationMap;
     uint private donationCount;
+
+    // Withdrawal Informations
+    mapping (uint => EthicOnChainLib.Withdrawal) private withdrawalMap;
+    uint private withdrawalCount;
 
     // EOC Token address
     address eocTokenAddress;
@@ -95,6 +56,7 @@ contract EthicOnChain is Ownable {
     event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
     event DonationAdded(uint _donationId, uint _projectId, uint _donorId, uint _donationDate, uint donationAmount);
+    event WithdrawalAdded(uint _withdrawalId ,uint _projectId, uint _amount, address _addressRecipent);
     
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
@@ -122,7 +84,7 @@ contract EthicOnChain is Ownable {
         require(bytes(_npoType).length > 0, "Le type est obligatoire");
         require(bytes(npoAddresses[_npoErc20Address].denomination).length == 0, unicode"NPO déjà enregistré");
         
-        NPO storage newNpo = npoAddresses[_npoErc20Address];
+        EthicOnChainLib.NPO storage newNpo = npoAddresses[_npoErc20Address];
         newNpo.npoId = npoCount;
         newNpo.npoErc20Address = _npoErc20Address;
         newNpo.denomination = _denomination;
@@ -148,7 +110,7 @@ contract EthicOnChain is Ownable {
         require(_donorErc20Address > address(0), unicode"L'adresse du donateur doit être différente de zéro");
         require(donorAddresses[_donorErc20Address].donorErc20Address == address(0), unicode"Donor déjà enregistré");
 
-        Donor storage newDonor = donorAddresses[_donorErc20Address];
+        EthicOnChainLib.Donor storage newDonor = donorAddresses[_donorErc20Address];
         newDonor.donorId = donorCount;
         newDonor.name = _name;
         newDonor.surName = _surName;
@@ -180,7 +142,7 @@ contract EthicOnChain is Ownable {
         uint _minAmount,
         uint _maxAmount
     ) public {
-        NPO storage projectNpo = npoAddresses[msg.sender];
+        EthicOnChainLib.NPO storage projectNpo = npoAddresses[msg.sender];
         require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         // Mandatory fields
         require(bytes(_title).length > 0, "Le titre est obligatoire");
@@ -195,7 +157,7 @@ contract EthicOnChain is Ownable {
         require(_startDate < _endDate, unicode"La date début de projet doit être avant la fin");
         require(_minAmount < _maxAmount, unicode"Le montant minimal doit être inférieur au montant maximal");
 
-        Project storage newProject = projectMap[projectCount];
+        EthicOnChainLib.Project storage newProject = projectMap[projectCount];
         newProject.projectId = projectCount;
         newProject.npoErc20Address = msg.sender;
         newProject.title = _title;
@@ -218,16 +180,16 @@ contract EthicOnChain is Ownable {
     /// @param _projectId id of the project for which the donation is done
     /// @param _donationAmount amount of the donation in EOC tokens
     function addDonation(uint _projectId, uint _donationAmount) public {
-        Donor storage donationDonor = donorAddresses[msg.sender];
+        EthicOnChainLib.Donor storage donationDonor = donorAddresses[msg.sender];
         require(donationDonor.donorErc20Address != address(0), unicode"Vous n'êtes pas enregistré en tant que donateur"); // concept de KYC
-        Project storage donationProject = projectMap[_projectId];
+        EthicOnChainLib.Project storage donationProject = projectMap[_projectId];
         require(bytes(donationProject.title).length != 0, "Projet inconnu");
         // donation possible seulement si dans période de campagne
         uint campaignEndDate = donationProject.campaignStartDate + donationProject.campaignDurationInDays * 1 days;
         require(block.timestamp > donationProject.campaignStartDate, unicode"La campagne n'est pas commencée");
         require(block.timestamp < campaignEndDate, unicode"La campagne est terminée");
 
-        Donation storage newDonation = donationMap[donationCount];
+        EthicOnChainLib.Donation storage newDonation = donationMap[donationCount];
         newDonation.donationId = donationCount;
         newDonation.projectId = _projectId;
         newDonation.donorId = donationDonor.donorId;
@@ -248,104 +210,125 @@ contract EthicOnChain is Ownable {
         emit DonationAdded(newDonation.donationId, newDonation.projectId, newDonation.donorId, newDonation.donationDate, newDonation.donationAmount);
     }
 
+    /// @dev Allows an NPO to withdraw funds from a project 
+    /// @param _projectId project id 
+    /// @param _amount Amount of withdrawal
+    /// @param _title title of the withdrawal
+    /// @param _description description of the withdrawal
+    function withdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
+        EthicOnChainLib.NPO storage withdrawalNpo = npoAddresses[msg.sender];
+        require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
+        require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
+        uint256 balance = projectMap[_projectId].projectBalance;
+        require(balance >= _amount, "Balance insuffisante");
+        // Widthdraw possible si seulement la campagne est terminée
+        uint campaignEndDate = projectMap[_projectId].campaignStartDate + projectMap[_projectId].campaignDurationInDays * 1 days;
+        require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
+        require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
+
+        EthicOnChainLib.Withdrawal storage newWithdrawal = withdrawalMap[withdrawalCount];
+        newWithdrawal.withdrawalId = withdrawalCount;
+        newWithdrawal.projectId = _projectId;
+        newWithdrawal.title = _title;
+        newWithdrawal.amount = _amount;
+        newWithdrawal.withdrawalDate = block.timestamp;
+        newWithdrawal.description = _description;
+
+        withdrawalNpo.withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le NPO
+        projectMap[_projectId].projectBalance -= _amount; // mise à jour de la balance du projet
+        projectMap[_projectId].withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le projet
+        withdrawalCount++;
+        IERC20(eocTokenAddress).transfer(msg.sender,_amount);
+        emit WithdrawalAdded(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
+    }
+
+
     /// @dev  get an NPO via its erc20 address
     /// @param _npoErc20Address erc20 address of the NPO
     /// @return returns the corresponding NPO struct
-    function getNpo(address _npoErc20Address) public view returns(NPO memory) {
-        return npoAddresses[_npoErc20Address];
+    function getNpo(address _npoErc20Address) public view returns(EthicOnChainLib.NPO memory) {
+        return EthicOnChainLib.libGetNpo(npoAddresses, _npoErc20Address);
     }
 
     /// @dev  get an NPO via its id
     /// @param _npoId id of the NPO
     /// @return returns the corresponding NPO struct
-    function getNpoByIndex(uint _npoId) internal view returns(NPO memory) {
-        return npoAddresses[npoMap[_npoId]];
+    function getNpoByIndex(uint _npoId) internal view returns(EthicOnChainLib.NPO memory) {
+        return EthicOnChainLib.libGetNpoByIndex(npoAddresses, npoMap, _npoId);
     }
 
     /// @dev  get all NPOs
     /// @return returns an array of all NPOs
-    function getNpos() public view returns(NPO [] memory) {
-        uint arraySize = npoCount;
-        NPO [] memory result= new NPO[](arraySize);
-        for(uint i; i < arraySize; i++) {
-            result[i] = getNpoByIndex(i);     
-        }
-        return result;
+    function getNpos() public view returns(EthicOnChainLib.NPO [] memory) {
+        return EthicOnChainLib.libGetNpos(npoAddresses, npoMap, npoCount);
     }
 
     /// @dev  get a Donor via its erc20 address
     /// @param _donorErc20Address erc20 address of the Donor
     /// @return returns the corresponding Donor struct
-    function getDonor(address _donorErc20Address) public view returns(Donor memory) {
-        return donorAddresses[_donorErc20Address];
+    function getDonor(address _donorErc20Address) public view returns(EthicOnChainLib.Donor memory) {
+        return EthicOnChainLib.libGetDonor(donorAddresses, _donorErc20Address);
     }
 
     /// @dev  get a Donor via its id
     /// @param _donorId id of the Donor
     /// @return returns the corresponding Donor struct
-    function getDonorByIndex(uint _donorId) internal view returns(Donor memory) {
-        return donorAddresses[donorMap[_donorId]];
+    function getDonorByIndex(uint _donorId) internal view returns(EthicOnChainLib.Donor memory) {
+        return EthicOnChainLib.libGetDonorByIndex(donorAddresses, donorMap, _donorId);
     }
 
     /// @dev  get all Donors
     /// @return returns an array of all Donors
-    function getDonors() public view returns(Donor [] memory) {
-        uint arraySize = donorCount;
-        Donor [] memory result = new Donor[](arraySize);
-        for(uint i; i < arraySize; i++) {
-            result[i] = getDonorByIndex(i);     
-        }
-        return result;
+    function getDonors() public view returns(EthicOnChainLib.Donor [] memory) {
+        return EthicOnChainLib.libGetDonors(donorAddresses, donorMap, donorCount);
     }
 
     /// @dev Returns a single Project
     /// @param _projectId project unique id
     /// @return the Project struct instance corresponding to _projectId
-    function getProject(uint _projectId) public view returns(Project memory) {
-        return projectMap[_projectId];
+    function getProject(uint _projectId) public view returns(EthicOnChainLib.Project memory) {
+        return EthicOnChainLib.libGetProject(projectMap, _projectId);
     }
 
     /// @dev  get all projects
     /// @return returns an array of all Project
-    function getProjects() public view returns(Project [] memory) {
-        uint arraySize = projectCount;
-        Project [] memory result= new Project[](arraySize);
-        for(uint i; i < arraySize; i++) {
-            result[i] = projectMap[i];     
-        }
-        return result;
+    function getProjects() public view returns(EthicOnChainLib.Project [] memory) {
+        return EthicOnChainLib.libGetProjects(projectMap, projectCount);
     }
+    
+    /// @dev Allows to know all the projects of a single NPO
+    /// @param _addressNpo id which represents the index
+    /// @return Returns an array of all projects of a single NPO
+    function getProjectsPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
+        return EthicOnChainLib.libGetProjectsPerNpo(npoAddresses, projectMap, _addressNpo);
+    }
+
     /// @dev  get Donation by id
     /// param _id index pour retrouver la donation a retourner
     /// @return a struct donation 
-    function getDonation(uint _id) public view returns(Donation memory) {
-        return donationMap[_id];
+    function getDonation(uint _id) public view returns(EthicOnChainLib.Donation memory) {
+        return EthicOnChainLib.libGetDonation(donationMap, _id);
     }
 
     /// @dev Allows to know all the donations of a single donor
     /// @param _addressNpo id which represents the index
     /// @return Returns an array of all donation of a single donor
-    function getDonationPerDonor(address _addressNpo) public view  returns(Donation [] memory ) {
-        uint arraySize = donorAddresses[_addressNpo].donationIds.length;
-        Donation [] memory result= new Donation[](arraySize);
-        for(uint i; i < arraySize; i++) {
-            uint index = donorAddresses[_addressNpo].donationIds[i];
-            result[i] = getDonation(index);     
-        }
-        return result;
+    function getDonationPerDonor(address _addressNpo) public view  returns(EthicOnChainLib.Donation [] memory ) {
+        return EthicOnChainLib.libGetDonationPerDonor(donorAddresses, donationMap, _addressNpo);
     }
 
+    /// @dev  get Withdrawal by id
+    /// param _id index pour retrouver le withdrawal a retourner
+    /// @return a struct retait 
+    function getWithdrawal(uint _id) public view returns(EthicOnChainLib.Withdrawal memory) {
+        return EthicOnChainLib.libGetWithdrawal(withdrawalMap, _id);
+    }
 
-    /// @dev Allows to know all the projects of a single NPO
+    /// @dev Allows to know all the donations of a single donor
     /// @param _addressNpo id which represents the index
-    /// @return Returns an array of all projects of a single NPO
-    function getProjectsPerNpo(address _addressNpo) public view  returns(Project [] memory ) {
-        uint arraySize = npoAddresses[_addressNpo].projectIds.length;
-        Project [] memory result= new Project[](arraySize);
-        for(uint i; i < arraySize; i++) {
-            uint index = npoAddresses[_addressNpo].projectIds[i];
-            result[i] = getProject(index);     
-        }
-        return result;
+    /// @return Returns an array of all donation of a single donor
+    function getWithdrawalPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Withdrawal [] memory ) {
+        return EthicOnChainLib.libGetWithdrawalPerNpo(npoAddresses, withdrawalMap, _addressNpo);
     }
+
 }
