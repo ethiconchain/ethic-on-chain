@@ -7,24 +7,26 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import { AddCircleOutlineOutlined, VolunteerActivismOutlined, ListAltOutlined } from '@mui/icons-material';
+import { SubjectOutlined, VolunteerActivismOutlined, ListAltOutlined } from '@mui/icons-material';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 
 const drawerWidth = 240;
 
-const LayoutDonor = () => {
+const LayoutDonor = (props) => {
+  const { data } = props
+  const { accounts } = data
   let navigate = useNavigate();
   const location = useLocation()
   const menuItems = [
     {
+      text: 'Projets',
+      icon: <SubjectOutlined color='secondary' />,
+      path: '/projets'
+    },
+    {
       text: 'Mes Dons',
       icon: <VolunteerActivismOutlined color='secondary' />,
       path: '/mesdons'
-    },
-    {
-      text: 'Faire un Don',
-      icon: <AddCircleOutlineOutlined color='secondary' />,
-      path: '/faireundon'
     },
     {
       text: 'Historique',
@@ -43,9 +45,10 @@ const LayoutDonor = () => {
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Ethic-On-Chain
+          <Typography sx={{ flexGrow: 1 }}>
+            {accounts[0]}
           </Typography>
+          <img src="EthicOnChainLogo2.svg" alt="logo" height="30px" />
         </Toolbar>
       </AppBar>
 
@@ -62,7 +65,7 @@ const LayoutDonor = () => {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar>
+        <Toolbar sx={{ bgcolor: '#f9f9f9' }}>
           <Typography variant='h5'>
             Espace Donateur
           </Typography>
@@ -85,6 +88,9 @@ const LayoutDonor = () => {
           ))}
         </List>
 
+        <Box sx={{ mt: `auto`, textAlign: "center", mb: `30px` }} >
+          <img src="EthicOnChainLogoSquare.svg" alt="logo" height="150px" />
+        </Box>
       </Drawer>
 
       <Box

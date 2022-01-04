@@ -62,8 +62,13 @@ export default function CreateProject(props) {
 
   const plusProject = async () => {
     try {
-      const { contract, accounts } = data;
-      await contract.methods.addProject(title, description, zone, timeValueBegin.toString(), timeValueEnd.toString(), timeValueCampaign.toString(), nbDays, amoutMin, amoutMax).send({ from: accounts[0] })
+      const { web3, contract, accounts } = data;
+      await contract.methods.addProject(title, description, zone,
+        Math.round(timeValueBegin.valueOf() / 1000),
+        Math.round(timeValueEnd.valueOf() / 1000),
+        Math.round(timeValueCampaign.valueOf() / 1000),
+        nbDays, web3.utils.toWei(amoutMin.toString()),
+        web3.utils.toWei(amoutMax.toString())).send({ from: accounts[0] })
         .then(x => navigate('/mesprojets'))
 
       // navigate('/mesprojets')
@@ -220,7 +225,6 @@ export default function CreateProject(props) {
           <br />
 
           <Button
-            onClick={() => console.log('you clicked me')}
             type="submit"
             color="secondary"
             variant="contained"

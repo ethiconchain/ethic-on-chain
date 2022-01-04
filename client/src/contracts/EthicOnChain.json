@@ -61513,12 +61513,12 @@
         }
       },
       "links": {},
-      "address": "0x3d4790226a9E51381765aB5F3216e612c5fB6A93",
-      "transactionHash": "0x2e93825a2251407e16e14bef389da153c3c8caf73f687254305780cea09bec64"
+      "address": "0xE039A08E50901bCC581234dEbF51B9Edb6ee4586",
+      "transactionHash": "0xbbab6ce6c0fb13613065cb22098e4dce1844660715ad5929697662f4d63f6618"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-02T16:53:00.022Z",
+  "updatedAt": "2022-01-04T16:01:58.930Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",

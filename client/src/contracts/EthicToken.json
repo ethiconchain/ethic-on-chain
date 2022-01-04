@@ -10693,12 +10693,12 @@
         }
       },
       "links": {},
-      "address": "0x1Ba749aE6c683D50Fd66702914E3Df7137DaD5BE",
-      "transactionHash": "0x92ce6dc979bf77a2f9a464b163d10576cf9597595a8d4699de72a7d87d1dc977"
+      "address": "0x13E4f99A406ff2CF8Fc379997cF9aA9c33297F85",
+      "transactionHash": "0x3a2e651e606100c814dc6db494c54fa3139a400d778abe534b3cd7350dccbe18"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-02T16:52:59.983Z",
+  "updatedAt": "2022-01-04T16:01:58.903Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev",
