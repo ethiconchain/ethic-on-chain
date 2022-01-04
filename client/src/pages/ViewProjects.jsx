@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,10 +9,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import Button from '@mui/material/Button';
+
 
 const ViewProjects = (props) => {
   const { data, msToDate } = props
-  let navigate = useNavigate();
   const [allProjects, setAllProjects] = useState(null)
 
   useEffect(() => {
@@ -31,25 +33,7 @@ const ViewProjects = (props) => {
 
     } catch (error) {
       console.log(error)
-      // console.log(`error`, error.message)
-      // if (/Already registered/.test(error.message)) {
-      //   setMessageAlert('Adresse déjà enregistrée !')
-      //   setShowAlert(true)
-      // } else if (/caller is not the owner/.test(error.message)) {
-      //   setMessageAlert("Vous n'êtes pas l'administrateur !")
-      //   setShowAlert(true)
-      // } else if (/Voters registration is not open yet/.test(error.message)) {
-      //   setMessageAlert('Enregistrement des voteurs inactive !')
-      //   setShowAlert(true)
-      // } else if (/The address cannot be empty/.test(error.message)) {
-      //   setMessageAlert("L'adresse ne peut être vide !")
-      //   setShowAlert(true)
-      // } else {
-      //   setMessageAlert('Erreur inconnue voter')
-      //   setShowAlert(true)
-      // }
     }
-    // setContentForm("")
   }
 
   return (
@@ -73,12 +57,13 @@ const ViewProjects = (props) => {
                 <TableCell>Description</TableCell>
                 <TableCell>Début campagne</TableCell>
                 <TableCell>Durée campagne (j)</TableCell>
+                <TableCell>Faire un don</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {allProjects.map((project) => (
                 <TableRow
-                  key={project.title}
+                  key={project.projectId}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="project">
@@ -87,6 +72,14 @@ const ViewProjects = (props) => {
                   <TableCell>{project.description}</TableCell>
                   <TableCell>{msToDate(project.campaignStartDate)}</TableCell>
                   <TableCell>{project.campaignDurationInDays}</TableCell>
+                  <TableCell>
+                    <Link to={`/faireundon/${project.projectId}`}>
+                      <Button variant="contained" color='secondary'
+                      >
+                        <VolunteerActivismIcon size="large" />
+                      </Button>
+                    </Link>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

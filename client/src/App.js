@@ -11,7 +11,7 @@ import "./App.css";
 import LayoutAdmin from "./components/LayoutAdmin";
 import LayoutNpo from "./components/LayoutNpo";
 import LayoutDonor from "./components/LayoutDonor";
-import ViewProjects from "./pages/admin/ViewProjects";
+import ViewProjects from "./pages/ViewProjects";
 import ViewNpos from "./pages/admin/ViewNpos";
 import ViewDonors from "./pages/admin/ViewDonors";
 import Historic from "./pages/Historic";
@@ -26,7 +26,6 @@ const theme = createTheme({
       main: '#653442',
     },
     secondary: {
-      // main: '#8C914E',
       main: '#11cb5f',
     },
   },
@@ -46,6 +45,7 @@ const App = () => {
     web3: null,
     accounts: null,
     contract: null,
+    contractTokenEOC: null,
     isAdmin: null,
     isNpo: null,
     isDonor: null
@@ -53,12 +53,11 @@ const App = () => {
   const [allNpos, setAllNpos] = useState(null)
   const [allDonors, setAllDonors] = useState(null)
 
-  const [actualAccount, setActualAccount] = useState(null)
   const [balance0, setBalance0] = useState(0)
   const [balanceActualAccount, setBalanceActualAccount] = useState(0)
 
-  const msToDate = (x) => new Date(+x).toLocaleDateString()
-
+  // convertit date epoch (ms) en date JJ/MM/YY
+  const msToDate = (x) => new Date(x * 1000).toLocaleDateString()
 
   useEffect(() => {
     init();
@@ -66,13 +65,11 @@ const App = () => {
 
   useEffect(() => {
     window.ethereum.on('accountsChanged', (accounts) => {
-      setActualAccount(accounts[0])
       // reload la page aprés changement de compte dans Metamask
       navigate("/")
       window.location.reload()
     });
   });
-
 
   useEffect(() => {
     console.log(`Npos`, allNpos)
@@ -80,27 +77,6 @@ const App = () => {
   useEffect(() => {
     console.log(`Donors`, allDonors)
   }, [allDonors]);
-
-  // useEffect(() => {
-  //   if (data.accounts && !actualAccount) {
-  //     setActualAccount(data.accounts)
-  //   }
-  // }, [data.accounts]);
-
-  // useEffect(() => {
-  //   if (data.accounts) {
-  //     getBalanceOwner(data.accounts.toString())
-  //     return () => getBalanceOwner()
-  //   }
-  // }, [data.accounts]);
-
-  // useEffect(() => {
-  //   if (actualAccount) {
-  //     console.log(`actualAccount`, actualAccount)
-  //     getBalanceActualAccount(actualAccount.toString())
-  //     return () => getBalanceActualAccount()
-  //   }
-  // }, [actualAccount]);
 
   const init = async () => {
     try {
@@ -111,6 +87,11 @@ const App = () => {
       const instance = new web3.eth.Contract(
         EthicOnChainContract.abi,
         deployedNetwork && deployedNetwork.address,
+      );
+      const deployedNetworkTokenEOC = EthicTokenContract.networks[networkId];
+      const instanceTokenEOC = new web3.eth.Contract(
+        EthicTokenContract.abi,
+        deployedNetworkTokenEOC && deployedNetworkTokenEOC.address,
       );
 
       const account = accounts[0];
@@ -128,12 +109,10 @@ const App = () => {
 
       await instance.methods.getNpo(account).call()
         .then(x => x[1] !== addressZero ? isANpo = true : isANpo = false)
-      // .then(x => console.log('getNpo', x))
       await instance.methods.getDonor(account).call()
         .then(x => x[1] !== addressZero ? isADonor = true : isADonor = false)
-      // .then(x => console.log('getDonor', x))
 
-      setData({ web3, accounts, contract: instance, isAdmin: isAnAdmin, isNpo: isANpo, isDonor: isADonor });
+      setData({ web3, accounts, contract: instance, contractTokenEOC: instanceTokenEOC, isAdmin: isAnAdmin, isNpo: isANpo, isDonor: isADonor });
 
     } catch (error) {
       alert(
@@ -142,19 +121,6 @@ const App = () => {
       console.error(error);
     }
   };
-
-  const getNpos = async () => {
-    const { contract } = data
-    await contract.methods.getNpos().call()
-      .then(x => setAllNpos(x))
-  }
-
-  const getDonors = async () => {
-    const { contract } = data
-    await contract.methods.getDonors().call()
-      .then(x => setAllDonors(x))
-  }
-
 
   const getBalanceOwner = async (acc) => {
     const { contract } = data
@@ -168,8 +134,6 @@ const App = () => {
       .then(a => setBalanceActualAccount(web3.utils.fromWei(a)))
   };
 
-
-
   const { web3, isAdmin, isDonor, isNpo } = data
   return !web3 ? (
     <div>Loading Web3, accounts, and contract...</div>
@@ -177,22 +141,23 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Routes>
         {isAdmin &&
-          <Route path="/" element={<LayoutAdmin />}>
+          <Route path="/" element={<LayoutAdmin data={data} />}>
             <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
-            <Route path="/npos" element={<ViewNpos data={data} />} />
-            <Route path="/donateurs" element={<ViewDonors data={data} />} />
+            <Route path="/npos" element={<ViewNpos data={data} allNpos={allNpos} />} />
+            <Route path="/donateurs" element={<ViewDonors data={data} allDonors={allDonors} />} />
             <Route path="/historique" element={<Historic data={data} />} />
           </Route>}
         {isNpo &&
-          <Route path="/" element={<LayoutNpo />}>
+          <Route path="/" element={<LayoutNpo data={data} />}>
             <Route path="/mesprojets" element={<MyProjects data={data} msToDate={msToDate} />} />
             <Route path="/creerprojet" element={<CreateProject data={data} />} />
             <Route path="/historique" element={<Historic data={data} />} />
           </Route>}
         {isDonor &&
-          <Route path="/" element={<LayoutDonor />}>
-            <Route path="/mesdons" element={<MyDonations data={data} />} />
-            <Route path="/faireundon" element={<MakeDonation data={data} />} />
+          <Route path="/" element={<LayoutDonor data={data} />}>
+            <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
+            <Route path="/mesdons" element={<MyDonations data={data} msToDate={msToDate} />} />
+            <Route path="/faireundon/:id" element={<MakeDonation data={data} />} />
             <Route path="/historique" element={<Historic data={data} />} />
           </Route>}
       </Routes>
