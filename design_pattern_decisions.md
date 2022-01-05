@@ -42,17 +42,16 @@ Ce document liste tous les Patterns Solidity issus de https://fravoll.github.io/
 
 - Utilisation : OUI
 - Dès qu'une fonction offre une possibilité de transfert de tokens, nous devons nous assurer qu'il n'y a pas de risque de réentrance (re-entrancy exploit risk).
-- Exemple d'utilisation : ...
+- Exemple d'utilisation : [EthicOnChain.sol](contracts/EthicOnChain.sol), fonctions addDonation et withdrawTokens: les appels à IERC20(eocTokenAddress).transfer et trasnferFrom sont faits en dernier.
 
 #### Secure Ether Transfer
 
 - Utilisation : OUI
 - nous devons réfléchir à la meilleure méthode / la plus appropriée en cas de transfert de tokens (parmi les méthodes send, transfer et call.value)
-- Exemple d'utilisation : ...
+- Exemple d'utilisation : [EthicOnChain.sol](contracts/EthicOnChain.sol), les fonctions addDonation et withdrawTokens utilisent les appels à IERC20(eocTokenAddress).transfer et trasnferFrom
 
 #### Pull over Push
 
-A REVOIR ENTRE TOUS LES MEMBRES DE L'EQUIPE !
 - Utilisation : NON
 - Dans notre modèle métier, il ne semble pas évident/facile de pouvoir demander aux intervenants de "réclamer" leur Tokens. Peut-être que dans le cas de la libération des tokens pour un projet cela peut-être utilisé.
 
