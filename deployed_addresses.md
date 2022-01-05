@@ -3,5 +3,5 @@ Ce document doit renseigner les addresses de vos smart contrats déployés sur l
 
 ### Ropsten (id 3)
 
-* EthicOnChain : 0x5b01b3cbb79f6d6de617795637d44cf4ec173dab689fb0804ab8dbbd88f4302b
-* EthicToken : 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925
+* EthicOnChain : [0xD8C21c62623784c4BA0C681f76192d562fB47a56](https://ropsten.etherscan.io/address/0xD8C21c62623784c4BA0C681f76192d562fB47a56)
+* EthicToken : [0xe569D2CACB02724710abc3D2501c2a64f2CEeA68](https://ropsten.etherscan.io/address/0xe569D2CACB02724710abc3D2501c2a64f2CEeA68)
