@@ -41,7 +41,7 @@ const LayoutAdmin = (props) => {
   ]
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', height: '100vh' }}>
       {/* app bar */}
       <AppBar
         color='secondary'

@@ -48,15 +48,6 @@ export default function CreateProject(props) {
     if (amoutMax === 0) { setAmoutMaxError(true) }
     if (title && description) {
       plusProject()
-      // console.log('title :>> ', title);
-      // console.log('zone :>> ', zone);
-      // console.log('description :>> ', description);
-      // console.log('timeValueBegin :>> ', timeValueBegin);
-      // console.log('timeValueEnd :>> ', timeValueEnd);
-      // console.log('timeValueCampaign :>> ', timeValueCampaign);
-      // console.log('nbDays :>> ', nbDays);
-      // console.log('amoutMin :>> ', amoutMin);
-      // console.log('amoutMax :>> ', amoutMax);
     }
   }
 
@@ -70,29 +61,9 @@ export default function CreateProject(props) {
         nbDays, web3.utils.toWei(amoutMin.toString()),
         web3.utils.toWei(amoutMax.toString())).send({ from: accounts[0] })
         .then(x => navigate('/mesprojets'))
-
-      // navigate('/mesprojets')
     } catch (error) {
       console.log(error)
-      // console.log(`error`, error.message)
-      // if (/Already registered/.test(error.message)) {
-      //   setMessageAlert('Adresse déjà enregistrée !')
-      //   setShowAlert(true)
-      // } else if (/caller is not the owner/.test(error.message)) {
-      //   setMessageAlert("Vous n'êtes pas l'administrateur !")
-      //   setShowAlert(true)
-      // } else if (/Voters registration is not open yet/.test(error.message)) {
-      //   setMessageAlert('Enregistrement des voteurs inactive !')
-      //   setShowAlert(true)
-      // } else if (/The address cannot be empty/.test(error.message)) {
-      //   setMessageAlert("L'adresse ne peut être vide !")
-      //   setShowAlert(true)
-      // } else {
-      //   setMessageAlert('Erreur inconnue voter')
-      //   setShowAlert(true)
-      // }
     }
-    // setContentForm("")
   }
 
 

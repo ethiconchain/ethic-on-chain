@@ -83480,10 +83480,10 @@
         }
       },
       "links": {
-        "EthicOnChainLib": "0x942A13A48108A9412BbC6de823451481FFd06377"
+        "EthicOnChainLib": "0x24cF9f3e364431efd8c0AAC494eb687E2e881259"
       },
-      "address": "0xD8C21c62623784c4BA0C681f76192d562fB47a56",
-      "transactionHash": "0x415b18349165c597b043b09ceff92aaa19c9fd04e4e5a14db49c0631de0acc15"
+      "address": "0x8ae16c82b19caD2Ac8bd2e11df5d4854649137F3",
+      "transactionHash": "0xdb73136bf14f214cd7044fb5bf64f7789e6467e9423c4c9cd5ab87f98f51e9ba"
     },
     "5777": {
       "events": {
@@ -83728,15 +83728,48 @@
           ],
           "name": "ProjectAdded",
           "type": "event"
+        },
+        "0x38b2ce41ee33d013c6288339b87fd2c9f7af7d6881611651dbb6c2ba145d71d7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_withdrawalId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_projectId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_addressRecipent",
+              "type": "address"
+            }
+          ],
+          "name": "WithdrawalAdded",
+          "type": "event"
         }
       },
-      "links": {},
-      "address": "0xE039A08E50901bCC581234dEbF51B9Edb6ee4586",
-      "transactionHash": "0xbbab6ce6c0fb13613065cb22098e4dce1844660715ad5929697662f4d63f6618"
+      "links": {
+        "EthicOnChainLib": "0x29Ce4102d97f7cC486C36C728B16359C031fc234"
+      },
+      "address": "0x7151500545bC3080BD91b1b111FF9793fF7af747",
+      "transactionHash": "0xb8699a7967a025e823c6663bad5ac315245dbb6b4a3501d1e222991d0ae159fe"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-05T08:24:47.807Z",
+  "updatedAt": "2022-01-05T19:04:38.910Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",

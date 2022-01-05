@@ -19,6 +19,8 @@ import MakeDonation from "./pages/donor/MakeDonation";
 import MyDonations from "./pages/donor/MyDonations";
 import CreateProject from "./pages/npo/CreateProject";
 import MyProjects from "./pages/npo/MyProjects";
+import Withdrawal from "./pages/npo/Withdrawal";
+import MyWithdrawals from "./pages/npo/MyWithdrawals";
 
 const theme = createTheme({
   palette: {
@@ -151,6 +153,8 @@ const App = () => {
           <Route path="/" element={<LayoutNpo data={data} />}>
             <Route path="/mesprojets" element={<MyProjects data={data} msToDate={msToDate} />} />
             <Route path="/creerprojet" element={<CreateProject data={data} />} />
+            <Route path="/mesretraits" element={<MyWithdrawals data={data} msToDate={msToDate} />} />
+            <Route path="/retrait/:id" element={<Withdrawal data={data} />} />
             <Route path="/historique" element={<Historic data={data} />} />
           </Route>}
         {isDonor &&
@@ -163,7 +167,6 @@ const App = () => {
       </Routes>
     </ThemeProvider>
   );
-
 }
 
 export default App;
