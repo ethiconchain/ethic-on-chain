@@ -224,7 +224,7 @@ contract EthicOnChain is Ownable {
         // Widthdraw possible si seulement la campagne est terminée
         uint campaignEndDate = projectMap[_projectId].campaignStartDate + projectMap[_projectId].campaignDurationInDays * 1 days;
         require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
-        require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
+        // require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
 
         EthicOnChainLib.Withdrawal storage newWithdrawal = withdrawalMap[withdrawalCount];
         newWithdrawal.withdrawalId = withdrawalCount;
