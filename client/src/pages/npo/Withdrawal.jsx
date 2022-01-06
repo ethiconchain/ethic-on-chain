@@ -5,11 +5,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import ShoppingCartCheckoutOutlinedIcon from '@mui/icons-material/ShoppingCartCheckoutOutlined';
 import InputAdornment from '@mui/material/InputAdornment';
 
-export default function MakeDonation(props) {
+export default function Withdrawal(props) {
   const { data } = props
+  const { web3 } = data
   let navigate = useNavigate();
   const { id } = useParams();
   const [selectedProject, setSelectedProject] = useState(null)
@@ -31,16 +32,16 @@ export default function MakeDonation(props) {
     e.preventDefault()
     if (amoutMin === 0) { setAmoutMinError(true) }
     if (amoutMin) {
-      plusDonation()
+      withdrawalRequest()
     }
   }
   console.log(`id`, id)
-  const plusDonation = async () => {
+  const withdrawalRequest = async () => {
     try {
       const { web3, contract, contractTokenEOC, accounts } = data;
       await contractTokenEOC.methods.approve(contract._address, web3.utils.toWei(amoutMin.toString())).send({ from: accounts[0] })
-      await contract.methods.addDonation(id, web3.utils.toWei(amoutMin.toString())).send({ from: accounts[0], gas: 2000000 })
-        .then(x => navigate('/mesdons'))
+      await contract.methods.withdrawTokens(id, web3.utils.toWei(amoutMin.toString()), selectedProject.title, selectedProject.description).send({ from: accounts[0], gas: 2000000 })
+        .then(x => navigate('/mesretraits'))
 
     } catch (error) {
       console.log(error)
@@ -55,14 +56,16 @@ export default function MakeDonation(props) {
             <Typography gutterBottom variant="h5" component="div">
               {selectedProject.title}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {selectedProject.description}
+            <br />
+            <Typography variant="button" sx={{ backgroundColor: '#B7EFCF', borderRadius: '5px', p: 1 }}>
+              Le montant actuel récolté est de {web3.utils.fromWei(selectedProject.projectBalance.toString())} EOC
             </Typography>
+            <br />
             <br />
             <form noValidate autoComplete='off' onSubmit={handleSubmit}>
               <TextField
                 onChange={(e) => setAmoutMin(e.target.value)}
-                label="Montant du don"
+                label="Montant du retrait"
                 variant='outlined'
                 color='secondary'
                 InputProps={{
@@ -78,8 +81,8 @@ export default function MakeDonation(props) {
                 type="submit"
                 color="secondary"
                 variant="contained"
-                endIcon={<VolunteerActivismIcon />}>
-                Donner
+                endIcon={<ShoppingCartCheckoutOutlinedIcon />}>
+                Demander un retrait
               </Button>
             </form>
           </CardContent>

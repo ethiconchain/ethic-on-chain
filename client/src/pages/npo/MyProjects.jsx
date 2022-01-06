@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,10 +9,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import ShoppingCartCheckoutOutlinedIcon from '@mui/icons-material/ShoppingCartCheckoutOutlined';
+import Button from '@mui/material/Button';
 
 const MyProjects = (props) => {
   const { data, msToDate } = props
-  let navigate = useNavigate();
   const [allMyProjects, setAllMyProjects] = useState(null)
 
   useEffect(() => {
@@ -28,28 +29,9 @@ const MyProjects = (props) => {
       const { contract, accounts } = data
       await contract.methods.getProjectsPerNpo(accounts[0]).call()
         .then(x => setAllMyProjects(x))
-
     } catch (error) {
       console.log(error)
-      // console.log(`error`, error.message)
-      // if (/Already registered/.test(error.message)) {
-      //   setMessageAlert('Adresse déjà enregistrée !')
-      //   setShowAlert(true)
-      // } else if (/caller is not the owner/.test(error.message)) {
-      //   setMessageAlert("Vous n'êtes pas l'administrateur !")
-      //   setShowAlert(true)
-      // } else if (/Voters registration is not open yet/.test(error.message)) {
-      //   setMessageAlert('Enregistrement des voteurs inactive !')
-      //   setShowAlert(true)
-      // } else if (/The address cannot be empty/.test(error.message)) {
-      //   setMessageAlert("L'adresse ne peut être vide !")
-      //   setShowAlert(true)
-      // } else {
-      //   setMessageAlert('Erreur inconnue voter')
-      //   setShowAlert(true)
-      // }
     }
-    // setContentForm("")
   }
 
   return (
@@ -73,6 +55,7 @@ const MyProjects = (props) => {
                 <TableCell>Description</TableCell>
                 <TableCell>Début campagne</TableCell>
                 <TableCell>Durée campagne (j)</TableCell>
+                <TableCell>Demande de retrait</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -87,6 +70,14 @@ const MyProjects = (props) => {
                   <TableCell>{project.description}</TableCell>
                   <TableCell>{msToDate(project.campaignStartDate)}</TableCell>
                   <TableCell>{project.campaignDurationInDays}</TableCell>
+                  <TableCell>
+                    <Link to={`/retrait/${project.projectId}`}>
+                      <Button variant="contained" color='secondary'
+                      >
+                        <ShoppingCartCheckoutOutlinedIcon size="large" />
+                      </Button>
+                    </Link>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

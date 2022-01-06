@@ -8,6 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { AddCircleOutlineOutlined, ListAltOutlined, SubjectOutlined } from '@mui/icons-material';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -29,6 +30,11 @@ const LayoutNpo = (props) => {
       path: '/creerprojet'
     },
     {
+      text: 'Mes demandes de retrait',
+      icon: <ShoppingCartOutlinedIcon color='secondary' />,
+      path: '/mesretraits'
+    },
+    {
       text: 'Historique',
       icon: <ListAltOutlined color='secondary' />,
       path: '/historique'
@@ -36,7 +42,7 @@ const LayoutNpo = (props) => {
   ]
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', height: '100vh' }}>
       {/* app bar */}
       <AppBar
         color='secondary'
