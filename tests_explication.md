@@ -61,10 +61,20 @@ addProject
 * it('Event For addProject') : vérifie que l'événement ProjectAdded est bien émis après l'ajout d'un projet.
 
 addDonation
+* it('Add Donation') : ajoute un don et vérifie que les propriétés passées en paramètre sont bien stockées dans la blockchain, ainsi que les propriétés calculées (identifiants et date de don)
+* it('Require a known donor - ExpectRevert') : l'adresse du donateur doit être connue = déclarée dans la liste des donateurs en amont (addDonor)
+* it('Require a project for a donation (Unknown project) - ExpectRevert') : le projet pour lequel on fait le don doit être déclaré dans la blockchain (addProject)
+* it('Require The campaign has not started, impossible to make a donation - ExpectRevert') : on ne peut donner que si la campagne est commencée
+* it('Require The campaign is ended, impossible to make a donation - ExpectRevert') : on ne peut donner que si la campagne n'est pas terminée
+* it('Event For DonationAdded') : vérifie que l'événement DonationAdded est bien émis après un don.
 
 withdrawTokens
-
-
-
+* it('WithdrawTokens') : effectue un retrait et vérifie que la nouvelle balance correspond bien à l'ancienne moins le montant du retrait.
+* it('WithdrawTokens - Require a known NPO - ExpectRevert') : le retrait ne peut être effectué que par un NPO déclaré dans la blockchain.
+* it('WithdrawTokens- Require Revert Projet Inconnu') : le projet à partir duquel on désire effectuer le retrait doit être déclaré dans la blockchain.
+* it('Add WithdrawTokens- Require Revert withdraw > Balance') : le retrait demandé doit être inférieur ou égal à la balance du projet (dons effectués moins les retraits déjà réalisés)
+* it('WithdrawTokens- Require Revert campaign not started') : le retrait ne peut commencer qu'une fois la campagne terminée donc après le début de la campagne.
+* it('WithdrawTokens- Require Revert campaign not completed') : le retrait ne peut commencer qu'une fois la campagne terminée.
+* it('Event For WithdrawalAdded') : vérifie que l'événement WithdrawalAdded est bien émis après un retrait.
 
 #### EthicOnChainLib.sol
