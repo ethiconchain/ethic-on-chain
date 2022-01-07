@@ -28,6 +28,10 @@ Les seules fonctions qui mettent en jeu une transaction n'ont pas d'appels crois
 
 Nous n'utilisons que msg.sender comme recommandé.
 
+### Underflow / Overflow
+
+Les risques d'underflow/overflow ont été réglé depuis Solidity 0.8 et supérieur.
+
 ## TODO : les points suivants sont à revoir pour vérifier la bonne pratique
 
 ### Contraintes de temps - time constraints
@@ -39,9 +43,3 @@ Nous n'utilisons que msg.sender comme recommandé.
 ### Déni de service - DOS (Deny-of-Service)
 
 ### Déni de service avec la limite en gas du bloc
-
-### Underflow / Overflow
-
-Ce point doit être absolument vérifié / revalidé car nous avons des compteurs pour les identifiants uniques de chaque collection, sans test de limite.
-TODO = ajouter des require pour vérifier que l'on n'a pas atteint la limite pour chaque compteur (ils sont en uint donc peut probable, mais à voir si on repasse à un uint256 pour consommer moins de gas par exemple)
-
