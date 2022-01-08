@@ -3,6 +3,6 @@ Ce document doit renseigner les addresses de vos smart contrats déployés sur l
 
 ### Ropsten (id 3)
 
-* EthicOnChain (smart contract principal) : [0x45d92452F178742375b467F6d63c98B95528F163](https://ropsten.etherscan.io/address/0x45d92452F178742375b467F6d63c98B95528F163)
-* EthicOnChainLib (librairie) : [0x93a0a6BC3f3acB778B768aCeffC8409697e8B16c](https://ropsten.etherscan.io/address/0x93a0a6BC3f3acB778B768aCeffC8409697e8B16c)
-* EthicToken (Token propriétaire EOC) : [0xD6D43F2eF2C0138d9EC4a71538f706f2DA24D27C](https://ropsten.etherscan.io/address/0xD6D43F2eF2C0138d9EC4a71538f706f2DA24D27C)
+* EthicOnChain (smart contract principal) : [0x9F2B477D234386E49AD3697C228A545e72C6FEBD](https://ropsten.etherscan.io/address/0x9F2B477D234386E49AD3697C228A545e72C6FEBD)
+* EthicOnChainLib (librairie) : [0x7a72E98f049dBF841e3bF10CF1ED97B0B81CE2ff](https://ropsten.etherscan.io/address/0x7a72E98f049dBF841e3bF10CF1ED97B0B81CE2ff)
+* EthicToken (Token propriétaire EOC) : [0x1599A29C38cacFF881E78985b05786a06678D4E3](https://ropsten.etherscan.io/address/0x1599A29C38cacFF881E78985b05786a06678D4E3)
