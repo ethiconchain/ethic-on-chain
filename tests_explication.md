@@ -38,14 +38,14 @@ addNpo
 * it('Event For AddNpo') : vérifie que l'événement NpoAdded est bien émis après l'ajout d'un NPO.
 
 addDonor
-* it('Add Donor') : ajoute un donateur et vérifie que les propriétés passées en paramètre sont bien stockées dans la blockchain.
+* it('Add and Get Donor') : ajoute un donateur et vérifie que les propriétés passées en paramètre sont bien stockées dans la blockchain.
 * it('Require an address for a Donor - ExpectRevert') : vérifie que le paramètre _donorErc20Address ne peut pas être une adresse vide
 * it('Add Donor already registered') : vérifie qu'on ne peut pas ajouter deux fois le même Donor (même adresse _donorErc20Address)
 * it('Event For AddDonor') : vérifie que l'événement DonorAdded est bien émis après l'ajout d'un donateur.
 * TODO / à revoir = ajouter plus de tests (pas de zones obligatoire pour addNpo)
 
 addProject
-* it('Add Project') : ajoute un projet et vérifie que les propriétés passées en paramètre sont bien stockées dans la blockchain.
+* it('Add and Get Project') : ajoute un projet et vérifie que les propriétés passées en paramètre sont bien stockées dans la blockchain.
 * it('Add Project - Increase projectCount') : vérifie que la variable globale projectCount est bien incrémentée.
 * it('Does not add a project if the sender is not an NPO') : vérifie que seuls les NPO peuvent ajouter des projets.
 * it('Require a title for a project - ExpectRevert') : passe un titre vide pour vérifier que le require bloque bien (gestion de zone obligatoire)
@@ -61,7 +61,7 @@ addProject
 * it('Event For addProject') : vérifie que l'événement ProjectAdded est bien émis après l'ajout d'un projet.
 
 addDonation
-* it('Add Donation') : ajoute un don et vérifie que les propriétés passées en paramètre sont bien stockées dans la blockchain, ainsi que les propriétés calculées (identifiants et date de don)
+* it('Add and Get Donation') : ajoute un don et vérifie que les propriétés passées en paramètre sont bien stockées dans la blockchain, ainsi que les propriétés calculées (identifiants et date de don)
 * it('Require a known donor - ExpectRevert') : l'adresse du donateur doit être connue = déclarée dans la liste des donateurs en amont (addDonor)
 * it('Require a project for a donation (Unknown project) - ExpectRevert') : le projet pour lequel on fait le don doit être déclaré dans la blockchain (addProject)
 * it('Require The campaign has not started, impossible to make a donation - ExpectRevert') : on ne peut donner que si la campagne est commencée
@@ -77,4 +77,35 @@ withdrawTokens
 * it('WithdrawTokens- Require Revert campaign not completed') : le retrait ne peut commencer qu'une fois la campagne terminée.
 * it('Event For WithdrawalAdded') : vérifie que l'événement WithdrawalAdded est bien émis après un retrait.
 
-#### EthicOnChainLib.sol
+getNpo
+* it('Get NPO') : ajoute un NPO puis invoque getNpo pour vérifier si les données stockées dans la blockchain sont bien identiques aux paramètres passés.
+
+getNpos
+* it('Get all NPOs') : ajoute un NPO puis invoque getNpos pour vérifier que la longueur du tableau renvoyée est bien de 1.
+
+getDonor
+* it('Add and Get Donor') : ajoute un donateur et vérifie que les propriétés passées en paramètre sont bien stockées dans la blockchain.
+
+getDonors
+* it('Get all Donors') : ajoute un donateur puis invoque getDonors pour vérifier que la longueur du tableau renvoyée est bien de 1.
+
+getProject
+* it('Add and Get Project') : ajoute un projet et vérifie que les propriétés passées en paramètre sont bien stockées en utilisant la fonction getProject.
+
+getProjects
+* it('Get all Projects') : ajoute un projet puis invoque getProjects pour vérifier que la longueur du tableau renvoyée est bien de 1.
+
+getProjectsPerNpo
+* it it('get Projects per NPO') : ajoute un projet puis invoque getProjects pour l'adresse du NPO pour vérifier que la longueur du tableau renvoyée est bien de 1.
+
+getDonation
+* it('Add and Get Donation') : ajoute un don et vérifie que les propriétés passées en paramètre sont bien stockées dans la blockchain, ainsi que les propriétés calculées 
+
+getDonationPerDonor
+* it('Get Donations per Donor') : ajoute un don puis invoque getDonationPerDonor pour le donateur pour vérifier que la longueur du tableau renvoyée est bien de 1.
+
+getWithdrawal
+* it('get Withdrawal') : effectue un retrait de tokens pour un NPO puis vérifie que le montant stocké dans l'historique des retraits est bien égal à celui demandé lors du retrait.
+
+getWithdrawalPerNpo
+* it('get Withdrawals per NPO') : effectue un retrait de tokens pour un NPO puis invoque getWithdrawalPerNpo pour vérifier que la longueur du tableau renvoyée est bien de 1.

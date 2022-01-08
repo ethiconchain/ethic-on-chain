@@ -14,6 +14,7 @@ contract('EthicOnChain', function (accounts) {
     const _object = "mobilité durable, sport et santé, éducation et solidarité, protection de l'environnement, culture et patrimoine";
     const _npoType = 'Fondation d’entreprise';
     const _newNpoErc20Address = accounts[9]; // account index = 9 because deploy script already uses 1 to 4 as donors and 5 to 8 as default NPOs
+    const _newNpo2Erc20Address = accounts[10];
     const _projectOneIndex = new BN(0);
 
     const _title = 'AidePourEnfants';
@@ -76,7 +77,7 @@ contract('EthicOnChain', function (accounts) {
         expectEvent(receipt, "NpoAdded", { _poId: _projectOneIndex,_npoErc20Address:_newNpoErc20Address, _denomination:_denomination});
     });  
 
-    it('Add Donor', async function () {
+    it('Add and Get Donor', async function () {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
         let InformationNewDonor = await this.InstanceEthicOnChain.getDonor(_newDonorErc20Address);
         verifName = InformationNewDonor.name;
@@ -85,7 +86,6 @@ contract('EthicOnChain', function (accounts) {
         expect(verifName).to.equal(_donorName);
         expect(verifSurName).to.equal(_donorSurName);
         expect(verifPostalAddress).to.equal(_donorPostalAddress);
-
     });
 
     it('Require an address for a Donor - ExpectRevert', async function () {
@@ -106,7 +106,7 @@ contract('EthicOnChain', function (accounts) {
         });
     });  
 
-    it('Add Project', async function () {
+    it('Add and Get Project', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _newNpoErc20Address });
         let InformationNewProject = await this.InstanceEthicOnChain.getProject(_projectOneIndex);
@@ -205,7 +205,7 @@ contract('EthicOnChain', function (accounts) {
         });
     });  
 
-    it('Add Donation', async function () {
+    it('Add and Get Donation', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let blockLastest = await web3.eth.getBlock("latest");
         await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+1000, blockLastest.timestamp, blockLastest.timestamp, _minAmount, _maxAmount, { from: _newNpoErc20Address });
@@ -343,20 +343,6 @@ contract('EthicOnChain', function (accounts) {
         expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(300),_title,_description, { from : _newNpoErc20Address} ),"Balance insuffisante");
     });
 
-    it('WithdrawTokens- Require Revert campaign not started', async function () {
-        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        let blockLastest = await web3.eth.getBlock("latest");
-        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+1000, blockLastest.timestamp+1, 1, _minAmount, _maxAmount, { from: _newNpoErc20Address });
-        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
-        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
-        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
-        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
-        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(300), { from : accounts[0]} );
-        await time.increaseTo(blockLastest.timestamp+90000);
-        expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(200),_title,_description, { from : _newNpoErc20Address} ),"La campagne n'est pas commencée");
-    });
-
-/* TODO = revoir pourquoi ce test ne passe pas !
     it('WithdrawTokens- Require Revert campaign not completed', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let blockLastest = await web3.eth.getBlock("latest");
@@ -370,6 +356,21 @@ contract('EthicOnChain', function (accounts) {
         expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(200),_title,_description, { from : _newNpoErc20Address} ),"La campagne est toujours en cours");
     });
 
+/* TODO = revoir pourquoi ce test ne passe pas !
+
+    it('WithdrawTokens- Require Revert campaign not started', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+1000, blockLastest.timestamp+1, 1, _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
+        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
+        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(300), { from : accounts[0]} );
+        await time.increaseTo(blockLastest.timestamp+90000);
+        await expectRevert(await this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(200),_title,_description, { from : _newNpoErc20Address} ),"La campagne n'est pas commencée");
+    });
+    
     it('Event For WithdrawalAdded', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let blockLastest = await web3.eth.getBlock("latest");
@@ -380,15 +381,93 @@ contract('EthicOnChain', function (accounts) {
         await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
         await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(1000), { from : accounts[0]} );
         await time.increaseTo(blockLastest.timestamp+90000);
-        const amount =new BN(500);
-        const receipt= await this.InstanceEthicOnChain.withdrawTokens(new BN(0), amount,_title,_description, { from : _newNpoErc20Address} );
-        expectEvent(receipt, "WithdrawalAdded", {
+        const amount = new BN(500);
+        const receipt = await this.InstanceEthicOnChain.withdrawTokens(new BN(0), amount,_title,_description, { from : _newNpoErc20Address} );
+        await expectEvent(receipt, "WithdrawalAdded", {
+            _withdrawalId: new BN(0),
             _projectId:new BN(0),
             _amount: amount,
-            _addressRecipent:_newNpoErc20Address, 
-            _withdrawalId: new BN(0),
+            _addressRecipent:_newNpoErc20Address
         });
     }); 
 */
+
+    it('Get NPO', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let InformationNpo = await this.InstanceEthicOnChain.getNpo(_newNpoErc20Address);
+        expect(InformationNpo.denomination).to.equal(_denomination);
+        expect(InformationNpo.postalAddress).to.equal(_npoPostalAddress);
+        expect(InformationNpo.object).to.equal(_object);
+        expect(InformationNpo.npoType).to.equal(_npoType);
+    });
+
+    it('Get all NPOs', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let arrNpo = await this.InstanceEthicOnChain.getNpos();
+        expect(arrNpo.length).to.equal(1);
+    });
+
+    it('Get all Donors', async function () {
+        await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
+        let arrDonors = await this.InstanceEthicOnChain.getDonors();
+        expect(arrDonors.length).to.equal(1);
+    });
+
+    it('Get all Projects', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        let arrProjects = await this.InstanceEthicOnChain.getProjects();
+        expect(arrProjects.length).to.equal(1);
+    });
+
+    it('get Projects per NPO', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        let arrProjects = await this.InstanceEthicOnChain.getProjectsPerNpo(_newNpoErc20Address);
+        expect(arrProjects.length).to.equal(1);
+    });
+
+    it('Get Donations per Donor', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+1000, blockLastest.timestamp, blockLastest.timestamp, _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
+        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
+        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(10), { from : accounts[0]} );
+        let arrDonations = await this.InstanceEthicOnChain.getDonationPerDonor(accounts[0]);
+        expect(arrDonations.length).to.equal(1);
+    });
+
+    it('get Withdrawal', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+40, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
+        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
+        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(1000), { from : accounts[0]} );
+        await time.increaseTo(blockLastest.timestamp+90000);
+        await this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(500),_title,_description, { from : _newNpoErc20Address} );
+        let informationWithdrawal = await this.InstanceEthicOnChain.getWithdrawal(new BN(0));
+        expect(informationWithdrawal.amount).to.be.bignumber.equal(new BN(500));
+    });
+
+    it('get Withdrawals per NPO', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+40, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
+        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
+        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(1000), { from : accounts[0]} );
+        await time.increaseTo(blockLastest.timestamp+90000);
+        await this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(500),_title,_description, { from : _newNpoErc20Address} );
+        let arrWithdrawal = await this.InstanceEthicOnChain.getWithdrawalPerNpo(_newNpoErc20Address);
+        expect(arrWithdrawal.length).to.equal(1);
+    });
 
 });

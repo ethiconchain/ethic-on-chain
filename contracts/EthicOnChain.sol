@@ -250,13 +250,6 @@ contract EthicOnChain is Ownable {
         return EthicOnChainLib.libGetNpo(npoAddresses, _npoErc20Address);
     }
 
-    /// @dev  get an NPO via its id
-    /// @param _npoId id of the NPO
-    /// @return returns the corresponding NPO struct
-    function getNpoByIndex(uint _npoId) internal view returns(EthicOnChainLib.NPO memory) {
-        return EthicOnChainLib.libGetNpoByIndex(npoAddresses, npoMap, _npoId);
-    }
-
     /// @dev  get all NPOs
     /// @return returns an array of all NPOs
     function getNpos() public view returns(EthicOnChainLib.NPO [] memory) {
@@ -268,13 +261,6 @@ contract EthicOnChain is Ownable {
     /// @return returns the corresponding Donor struct
     function getDonor(address _donorErc20Address) public view returns(EthicOnChainLib.Donor memory) {
         return EthicOnChainLib.libGetDonor(donorAddresses, _donorErc20Address);
-    }
-
-    /// @dev  get a Donor via its id
-    /// @param _donorId id of the Donor
-    /// @return returns the corresponding Donor struct
-    function getDonorByIndex(uint _donorId) internal view returns(EthicOnChainLib.Donor memory) {
-        return EthicOnChainLib.libGetDonorByIndex(donorAddresses, donorMap, _donorId);
     }
 
     /// @dev  get all Donors
@@ -329,6 +315,20 @@ contract EthicOnChain is Ownable {
     /// @return Returns an array of all donation of a single donor
     function getWithdrawalPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Withdrawal [] memory ) {
         return EthicOnChainLib.libGetWithdrawalPerNpo(npoAddresses, withdrawalMap, _addressNpo);
+    }
+
+    /// @dev  get an NPO via its id
+    /// @param _npoId id of the NPO
+    /// @return returns the corresponding NPO struct
+    function getNpoByIndex(uint _npoId) internal view returns(EthicOnChainLib.NPO memory) {
+        return EthicOnChainLib.libGetNpoByIndex(npoAddresses, npoMap, _npoId);
+    }
+
+    /// @dev  get a Donor via its id
+    /// @param _donorId id of the Donor
+    /// @return returns the corresponding Donor struct
+    function getDonorByIndex(uint _donorId) internal view returns(EthicOnChainLib.Donor memory) {
+        return EthicOnChainLib.libGetDonorByIndex(donorAddresses, donorMap, _donorId);
     }
 
 }
