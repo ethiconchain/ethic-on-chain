@@ -296,11 +296,32 @@ contract EthicOnChain is Ownable {
         return EthicOnChainLib.libGetProjects(projectMap, projectCount);
     }
     
-    /// @dev Allows to know all the projects of a single NPO
-    /// @param _addressNpo id which represents the index
-    /// @return Returns an array of all projects of a single NPO
+    /// @dev Allows to know all the projects of an NPO
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
     function getProjectsPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
         return EthicOnChainLib.libGetProjectsPerNpo(npoAddresses, projectMap, _addressNpo);
+    }
+
+    /// @dev Allows to know all the projects of a single NPO that are under creation (means today's date lower than campaign start date)
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
+    function getProjectsUnderCreationPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
+        return EthicOnChainLib.libGetProjectsUnderCreationPerNpo(npoAddresses, projectMap, _addressNpo);
+    }
+
+    /// @dev Allows to know all the projects of a single NPO that are under campaign (means today's date higher than or equal to campaign start date and lower or equal to campaign end date)
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
+    function getProjectsUnderCampaignPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
+        return EthicOnChainLib.libGetProjectsUnderCampaignPerNpo(npoAddresses, projectMap, _addressNpo);
+    }
+
+    /// @dev Allows to know all the projects of a single NPO that are in progress (means today's date higher than campaign end date, minimum donation amount achieved and today's date between start and end date of the project)
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
+    function getProjectsInProgressPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
+        return EthicOnChainLib.libGetProjectsInProgressPerNpo(npoAddresses, projectMap, _addressNpo);
     }
 
     /// @dev  get Donation by id

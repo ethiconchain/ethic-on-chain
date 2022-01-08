@@ -161,17 +161,116 @@ library EthicOnChainLib {
         return result;
     }
     
-    /// @dev Allows to know all the projects of a single NPO
+    /// @dev Allows to know all the projects of an NPO
     /// @param _npoAddresses mapping of NPO addresses to NPO Struct
     /// @param _projectMap mapping of Project id to Project Struct
-    /// @param _addressNpo id which represents the index
-    /// @return Returns an array of all projects of a single NPO
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
     function libGetProjectsPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) public view  returns(Project [] memory ) {
         uint arraySize = _npoAddresses[_addressNpo].projectIds.length;
-        Project [] memory result= new Project[](arraySize);
+        Project [] memory result = new Project[](arraySize);
         for(uint i; i < arraySize; i++) {
             uint index = _npoAddresses[_addressNpo].projectIds[i];
             result[i] = libGetProject(_projectMap, index);     
+        }
+        return result;
+    }
+
+    /// @dev Allows to know all the projects of a single NPO that are under creation (means today's date lower than campaign start date)
+    /// @param _npoAddresses mapping of NPO addresses to NPO Struct
+    /// @param _projectMap mapping of Project id to Project Struct
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
+    function libGetProjectsUnderCreationPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) public view  returns(Project [] memory ) {
+        uint arraySize = _npoAddresses[_addressNpo].projectIds.length;
+        uint projectIndex;
+        
+        // première boucle pour connaitre le nombre d'éléments du tableau à retourner
+        for (uint i; i < arraySize; i++) {
+            uint index = _npoAddresses[_addressNpo].projectIds[i];
+            Project memory currentProject = libGetProject(_projectMap, index);
+            if (currentProject.campaignStartDate > block.timestamp) {
+                projectIndex++;
+            }
+        }
+
+        Project [] memory result = new Project[](projectIndex);
+        projectIndex = 0;
+        for (uint i; i < arraySize; i++) {
+            uint index = _npoAddresses[_addressNpo].projectIds[i];
+            Project memory currentProject = libGetProject(_projectMap, index);
+            if (currentProject.campaignStartDate > block.timestamp) {
+                result[projectIndex] = currentProject;
+                projectIndex++;
+            }
+        }
+        return result;
+    }
+    
+    /// @dev Allows to know all the projects of a single NPO that are under campaign (means today's date higher than or equal to campaign start date and lower or equal to campaign end date)
+    /// @param _npoAddresses mapping of NPO addresses to NPO Struct
+    /// @param _projectMap mapping of Project id to Project Struct
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
+    function libGetProjectsUnderCampaignPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) public view  returns(Project [] memory ) {
+        uint arraySize = _npoAddresses[_addressNpo].projectIds.length;
+        uint projectIndex;
+        
+        // première boucle pour connaitre le nombre d'éléments du tableau à retourner
+        for (uint i; i < arraySize; i++) {
+            uint index = _npoAddresses[_addressNpo].projectIds[i];
+            Project memory currentProject = libGetProject(_projectMap, index);
+            uint campaignEndDate = currentProject.campaignStartDate + currentProject.campaignDurationInDays * 1 days;
+            if (currentProject.campaignStartDate <= block.timestamp && block.timestamp <= campaignEndDate) {
+                projectIndex++;
+            }
+        }
+
+        Project [] memory result = new Project[](projectIndex);
+        projectIndex = 0;
+        for (uint i; i < arraySize; i++) {
+            uint index = _npoAddresses[_addressNpo].projectIds[i];
+            Project memory currentProject = libGetProject(_projectMap, index);
+            uint campaignEndDate = currentProject.campaignStartDate + currentProject.campaignDurationInDays * 1 days;
+            if (currentProject.campaignStartDate <= block.timestamp && block.timestamp <= campaignEndDate) {
+                result[projectIndex] = currentProject;
+                projectIndex++;
+            }
+        }
+        return result;
+    }
+
+    /// @dev Allows to know all the projects of a single NPO that are in progress (means today's date higher than campaign end date, minimum donation amount achieved and today's date between start and end date of the project)
+    /// @param _npoAddresses mapping of NPO addresses to NPO Struct
+    /// @param _projectMap mapping of Project id to Project Struct
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
+    function libGetProjectsInProgressPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) public view  returns(Project [] memory ) {
+        uint arraySize = _npoAddresses[_addressNpo].projectIds.length;
+        uint projectIndex;
+        
+        // première boucle pour connaitre le nombre d'éléments du tableau à retourner
+        for (uint i; i < arraySize; i++) {
+            uint index = _npoAddresses[_addressNpo].projectIds[i];
+            Project memory currentProject = libGetProject(_projectMap, index);
+            uint campaignEndDate = currentProject.campaignStartDate + currentProject.campaignDurationInDays * 1 days;
+            if (block.timestamp > campaignEndDate && currentProject.projectBalance >= currentProject.minAmount &&
+                currentProject.startDate <= block.timestamp && block.timestamp <= currentProject.endDate) {
+                projectIndex++;
+            }
+        }
+
+        Project [] memory result = new Project[](projectIndex);
+        projectIndex = 0;
+        for (uint i; i < arraySize; i++) {
+            uint index = _npoAddresses[_addressNpo].projectIds[i];
+            Project memory currentProject = libGetProject(_projectMap, index);
+            uint campaignEndDate = currentProject.campaignStartDate + currentProject.campaignDurationInDays * 1 days;
+            if (block.timestamp > campaignEndDate && currentProject.projectBalance >= currentProject.minAmount &&
+                currentProject.startDate <= block.timestamp && block.timestamp <= currentProject.endDate) {
+                result[projectIndex] = currentProject;
+                projectIndex++;
+            }
         }
         return result;
     }
