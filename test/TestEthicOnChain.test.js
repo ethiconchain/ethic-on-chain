@@ -356,19 +356,11 @@ contract('EthicOnChain', function (accounts) {
         expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(200),_title,_description, { from : _newNpoErc20Address} ),"La campagne est toujours en cours");
     });
 
-/* TODO = revoir pourquoi ce test ne passe pas !
-
     it('WithdrawTokens- Require Revert campaign not started', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let blockLastest = await web3.eth.getBlock("latest");
-        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+1000, blockLastest.timestamp+1, 1, _minAmount, _maxAmount, { from: _newNpoErc20Address });
-        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
-        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
-        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
-        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
-        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(300), { from : accounts[0]} );
-        await time.increaseTo(blockLastest.timestamp+90000);
-        await expectRevert(await this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(200),_title,_description, { from : _newNpoErc20Address} ),"La campagne n'est pas commencée");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp+10000, blockLastest.timestamp+20000, blockLastest.timestamp+5000, 1, _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(200),_title,_description, { from : _newNpoErc20Address} ),"La campagne n'est pas commencée");
     });
     
     it('Event For WithdrawalAdded', async function () {
@@ -385,12 +377,11 @@ contract('EthicOnChain', function (accounts) {
         const receipt = await this.InstanceEthicOnChain.withdrawTokens(new BN(0), amount,_title,_description, { from : _newNpoErc20Address} );
         await expectEvent(receipt, "WithdrawalAdded", {
             _withdrawalId: new BN(0),
-            _projectId:new BN(0),
+            _projectId: new BN(0),
             _amount: amount,
             _addressRecipent:_newNpoErc20Address
         });
     }); 
-*/
 
     it('Get NPO', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);

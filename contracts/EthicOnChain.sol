@@ -216,15 +216,16 @@ contract EthicOnChain is Ownable {
     /// @param _title title of the withdrawal
     /// @param _description description of the withdrawal
     function withdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
+        // Widthdraw possible si seulement la campagne est terminée
+        uint campaignEndDate = projectMap[_projectId].campaignStartDate + projectMap[_projectId].campaignDurationInDays * 1 days;
+        require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
+        require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
         EthicOnChainLib.NPO storage withdrawalNpo = npoAddresses[msg.sender];
         require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
         uint256 balance = projectMap[_projectId].projectBalance;
         require(balance >= _amount, "Balance insuffisante");
-        // Widthdraw possible si seulement la campagne est terminée
-        uint campaignEndDate = projectMap[_projectId].campaignStartDate + projectMap[_projectId].campaignDurationInDays * 1 days;
-        require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
-        require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
+
 
         EthicOnChainLib.Withdrawal storage newWithdrawal = withdrawalMap[withdrawalCount];
         newWithdrawal.withdrawalId = withdrawalCount;
