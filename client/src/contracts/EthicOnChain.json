@@ -82867,10 +82867,10 @@
         }
       },
       "links": {
-        "EthicOnChainLib": "0x93a0a6BC3f3acB778B768aCeffC8409697e8B16c"
+        "EthicOnChainLib": "0x7a72E98f049dBF841e3bF10CF1ED97B0B81CE2ff"
       },
-      "address": "0x45d92452F178742375b467F6d63c98B95528F163",
-      "transactionHash": "0x37b7c564e842e5fe3fcceef42bdd00092125ccb2923c0bdc967b1cc2ea5b79b9"
+      "address": "0x9F2B477D234386E49AD3697C228A545e72C6FEBD",
+      "transactionHash": "0xe7b4ec15dc44f45cdc4c53f0a396392329d0828976d6a43dbbe280cdf8cd115d"
     },
     "5777": {
       "events": {
@@ -83149,14 +83149,14 @@
         }
       },
       "links": {
-        "EthicOnChainLib": "0x39e97562F5201ACbe8C9Dc21A59aD86736034095"
+        "EthicOnChainLib": "0x2E5CA2EE5F00AC12298075d9A1EC3c63e90494df"
       },
-      "address": "0x774bE0c7F124cAa589a72d3a6888a5Deb35Ec23F",
-      "transactionHash": "0x73a32a251e73ab9cf7a081d035c191d256367eb0e2a551fa3f281e4336462db6"
+      "address": "0x56F253454faa9C688AB204D0CE9bc37872A8cd72",
+      "transactionHash": "0x2dfea6017fca9814480e272a2c64f55c48bd509822ce2268cf5dfd419452f1f3"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-06T11:21:33.951Z",
+  "updatedAt": "2022-01-08T16:24:22.434Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",
