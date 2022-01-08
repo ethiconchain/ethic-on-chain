@@ -11,6 +11,8 @@ import DatePicker from '@mui/lab/DatePicker';
 import { Grid } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 
+import { Loader } from '../../components/Loader';
+
 export default function CreateProject(props) {
   const { data } = props
   let navigate = useNavigate();
@@ -26,11 +28,20 @@ export default function CreateProject(props) {
   const [amoutMinError, setAmoutMinError] = useState(false)
   const [amoutMax, setAmoutMax] = useState(0)
   const [amoutMaxError, setAmoutMaxError] = useState(false)
-
   const [timeValueBegin, setTimeValueBegin] = useState(null)
   const [timeValueEnd, setTimeValueEnd] = useState(null)
   const [timeValueCampaign, setTimeValueCampaign] = useState(null)
 
+  const [loaderIsOpen, setLoaderIsOpen] = useState(false);
+  const [progress, setProgress] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [fail, setFail] = useState(false)
+  const [loaderText, setLoaderText] = useState({
+    text1: '',
+    text2: '',
+    text3: '',
+    text4: '',
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -54,18 +65,31 @@ export default function CreateProject(props) {
   const plusProject = async () => {
     try {
       const { web3, contract, accounts } = data;
+      setLoaderText({
+        text1: 'Enregistrement en attente',
+        text2: "Validez l'enregistrement dans votre portefeuille",
+        text3: 'Enregistrement effectué !',
+        text4: 'Enregistrement annulé !'
+      })
+      setProgress(true)
+      setLoaderIsOpen(true)
       await contract.methods.addProject(title, description, zone,
         Math.round(timeValueBegin.valueOf() / 1000),
         Math.round(timeValueEnd.valueOf() / 1000),
         Math.round(timeValueCampaign.valueOf() / 1000),
         nbDays, web3.utils.toWei(amoutMin.toString()),
         web3.utils.toWei(amoutMax.toString())).send({ from: accounts[0] })
-        .then(x => navigate('/mesprojets'))
+      setProgress(false)
+      setSuccess(true)
+      setTimeout(() => navigate('/mesprojets'), 2000)
+
     } catch (error) {
       console.log(error)
+      setProgress(false)
+      setFail(true)
+      setTimeout(() => { setLoaderIsOpen(false); setFail(false) }, 2000)
     }
   }
-
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -196,6 +220,7 @@ export default function CreateProject(props) {
           <br />
 
           <Button
+            // disabled="false"
             type="submit"
             color="secondary"
             variant="contained"
@@ -204,6 +229,8 @@ export default function CreateProject(props) {
           </Button>
         </form>
       </Container>
+
+      <Loader loaderIsOpen={loaderIsOpen} progress={progress} success={success} fail={fail} loaderText={loaderText} />
     </LocalizationProvider>
   )
 }
