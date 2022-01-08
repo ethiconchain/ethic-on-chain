@@ -373,7 +373,7 @@ contract('EthicOnChain', function (accounts) {
         await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
         await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(1000), { from : accounts[0]} );
         await time.increaseTo(blockLastest.timestamp+90000);
-        const amount = new BN(500);
+        const amount = new BN(500); 
         const receipt = await this.InstanceEthicOnChain.withdrawTokens(new BN(0), amount,_title,_description, { from : _newNpoErc20Address} );
         await expectEvent(receipt, "WithdrawalAdded", {
             _withdrawalId: new BN(0),

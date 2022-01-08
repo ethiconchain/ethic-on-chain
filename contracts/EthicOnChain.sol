@@ -216,7 +216,7 @@ contract EthicOnChain is Ownable {
     /// @param _title title of the withdrawal
     /// @param _description description of the withdrawal
     function withdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
-        // Widthdraw possible si seulement la campagne est terminée
+        // Widthdraw possible si seulement la campagne est terminée 
         uint campaignEndDate = projectMap[_projectId].campaignStartDate + projectMap[_projectId].campaignDurationInDays * 1 days;
         require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
         require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
