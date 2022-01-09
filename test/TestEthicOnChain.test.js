@@ -363,7 +363,7 @@ contract('EthicOnChain', function (accounts) {
         await expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(200),_title,_description, { from : _newNpoErc20Address} ),"La campagne n'est pas commencée");
     });
     
-    it('Event For WithdrawalAdded', async function () {
+    it('Event For TokensWithdrawn', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let blockLastest = await web3.eth.getBlock("latest");
         await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+10, blockLastest.timestamp, 1, _minAmount, _maxAmount, { from: _newNpoErc20Address });
@@ -375,7 +375,7 @@ contract('EthicOnChain', function (accounts) {
         await time.increaseTo(blockLastest.timestamp+90000);
         const amount = new BN(500); 
         const receipt = await this.InstanceEthicOnChain.withdrawTokens(new BN(0), amount,_title,_description, { from : _newNpoErc20Address} );
-        await expectEvent(receipt, "WithdrawalAdded", {
+        await expectEvent(receipt, "TokensWithdrawn", {
             _withdrawalId: new BN(0),
             _projectId: new BN(0),
             _amount: amount,

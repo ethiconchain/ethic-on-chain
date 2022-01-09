@@ -56,7 +56,7 @@ contract EthicOnChain is Ownable {
     event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
     event DonationAdded(uint _donationId, uint _projectId, uint _donorId, uint _donationDate, uint donationAmount);
-    event WithdrawalAdded(uint _withdrawalId ,uint _projectId, uint _amount, address _addressRecipent);
+    event TokensWithdrawn(uint _withdrawalId ,uint _projectId, uint _amount, address _addressRecipent);
     
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
@@ -239,7 +239,7 @@ contract EthicOnChain is Ownable {
         projectMap[_projectId].withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le projet
         withdrawalCount++;
         IERC20(eocTokenAddress).transfer(msg.sender,_amount);
-        emit WithdrawalAdded(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
+        emit TokensWithdrawn(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
     }
 
 

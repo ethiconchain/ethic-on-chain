@@ -75,7 +75,7 @@ withdrawTokens
 * it('Add WithdrawTokens- Require Revert withdraw > Balance') : le retrait demandé doit être inférieur ou égal à la balance du projet (dons effectués moins les retraits déjà réalisés)
 * it('WithdrawTokens- Require Revert campaign not started') : le retrait ne peut commencer qu'une fois la campagne terminée donc après le début de la campagne.
 * it('WithdrawTokens- Require Revert campaign not completed') : le retrait ne peut commencer qu'une fois la campagne terminée.
-* it('Event For WithdrawalAdded') : vérifie que l'événement WithdrawalAdded est bien émis après un retrait.
+* it('Event For TokensWithdrawn') : vérifie que l'événement TokensWithdrawn est bien émis après un retrait.
 
 getNpo
 * it('Get NPO') : ajoute un NPO puis invoque getNpo pour vérifier si les données stockées dans la blockchain sont bien identiques aux paramètres passés.
