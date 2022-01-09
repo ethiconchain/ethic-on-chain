@@ -28,11 +28,6 @@ contract EthicOnChain is Ownable {
         CloseFundRaising
     }
 
-    // NPOs
-    mapping (address => EthicOnChainLib.NPO) public npoAddresses; //Mapping of all NPO 
-    mapping (uint => address) private npoMap;
-    uint private npoCount; 
-
     // Donors
     mapping (address => EthicOnChainLib.Donor) public donorAddresses; //Mapping of all donors 
     mapping (uint => address) private donorMap;
@@ -81,9 +76,6 @@ contract EthicOnChain is Ownable {
         string memory _object,
         string memory _npoType) public onlyOwner {
         INPO(npoContractAddress).addNpo(
-            npoAddresses,
-            npoMap,
-            npoCount,
             _npoErc20Address,
             _denomination,
             _postalAddress,
@@ -92,6 +84,26 @@ contract EthicOnChain is Ownable {
         );
     }
  
+    /// @dev  get an NPO via its erc20 address
+    /// @param _npoErc20Address erc20 address of the NPO
+    /// @return returns the corresponding NPO struct
+    function getNpo(address _npoErc20Address) public view returns(INPO.NPO memory) {
+        return INPO(npoContractAddress).getNpo(_npoErc20Address);
+    }
+
+    /// @dev  get an NPO via its id
+    /// @param _npoId id of the NPO
+    /// @return returns the corresponding NPO struct
+    function getNpoByIndex(uint _npoId) internal view returns(INPO.NPO memory) {
+        return INPO(npoContractAddress).getNpoByIndex(_npoId);
+    }
+
+    /// @dev  get all NPOs
+    /// @return returns an array of all NPOs
+    function getNpos() public view returns(INPO.NPO [] memory) {
+        return INPO(npoContractAddress).getNpos();
+    }
+
     /// @dev The administrator/contract can add a new Donor
     /// @param _donorErc20Address ERC20 address of the donor
     /// @param _name Name of the Donor
@@ -138,7 +150,7 @@ contract EthicOnChain is Ownable {
         uint _minAmount,
         uint _maxAmount
     ) public {
-        EthicOnChainLib.NPO storage projectNpo = npoAddresses[msg.sender];
+        INPO.NPO memory projectNpo = getNpo(msg.sender);
         require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         // Mandatory fields
         require(bytes(_title).length > 0, "Le titre est obligatoire");
@@ -212,8 +224,8 @@ contract EthicOnChain is Ownable {
     /// @param _title title of the withdrawal
     /// @param _description description of the withdrawal
     function withdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
-        EthicOnChainLib.NPO storage withdrawalNpo = npoAddresses[msg.sender];
-        require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
+        INPO.NPO memory withdrawalNpo = getNpo(msg.sender);
+        require(bytes(withdrawalNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
         uint256 balance = projectMap[_projectId].projectBalance;
         require(balance >= _amount, "Balance insuffisante");
@@ -236,27 +248,6 @@ contract EthicOnChain is Ownable {
         withdrawalCount++;
         IERC20(eocTokenAddress).transfer(msg.sender,_amount);
         emit WithdrawalAdded(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
-    }
-
-
-    /// @dev  get an NPO via its erc20 address
-    /// @param _npoErc20Address erc20 address of the NPO
-    /// @return returns the corresponding NPO struct
-    function getNpo(address _npoErc20Address) public view returns(EthicOnChainLib.NPO memory) {
-        return EthicOnChainLib.libGetNpo(npoAddresses, _npoErc20Address);
-    }
-
-    /// @dev  get an NPO via its id
-    /// @param _npoId id of the NPO
-    /// @return returns the corresponding NPO struct
-    function getNpoByIndex(uint _npoId) internal view returns(EthicOnChainLib.NPO memory) {
-        return EthicOnChainLib.libGetNpoByIndex(npoAddresses, npoMap, _npoId);
-    }
-
-    /// @dev  get all NPOs
-    /// @return returns an array of all NPOs
-    function getNpos() public view returns(EthicOnChainLib.NPO [] memory) {
-        return EthicOnChainLib.libGetNpos(npoAddresses, npoMap, npoCount);
     }
 
     /// @dev  get a Donor via its erc20 address
@@ -295,9 +286,9 @@ contract EthicOnChain is Ownable {
     /// @dev Allows to know all the projects of a single NPO
     /// @param _addressNpo id which represents the index
     /// @return Returns an array of all projects of a single NPO
-    function getProjectsPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
-        return EthicOnChainLib.libGetProjectsPerNpo(npoAddresses, projectMap, _addressNpo);
-    }
+//    function getProjectsPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
+//        return EthicOnChainLib.libGetProjectsPerNpo(npoAddresses, projectMap, _addressNpo);
+//    }
 
     /// @dev  get Donation by id
     /// param _id index pour retrouver la donation a retourner
@@ -323,8 +314,8 @@ contract EthicOnChain is Ownable {
     /// @dev Allows to know all the donations of a single donor
     /// @param _addressNpo id which represents the index
     /// @return Returns an array of all donation of a single donor
-    function getWithdrawalPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Withdrawal [] memory ) {
-        return EthicOnChainLib.libGetWithdrawalPerNpo(npoAddresses, withdrawalMap, _addressNpo);
-    }
+//    function getWithdrawalPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Withdrawal [] memory ) {
+//        return EthicOnChainLib.libGetWithdrawalPerNpo(npoAddresses, withdrawalMap, _addressNpo);
+//    }
 
 }
