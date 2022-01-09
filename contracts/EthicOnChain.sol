@@ -4,6 +4,7 @@ pragma solidity 0.8.11;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./EthicOnChainLib.sol";
+import "./INPO.sol";
 
 /// @title EthicOnChain 
 /// @author Lahcen E. Dev / Jérôme Gauthier
@@ -51,6 +52,8 @@ contract EthicOnChain is Ownable {
 
     // EOC Token address
     address eocTokenAddress;
+    // NPO deployed contract address
+    address npoContractAddress;
 
     event NpoAdded(uint _poId, address _npoErc20Address, string _denomination);
     event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
@@ -60,8 +63,9 @@ contract EthicOnChain is Ownable {
     
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
-    constructor(address _eocTokenAddress) {
+    constructor(address _eocTokenAddress, address _npoContractAddress) {
        eocTokenAddress =  _eocTokenAddress;
+       npoContractAddress = _npoContractAddress;
     }
 
     /// @dev The administrator can add a new NPO
@@ -76,24 +80,16 @@ contract EthicOnChain is Ownable {
         string memory _postalAddress,
         string memory _object,
         string memory _npoType) public onlyOwner {
-        // Mandatory fields
-        require(_npoErc20Address > address(0), unicode"L'adresse du NPO doit être différente de zéro");
-        require(bytes(_denomination).length > 0, unicode"La dénomination est obligatoire");
-        require(bytes(_postalAddress).length > 0, "L'adresse est obligatoire");
-        require(bytes(_object).length > 0, "L'objet est obligatoire");
-        require(bytes(_npoType).length > 0, "Le type est obligatoire");
-        require(bytes(npoAddresses[_npoErc20Address].denomination).length == 0, unicode"NPO déjà enregistré");
-        
-        EthicOnChainLib.NPO storage newNpo = npoAddresses[_npoErc20Address];
-        newNpo.npoId = npoCount;
-        newNpo.npoErc20Address = _npoErc20Address;
-        newNpo.denomination = _denomination;
-        newNpo.postalAddress = _postalAddress;
-        newNpo.object = _object;
-        newNpo.npoType = _npoType;
-        npoMap[npoCount] = _npoErc20Address;
-        npoCount++;
-        emit NpoAdded(newNpo.npoId, _npoErc20Address, _denomination);
+        INPO(npoContractAddress).addNpo(
+            npoAddresses,
+            npoMap,
+            npoCount,
+            _npoErc20Address,
+            _denomination,
+            _postalAddress,
+            _object,
+            _npoType
+        );
     }
  
     /// @dev The administrator/contract can add a new Donor
