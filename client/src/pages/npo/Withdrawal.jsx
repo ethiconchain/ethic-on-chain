@@ -7,6 +7,9 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import ShoppingCartCheckoutOutlinedIcon from '@mui/icons-material/ShoppingCartCheckoutOutlined';
 import InputAdornment from '@mui/material/InputAdornment';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 import { green } from '@mui/material/colors';
 
 import { Loader } from '../../components/Loader';
@@ -34,8 +37,20 @@ export default function Withdrawal(props) {
 
   useEffect(() => {
     getSelectedProject(id)
-    console.log('selectedProject :>> ', selectedProject);
   }, []);
+
+  useEffect(() => {
+    if (selectedProject) { console.log('selectedProject :>> ', selectedProject) }
+  }, [selectedProject]);
+
+  const daysLeft = () => {
+    let dateNow = new Date()
+    return Math.ceil(((+selectedProject.campaignStartDate + +selectedProject.campaignDurationInDays * 86400) - dateNow.valueOf() / 1000) / 86400)
+  }
+
+  const currentPercentage = () => {
+    return Math.ceil((web3.utils.fromWei(selectedProject.projectBalance.toString()) * 100) / web3.utils.fromWei(selectedProject.minAmount.toString()))
+  }
 
   const getSelectedProject = async (params) => {
     const { contract } = data;
@@ -78,36 +93,58 @@ export default function Withdrawal(props) {
   return (
     <>
       {selectedProject &&
-        <Card sx={{ maxWidth: 500, borderRadius: '15px' }}>
+        <Card sx={{ maxWidth: 450, borderRadius: '15px' }}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {selectedProject.title}
             </Typography>
-            <Typography variant="body2" >
+            <Typography variant="body2" color="text.secondary">
               {selectedProject.description}
             </Typography>
             <br />
             <br />
-            <Typography variant="button" sx={{ backgroundColor: greenColor, borderRadius: '5px', p: 1 }}>
-              Le montant actuel récolté est de {web3.utils.fromWei(selectedProject.projectBalance.toString())} EOC
-            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Box>
+                <Typography variant="body2" sx={{ mb: 1 }}>Montant actuel</Typography>
+                <Typography variant="button" sx={{ backgroundColor: greenColor, borderRadius: '5px', p: 0.7 }}>{web3.utils.fromWei(selectedProject.projectBalance.toString())} EOC</Typography>
+              </Box>
+              <Box>
+                <Typography variant="body2" sx={{ mb: 1, textAlign: 'right' }}>Objectif</Typography>
+                <Typography variant="button" sx={{ backgroundColor: greenColor, borderRadius: '5px', p: 0.7, textAlign: 'right' }}>{web3.utils.fromWei(selectedProject.minAmount.toString())} EOC</Typography>
+              </Box>
+            </Box>
+            <br />
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box sx={{ width: '100%', mr: 1 }}>
+                <LinearProgress color="secondary" variant="determinate" value={currentPercentage()} />
+              </Box>
+              <Box sx={{ minWidth: 35 }}>
+                <Typography variant="body2" color="secondary">{`${Math.round(currentPercentage())}%`}</Typography>
+              </Box>
+            </Box>
             <br />
             <br />
             <form noValidate autoComplete='off' onSubmit={handleSubmit}>
-              <TextField
-                onChange={(e) => setAmoutMin(e.target.value)}
-                label="Montant du retrait"
-                variant='outlined'
-                color='secondary'
-                InputProps={{
-                  endAdornment: <InputAdornment position="end">EOC</InputAdornment>,
-                }}
-                required
-                sx={{ mb: 3 }}
-                error={amoutMinError}
-              />
-              <br />
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <TextField
+                  onChange={(e) => setAmoutMin(e.target.value)}
+                  label="Montant du retrait"
+                  variant='outlined'
+                  color='secondary'
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">EOC</InputAdornment>,
+                  }}
+                  required
+                  sx={{ mb: 3 }}
+                  error={amoutMinError}
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                  <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
+                  <Typography variant="body1" color="text.secondary">{daysLeft()} jours</Typography>
+                </Box>
+              </Box>
               <Button
+                fullWidth
                 type="submit"
                 color="secondary"
                 variant="contained"
