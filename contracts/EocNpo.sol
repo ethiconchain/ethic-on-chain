@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 /// @title NPO 
 /// @author Lahcen E. Dev / Jérôme Gauthier
 /// @notice Contract to manage NPOs (= non profit organisations)
-contract NPOContract is Ownable {
+contract EocNpo is Ownable {
 
     struct NPO {
         uint npoId;

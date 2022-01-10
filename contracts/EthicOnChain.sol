@@ -4,7 +4,7 @@ pragma solidity 0.8.11;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./EthicOnChainLib.sol";
-import "./INPO.sol";
+import "./IEocNpo.sol";
 
 /// @title EthicOnChain 
 /// @author Lahcen E. Dev / Jérôme Gauthier
@@ -75,7 +75,7 @@ contract EthicOnChain is Ownable {
         string memory _postalAddress,
         string memory _object,
         string memory _npoType) public onlyOwner {
-        INPO(npoContractAddress).addNpo(
+        IEocNpo(npoContractAddress).addNpo(
             _npoErc20Address,
             _denomination,
             _postalAddress,
@@ -87,21 +87,21 @@ contract EthicOnChain is Ownable {
     /// @dev  get an NPO via its erc20 address
     /// @param _npoErc20Address erc20 address of the NPO
     /// @return returns the corresponding NPO struct
-    function getNpo(address _npoErc20Address) public view returns(INPO.NPO memory) {
-        return INPO(npoContractAddress).getNpo(_npoErc20Address);
+    function getNpo(address _npoErc20Address) public view returns(IEocNpo.NPO memory) {
+        return IEocNpo(npoContractAddress).getNpo(_npoErc20Address);
     }
 
     /// @dev  get an NPO via its id
     /// @param _npoId id of the NPO
     /// @return returns the corresponding NPO struct
-    function getNpoByIndex(uint _npoId) internal view returns(INPO.NPO memory) {
-        return INPO(npoContractAddress).getNpoByIndex(_npoId);
+    function getNpoByIndex(uint _npoId) internal view returns(IEocNpo.NPO memory) {
+        return IEocNpo(npoContractAddress).getNpoByIndex(_npoId);
     }
 
     /// @dev  get all NPOs
     /// @return returns an array of all NPOs
-    function getNpos() public view returns(INPO.NPO [] memory) {
-        return INPO(npoContractAddress).getNpos();
+    function getNpos() public view returns(IEocNpo.NPO [] memory) {
+        return IEocNpo(npoContractAddress).getNpos();
     }
 
     /// @dev The administrator/contract can add a new Donor
@@ -150,7 +150,7 @@ contract EthicOnChain is Ownable {
         uint _minAmount,
         uint _maxAmount
     ) public {
-        INPO.NPO memory projectNpo = getNpo(msg.sender);
+        IEocNpo.NPO memory projectNpo = getNpo(msg.sender);
         require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         // Mandatory fields
         require(bytes(_title).length > 0, "Le titre est obligatoire");
@@ -178,7 +178,8 @@ contract EthicOnChain is Ownable {
         newProject.campaignDurationInDays = _campaignDurationInDays;
         newProject.minAmount = _minAmount;
         newProject.maxAmount = _maxAmount;
-        projectNpo.projectIds.push(projectCount);
+// TODO = create a new function into the future ProjectContract class
+//        projectNpo.projectIds.push(projectCount);
 
         projectCount++;
         emit ProjectAdded(newProject.projectId, _title,  _startDate, _endDate, _minAmount, _maxAmount);
@@ -224,14 +225,15 @@ contract EthicOnChain is Ownable {
     /// @param _title title of the withdrawal
     /// @param _description description of the withdrawal
     function withdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
-        INPO.NPO memory withdrawalNpo = getNpo(msg.sender);
+        IEocNpo.NPO memory withdrawalNpo = getNpo(msg.sender);
         require(bytes(withdrawalNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
         uint256 balance = projectMap[_projectId].projectBalance;
         require(balance >= _amount, "Balance insuffisante");
         // Widthdraw possible si seulement la campagne est terminée
-        uint campaignEndDate = projectMap[_projectId].campaignStartDate + projectMap[_projectId].campaignDurationInDays * 1 days;
         require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
+        // TODO = uncomment below lines if it should not be possible to withdraw some amount before the end of the campaign
+        // uint campaignEndDate = projectMap[_projectId].campaignStartDate + projectMap[_projectId].campaignDurationInDays * 1 days;
         // require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
 
         EthicOnChainLib.Withdrawal storage newWithdrawal = withdrawalMap[withdrawalCount];
@@ -242,7 +244,8 @@ contract EthicOnChain is Ownable {
         newWithdrawal.withdrawalDate = block.timestamp;
         newWithdrawal.description = _description;
 
-        withdrawalNpo.withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le NPO
+// TODO = create a new function into the future WithdrawalContract class
+//        withdrawalNpo.withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le NPO
         projectMap[_projectId].projectBalance -= _amount; // mise à jour de la balance du projet
         projectMap[_projectId].withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le projet
         withdrawalCount++;
