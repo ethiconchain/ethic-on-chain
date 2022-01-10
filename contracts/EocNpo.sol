@@ -3,7 +3,7 @@ pragma solidity 0.8.11;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/// @title NPO 
+/// @title EocNpo 
 /// @author Lahcen E. Dev / Jérôme Gauthier
 /// @notice Contract to manage NPOs (= non profit organisations)
 contract EocNpo is Ownable {

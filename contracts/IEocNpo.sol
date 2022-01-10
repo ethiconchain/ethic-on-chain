@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
  
-/// @title INPO 
+/// @title IEocNpo 
 /// @author Lahcen E. Dev / Jérôme Gauthier
 /// @notice Interface to manage NPOs (= non profit organisations)
 interface IEocNpo {
