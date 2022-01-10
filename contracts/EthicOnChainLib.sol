@@ -78,37 +78,6 @@ library EthicOnChainLib {
         CloseFundRaising
     }
 
-    /// @dev  get a Donor via its erc20 address
-    /// @param _donorAddresses mapping of Donors addresses to Donor Struct
-    /// @param _donorErc20Address erc20 address of the Donor
-    /// @return returns the corresponding Donor struct
-    function libGetDonor(mapping (address => Donor) storage _donorAddresses, address _donorErc20Address) public view returns(Donor memory) {
-        return _donorAddresses[_donorErc20Address];
-    }
-
-    /// @dev  get a Donor via its id
-    /// @param _donorAddresses mapping of Donors addresses to Donor Struct
-    /// @param _donorMap mapping of Donor id to Donor Struct
-    /// @param _donorId id of the Donor
-    /// @return returns the corresponding Donor struct
-    function libGetDonorByIndex(mapping (address => Donor) storage _donorAddresses, mapping (uint => address) storage _donorMap, uint _donorId) internal view returns(Donor memory) {
-        return _donorAddresses[_donorMap[_donorId]];
-    }
-
-    /// @dev  get all Donors
-    /// @param _donorAddresses mapping of Donors addresses to Donor Struct
-    /// @param _donorMap mapping of Donor id to Donor Struct
-    /// @param _donorCount current index for Donor = total count of Donors
-    /// @return returns an array of all Donors
-    function libGetDonors(mapping (address => Donor) storage _donorAddresses, mapping (uint => address) storage _donorMap, uint _donorCount) public view returns(Donor [] memory) {
-        uint arraySize = _donorCount;
-        Donor [] memory result = new Donor[](arraySize);
-        for(uint i; i < arraySize; i++) {
-            result[i] = libGetDonorByIndex(_donorAddresses, _donorMap, i);
-        }
-        return result;
-    }
-
     /// @dev Returns a single Project
     /// @param _projectMap mapping of Project id to Project Struct
     /// @param _projectId project unique id

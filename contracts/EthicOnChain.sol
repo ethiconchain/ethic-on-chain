@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./EthicOnChainLib.sol";
 import "./IEocNpo.sol";
+import "./IEocDonor.sol";
 
 /// @title EthicOnChain 
 /// @author Lahcen E. Dev / Jérôme Gauthier
@@ -48,7 +49,9 @@ contract EthicOnChain is Ownable {
     // EOC Token address
     address eocTokenAddress;
     // NPO deployed contract address
-    address npoContractAddress;
+    address eocNpoAddress;
+    // Donor deployed contract address
+    address eocDonorAddress;
 
     event NpoAdded(uint _poId, address _npoErc20Address, string _denomination);
     event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
@@ -58,9 +61,10 @@ contract EthicOnChain is Ownable {
     
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
-    constructor(address _eocTokenAddress, address _npoContractAddress) {
+    constructor(address _eocTokenAddress, address _eocNpoAddress, address _eocDonorAddress) {
        eocTokenAddress =  _eocTokenAddress;
-       npoContractAddress = _npoContractAddress;
+       eocNpoAddress = _eocNpoAddress;
+       eocDonorAddress = _eocDonorAddress;
     }
 
     /// @dev The administrator can add a new NPO
@@ -75,7 +79,7 @@ contract EthicOnChain is Ownable {
         string memory _postalAddress,
         string memory _object,
         string memory _npoType) public onlyOwner {
-        IEocNpo(npoContractAddress).addNpo(
+        IEocNpo(eocNpoAddress).addNpo(
             _npoErc20Address,
             _denomination,
             _postalAddress,
@@ -88,20 +92,20 @@ contract EthicOnChain is Ownable {
     /// @param _npoErc20Address erc20 address of the NPO
     /// @return returns the corresponding NPO struct
     function getNpo(address _npoErc20Address) public view returns(IEocNpo.NPO memory) {
-        return IEocNpo(npoContractAddress).getNpo(_npoErc20Address);
+        return IEocNpo(eocNpoAddress).getNpo(_npoErc20Address);
     }
 
     /// @dev  get an NPO via its id
     /// @param _npoId id of the NPO
     /// @return returns the corresponding NPO struct
     function getNpoByIndex(uint _npoId) internal view returns(IEocNpo.NPO memory) {
-        return IEocNpo(npoContractAddress).getNpoByIndex(_npoId);
+        return IEocNpo(eocNpoAddress).getNpoByIndex(_npoId);
     }
 
     /// @dev  get all NPOs
     /// @return returns an array of all NPOs
     function getNpos() public view returns(IEocNpo.NPO [] memory) {
-        return IEocNpo(npoContractAddress).getNpos();
+        return IEocNpo(eocNpoAddress).getNpos();
     }
 
     /// @dev The administrator/contract can add a new Donor
@@ -114,19 +118,32 @@ contract EthicOnChain is Ownable {
         string memory _name,
         string memory _surName,
         string memory _postalAddress) public onlyOwner {
-        // Mandatory fields
-        require(_donorErc20Address > address(0), unicode"L'adresse du donateur doit être différente de zéro");
-        require(donorAddresses[_donorErc20Address].donorErc20Address == address(0), unicode"Donor déjà enregistré");
+        IEocDonor(eocDonorAddress).addDonor(
+            _donorErc20Address,
+            _name,
+            _surName,
+            _postalAddress
+        );
+    }
 
-        EthicOnChainLib.Donor storage newDonor = donorAddresses[_donorErc20Address];
-        newDonor.donorId = donorCount;
-        newDonor.name = _name;
-        newDonor.surName = _surName;
-        newDonor.donorErc20Address=_donorErc20Address;
-        newDonor.postalAddress = _postalAddress;
-        donorMap[donorCount] = _donorErc20Address;
-        donorCount++;
-        emit DonorAdded(newDonor.donorId, _donorErc20Address, _name);
+    /// @dev  get a Donor via its erc20 address
+    /// @param _donorErc20Address erc20 address of the Donor
+    /// @return returns the corresponding Donor struct
+    function getDonor(address _donorErc20Address) public view returns(IEocDonor.Donor memory) {
+        return IEocDonor(eocDonorAddress).getDonor(_donorErc20Address);
+    }
+
+    /// @dev  get a Donor via its id
+    /// @param _donorId id of the Donor
+    /// @return returns the corresponding Donor struct
+    function getDonorByIndex(uint _donorId) internal view returns(IEocDonor.Donor memory) {
+        return IEocDonor(eocDonorAddress).getDonorByIndex(_donorId);
+    }
+
+    /// @dev  get all Donors
+    /// @return returns an array of all Donors
+    function getDonors() public view returns(IEocDonor.Donor [] memory) {
+        return IEocDonor(eocDonorAddress).getDonors();
     }
  
     /// @dev This function will allow to add a project, the owner will be the one who calls the function. 
@@ -251,26 +268,6 @@ contract EthicOnChain is Ownable {
         withdrawalCount++;
         IERC20(eocTokenAddress).transfer(msg.sender,_amount);
         emit WithdrawalAdded(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
-    }
-
-    /// @dev  get a Donor via its erc20 address
-    /// @param _donorErc20Address erc20 address of the Donor
-    /// @return returns the corresponding Donor struct
-    function getDonor(address _donorErc20Address) public view returns(EthicOnChainLib.Donor memory) {
-        return EthicOnChainLib.libGetDonor(donorAddresses, _donorErc20Address);
-    }
-
-    /// @dev  get a Donor via its id
-    /// @param _donorId id of the Donor
-    /// @return returns the corresponding Donor struct
-    function getDonorByIndex(uint _donorId) internal view returns(EthicOnChainLib.Donor memory) {
-        return EthicOnChainLib.libGetDonorByIndex(donorAddresses, donorMap, _donorId);
-    }
-
-    /// @dev  get all Donors
-    /// @return returns an array of all Donors
-    function getDonors() public view returns(EthicOnChainLib.Donor [] memory) {
-        return EthicOnChainLib.libGetDonors(donorAddresses, donorMap, donorCount);
     }
 
     /// @dev Returns a single Project
