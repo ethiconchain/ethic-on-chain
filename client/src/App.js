@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 import EthicOnChainContract from "./contracts/EthicOnChain.json";
 import EthicTokenContract from "./contracts/EthicToken.json";
@@ -21,6 +23,8 @@ import CreateProject from "./pages/npo/CreateProject";
 import MyProjects from "./pages/npo/MyProjects";
 import Withdrawal from "./pages/npo/Withdrawal";
 import MyWithdrawals from "./pages/npo/MyWithdrawals";
+import Page404 from "./pages/Page404";
+import LoaderGlobal from "./components/LoaderGlobal";
 
 const theme = createTheme({
   palette: {
@@ -138,7 +142,9 @@ const App = () => {
 
   const { web3, isAdmin, isDonor, isNpo } = data
   return !web3 ? (
-    <div>Loading Web3, accounts, and contract...</div>
+    <ThemeProvider theme={theme}>
+      <LoaderGlobal />
+    </ThemeProvider>
   ) : (
     <ThemeProvider theme={theme}>
       <Routes>
@@ -148,6 +154,7 @@ const App = () => {
             <Route path="/npos" element={<ViewNpos data={data} allNpos={allNpos} />} />
             <Route path="/donateurs" element={<ViewDonors data={data} allDonors={allDonors} />} />
             <Route path="/historique" element={<Historic data={data} />} />
+            <Route path="/*" element={<Page404 />} />
           </Route>}
         {isNpo &&
           <Route path="/" element={<LayoutNpo data={data} />}>
@@ -156,6 +163,7 @@ const App = () => {
             <Route path="/mesretraits" element={<MyWithdrawals data={data} msToDate={msToDate} />} />
             <Route path="/retrait/:id" element={<Withdrawal data={data} />} />
             <Route path="/historique" element={<Historic data={data} />} />
+            <Route path="/*" element={<Page404 />} />
           </Route>}
         {isDonor &&
           <Route path="/" element={<LayoutDonor data={data} />}>
@@ -163,8 +171,20 @@ const App = () => {
             <Route path="/mesdons" element={<MyDonations data={data} msToDate={msToDate} />} />
             <Route path="/faireundon/:id" element={<MakeDonation data={data} />} />
             <Route path="/historique" element={<Historic data={data} />} />
+            <Route path="/*" element={<Page404 />} />
           </Route>}
       </Routes>
+
+      {!isAdmin && !isNpo && !isDonor &&
+        <Box sx={{ bgcolor: '#f9f9f9', display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+          <Typography sx={{ fontSize: 25, textAlign: 'center' }} >
+            Votre addresse n'est pas enregistrée
+          </Typography>
+          <Box sx={{ textAlign: "center", mt: `30px` }} >
+            <img src="EthicOnChainLogoSquare.svg" alt="logo" height="150px" />
+          </Box>
+        </Box>
+      }
     </ThemeProvider>
   );
 }
