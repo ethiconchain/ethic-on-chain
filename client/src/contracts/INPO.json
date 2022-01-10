@@ -1,0 +1,1979 @@
+{
+  "contractName": "INPO",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_poId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_npoErc20Address",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "_denomination",
+          "type": "string"
+        }
+      ],
+      "name": "NpoAdded",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_npoErc20Address",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_denomination",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_postalAddress",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_object",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_npoType",
+          "type": "string"
+        }
+      ],
+      "name": "addNpo",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_npoErc20Address",
+          "type": "address"
+        }
+      ],
+      "name": "getNpo",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "npoId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "npoErc20Address",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "denomination",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "postalAddress",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "object",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "npoType",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "projectIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "withdrawalIds",
+              "type": "uint256[]"
+            }
+          ],
+          "internalType": "struct INPO.NPO",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_npoId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getNpoByIndex",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "npoId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "npoErc20Address",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "denomination",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "postalAddress",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "object",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "npoType",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "projectIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "withdrawalIds",
+              "type": "uint256[]"
+            }
+          ],
+          "internalType": "struct INPO.NPO",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getNpos",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "npoId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "npoErc20Address",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "denomination",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "postalAddress",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "object",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "npoType",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "projectIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "withdrawalIds",
+              "type": "uint256[]"
+            }
+          ],
+          "internalType": "struct INPO.NPO[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_poId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_npoErc20Address\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"_denomination\",\"type\":\"string\"}],\"name\":\"NpoAdded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_denomination\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_postalAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_object\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_npoType\",\"type\":\"string\"}],\"name\":\"addNpo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_npoErc20Address\",\"type\":\"address\"}],\"name\":\"getNpo\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"npoId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"denomination\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"postalAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"object\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"npoType\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"projectIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"withdrawalIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct INPO.NPO\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_npoId\",\"type\":\"uint256\"}],\"name\":\"getNpoByIndex\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"npoId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"denomination\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"postalAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"object\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"npoType\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"projectIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"withdrawalIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct INPO.NPO\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getNpos\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"npoId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"denomination\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"postalAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"object\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"npoType\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"projectIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"withdrawalIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct INPO.NPO[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Lahcen E. Dev / J\\u00e9r\\u00f4me Gauthier\",\"kind\":\"dev\",\"methods\":{\"addNpo(address,string,string,string,string)\":{\"details\":\"The administrator can add a new NPO\",\"params\":{\"_denomination\":\"Demonination of the NPO\",\"_npoErc20Address\":\"the ERC20 address of the npo\",\"_npoType\":\"Type of npo organization\",\"_object\":\"object of NPO\",\"_postalAddress\":\"Postal address of the NPO\"}},\"getNpo(address)\":{\"details\":\"Get an NPO via its erc20 address\",\"params\":{\"_npoErc20Address\":\"erc20 address of the NPO Struct\"},\"returns\":{\"_0\":\"returns the corresponding NPO struct\"}},\"getNpoByIndex(uint256)\":{\"details\":\"Get an NPO via its id\",\"params\":{\"_npoId\":\"id of the NPO\"},\"returns\":{\"_0\":\"returns the corresponding NPO struct\"}},\"getNpos()\":{\"details\":\"Get all NPOs\",\"returns\":{\"_0\":\"returns an array of all NPOs\"}}},\"title\":\"INPO \",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"Interface to manage NPOs (= non profit organisations)\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/INPO.sol\":\"INPO\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/INPO.sol\":{\"keccak256\":\"0x939023d2cae6b4d557ef7f83871b7c71da5e1aeeae44976eaa0bf74cd791c182\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ec000dede812f98a68d466de033455c7bc7ac595de2796e21fb2b5b71a506af4\",\"dweb:/ipfs/QmUWGuHwfK9ZNKtBLVU8Bt6NxF1VHpq6XCuQijqtkBVmim\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity 0.8.11;\r\n \r\n/// @title INPO \r\n/// @author Lahcen E. Dev / Jérôme Gauthier\r\n/// @notice Interface to manage NPOs (= non profit organisations)\r\ninterface INPO {\r\n    \r\n    struct NPO {\r\n        uint npoId;\r\n        address npoErc20Address;\r\n        string denomination;\r\n        string postalAddress;\r\n        string object;\r\n        string npoType;\r\n        uint[] projectIds;\r\n        uint[] withdrawalIds;\r\n    }\r\n\r\n    event NpoAdded(uint _poId, address _npoErc20Address, string _denomination);\r\n\r\n    /// @dev The administrator can add a new NPO\r\n    /// @param _npoErc20Address the ERC20 address of the npo\r\n    /// @param _denomination Demonination of the NPO\r\n    /// @param _postalAddress Postal address of the NPO\r\n    /// @param _object object of NPO\r\n    /// @param _npoType Type of npo organization\r\n    function addNpo(\r\n        address _npoErc20Address,\r\n        string memory _denomination,\r\n        string memory _postalAddress,\r\n        string memory _object,\r\n        string memory _npoType) external;\r\n\r\n    /// @dev Get an NPO via its erc20 address\r\n    /// @param _npoErc20Address erc20 address of the NPO Struct\r\n    /// @return returns the corresponding NPO struct\r\n    function getNpo(address _npoErc20Address) external view returns(NPO memory);\r\n    \r\n    /// @dev Get an NPO via its id\r\n    /// @param _npoId id of the NPO\r\n    /// @return returns the corresponding NPO struct\r\n    function getNpoByIndex(uint _npoId) external view returns(NPO memory);\r\n\r\n    /// @dev Get all NPOs\r\n    /// @return returns an array of all NPOs\r\n    function getNpos() external view returns(NPO [] memory);\r\n\r\n}",
+  "sourcePath": "C:\\Appli.crypto\\ethic-on-chain\\contracts\\INPO.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/INPO.sol",
+    "exportedSymbols": {
+      "INPO": [
+        2389
+      ]
+    },
+    "id": 2390,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2320,
+        "literals": [
+          "solidity",
+          "0.8",
+          ".11"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:8"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "INPO",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 2321,
+          "nodeType": "StructuredDocumentation",
+          "src": "61:132:8",
+          "text": "@title INPO \n @author Lahcen E. Dev / Jérôme Gauthier\n @notice Interface to manage NPOs (= non profit organisations)"
+        },
+        "fullyImplemented": false,
+        "id": 2389,
+        "linearizedBaseContracts": [
+          2389
+        ],
+        "name": "INPO",
+        "nameLocation": "203:4:8",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "INPO.NPO",
+            "id": 2340,
+            "members": [
+              {
+                "constant": false,
+                "id": 2323,
+                "mutability": "mutable",
+                "name": "npoId",
+                "nameLocation": "248:5:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "243:10:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2322,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "243:4:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2325,
+                "mutability": "mutable",
+                "name": "npoErc20Address",
+                "nameLocation": "272:15:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "264:23:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2324,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "264:7:8",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2327,
+                "mutability": "mutable",
+                "name": "denomination",
+                "nameLocation": "305:12:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "298:19:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2326,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "298:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2329,
+                "mutability": "mutable",
+                "name": "postalAddress",
+                "nameLocation": "335:13:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "328:20:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2328,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "328:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2331,
+                "mutability": "mutable",
+                "name": "object",
+                "nameLocation": "366:6:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "359:13:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2330,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "359:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2333,
+                "mutability": "mutable",
+                "name": "npoType",
+                "nameLocation": "390:7:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "383:14:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2332,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "383:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2336,
+                "mutability": "mutable",
+                "name": "projectIds",
+                "nameLocation": "415:10:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "408:17:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2334,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "408:4:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2335,
+                  "nodeType": "ArrayTypeName",
+                  "src": "408:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2339,
+                "mutability": "mutable",
+                "name": "withdrawalIds",
+                "nameLocation": "443:13:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "436:20:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2337,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "436:4:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2338,
+                  "nodeType": "ArrayTypeName",
+                  "src": "436:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "NPO",
+            "nameLocation": "228:3:8",
+            "nodeType": "StructDefinition",
+            "scope": 2389,
+            "src": "221:243:8",
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "id": 2348,
+            "name": "NpoAdded",
+            "nameLocation": "478:8:8",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2347,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2342,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_poId",
+                  "nameLocation": "492:5:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2348,
+                  "src": "487:10:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2341,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "487:4:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2344,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_npoErc20Address",
+                  "nameLocation": "507:16:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2348,
+                  "src": "499:24:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2343,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "499:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2346,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_denomination",
+                  "nameLocation": "532:13:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2348,
+                  "src": "525:20:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2345,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "525:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "486:60:8"
+            },
+            "src": "472:75:8"
+          },
+          {
+            "documentation": {
+              "id": 2349,
+              "nodeType": "StructuredDocumentation",
+              "src": "555:305:8",
+              "text": "@dev The administrator can add a new NPO\n @param _npoErc20Address the ERC20 address of the npo\n @param _denomination Demonination of the NPO\n @param _postalAddress Postal address of the NPO\n @param _object object of NPO\n @param _npoType Type of npo organization"
+            },
+            "functionSelector": "3f9754c9",
+            "id": 2362,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addNpo",
+            "nameLocation": "875:6:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2360,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2351,
+                  "mutability": "mutable",
+                  "name": "_npoErc20Address",
+                  "nameLocation": "900:16:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "892:24:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2350,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "892:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2353,
+                  "mutability": "mutable",
+                  "name": "_denomination",
+                  "nameLocation": "941:13:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "927:27:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2352,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "927:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2355,
+                  "mutability": "mutable",
+                  "name": "_postalAddress",
+                  "nameLocation": "979:14:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "965:28:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2354,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "965:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2357,
+                  "mutability": "mutable",
+                  "name": "_object",
+                  "nameLocation": "1018:7:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "1004:21:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2356,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1004:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2359,
+                  "mutability": "mutable",
+                  "name": "_npoType",
+                  "nameLocation": "1050:8:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "1036:22:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2358,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1036:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "881:178:8"
+            },
+            "returnParameters": {
+              "id": 2361,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1068:0:8"
+            },
+            "scope": 2389,
+            "src": "866:203:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 2363,
+              "nodeType": "StructuredDocumentation",
+              "src": "1077:160:8",
+              "text": "@dev Get an NPO via its erc20 address\n @param _npoErc20Address erc20 address of the NPO Struct\n @return returns the corresponding NPO struct"
+            },
+            "functionSelector": "ff6d56ef",
+            "id": 2371,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getNpo",
+            "nameLocation": "1252:6:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2366,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2365,
+                  "mutability": "mutable",
+                  "name": "_npoErc20Address",
+                  "nameLocation": "1267:16:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2371,
+                  "src": "1259:24:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2364,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1259:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1258:26:8"
+            },
+            "returnParameters": {
+              "id": 2370,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2369,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2371,
+                  "src": "1307:10:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_NPO_$2340_memory_ptr",
+                    "typeString": "struct INPO.NPO"
+                  },
+                  "typeName": {
+                    "id": 2368,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 2367,
+                      "name": "NPO",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 2340,
+                      "src": "1307:3:8"
+                    },
+                    "referencedDeclaration": 2340,
+                    "src": "1307:3:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_NPO_$2340_storage_ptr",
+                      "typeString": "struct INPO.NPO"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1306:12:8"
+            },
+            "scope": 2389,
+            "src": "1243:76:8",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 2372,
+              "nodeType": "StructuredDocumentation",
+              "src": "1331:121:8",
+              "text": "@dev Get an NPO via its id\n @param _npoId id of the NPO\n @return returns the corresponding NPO struct"
+            },
+            "functionSelector": "f10a6ac3",
+            "id": 2380,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getNpoByIndex",
+            "nameLocation": "1467:13:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2375,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2374,
+                  "mutability": "mutable",
+                  "name": "_npoId",
+                  "nameLocation": "1486:6:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2380,
+                  "src": "1481:11:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2373,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1481:4:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1480:13:8"
+            },
+            "returnParameters": {
+              "id": 2379,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2378,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2380,
+                  "src": "1516:10:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_NPO_$2340_memory_ptr",
+                    "typeString": "struct INPO.NPO"
+                  },
+                  "typeName": {
+                    "id": 2377,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 2376,
+                      "name": "NPO",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 2340,
+                      "src": "1516:3:8"
+                    },
+                    "referencedDeclaration": 2340,
+                    "src": "1516:3:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_NPO_$2340_storage_ptr",
+                      "typeString": "struct INPO.NPO"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1515:12:8"
+            },
+            "scope": 2389,
+            "src": "1458:70:8",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 2381,
+              "nodeType": "StructuredDocumentation",
+              "src": "1536:67:8",
+              "text": "@dev Get all NPOs\n @return returns an array of all NPOs"
+            },
+            "functionSelector": "7d1887f8",
+            "id": 2388,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getNpos",
+            "nameLocation": "1618:7:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2382,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1625:2:8"
+            },
+            "returnParameters": {
+              "id": 2387,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2386,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2388,
+                  "src": "1650:13:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_NPO_$2340_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct INPO.NPO[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2384,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 2383,
+                        "name": "NPO",
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 2340,
+                        "src": "1650:3:8"
+                      },
+                      "referencedDeclaration": 2340,
+                      "src": "1650:3:8",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_NPO_$2340_storage_ptr",
+                        "typeString": "struct INPO.NPO"
+                      }
+                    },
+                    "id": 2385,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1650:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_NPO_$2340_storage_$dyn_storage_ptr",
+                      "typeString": "struct INPO.NPO[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1649:15:8"
+            },
+            "scope": 2389,
+            "src": "1609:56:8",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2390,
+        "src": "193:1477:8",
+        "usedErrors": []
+      }
+    ],
+    "src": "33:1637:8"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/INPO.sol",
+    "exportedSymbols": {
+      "INPO": [
+        2389
+      ]
+    },
+    "id": 2390,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2320,
+        "literals": [
+          "solidity",
+          "0.8",
+          ".11"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:8"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "INPO",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 2321,
+          "nodeType": "StructuredDocumentation",
+          "src": "61:132:8",
+          "text": "@title INPO \n @author Lahcen E. Dev / Jérôme Gauthier\n @notice Interface to manage NPOs (= non profit organisations)"
+        },
+        "fullyImplemented": false,
+        "id": 2389,
+        "linearizedBaseContracts": [
+          2389
+        ],
+        "name": "INPO",
+        "nameLocation": "203:4:8",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "INPO.NPO",
+            "id": 2340,
+            "members": [
+              {
+                "constant": false,
+                "id": 2323,
+                "mutability": "mutable",
+                "name": "npoId",
+                "nameLocation": "248:5:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "243:10:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2322,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "243:4:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2325,
+                "mutability": "mutable",
+                "name": "npoErc20Address",
+                "nameLocation": "272:15:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "264:23:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2324,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "264:7:8",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2327,
+                "mutability": "mutable",
+                "name": "denomination",
+                "nameLocation": "305:12:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "298:19:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2326,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "298:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2329,
+                "mutability": "mutable",
+                "name": "postalAddress",
+                "nameLocation": "335:13:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "328:20:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2328,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "328:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2331,
+                "mutability": "mutable",
+                "name": "object",
+                "nameLocation": "366:6:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "359:13:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2330,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "359:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2333,
+                "mutability": "mutable",
+                "name": "npoType",
+                "nameLocation": "390:7:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "383:14:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2332,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "383:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2336,
+                "mutability": "mutable",
+                "name": "projectIds",
+                "nameLocation": "415:10:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "408:17:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2334,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "408:4:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2335,
+                  "nodeType": "ArrayTypeName",
+                  "src": "408:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2339,
+                "mutability": "mutable",
+                "name": "withdrawalIds",
+                "nameLocation": "443:13:8",
+                "nodeType": "VariableDeclaration",
+                "scope": 2340,
+                "src": "436:20:8",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 2337,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "436:4:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 2338,
+                  "nodeType": "ArrayTypeName",
+                  "src": "436:6:8",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "NPO",
+            "nameLocation": "228:3:8",
+            "nodeType": "StructDefinition",
+            "scope": 2389,
+            "src": "221:243:8",
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "id": 2348,
+            "name": "NpoAdded",
+            "nameLocation": "478:8:8",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2347,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2342,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_poId",
+                  "nameLocation": "492:5:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2348,
+                  "src": "487:10:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2341,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "487:4:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2344,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_npoErc20Address",
+                  "nameLocation": "507:16:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2348,
+                  "src": "499:24:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2343,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "499:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2346,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_denomination",
+                  "nameLocation": "532:13:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2348,
+                  "src": "525:20:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2345,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "525:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "486:60:8"
+            },
+            "src": "472:75:8"
+          },
+          {
+            "documentation": {
+              "id": 2349,
+              "nodeType": "StructuredDocumentation",
+              "src": "555:305:8",
+              "text": "@dev The administrator can add a new NPO\n @param _npoErc20Address the ERC20 address of the npo\n @param _denomination Demonination of the NPO\n @param _postalAddress Postal address of the NPO\n @param _object object of NPO\n @param _npoType Type of npo organization"
+            },
+            "functionSelector": "3f9754c9",
+            "id": 2362,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addNpo",
+            "nameLocation": "875:6:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2360,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2351,
+                  "mutability": "mutable",
+                  "name": "_npoErc20Address",
+                  "nameLocation": "900:16:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "892:24:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2350,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "892:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2353,
+                  "mutability": "mutable",
+                  "name": "_denomination",
+                  "nameLocation": "941:13:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "927:27:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2352,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "927:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2355,
+                  "mutability": "mutable",
+                  "name": "_postalAddress",
+                  "nameLocation": "979:14:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "965:28:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2354,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "965:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2357,
+                  "mutability": "mutable",
+                  "name": "_object",
+                  "nameLocation": "1018:7:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "1004:21:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2356,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1004:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2359,
+                  "mutability": "mutable",
+                  "name": "_npoType",
+                  "nameLocation": "1050:8:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2362,
+                  "src": "1036:22:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2358,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1036:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "881:178:8"
+            },
+            "returnParameters": {
+              "id": 2361,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1068:0:8"
+            },
+            "scope": 2389,
+            "src": "866:203:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 2363,
+              "nodeType": "StructuredDocumentation",
+              "src": "1077:160:8",
+              "text": "@dev Get an NPO via its erc20 address\n @param _npoErc20Address erc20 address of the NPO Struct\n @return returns the corresponding NPO struct"
+            },
+            "functionSelector": "ff6d56ef",
+            "id": 2371,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getNpo",
+            "nameLocation": "1252:6:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2366,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2365,
+                  "mutability": "mutable",
+                  "name": "_npoErc20Address",
+                  "nameLocation": "1267:16:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2371,
+                  "src": "1259:24:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2364,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1259:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1258:26:8"
+            },
+            "returnParameters": {
+              "id": 2370,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2369,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2371,
+                  "src": "1307:10:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_NPO_$2340_memory_ptr",
+                    "typeString": "struct INPO.NPO"
+                  },
+                  "typeName": {
+                    "id": 2368,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 2367,
+                      "name": "NPO",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 2340,
+                      "src": "1307:3:8"
+                    },
+                    "referencedDeclaration": 2340,
+                    "src": "1307:3:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_NPO_$2340_storage_ptr",
+                      "typeString": "struct INPO.NPO"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1306:12:8"
+            },
+            "scope": 2389,
+            "src": "1243:76:8",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 2372,
+              "nodeType": "StructuredDocumentation",
+              "src": "1331:121:8",
+              "text": "@dev Get an NPO via its id\n @param _npoId id of the NPO\n @return returns the corresponding NPO struct"
+            },
+            "functionSelector": "f10a6ac3",
+            "id": 2380,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getNpoByIndex",
+            "nameLocation": "1467:13:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2375,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2374,
+                  "mutability": "mutable",
+                  "name": "_npoId",
+                  "nameLocation": "1486:6:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2380,
+                  "src": "1481:11:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2373,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1481:4:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1480:13:8"
+            },
+            "returnParameters": {
+              "id": 2379,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2378,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2380,
+                  "src": "1516:10:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_NPO_$2340_memory_ptr",
+                    "typeString": "struct INPO.NPO"
+                  },
+                  "typeName": {
+                    "id": 2377,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 2376,
+                      "name": "NPO",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 2340,
+                      "src": "1516:3:8"
+                    },
+                    "referencedDeclaration": 2340,
+                    "src": "1516:3:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_NPO_$2340_storage_ptr",
+                      "typeString": "struct INPO.NPO"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1515:12:8"
+            },
+            "scope": 2389,
+            "src": "1458:70:8",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 2381,
+              "nodeType": "StructuredDocumentation",
+              "src": "1536:67:8",
+              "text": "@dev Get all NPOs\n @return returns an array of all NPOs"
+            },
+            "functionSelector": "7d1887f8",
+            "id": 2388,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getNpos",
+            "nameLocation": "1618:7:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2382,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1625:2:8"
+            },
+            "returnParameters": {
+              "id": 2387,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2386,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2388,
+                  "src": "1650:13:8",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_NPO_$2340_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct INPO.NPO[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2384,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 2383,
+                        "name": "NPO",
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 2340,
+                        "src": "1650:3:8"
+                      },
+                      "referencedDeclaration": 2340,
+                      "src": "1650:3:8",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_NPO_$2340_storage_ptr",
+                        "typeString": "struct INPO.NPO"
+                      }
+                    },
+                    "id": 2385,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1650:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_NPO_$2340_storage_$dyn_storage_ptr",
+                      "typeString": "struct INPO.NPO[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1649:15:8"
+            },
+            "scope": 2389,
+            "src": "1609:56:8",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2390,
+        "src": "193:1477:8",
+        "usedErrors": []
+      }
+    ],
+    "src": "33:1637:8"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.11+commit.d7f03943.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-01-10T07:25:13.025Z",
+  "devdoc": {
+    "author": "Lahcen E. Dev / Jérôme Gauthier",
+    "kind": "dev",
+    "methods": {
+      "addNpo(address,string,string,string,string)": {
+        "details": "The administrator can add a new NPO",
+        "params": {
+          "_denomination": "Demonination of the NPO",
+          "_npoErc20Address": "the ERC20 address of the npo",
+          "_npoType": "Type of npo organization",
+          "_object": "object of NPO",
+          "_postalAddress": "Postal address of the NPO"
+        }
+      },
+      "getNpo(address)": {
+        "details": "Get an NPO via its erc20 address",
+        "params": {
+          "_npoErc20Address": "erc20 address of the NPO Struct"
+        },
+        "returns": {
+          "_0": "returns the corresponding NPO struct"
+        }
+      },
+      "getNpoByIndex(uint256)": {
+        "details": "Get an NPO via its id",
+        "params": {
+          "_npoId": "id of the NPO"
+        },
+        "returns": {
+          "_0": "returns the corresponding NPO struct"
+        }
+      },
+      "getNpos()": {
+        "details": "Get all NPOs",
+        "returns": {
+          "_0": "returns an array of all NPOs"
+        }
+      }
+    },
+    "title": "INPO ",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "Interface to manage NPOs (= non profit organisations)",
+    "version": 1
+  }
+}

@@ -78,37 +78,6 @@ library EthicOnChainLib {
         CloseFundRaising
     }
 
-    /// @dev Get an NPO via its erc20 address
-    /// @param _npoAddresses mapping of NPO addresses to NPO Struct
-    /// @param _npoErc20Address erc20 address of the NPO Struct
-    /// @return returns the corresponding NPO struct
-    function libGetNpo(mapping (address => NPO) storage _npoAddresses, address _npoErc20Address) public view returns(NPO memory) {
-        return _npoAddresses[_npoErc20Address];
-    }
-    
-    /// @dev Get an NPO via its id
-    /// @param _npoAddresses mapping of NPO addresses to NPO Struct
-    /// @param _npoMap mapping of NPO id to NPO Struct
-    /// @param _npoId id of the NPO
-    /// @return returns the corresponding NPO struct
-    function libGetNpoByIndex(mapping (address => NPO) storage _npoAddresses, mapping (uint => address) storage _npoMap, uint _npoId) internal view returns(NPO memory) {
-        return _npoAddresses[_npoMap[_npoId]];
-    }
-
-    /// @dev Get all NPOs
-    /// @param _npoAddresses mapping of NPO addresses to NPO Struct
-    /// @param _npoMap mapping of NPO id to NPO Struct
-    /// @param _npoCount current index for NPO = total count of NPOs
-    /// @return returns an array of all NPOs
-    function libGetNpos(mapping (address => NPO) storage _npoAddresses, mapping (uint => address) storage _npoMap, uint _npoCount) public view returns(NPO [] memory) {
-        uint arraySize = _npoCount;
-        NPO [] memory result= new NPO[](arraySize);
-        for(uint i; i < arraySize; i++) {
-            result[i] = libGetNpoByIndex(_npoAddresses, _npoMap, i);     
-        }
-        return result;
-    }
-
     /// @dev  get a Donor via its erc20 address
     /// @param _donorAddresses mapping of Donors addresses to Donor Struct
     /// @param _donorErc20Address erc20 address of the Donor
