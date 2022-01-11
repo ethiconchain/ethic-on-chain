@@ -1,6 +1,8 @@
 var EthicToken = artifacts.require("./EthicToken.sol");
 var EthicOnChainLib = artifacts.require("./EthicOnChainLib.sol");
 var EthicOnChain = artifacts.require("./EthicOnChain.sol");
+var EocNpo = artifacts.require("./EocNpo.sol");
+var EocDonor = artifacts.require("./EocDonor.sol");
 
 module.exports = async function(deployer, _network, accounts) {
   const ContractOwner = accounts[0];
@@ -47,6 +49,20 @@ module.exports = async function(deployer, _network, accounts) {
   console.log("Montant de la balance de Leonardo", DonorLeonardoBalance.toString());
   console.log("Montant de la balance de Elon", DonorElonBalance.toString());
 
+  //////////////
+  /// EocNpo ///
+  //////////////
+  await deployer.deploy(EocNpo);
+  const EocNpoContract = await EocNpo.deployed();
+  console.log("Contrat EocNpo déployé à l'adresse " + EocNpo.address);
+  
+  ////////////////
+  /// EocDonor ///
+  ////////////////
+  await deployer.deploy(EocDonor);
+  const EocDonorContract = await EocDonor.deployed();
+  console.log("Contrat EocDonor déployé à l'adresse " + EocDonor.address);
+  
   ////////////////////
   /// EthicOnChain ///
   ////////////////////
@@ -59,7 +75,7 @@ module.exports = async function(deployer, _network, accounts) {
   console.log("EthicOnChainLib liée à EthicOnChain");
 
   // l'adresse du token EOC déployé doit être transmise au contrat EthicOnChain pour les transferts (donations et withdrawals)
-  await deployer.deploy(EthicOnChain, TokenEOC.address);
+  await deployer.deploy(EthicOnChain, TokenEOC.address, EocNpo.address, EocDonor.address);
   const EthicOnChainContract = await EthicOnChain.deployed();
   console.log("Contrat EthicOnChain déployé");
 

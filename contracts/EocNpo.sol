@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-
 /// @title EocNpo 
 /// @author Lahcen E. Dev / Jérôme Gauthier
 /// @notice Contract to manage NPOs (= non profit organisations)
-contract EocNpo is Ownable {
+contract EocNpo {
 
     struct NPO {
         uint npoId;
@@ -37,7 +35,7 @@ contract EocNpo is Ownable {
         string memory _denomination,
         string memory _postalAddress,
         string memory _object,
-        string memory _npoType) internal onlyOwner {
+        string memory _npoType) public {
         // Mandatory fields
         require(_npoErc20Address > address(0), unicode"L'adresse du NPO doit être différente de zéro");
         require(bytes(_denomination).length > 0, unicode"La dénomination est obligatoire");

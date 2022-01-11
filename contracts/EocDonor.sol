@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-
 /// @title EocDonor 
 /// @author Lahcen E. Dev / Jérôme Gauthier
 /// @notice Contract to manage NPOs (= non profit organisations)
-contract EocDonor is Ownable {
+contract EocDonor {
     
     struct Donor {
         uint donorId;
@@ -33,7 +31,7 @@ contract EocDonor is Ownable {
         address _donorErc20Address,
         string memory _name,
         string memory _surName,
-        string memory _postalAddress) public onlyOwner {
+        string memory _postalAddress) public {
         // Mandatory fields
         require(_donorErc20Address > address(0), unicode"L'adresse du donateur doit être différente de zéro");
         require(donorAddresses[_donorErc20Address].donorErc20Address == address(0), unicode"Donor déjà enregistré");
