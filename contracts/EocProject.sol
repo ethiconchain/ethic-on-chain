@@ -2,6 +2,7 @@
 pragma solidity 0.8.11;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./IEocNpo.sol";
 
 /// @title EocDonor 
 /// @author Lahcen E. Dev / Jérôme Gauthier
@@ -39,7 +40,15 @@ contract EocProject  {
     // Projects
     mapping (uint => Project) projectMap;
     uint projectCount;
-    
+
+    // NPO deployed contract address
+    address eocNpoAddress;
+
+    /// @dev Initialise the deployed EOC token address for swap
+    /// @param _eocNpoAddress EOC Token address
+    constructor(address _eocNpoAddress) {
+       eocNpoAddress = _eocNpoAddress;
+    }
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
 
     /// @dev This function will allow to add a project, the owner will be the one who calls the function. 
@@ -63,9 +72,8 @@ contract EocProject  {
         uint _minAmount,
         uint _maxAmount
     ) public {
-        //TODO j'ai du commenter les deux lignes suivante
-        //IEocNpo.NPO memory projectNpo = getNpo(msg.sender);
-        //require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
+        IEocNpo.NPO memory projectNpo = IEocNpo(eocNpoAddress).getNpo(msg.sender);
+        require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         // Mandatory fields
         require(bytes(_title).length > 0, "Le titre est obligatoire");
         require(bytes(_description).length > 0, "La description est obligatoire");
@@ -92,8 +100,8 @@ contract EocProject  {
         newProject.campaignDurationInDays = _campaignDurationInDays;
         newProject.minAmount = _minAmount;
         newProject.maxAmount = _maxAmount;
-// TODO = create a new function into the future ProjectContract class
-//        projectNpo.projectIds.push(projectCount);
+// TODO = A verifier
+        IEocNpo(eocNpoAddress).addProjectIdsItem(newProject.npoErc20Address, projectCount);
 
         projectCount++;
         emit ProjectAdded(newProject.projectId, _title,  _startDate, _endDate, _minAmount, _maxAmount);

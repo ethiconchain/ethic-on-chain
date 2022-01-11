@@ -55,7 +55,10 @@ contract EocNpo {
         npoCount++;
         emit NpoAdded(newNpo.npoId, _npoErc20Address, _denomination);
     }
-
+    /// @dev Update all NPOs
+    function addProjectIdsItem(address _npoErc20Address,uint _projectId) internal{
+        npoAddresses[_npoErc20Address].projectIds.push(_projectId);
+    }
     /// @dev Get an NPO via its erc20 address
     /// @param _npoErc20Address erc20 address of the NPO Struct
     /// @return returns the corresponding NPO struct

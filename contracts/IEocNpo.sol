@@ -32,6 +32,9 @@ interface IEocNpo {
         string memory _object,
         string memory _npoType) external;
 
+    /// @dev Update all NPOs
+    function addProjectIdsItem(address _npoErc20Address, uint _projectId ) external;
+
     /// @dev Get an NPO via its erc20 address
     /// @param _npoErc20Address erc20 address of the NPO Struct
     /// @return returns the corresponding NPO struct
@@ -45,5 +48,7 @@ interface IEocNpo {
     /// @dev Get all NPOs
     /// @return returns an array of all NPOs
     function getNpos() external view returns(NPO [] memory);
+
+
 
 }
