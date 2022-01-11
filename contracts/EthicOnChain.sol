@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./EthicOnChainLib.sol";
 import "./IEocNpo.sol";
 import "./IEocDonor.sol";
+import "./IEocProject.sol";
 
 /// @title EthicOnChain 
 /// @author Lahcen E. Dev / Jérôme Gauthier
@@ -52,6 +53,8 @@ contract EthicOnChain is Ownable {
     address eocNpoAddress;
     // Donor deployed contract address
     address eocDonorAddress;
+    // Project deployed contract address
+    address eocProjectAddress;
 
     event NpoAdded(uint _poId, address _npoErc20Address, string _denomination);
     event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
@@ -61,10 +64,11 @@ contract EthicOnChain is Ownable {
     
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
-    constructor(address _eocTokenAddress, address _eocNpoAddress, address _eocDonorAddress) {
+    constructor(address _eocTokenAddress, address _eocNpoAddress, address _eocDonorAddress, address _eocProjectAddress) {
        eocTokenAddress =  _eocTokenAddress;
        eocNpoAddress = _eocNpoAddress;
        eocDonorAddress = _eocDonorAddress;
+       eocProjectAddress = _eocProjectAddress;
     }
 
     /// @dev The administrator can add a new NPO
@@ -167,39 +171,17 @@ contract EthicOnChain is Ownable {
         uint _minAmount,
         uint _maxAmount
     ) public {
-        IEocNpo.NPO memory projectNpo = getNpo(msg.sender);
-        require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
-        // Mandatory fields
-        require(bytes(_title).length > 0, "Le titre est obligatoire");
-        require(bytes(_description).length > 0, "La description est obligatoire");
-        require(_startDate > 0, unicode"Date de début de projet obligatoire");
-        require(_endDate > 0, "Date de fin de projet obligatoire");
-        require(_minAmount > 0, "Montant minimal obligatoire");
-        require(_maxAmount > 0, "Montant maximal obligatoire");
-        require(_campaignStartDate > 0, unicode"Date de début de campagne obligatoire");
-        require(_campaignDurationInDays > 0, unicode"Durée de campagne obligatoire");
-        // Comparisons
-        require(_startDate < _endDate, unicode"La date début de projet doit être avant la fin");
-        require(_minAmount < _maxAmount, unicode"Le montant minimal doit être inférieur au montant maximal");
-
-        EthicOnChainLib.Project storage newProject = projectMap[projectCount];
-        newProject.projectId = projectCount;
-        newProject.npoErc20Address = msg.sender;
-        newProject.title = _title;
-        // TODO = voir comment gérer le Project Cause en fonction de son enum
-        newProject.description = _description;
-        newProject.geographicalArea = _geographicalArea;
-        newProject.startDate = _startDate;
-        newProject.endDate = _endDate;
-        newProject.campaignStartDate = _campaignStartDate;
-        newProject.campaignDurationInDays = _campaignDurationInDays;
-        newProject.minAmount = _minAmount;
-        newProject.maxAmount = _maxAmount;
-// TODO = create a new function into the future ProjectContract class
-//        projectNpo.projectIds.push(projectCount);
-
-        projectCount++;
-        emit ProjectAdded(newProject.projectId, _title,  _startDate, _endDate, _minAmount, _maxAmount);
+        IEocProject(eocProjectAddress).addProject(
+            _title,
+            _description,
+            _geographicalArea,
+            _startDate,
+            _endDate,
+            _campaignStartDate,
+            _campaignDurationInDays,
+            _minAmount,
+            _maxAmount
+        );
     } 
 
     /// @dev Add a Donation struct in global donationMap
