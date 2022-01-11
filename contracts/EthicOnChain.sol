@@ -56,8 +56,6 @@ contract EthicOnChain is Ownable {
     // Project deployed contract address
     address eocProjectAddress;
 
-    event NpoAdded(uint _poId, address _npoErc20Address, string _denomination);
-    event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
     event DonationAdded(uint _donationId, uint _projectId, uint _donorId, uint _donationDate, uint donationAmount);
     event WithdrawalAdded(uint _withdrawalId ,uint _projectId, uint _amount, address _addressRecipent);

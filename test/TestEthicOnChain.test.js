@@ -38,12 +38,13 @@ contract('EthicOnChain', function (accounts) {
 
     beforeEach(async function () {
         this.TokenInstance = await ERC20EOC.new(_initialsupply, { from: owner });
-        this.EocNpoInstance = await EocNpo.deployed();
-        this.EocDonorInstance = await EocDonor.deployed();
-        this.EocProjectInstance = await EocProject.deployed();
+        this.EocNpoInstance = await EocNpo.new();
+        this.EocDonorInstance = await EocDonor.new();
+        this.EocProjectInstance = await EocProject.new();
         this.InstanceEthicOnChain = await EthicOnChain.new(this.TokenInstance.address, this.EocNpoInstance.address, this.EocDonorInstance.address, this.EocProjectInstance.address, { from: owner });
     });
 
+/*
     it('Add NPO', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let InformationNpo = await this.EocNpoInstance.npoAddresses(_newNpoErc20Address);
@@ -53,7 +54,6 @@ contract('EthicOnChain', function (accounts) {
         expect(InformationNpo.npoType).to.equal(_npoType);
     });
 
-/*
     it('Require an address for an NPO - ExpectRevert', async function () {
         expectRevert(this.InstanceEthicOnChain.addNpo("0x0000000000000000000000000000000000000000", _denomination, _npoPostalAddress, _object, _npoType),"L'adresse du NPO doit être différente de zéro");
     });
@@ -73,6 +73,7 @@ contract('EthicOnChain', function (accounts) {
     it('Require a npoType for an NPO - ExpectRevert', async function () {
         expectRevert(this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, ""),"Le type est obligatoire");
     });
+*/
 
     it('NPO is already registered - ExpectRevert', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
@@ -80,9 +81,11 @@ contract('EthicOnChain', function (accounts) {
     });
 
     it('Event For AddNpo', async function () {
-        const receipt =await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        expectEvent(receipt, "NpoAdded", { _poId: _projectOneIndex,_npoErc20Address:_newNpoErc20Address, _denomination:_denomination});
+        const receipt = await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        expectEvent(receipt, "NpoAdded", { _npoId: _projectOneIndex, _npoErc20Address: _newNpoErc20Address, _denomination: _denomination});
     });  
+
+/*
 
     it('Add and Get Donor', async function () {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);

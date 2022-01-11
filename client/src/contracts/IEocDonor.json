@@ -216,22 +216,22 @@
     "absolutePath": "project:/contracts/IEocDonor.sol",
     "exportedSymbols": {
       "IEocDonor": [
-        2684
+        2819
       ]
     },
-    "id": 2685,
+    "id": 2820,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2622,
+        "id": 2757,
         "literals": [
           "solidity",
           "0.8",
           ".11"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:10"
+        "src": "33:23:11"
       },
       {
         "abstract": false,
@@ -240,33 +240,33 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 2623,
+          "id": 2758,
           "nodeType": "StructuredDocumentation",
-          "src": "61:110:10",
+          "src": "61:110:11",
           "text": "@title IEocDonor \n @author Lahcen E. Dev / Jérôme Gauthier\n @notice Interface to manage Donors"
         },
         "fullyImplemented": false,
-        "id": 2684,
+        "id": 2819,
         "linearizedBaseContracts": [
-          2684
+          2819
         ],
         "name": "IEocDonor",
-        "nameLocation": "181:9:10",
+        "nameLocation": "181:9:11",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "IEocDonor.Donor",
-            "id": 2637,
+            "id": 2772,
             "members": [
               {
                 "constant": false,
-                "id": 2625,
+                "id": 2760,
                 "mutability": "mutable",
                 "name": "donorId",
-                "nameLocation": "233:7:10",
+                "nameLocation": "233:7:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "228:12:10",
+                "scope": 2772,
+                "src": "228:12:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -274,10 +274,10 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2624,
+                  "id": 2759,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
-                  "src": "228:4:10",
+                  "src": "228:4:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -287,13 +287,13 @@
               },
               {
                 "constant": false,
-                "id": 2627,
+                "id": 2762,
                 "mutability": "mutable",
                 "name": "donorErc20Address",
-                "nameLocation": "259:17:10",
+                "nameLocation": "259:17:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "251:25:10",
+                "scope": 2772,
+                "src": "251:25:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -301,10 +301,10 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 2626,
+                  "id": 2761,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
-                  "src": "251:7:10",
+                  "src": "251:7:11",
                   "stateMutability": "nonpayable",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
@@ -315,13 +315,13 @@
               },
               {
                 "constant": false,
-                "id": 2629,
+                "id": 2764,
                 "mutability": "mutable",
                 "name": "name",
-                "nameLocation": "294:4:10",
+                "nameLocation": "294:4:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "287:11:10",
+                "scope": 2772,
+                "src": "287:11:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -329,10 +329,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2628,
+                  "id": 2763,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "287:6:10",
+                  "src": "287:6:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -342,13 +342,13 @@
               },
               {
                 "constant": false,
-                "id": 2631,
+                "id": 2766,
                 "mutability": "mutable",
                 "name": "surName",
-                "nameLocation": "316:7:10",
+                "nameLocation": "316:7:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "309:14:10",
+                "scope": 2772,
+                "src": "309:14:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -356,10 +356,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2630,
+                  "id": 2765,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "309:6:10",
+                  "src": "309:6:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -369,13 +369,13 @@
               },
               {
                 "constant": false,
-                "id": 2633,
+                "id": 2768,
                 "mutability": "mutable",
                 "name": "postalAddress",
-                "nameLocation": "341:13:10",
+                "nameLocation": "341:13:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "334:20:10",
+                "scope": 2772,
+                "src": "334:20:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -383,10 +383,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2632,
+                  "id": 2767,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "334:6:10",
+                  "src": "334:6:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -396,13 +396,13 @@
               },
               {
                 "constant": false,
-                "id": 2636,
+                "id": 2771,
                 "mutability": "mutable",
                 "name": "donationIds",
-                "nameLocation": "372:11:10",
+                "nameLocation": "372:11:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "365:18:10",
+                "scope": 2772,
+                "src": "365:18:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -411,18 +411,18 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 2634,
+                    "id": 2769,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "365:4:10",
+                    "src": "365:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "id": 2635,
+                  "id": 2770,
                   "nodeType": "ArrayTypeName",
-                  "src": "365:6:10",
+                  "src": "365:6:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
                     "typeString": "uint256[]"
@@ -432,32 +432,32 @@
               }
             ],
             "name": "Donor",
-            "nameLocation": "211:5:10",
+            "nameLocation": "211:5:11",
             "nodeType": "StructDefinition",
-            "scope": 2684,
-            "src": "204:187:10",
+            "scope": 2819,
+            "src": "204:187:11",
             "visibility": "public"
           },
           {
             "anonymous": false,
-            "id": 2645,
+            "id": 2780,
             "name": "DonorAdded",
-            "nameLocation": "405:10:10",
+            "nameLocation": "405:10:11",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 2644,
+              "id": 2779,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2639,
+                  "id": 2774,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_donorId",
-                  "nameLocation": "421:8:10",
+                  "nameLocation": "421:8:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2645,
-                  "src": "416:13:10",
+                  "scope": 2780,
+                  "src": "416:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -465,10 +465,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2638,
+                    "id": 2773,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "416:4:10",
+                    "src": "416:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -478,14 +478,14 @@
                 },
                 {
                   "constant": false,
-                  "id": 2641,
+                  "id": 2776,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_donorErc20Address",
-                  "nameLocation": "439:18:10",
+                  "nameLocation": "439:18:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2645,
-                  "src": "431:26:10",
+                  "scope": 2780,
+                  "src": "431:26:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -493,10 +493,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2640,
+                    "id": 2775,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "431:7:10",
+                    "src": "431:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -507,14 +507,14 @@
                 },
                 {
                   "constant": false,
-                  "id": 2643,
+                  "id": 2778,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_donorName",
-                  "nameLocation": "466:10:10",
+                  "nameLocation": "466:10:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2645,
-                  "src": "459:17:10",
+                  "scope": 2780,
+                  "src": "459:17:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -522,10 +522,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2642,
+                    "id": 2777,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "459:6:10",
+                    "src": "459:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -534,38 +534,38 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "415:62:10"
+              "src": "415:62:11"
             },
-            "src": "399:79:10"
+            "src": "399:79:11"
           },
           {
             "documentation": {
-              "id": 2646,
+              "id": 2781,
               "nodeType": "StructuredDocumentation",
-              "src": "486:262:10",
+              "src": "486:262:11",
               "text": "@dev The administrator/contract can add a new Donor\n @param _donorErc20Address ERC20 address of the donor\n @param _name Name of the Donor\n @param _surName Surname of the Donor\n @param _postalAddress postal address of the donor"
             },
             "functionSelector": "19ccf9ed",
-            "id": 2657,
+            "id": 2792,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "addDonor",
-            "nameLocation": "763:8:10",
+            "nameLocation": "763:8:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2655,
+              "id": 2790,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2648,
+                  "id": 2783,
                   "mutability": "mutable",
                   "name": "_donorErc20Address",
-                  "nameLocation": "790:18:10",
+                  "nameLocation": "790:18:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2657,
-                  "src": "782:26:10",
+                  "scope": 2792,
+                  "src": "782:26:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -573,10 +573,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2647,
+                    "id": 2782,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "782:7:10",
+                    "src": "782:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -587,13 +587,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2650,
+                  "id": 2785,
                   "mutability": "mutable",
                   "name": "_name",
-                  "nameLocation": "833:5:10",
+                  "nameLocation": "833:5:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2657,
-                  "src": "819:19:10",
+                  "scope": 2792,
+                  "src": "819:19:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -601,10 +601,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2649,
+                    "id": 2784,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "819:6:10",
+                    "src": "819:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -614,13 +614,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2652,
+                  "id": 2787,
                   "mutability": "mutable",
                   "name": "_surName",
-                  "nameLocation": "863:8:10",
+                  "nameLocation": "863:8:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2657,
-                  "src": "849:22:10",
+                  "scope": 2792,
+                  "src": "849:22:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -628,10 +628,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2651,
+                    "id": 2786,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "849:6:10",
+                    "src": "849:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -641,13 +641,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2654,
+                  "id": 2789,
                   "mutability": "mutable",
                   "name": "_postalAddress",
-                  "nameLocation": "896:14:10",
+                  "nameLocation": "896:14:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2657,
-                  "src": "882:28:10",
+                  "scope": 2792,
+                  "src": "882:28:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -655,10 +655,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2653,
+                    "id": 2788,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "882:6:10",
+                    "src": "882:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -667,48 +667,48 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "771:140:10"
+              "src": "771:140:11"
             },
             "returnParameters": {
-              "id": 2656,
+              "id": 2791,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "920:0:10"
+              "src": "920:0:11"
             },
-            "scope": 2684,
-            "src": "754:167:10",
+            "scope": 2819,
+            "src": "754:167:11",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2658,
+              "id": 2793,
               "nodeType": "StructuredDocumentation",
-              "src": "929:161:10",
+              "src": "929:161:11",
               "text": "@dev  get a Donor via its erc20 address\n @param _donorErc20Address erc20 address of the Donor\n @return returns the corresponding Donor struct"
             },
             "functionSelector": "96c59043",
-            "id": 2666,
+            "id": 2801,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getDonor",
-            "nameLocation": "1105:8:10",
+            "nameLocation": "1105:8:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2661,
+              "id": 2796,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2660,
+                  "id": 2795,
                   "mutability": "mutable",
                   "name": "_donorErc20Address",
-                  "nameLocation": "1122:18:10",
+                  "nameLocation": "1122:18:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2666,
-                  "src": "1114:26:10",
+                  "scope": 2801,
+                  "src": "1114:26:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -716,10 +716,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2659,
+                    "id": 2794,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1114:7:10",
+                    "src": "1114:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -729,83 +729,83 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1113:28:10"
+              "src": "1113:28:11"
             },
             "returnParameters": {
-              "id": 2665,
+              "id": 2800,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2664,
+                  "id": 2799,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2666,
-                  "src": "1164:12:10",
+                  "scope": 2801,
+                  "src": "1164:12:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Donor_$2637_memory_ptr",
+                    "typeIdentifier": "t_struct$_Donor_$2772_memory_ptr",
                     "typeString": "struct IEocDonor.Donor"
                   },
                   "typeName": {
-                    "id": 2663,
+                    "id": 2798,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2662,
+                      "id": 2797,
                       "name": "Donor",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2637,
-                      "src": "1164:5:10"
+                      "referencedDeclaration": 2772,
+                      "src": "1164:5:11"
                     },
-                    "referencedDeclaration": 2637,
-                    "src": "1164:5:10",
+                    "referencedDeclaration": 2772,
+                    "src": "1164:5:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Donor_$2637_storage_ptr",
+                      "typeIdentifier": "t_struct$_Donor_$2772_storage_ptr",
                       "typeString": "struct IEocDonor.Donor"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "1163:14:10"
+              "src": "1163:14:11"
             },
-            "scope": 2684,
-            "src": "1096:82:10",
+            "scope": 2819,
+            "src": "1096:82:11",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2667,
+              "id": 2802,
               "nodeType": "StructuredDocumentation",
-              "src": "1186:129:10",
+              "src": "1186:129:11",
               "text": "@dev  get a Donor via its id\n @param _donorId id of the Donor\n @return returns the corresponding Donor struct"
             },
             "functionSelector": "57075257",
-            "id": 2675,
+            "id": 2810,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getDonorByIndex",
-            "nameLocation": "1330:15:10",
+            "nameLocation": "1330:15:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2670,
+              "id": 2805,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2669,
+                  "id": 2804,
                   "mutability": "mutable",
                   "name": "_donorId",
-                  "nameLocation": "1351:8:10",
+                  "nameLocation": "1351:8:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2675,
-                  "src": "1346:13:10",
+                  "scope": 2810,
+                  "src": "1346:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -813,10 +813,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2668,
+                    "id": 2803,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1346:4:10",
+                    "src": "1346:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -825,160 +825,160 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1345:15:10"
+              "src": "1345:15:11"
             },
             "returnParameters": {
-              "id": 2674,
+              "id": 2809,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2673,
+                  "id": 2808,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2675,
-                  "src": "1383:12:10",
+                  "scope": 2810,
+                  "src": "1383:12:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Donor_$2637_memory_ptr",
+                    "typeIdentifier": "t_struct$_Donor_$2772_memory_ptr",
                     "typeString": "struct IEocDonor.Donor"
                   },
                   "typeName": {
-                    "id": 2672,
+                    "id": 2807,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2671,
+                      "id": 2806,
                       "name": "Donor",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2637,
-                      "src": "1383:5:10"
+                      "referencedDeclaration": 2772,
+                      "src": "1383:5:11"
                     },
-                    "referencedDeclaration": 2637,
-                    "src": "1383:5:10",
+                    "referencedDeclaration": 2772,
+                    "src": "1383:5:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Donor_$2637_storage_ptr",
+                      "typeIdentifier": "t_struct$_Donor_$2772_storage_ptr",
                       "typeString": "struct IEocDonor.Donor"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "1382:14:10"
+              "src": "1382:14:11"
             },
-            "scope": 2684,
-            "src": "1321:76:10",
+            "scope": 2819,
+            "src": "1321:76:11",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2676,
+              "id": 2811,
               "nodeType": "StructuredDocumentation",
-              "src": "1405:72:10",
+              "src": "1405:72:11",
               "text": "@dev  get all Donors\n @return returns an array of all Donors"
             },
             "functionSelector": "96f300d4",
-            "id": 2683,
+            "id": 2818,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getDonors",
-            "nameLocation": "1492:9:10",
+            "nameLocation": "1492:9:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2677,
+              "id": 2812,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1501:2:10"
+              "src": "1501:2:11"
             },
             "returnParameters": {
-              "id": 2682,
+              "id": 2817,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2681,
+                  "id": 2816,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2683,
-                  "src": "1526:15:10",
+                  "scope": 2818,
+                  "src": "1526:15:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_struct$_Donor_$2637_memory_ptr_$dyn_memory_ptr",
+                    "typeIdentifier": "t_array$_t_struct$_Donor_$2772_memory_ptr_$dyn_memory_ptr",
                     "typeString": "struct IEocDonor.Donor[]"
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 2679,
+                      "id": 2814,
                       "nodeType": "UserDefinedTypeName",
                       "pathNode": {
-                        "id": 2678,
+                        "id": 2813,
                         "name": "Donor",
                         "nodeType": "IdentifierPath",
-                        "referencedDeclaration": 2637,
-                        "src": "1526:5:10"
+                        "referencedDeclaration": 2772,
+                        "src": "1526:5:11"
                       },
-                      "referencedDeclaration": 2637,
-                      "src": "1526:5:10",
+                      "referencedDeclaration": 2772,
+                      "src": "1526:5:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Donor_$2637_storage_ptr",
+                        "typeIdentifier": "t_struct$_Donor_$2772_storage_ptr",
                         "typeString": "struct IEocDonor.Donor"
                       }
                     },
-                    "id": 2680,
+                    "id": 2815,
                     "nodeType": "ArrayTypeName",
-                    "src": "1526:8:10",
+                    "src": "1526:8:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_array$_t_struct$_Donor_$2637_storage_$dyn_storage_ptr",
+                      "typeIdentifier": "t_array$_t_struct$_Donor_$2772_storage_$dyn_storage_ptr",
                       "typeString": "struct IEocDonor.Donor[]"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "1525:17:10"
+              "src": "1525:17:11"
             },
-            "scope": 2684,
-            "src": "1483:60:10",
+            "scope": 2819,
+            "src": "1483:60:11",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2685,
-        "src": "171:1377:10",
+        "scope": 2820,
+        "src": "171:1377:11",
         "usedErrors": []
       }
     ],
-    "src": "33:1515:10"
+    "src": "33:1515:11"
   },
   "legacyAST": {
     "absolutePath": "project:/contracts/IEocDonor.sol",
     "exportedSymbols": {
       "IEocDonor": [
-        2684
+        2819
       ]
     },
-    "id": 2685,
+    "id": 2820,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2622,
+        "id": 2757,
         "literals": [
           "solidity",
           "0.8",
           ".11"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:10"
+        "src": "33:23:11"
       },
       {
         "abstract": false,
@@ -987,33 +987,33 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 2623,
+          "id": 2758,
           "nodeType": "StructuredDocumentation",
-          "src": "61:110:10",
+          "src": "61:110:11",
           "text": "@title IEocDonor \n @author Lahcen E. Dev / Jérôme Gauthier\n @notice Interface to manage Donors"
         },
         "fullyImplemented": false,
-        "id": 2684,
+        "id": 2819,
         "linearizedBaseContracts": [
-          2684
+          2819
         ],
         "name": "IEocDonor",
-        "nameLocation": "181:9:10",
+        "nameLocation": "181:9:11",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "IEocDonor.Donor",
-            "id": 2637,
+            "id": 2772,
             "members": [
               {
                 "constant": false,
-                "id": 2625,
+                "id": 2760,
                 "mutability": "mutable",
                 "name": "donorId",
-                "nameLocation": "233:7:10",
+                "nameLocation": "233:7:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "228:12:10",
+                "scope": 2772,
+                "src": "228:12:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1021,10 +1021,10 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2624,
+                  "id": 2759,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
-                  "src": "228:4:10",
+                  "src": "228:4:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -1034,13 +1034,13 @@
               },
               {
                 "constant": false,
-                "id": 2627,
+                "id": 2762,
                 "mutability": "mutable",
                 "name": "donorErc20Address",
-                "nameLocation": "259:17:10",
+                "nameLocation": "259:17:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "251:25:10",
+                "scope": 2772,
+                "src": "251:25:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1048,10 +1048,10 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 2626,
+                  "id": 2761,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
-                  "src": "251:7:10",
+                  "src": "251:7:11",
                   "stateMutability": "nonpayable",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
@@ -1062,13 +1062,13 @@
               },
               {
                 "constant": false,
-                "id": 2629,
+                "id": 2764,
                 "mutability": "mutable",
                 "name": "name",
-                "nameLocation": "294:4:10",
+                "nameLocation": "294:4:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "287:11:10",
+                "scope": 2772,
+                "src": "287:11:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1076,10 +1076,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2628,
+                  "id": 2763,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "287:6:10",
+                  "src": "287:6:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -1089,13 +1089,13 @@
               },
               {
                 "constant": false,
-                "id": 2631,
+                "id": 2766,
                 "mutability": "mutable",
                 "name": "surName",
-                "nameLocation": "316:7:10",
+                "nameLocation": "316:7:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "309:14:10",
+                "scope": 2772,
+                "src": "309:14:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1103,10 +1103,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2630,
+                  "id": 2765,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "309:6:10",
+                  "src": "309:6:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -1116,13 +1116,13 @@
               },
               {
                 "constant": false,
-                "id": 2633,
+                "id": 2768,
                 "mutability": "mutable",
                 "name": "postalAddress",
-                "nameLocation": "341:13:10",
+                "nameLocation": "341:13:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "334:20:10",
+                "scope": 2772,
+                "src": "334:20:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1130,10 +1130,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2632,
+                  "id": 2767,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "334:6:10",
+                  "src": "334:6:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -1143,13 +1143,13 @@
               },
               {
                 "constant": false,
-                "id": 2636,
+                "id": 2771,
                 "mutability": "mutable",
                 "name": "donationIds",
-                "nameLocation": "372:11:10",
+                "nameLocation": "372:11:11",
                 "nodeType": "VariableDeclaration",
-                "scope": 2637,
-                "src": "365:18:10",
+                "scope": 2772,
+                "src": "365:18:11",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1158,18 +1158,18 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 2634,
+                    "id": 2769,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "365:4:10",
+                    "src": "365:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "id": 2635,
+                  "id": 2770,
                   "nodeType": "ArrayTypeName",
-                  "src": "365:6:10",
+                  "src": "365:6:11",
                   "typeDescriptions": {
                     "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
                     "typeString": "uint256[]"
@@ -1179,32 +1179,32 @@
               }
             ],
             "name": "Donor",
-            "nameLocation": "211:5:10",
+            "nameLocation": "211:5:11",
             "nodeType": "StructDefinition",
-            "scope": 2684,
-            "src": "204:187:10",
+            "scope": 2819,
+            "src": "204:187:11",
             "visibility": "public"
           },
           {
             "anonymous": false,
-            "id": 2645,
+            "id": 2780,
             "name": "DonorAdded",
-            "nameLocation": "405:10:10",
+            "nameLocation": "405:10:11",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 2644,
+              "id": 2779,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2639,
+                  "id": 2774,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_donorId",
-                  "nameLocation": "421:8:10",
+                  "nameLocation": "421:8:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2645,
-                  "src": "416:13:10",
+                  "scope": 2780,
+                  "src": "416:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1212,10 +1212,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2638,
+                    "id": 2773,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "416:4:10",
+                    "src": "416:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1225,14 +1225,14 @@
                 },
                 {
                   "constant": false,
-                  "id": 2641,
+                  "id": 2776,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_donorErc20Address",
-                  "nameLocation": "439:18:10",
+                  "nameLocation": "439:18:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2645,
-                  "src": "431:26:10",
+                  "scope": 2780,
+                  "src": "431:26:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1240,10 +1240,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2640,
+                    "id": 2775,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "431:7:10",
+                    "src": "431:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1254,14 +1254,14 @@
                 },
                 {
                   "constant": false,
-                  "id": 2643,
+                  "id": 2778,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_donorName",
-                  "nameLocation": "466:10:10",
+                  "nameLocation": "466:10:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2645,
-                  "src": "459:17:10",
+                  "scope": 2780,
+                  "src": "459:17:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1269,10 +1269,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2642,
+                    "id": 2777,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "459:6:10",
+                    "src": "459:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -1281,38 +1281,38 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "415:62:10"
+              "src": "415:62:11"
             },
-            "src": "399:79:10"
+            "src": "399:79:11"
           },
           {
             "documentation": {
-              "id": 2646,
+              "id": 2781,
               "nodeType": "StructuredDocumentation",
-              "src": "486:262:10",
+              "src": "486:262:11",
               "text": "@dev The administrator/contract can add a new Donor\n @param _donorErc20Address ERC20 address of the donor\n @param _name Name of the Donor\n @param _surName Surname of the Donor\n @param _postalAddress postal address of the donor"
             },
             "functionSelector": "19ccf9ed",
-            "id": 2657,
+            "id": 2792,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "addDonor",
-            "nameLocation": "763:8:10",
+            "nameLocation": "763:8:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2655,
+              "id": 2790,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2648,
+                  "id": 2783,
                   "mutability": "mutable",
                   "name": "_donorErc20Address",
-                  "nameLocation": "790:18:10",
+                  "nameLocation": "790:18:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2657,
-                  "src": "782:26:10",
+                  "scope": 2792,
+                  "src": "782:26:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1320,10 +1320,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2647,
+                    "id": 2782,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "782:7:10",
+                    "src": "782:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1334,13 +1334,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2650,
+                  "id": 2785,
                   "mutability": "mutable",
                   "name": "_name",
-                  "nameLocation": "833:5:10",
+                  "nameLocation": "833:5:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2657,
-                  "src": "819:19:10",
+                  "scope": 2792,
+                  "src": "819:19:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1348,10 +1348,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2649,
+                    "id": 2784,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "819:6:10",
+                    "src": "819:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -1361,13 +1361,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2652,
+                  "id": 2787,
                   "mutability": "mutable",
                   "name": "_surName",
-                  "nameLocation": "863:8:10",
+                  "nameLocation": "863:8:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2657,
-                  "src": "849:22:10",
+                  "scope": 2792,
+                  "src": "849:22:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1375,10 +1375,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2651,
+                    "id": 2786,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "849:6:10",
+                    "src": "849:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -1388,13 +1388,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2654,
+                  "id": 2789,
                   "mutability": "mutable",
                   "name": "_postalAddress",
-                  "nameLocation": "896:14:10",
+                  "nameLocation": "896:14:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2657,
-                  "src": "882:28:10",
+                  "scope": 2792,
+                  "src": "882:28:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1402,10 +1402,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2653,
+                    "id": 2788,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "882:6:10",
+                    "src": "882:6:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -1414,48 +1414,48 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "771:140:10"
+              "src": "771:140:11"
             },
             "returnParameters": {
-              "id": 2656,
+              "id": 2791,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "920:0:10"
+              "src": "920:0:11"
             },
-            "scope": 2684,
-            "src": "754:167:10",
+            "scope": 2819,
+            "src": "754:167:11",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2658,
+              "id": 2793,
               "nodeType": "StructuredDocumentation",
-              "src": "929:161:10",
+              "src": "929:161:11",
               "text": "@dev  get a Donor via its erc20 address\n @param _donorErc20Address erc20 address of the Donor\n @return returns the corresponding Donor struct"
             },
             "functionSelector": "96c59043",
-            "id": 2666,
+            "id": 2801,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getDonor",
-            "nameLocation": "1105:8:10",
+            "nameLocation": "1105:8:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2661,
+              "id": 2796,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2660,
+                  "id": 2795,
                   "mutability": "mutable",
                   "name": "_donorErc20Address",
-                  "nameLocation": "1122:18:10",
+                  "nameLocation": "1122:18:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2666,
-                  "src": "1114:26:10",
+                  "scope": 2801,
+                  "src": "1114:26:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1463,10 +1463,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2659,
+                    "id": 2794,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1114:7:10",
+                    "src": "1114:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1476,83 +1476,83 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1113:28:10"
+              "src": "1113:28:11"
             },
             "returnParameters": {
-              "id": 2665,
+              "id": 2800,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2664,
+                  "id": 2799,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2666,
-                  "src": "1164:12:10",
+                  "scope": 2801,
+                  "src": "1164:12:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Donor_$2637_memory_ptr",
+                    "typeIdentifier": "t_struct$_Donor_$2772_memory_ptr",
                     "typeString": "struct IEocDonor.Donor"
                   },
                   "typeName": {
-                    "id": 2663,
+                    "id": 2798,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2662,
+                      "id": 2797,
                       "name": "Donor",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2637,
-                      "src": "1164:5:10"
+                      "referencedDeclaration": 2772,
+                      "src": "1164:5:11"
                     },
-                    "referencedDeclaration": 2637,
-                    "src": "1164:5:10",
+                    "referencedDeclaration": 2772,
+                    "src": "1164:5:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Donor_$2637_storage_ptr",
+                      "typeIdentifier": "t_struct$_Donor_$2772_storage_ptr",
                       "typeString": "struct IEocDonor.Donor"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "1163:14:10"
+              "src": "1163:14:11"
             },
-            "scope": 2684,
-            "src": "1096:82:10",
+            "scope": 2819,
+            "src": "1096:82:11",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2667,
+              "id": 2802,
               "nodeType": "StructuredDocumentation",
-              "src": "1186:129:10",
+              "src": "1186:129:11",
               "text": "@dev  get a Donor via its id\n @param _donorId id of the Donor\n @return returns the corresponding Donor struct"
             },
             "functionSelector": "57075257",
-            "id": 2675,
+            "id": 2810,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getDonorByIndex",
-            "nameLocation": "1330:15:10",
+            "nameLocation": "1330:15:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2670,
+              "id": 2805,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2669,
+                  "id": 2804,
                   "mutability": "mutable",
                   "name": "_donorId",
-                  "nameLocation": "1351:8:10",
+                  "nameLocation": "1351:8:11",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2675,
-                  "src": "1346:13:10",
+                  "scope": 2810,
+                  "src": "1346:13:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1560,10 +1560,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2668,
+                    "id": 2803,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1346:4:10",
+                    "src": "1346:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1572,139 +1572,139 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1345:15:10"
+              "src": "1345:15:11"
             },
             "returnParameters": {
-              "id": 2674,
+              "id": 2809,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2673,
+                  "id": 2808,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2675,
-                  "src": "1383:12:10",
+                  "scope": 2810,
+                  "src": "1383:12:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Donor_$2637_memory_ptr",
+                    "typeIdentifier": "t_struct$_Donor_$2772_memory_ptr",
                     "typeString": "struct IEocDonor.Donor"
                   },
                   "typeName": {
-                    "id": 2672,
+                    "id": 2807,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2671,
+                      "id": 2806,
                       "name": "Donor",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2637,
-                      "src": "1383:5:10"
+                      "referencedDeclaration": 2772,
+                      "src": "1383:5:11"
                     },
-                    "referencedDeclaration": 2637,
-                    "src": "1383:5:10",
+                    "referencedDeclaration": 2772,
+                    "src": "1383:5:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Donor_$2637_storage_ptr",
+                      "typeIdentifier": "t_struct$_Donor_$2772_storage_ptr",
                       "typeString": "struct IEocDonor.Donor"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "1382:14:10"
+              "src": "1382:14:11"
             },
-            "scope": 2684,
-            "src": "1321:76:10",
+            "scope": 2819,
+            "src": "1321:76:11",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 2676,
+              "id": 2811,
               "nodeType": "StructuredDocumentation",
-              "src": "1405:72:10",
+              "src": "1405:72:11",
               "text": "@dev  get all Donors\n @return returns an array of all Donors"
             },
             "functionSelector": "96f300d4",
-            "id": 2683,
+            "id": 2818,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getDonors",
-            "nameLocation": "1492:9:10",
+            "nameLocation": "1492:9:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2677,
+              "id": 2812,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1501:2:10"
+              "src": "1501:2:11"
             },
             "returnParameters": {
-              "id": 2682,
+              "id": 2817,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2681,
+                  "id": 2816,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2683,
-                  "src": "1526:15:10",
+                  "scope": 2818,
+                  "src": "1526:15:11",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_struct$_Donor_$2637_memory_ptr_$dyn_memory_ptr",
+                    "typeIdentifier": "t_array$_t_struct$_Donor_$2772_memory_ptr_$dyn_memory_ptr",
                     "typeString": "struct IEocDonor.Donor[]"
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 2679,
+                      "id": 2814,
                       "nodeType": "UserDefinedTypeName",
                       "pathNode": {
-                        "id": 2678,
+                        "id": 2813,
                         "name": "Donor",
                         "nodeType": "IdentifierPath",
-                        "referencedDeclaration": 2637,
-                        "src": "1526:5:10"
+                        "referencedDeclaration": 2772,
+                        "src": "1526:5:11"
                       },
-                      "referencedDeclaration": 2637,
-                      "src": "1526:5:10",
+                      "referencedDeclaration": 2772,
+                      "src": "1526:5:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Donor_$2637_storage_ptr",
+                        "typeIdentifier": "t_struct$_Donor_$2772_storage_ptr",
                         "typeString": "struct IEocDonor.Donor"
                       }
                     },
-                    "id": 2680,
+                    "id": 2815,
                     "nodeType": "ArrayTypeName",
-                    "src": "1526:8:10",
+                    "src": "1526:8:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_array$_t_struct$_Donor_$2637_storage_$dyn_storage_ptr",
+                      "typeIdentifier": "t_array$_t_struct$_Donor_$2772_storage_$dyn_storage_ptr",
                       "typeString": "struct IEocDonor.Donor[]"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "1525:17:10"
+              "src": "1525:17:11"
             },
-            "scope": 2684,
-            "src": "1483:60:10",
+            "scope": 2819,
+            "src": "1483:60:11",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2685,
-        "src": "171:1377:10",
+        "scope": 2820,
+        "src": "171:1377:11",
         "usedErrors": []
       }
     ],
-    "src": "33:1515:10"
+    "src": "33:1515:11"
   },
   "compiler": {
     "name": "solc",
@@ -1712,7 +1712,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-11T06:52:28.744Z",
+  "updatedAt": "2022-01-11T16:35:12.547Z",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",
     "kind": "dev",

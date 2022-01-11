@@ -22,7 +22,7 @@ contract EocNpo {
     mapping (uint => address) private npoMap;
     uint private npoCount; 
 
-    event NpoAdded(uint _poId, address _npoErc20Address, string _denomination);
+    event NpoAdded(uint _npoId, address _npoErc20Address, string _denomination);
 
     /// @dev The administrator can add a new NPO
     /// @param _npoErc20Address the ERC20 address of the npo
