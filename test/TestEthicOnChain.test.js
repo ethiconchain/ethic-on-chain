@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const ERC20EOC = artifacts.require('EthicToken');
 const EocNpo = artifacts.require('EocNpo');
 const EocDonor = artifacts.require('EocDonor');
+const EocProject = artifacts.require('EocProject');
 const EthicOnChain = artifacts.require('EthicOnChain');
 
 contract('EthicOnChain', function (accounts) {
@@ -39,12 +40,13 @@ contract('EthicOnChain', function (accounts) {
         this.TokenInstance = await ERC20EOC.new(_initialsupply, { from: owner });
         this.EocNpoInstance = await EocNpo.deployed();
         this.EocDonorInstance = await EocDonor.deployed();
-        this.InstanceEthicOnChain = await EthicOnChain.new(this.TokenInstance.address, this.EocNpoInstance.address, this.EocDonorInstance.address, { from: owner });
+        this.EocProjectInstance = await EocProject.deployed();
+        this.InstanceEthicOnChain = await EthicOnChain.new(this.TokenInstance.address, this.EocNpoInstance.address, this.EocDonorInstance.address, this.EocProjectInstance.address, { from: owner });
     });
 
     it('Add NPO', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        let InformationNpo = await this.InstanceEthicOnChain.npoAddresses(_newNpoErc20Address);
+        let InformationNpo = await this.EocNpoInstance.npoAddresses(_newNpoErc20Address);
         expect(InformationNpo.denomination).to.equal(_denomination);
         expect(InformationNpo.postalAddress).to.equal(_npoPostalAddress);
         expect(InformationNpo.object).to.equal(_object);
