@@ -67,7 +67,7 @@ module.exports = async function(deployer, _network, accounts) {
   //////////////////
   /// EocProject ///
   //////////////////
-  await deployer.deploy(EocProject);
+  await deployer.deploy(EocProject, EocNpo.address);
   const EocProjectContract = await EocProject.deployed();
   console.log("Contrat EocProject déployé à l'adresse " + EocProject.address);
   

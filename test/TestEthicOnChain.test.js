@@ -40,11 +40,11 @@ contract('EthicOnChain', function (accounts) {
         this.TokenInstance = await ERC20EOC.new(_initialsupply, { from: owner });
         this.EocNpoInstance = await EocNpo.new();
         this.EocDonorInstance = await EocDonor.new();
-        this.EocProjectInstance = await EocProject.new();
+        this.EocProjectInstance = await EocProject.new(this.EocNpoInstance.address);
         this.InstanceEthicOnChain = await EthicOnChain.new(this.TokenInstance.address, this.EocNpoInstance.address, this.EocDonorInstance.address, this.EocProjectInstance.address, { from: owner });
     });
 
-/*
+
     it('Add NPO', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let InformationNpo = await this.EocNpoInstance.npoAddresses(_newNpoErc20Address);
@@ -73,7 +73,7 @@ contract('EthicOnChain', function (accounts) {
     it('Require a npoType for an NPO - ExpectRevert', async function () {
         expectRevert(this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, ""),"Le type est obligatoire");
     });
-*/
+
 
     it('NPO is already registered - ExpectRevert', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
@@ -85,7 +85,7 @@ contract('EthicOnChain', function (accounts) {
         expectEvent(receipt, "NpoAdded", { _npoId: _projectOneIndex, _npoErc20Address: _newNpoErc20Address, _denomination: _denomination});
     });  
 
-/*
+
 
     it('Add and Get Donor', async function () {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
@@ -470,6 +470,6 @@ contract('EthicOnChain', function (accounts) {
         let arrWithdrawal = await this.InstanceEthicOnChain.getWithdrawalPerNpo(_newNpoErc20Address);
         expect(arrWithdrawal.length).to.equal(1);
     });
-*/
+
 
 });
