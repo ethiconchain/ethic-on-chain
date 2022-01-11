@@ -20,8 +20,6 @@ contract EocDonor {
     mapping (uint => address) private donorMap;
     uint private donorCount; 
     
-    event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
-
     /// @dev The administrator/contract can add a new Donor
     /// @param _donorErc20Address ERC20 address of the donor
     /// @param _name Name of the Donor
@@ -31,7 +29,7 @@ contract EocDonor {
         address _donorErc20Address,
         string memory _name,
         string memory _surName,
-        string memory _postalAddress) public {
+        string memory _postalAddress) public  returns (uint _donorId) {
         // Mandatory fields
         require(_donorErc20Address > address(0), unicode"L'adresse du donateur doit être différente de zéro");
         require(donorAddresses[_donorErc20Address].donorErc20Address == address(0), unicode"Donor déjà enregistré");
@@ -44,7 +42,7 @@ contract EocDonor {
         newDonor.postalAddress = _postalAddress;
         donorMap[donorCount] = _donorErc20Address;
         donorCount++;
-        emit DonorAdded(newDonor.donorId, _donorErc20Address, _name);
+        return newDonor.donorId;
     }
 
     /// @dev  get a Donor via its erc20 address

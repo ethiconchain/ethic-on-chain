@@ -100,7 +100,6 @@ contract EocProject  {
         newProject.campaignDurationInDays = _campaignDurationInDays;
         newProject.minAmount = _minAmount;
         newProject.maxAmount = _maxAmount;
-// TODO = A verifier
         IEocNpo(eocNpoAddress).addProjectIdsItem(newProject.npoErc20Address, projectCount);
 
         projectCount++;

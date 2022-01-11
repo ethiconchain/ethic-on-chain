@@ -15,8 +15,6 @@ interface IEocDonor {
         uint[] donationIds;
     }
 
-    event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
-
     /// @dev The administrator/contract can add a new Donor
     /// @param _donorErc20Address ERC20 address of the donor
     /// @param _name Name of the Donor
@@ -26,7 +24,7 @@ interface IEocDonor {
         address _donorErc20Address,
         string memory _name,
         string memory _surName,
-        string memory _postalAddress) external;
+        string memory _postalAddress) external returns (uint _donorId);
 
     /// @dev  get a Donor via its erc20 address
     /// @param _donorErc20Address erc20 address of the Donor

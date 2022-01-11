@@ -22,8 +22,6 @@ contract EocNpo {
     mapping (uint => address) private npoMap;
     uint private npoCount; 
 
-    event NpoAdded(uint _npoId, address _npoErc20Address, string _denomination);
-
     /// @dev The administrator can add a new NPO
     /// @param _npoErc20Address the ERC20 address of the npo
     /// @param _denomination Demonination of the NPO
@@ -35,7 +33,7 @@ contract EocNpo {
         string memory _denomination,
         string memory _postalAddress,
         string memory _object,
-        string memory _npoType) public {
+        string memory _npoType) public returns (uint _npoId) {
         // Mandatory fields
         require(_npoErc20Address > address(0), unicode"L'adresse du NPO doit être différente de zéro");
         require(bytes(_denomination).length > 0, unicode"La dénomination est obligatoire");
@@ -53,9 +51,12 @@ contract EocNpo {
         newNpo.npoType = _npoType;
         npoMap[npoCount] = _npoErc20Address;
         npoCount++;
-        emit NpoAdded(newNpo.npoId, _npoErc20Address, _denomination);
+        return newNpo.npoId;
     }
-    /// @dev Update all NPOs
+
+    /// @dev Adds an item in the projectIds array of the NPO
+    /// @param _npoErc20Address erc20 address of the NPO Struct
+    /// @param _projectId project id of the project to be added
     function addProjectIdsItem(address _npoErc20Address,uint _projectId) internal{
         npoAddresses[_npoErc20Address].projectIds.push(_projectId);
     }

@@ -17,8 +17,6 @@ interface IEocNpo {
         uint[] withdrawalIds;
     }
 
-    event NpoAdded(uint _npoId, address _npoErc20Address, string _denomination);
-
     /// @dev The administrator can add a new NPO
     /// @param _npoErc20Address the ERC20 address of the npo
     /// @param _denomination Demonination of the NPO
@@ -30,9 +28,11 @@ interface IEocNpo {
         string memory _denomination,
         string memory _postalAddress,
         string memory _object,
-        string memory _npoType) external;
+        string memory _npoType) external returns (uint _npoId);
 
-    /// @dev Update all NPOs
+    /// @dev Adds an item in the projectIds array of the NPO
+    /// @param _npoErc20Address erc20 address of the NPO Struct
+    /// @param _projectId project id of the project to be added
     function addProjectIdsItem(address _npoErc20Address, uint _projectId ) external;
 
     /// @dev Get an NPO via its erc20 address

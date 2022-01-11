@@ -56,6 +56,8 @@ contract EthicOnChain is Ownable {
     // Project deployed contract address
     address eocProjectAddress;
 
+    event NpoAdded(uint _npoId, address _npoErc20Address, string _denomination);
+    event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
     event DonationAdded(uint _donationId, uint _projectId, uint _donorId, uint _donationDate, uint donationAmount);
     event WithdrawalAdded(uint _withdrawalId ,uint _projectId, uint _amount, address _addressRecipent);
@@ -81,13 +83,15 @@ contract EthicOnChain is Ownable {
         string memory _postalAddress,
         string memory _object,
         string memory _npoType) public onlyOwner {
-        IEocNpo(eocNpoAddress).addNpo(
+        uint npoId;
+        npoId = IEocNpo(eocNpoAddress).addNpo(
             _npoErc20Address,
             _denomination,
             _postalAddress,
             _object,
             _npoType
         );
+        emit NpoAdded(npoId, _npoErc20Address, _denomination);
     }
  
     /// @dev  get an NPO via its erc20 address
@@ -120,12 +124,14 @@ contract EthicOnChain is Ownable {
         string memory _name,
         string memory _surName,
         string memory _postalAddress) public onlyOwner {
-        IEocDonor(eocDonorAddress).addDonor(
+        uint donorId;
+        donorId = IEocDonor(eocDonorAddress).addDonor(
             _donorErc20Address,
             _name,
             _surName,
             _postalAddress
         );
+        emit DonorAdded(donorId, _donorErc20Address, _name);
     }
 
     /// @dev  get a Donor via its erc20 address

@@ -44,7 +44,7 @@ contract('EthicOnChain', function (accounts) {
         this.InstanceEthicOnChain = await EthicOnChain.new(this.TokenInstance.address, this.EocNpoInstance.address, this.EocDonorInstance.address, this.EocProjectInstance.address, { from: owner });
     });
 
-
+/*
     it('Add NPO', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let InformationNpo = await this.EocNpoInstance.npoAddresses(_newNpoErc20Address);
@@ -74,7 +74,6 @@ contract('EthicOnChain', function (accounts) {
         expectRevert(this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, ""),"Le type est obligatoire");
     });
 
-
     it('NPO is already registered - ExpectRevert', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         expectRevert(this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType),"NPO déjà enregistré");
@@ -84,8 +83,6 @@ contract('EthicOnChain', function (accounts) {
         const receipt = await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         expectEvent(receipt, "NpoAdded", { _npoId: _projectOneIndex, _npoErc20Address: _newNpoErc20Address, _denomination: _denomination});
     });  
-
-
 
     it('Add and Get Donor', async function () {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
@@ -106,6 +103,7 @@ contract('EthicOnChain', function (accounts) {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
         expectRevert(this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress),"Donor déjà enregistré");
     });
+*/
 
     it('Event For AddDonor', async function () {
         const receipt = await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
