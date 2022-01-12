@@ -131,10 +131,10 @@ export default function MakeDonation(props) {
             <br />
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Box sx={{ width: '100%', mr: 1 }}>
-                <LinearProgress color="secondary" variant="determinate" value={currentPercentage()} />
+                <LinearProgress sx={{ height: '8px', borderRadius: '4px' }} color="secondary" variant="determinate" value={currentPercentage()} />
               </Box>
               <Box sx={{ minWidth: 35 }}>
-                <Typography variant="body2" color="secondary">{`${Math.round(currentPercentage())}%`}</Typography>
+                <Typography variant="body2" color="secondary">{Math.round(currentPercentage())}%</Typography>
               </Box>
             </Box>
             <br />
