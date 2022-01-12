@@ -57,26 +57,26 @@ contract EocNpo {
     /// @dev Adds an item in the projectIds array of the NPO
     /// @param _npoErc20Address erc20 address of the NPO Struct
     /// @param _projectId project id of the project to be added
-    function addProjectIdsItem(address _npoErc20Address,uint _projectId) internal{
+    function addProjectIdsItem(address _npoErc20Address,uint _projectId) public {
         npoAddresses[_npoErc20Address].projectIds.push(_projectId);
     }
     /// @dev Get an NPO via its erc20 address
     /// @param _npoErc20Address erc20 address of the NPO Struct
     /// @return returns the corresponding NPO struct
-    function getNpo(address _npoErc20Address) internal view returns(NPO memory) {
+    function getNpo(address _npoErc20Address) public view returns(NPO memory) {
         return npoAddresses[_npoErc20Address];
     }
     
     /// @dev Get an NPO via its id
     /// @param _npoId id of the NPO
     /// @return returns the corresponding NPO struct
-    function getNpoByIndex(uint _npoId) internal view returns(NPO memory) {
+    function getNpoByIndex(uint _npoId) public view returns(NPO memory) {
         return npoAddresses[npoMap[_npoId]];
     }
 
     /// @dev Get all NPOs
     /// @return returns an array of all NPOs
-    function libGetNpos() internal view returns(NPO [] memory) {
+    function libGetNpos() public view returns(NPO [] memory) {
         uint arraySize = npoCount;
         NPO [] memory result= new NPO[](arraySize);
         for(uint i; i < arraySize; i++) {

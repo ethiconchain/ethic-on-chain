@@ -298,15 +298,15 @@
     "absolutePath": "project:/contracts/IEocProject.sol",
     "exportedSymbols": {
       "IEocProject": [
-        3061
+        3067
       ]
     },
-    "id": 3062,
+    "id": 3068,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2965,
+        "id": 2971,
         "literals": [
           "solidity",
           "0.8",
@@ -322,15 +322,15 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 2966,
+          "id": 2972,
           "nodeType": "StructuredDocumentation",
           "src": "61:110:13",
           "text": "@title IEocDonor \n @author Lahcen E. Dev / Jérôme Gauthier\n @notice Interface to manage Donors"
         },
         "fullyImplemented": false,
-        "id": 3061,
+        "id": 3067,
         "linearizedBaseContracts": [
-          3061
+          3067
         ],
         "name": "IEocProject",
         "nameLocation": "181:11:13",
@@ -338,16 +338,16 @@
         "nodes": [
           {
             "canonicalName": "IEocProject.Project",
-            "id": 3000,
+            "id": 3006,
             "members": [
               {
                 "constant": false,
-                "id": 2968,
+                "id": 2974,
                 "mutability": "mutable",
                 "name": "projectId",
                 "nameLocation": "237:9:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "232:14:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -356,7 +356,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2967,
+                  "id": 2973,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "232:4:13",
@@ -369,12 +369,12 @@
               },
               {
                 "constant": false,
-                "id": 2970,
+                "id": 2976,
                 "mutability": "mutable",
                 "name": "startDate",
                 "nameLocation": "279:9:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "274:14:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -383,7 +383,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2969,
+                  "id": 2975,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "274:4:13",
@@ -396,12 +396,12 @@
               },
               {
                 "constant": false,
-                "id": 2972,
+                "id": 2978,
                 "mutability": "mutable",
                 "name": "endDate",
                 "nameLocation": "304:7:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "299:12:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -410,7 +410,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2971,
+                  "id": 2977,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "299:4:13",
@@ -423,12 +423,12 @@
               },
               {
                 "constant": false,
-                "id": 2974,
+                "id": 2980,
                 "mutability": "mutable",
                 "name": "campaignStartDate",
                 "nameLocation": "327:17:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "322:22:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -437,7 +437,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2973,
+                  "id": 2979,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "322:4:13",
@@ -450,12 +450,12 @@
               },
               {
                 "constant": false,
-                "id": 2976,
+                "id": 2982,
                 "mutability": "mutable",
                 "name": "campaignDurationInDays",
                 "nameLocation": "360:22:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "355:27:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -464,7 +464,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2975,
+                  "id": 2981,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "355:4:13",
@@ -477,12 +477,12 @@
               },
               {
                 "constant": false,
-                "id": 2978,
+                "id": 2984,
                 "mutability": "mutable",
                 "name": "minAmount",
                 "nameLocation": "398:9:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "393:14:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -491,7 +491,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2977,
+                  "id": 2983,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "393:4:13",
@@ -504,12 +504,12 @@
               },
               {
                 "constant": false,
-                "id": 2980,
+                "id": 2986,
                 "mutability": "mutable",
                 "name": "maxAmount",
                 "nameLocation": "423:9:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "418:14:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -518,7 +518,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2979,
+                  "id": 2985,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "418:4:13",
@@ -531,12 +531,12 @@
               },
               {
                 "constant": false,
-                "id": 2982,
+                "id": 2988,
                 "mutability": "mutable",
                 "name": "projectBalance",
                 "nameLocation": "448:14:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "443:19:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -545,7 +545,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2981,
+                  "id": 2987,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "443:4:13",
@@ -558,12 +558,12 @@
               },
               {
                 "constant": false,
-                "id": 2984,
+                "id": 2990,
                 "mutability": "mutable",
                 "name": "npoErc20Address",
                 "nameLocation": "481:15:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "473:23:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -572,7 +572,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 2983,
+                  "id": 2989,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "473:7:13",
@@ -586,33 +586,33 @@
               },
               {
                 "constant": false,
-                "id": 2987,
+                "id": 2993,
                 "mutability": "mutable",
                 "name": "cause",
                 "nameLocation": "520:5:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "507:18:13",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_ProjectCause_$3008",
+                  "typeIdentifier": "t_enum$_ProjectCause_$3014",
                   "typeString": "enum IEocProject.ProjectCause"
                 },
                 "typeName": {
-                  "id": 2986,
+                  "id": 2992,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 2985,
+                    "id": 2991,
                     "name": "ProjectCause",
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 3008,
+                    "referencedDeclaration": 3014,
                     "src": "507:12:13"
                   },
-                  "referencedDeclaration": 3008,
+                  "referencedDeclaration": 3014,
                   "src": "507:12:13",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ProjectCause_$3008",
+                    "typeIdentifier": "t_enum$_ProjectCause_$3014",
                     "typeString": "enum IEocProject.ProjectCause"
                   }
                 },
@@ -620,12 +620,12 @@
               },
               {
                 "constant": false,
-                "id": 2989,
+                "id": 2995,
                 "mutability": "mutable",
                 "name": "title",
                 "nameLocation": "543:5:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "536:12:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -634,7 +634,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2988,
+                  "id": 2994,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "536:6:13",
@@ -647,12 +647,12 @@
               },
               {
                 "constant": false,
-                "id": 2991,
+                "id": 2997,
                 "mutability": "mutable",
                 "name": "description",
                 "nameLocation": "566:11:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "559:18:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -661,7 +661,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2990,
+                  "id": 2996,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "559:6:13",
@@ -674,12 +674,12 @@
               },
               {
                 "constant": false,
-                "id": 2993,
+                "id": 2999,
                 "mutability": "mutable",
                 "name": "geographicalArea",
                 "nameLocation": "595:16:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "588:23:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -688,7 +688,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2992,
+                  "id": 2998,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "588:6:13",
@@ -701,12 +701,12 @@
               },
               {
                 "constant": false,
-                "id": 2996,
+                "id": 3002,
                 "mutability": "mutable",
                 "name": "donationIds",
                 "nameLocation": "629:11:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "622:18:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -716,7 +716,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 2994,
+                    "id": 3000,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "622:4:13",
@@ -725,7 +725,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 2995,
+                  "id": 3001,
                   "nodeType": "ArrayTypeName",
                   "src": "622:6:13",
                   "typeDescriptions": {
@@ -737,12 +737,12 @@
               },
               {
                 "constant": false,
-                "id": 2999,
+                "id": 3005,
                 "mutability": "mutable",
                 "name": "withdrawalIds",
                 "nameLocation": "658:13:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "651:20:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -752,7 +752,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 2997,
+                    "id": 3003,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "651:4:13",
@@ -761,7 +761,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 2998,
+                  "id": 3004,
                   "nodeType": "ArrayTypeName",
                   "src": "651:6:13",
                   "typeDescriptions": {
@@ -775,58 +775,58 @@
             "name": "Project",
             "nameLocation": "213:7:13",
             "nodeType": "StructDefinition",
-            "scope": 3061,
+            "scope": 3067,
             "src": "206:473:13",
             "visibility": "public"
           },
           {
             "canonicalName": "IEocProject.ProjectCause",
-            "id": 3008,
+            "id": 3014,
             "members": [
               {
-                "id": 3001,
+                "id": 3007,
                 "name": "LutteContreLaPauvreteEtExclusion",
                 "nameLocation": "717:32:13",
                 "nodeType": "EnumValue",
                 "src": "717:32:13"
               },
               {
-                "id": 3002,
+                "id": 3008,
                 "name": "EnvironnementEtLesAnimaux",
                 "nameLocation": "760:25:13",
                 "nodeType": "EnumValue",
                 "src": "760:25:13"
               },
               {
-                "id": 3003,
+                "id": 3009,
                 "name": "Education",
                 "nameLocation": "796:9:13",
                 "nodeType": "EnumValue",
                 "src": "796:9:13"
               },
               {
-                "id": 3004,
+                "id": 3010,
                 "name": "ArtEtLaCulture",
                 "nameLocation": "816:14:13",
                 "nodeType": "EnumValue",
                 "src": "816:14:13"
               },
               {
-                "id": 3005,
+                "id": 3011,
                 "name": "SanteEtLaRecherche",
                 "nameLocation": "841:18:13",
                 "nodeType": "EnumValue",
                 "src": "841:18:13"
               },
               {
-                "id": 3006,
+                "id": 3012,
                 "name": "DroitsDeLHomme",
                 "nameLocation": "870:14:13",
                 "nodeType": "EnumValue",
                 "src": "870:14:13"
               },
               {
-                "id": 3007,
+                "id": 3013,
                 "name": "InfrastructureRoutiere",
                 "nameLocation": "895:22:13",
                 "nodeType": "EnumValue",
@@ -840,23 +840,23 @@
           },
           {
             "anonymous": false,
-            "id": 3022,
+            "id": 3028,
             "name": "ProjectAdded",
             "nameLocation": "936:12:13",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 3021,
+              "id": 3027,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3010,
+                  "id": 3016,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_projectId",
                   "nameLocation": "954:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "949:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -865,7 +865,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3009,
+                    "id": 3015,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "949:4:13",
@@ -878,13 +878,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3012,
+                  "id": 3018,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_title",
                   "nameLocation": "973:6:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "966:13:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -893,7 +893,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 3011,
+                    "id": 3017,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "966:6:13",
@@ -906,13 +906,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3014,
+                  "id": 3020,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_startDate",
                   "nameLocation": "986:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "981:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -921,7 +921,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3013,
+                    "id": 3019,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "981:4:13",
@@ -934,13 +934,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3016,
+                  "id": 3022,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_endDate",
                   "nameLocation": "1003:8:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "998:13:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -949,7 +949,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3015,
+                    "id": 3021,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "998:4:13",
@@ -962,13 +962,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3018,
+                  "id": 3024,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_minAmount",
                   "nameLocation": "1018:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "1013:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -977,7 +977,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3017,
+                    "id": 3023,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1013:4:13",
@@ -990,13 +990,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3020,
+                  "id": 3026,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_maxAmount",
                   "nameLocation": "1035:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "1030:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1005,7 +1005,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3019,
+                    "id": 3025,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1030:4:13",
@@ -1023,13 +1023,13 @@
           },
           {
             "documentation": {
-              "id": 3023,
+              "id": 3029,
               "nodeType": "StructuredDocumentation",
               "src": "1055:707:13",
               "text": "@dev This function will allow to add a project, the owner will be the one who calls the function. \n @param _title The title of the project\n @param _description description of the project\n @param _geographicalArea the geographical area where the project will be located.\n @param _startDate The start date of the project\n @param _endDate The end of the project\n @param _campaignStartDate the beginning of the collection of funds\n @param _campaignDurationInDays the duration of the collection of funds\n @param _minAmount The minimum price for the project to be valid\n @param _maxAmount The maximum price to make the project a success "
             },
             "functionSelector": "1f1ffb1c",
-            "id": 3044,
+            "id": 3050,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1037,17 +1037,17 @@
             "nameLocation": "1777:10:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3042,
+              "id": 3048,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3025,
+                  "id": 3031,
                   "mutability": "mutable",
                   "name": "_title",
                   "nameLocation": "1812:6:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1798:20:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1056,7 +1056,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 3024,
+                    "id": 3030,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1798:6:13",
@@ -1069,12 +1069,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3027,
+                  "id": 3033,
                   "mutability": "mutable",
                   "name": "_description",
                   "nameLocation": "1843:12:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1829:26:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1083,7 +1083,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 3026,
+                    "id": 3032,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1829:6:13",
@@ -1096,12 +1096,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3029,
+                  "id": 3035,
                   "mutability": "mutable",
                   "name": "_geographicalArea",
                   "nameLocation": "1880:17:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1866:31:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1110,7 +1110,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 3028,
+                    "id": 3034,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1866:6:13",
@@ -1123,12 +1123,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3031,
+                  "id": 3037,
                   "mutability": "mutable",
                   "name": "_startDate",
                   "nameLocation": "1913:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1908:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1137,7 +1137,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3030,
+                    "id": 3036,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1908:4:13",
@@ -1150,12 +1150,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3033,
+                  "id": 3039,
                   "mutability": "mutable",
                   "name": "_endDate",
                   "nameLocation": "1939:8:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1934:13:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1164,7 +1164,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3032,
+                    "id": 3038,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1934:4:13",
@@ -1177,12 +1177,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3035,
+                  "id": 3041,
                   "mutability": "mutable",
                   "name": "_campaignStartDate",
                   "nameLocation": "1963:18:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1958:23:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1191,7 +1191,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3034,
+                    "id": 3040,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1958:4:13",
@@ -1204,12 +1204,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3037,
+                  "id": 3043,
                   "mutability": "mutable",
                   "name": "_campaignDurationInDays",
                   "nameLocation": "1997:23:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1992:28:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1218,7 +1218,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3036,
+                    "id": 3042,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1992:4:13",
@@ -1231,12 +1231,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3039,
+                  "id": 3045,
                   "mutability": "mutable",
                   "name": "_minAmount",
                   "nameLocation": "2036:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "2031:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1245,7 +1245,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3038,
+                    "id": 3044,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2031:4:13",
@@ -1258,12 +1258,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3041,
+                  "id": 3047,
                   "mutability": "mutable",
                   "name": "_maxAmount",
                   "nameLocation": "2062:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "2057:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1272,7 +1272,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3040,
+                    "id": 3046,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2057:4:13",
@@ -1287,12 +1287,12 @@
               "src": "1787:292:13"
             },
             "returnParameters": {
-              "id": 3043,
+              "id": 3049,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2088:0:13"
             },
-            "scope": 3061,
+            "scope": 3067,
             "src": "1768:321:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1300,13 +1300,13 @@
           },
           {
             "documentation": {
-              "id": 3045,
+              "id": 3051,
               "nodeType": "StructuredDocumentation",
               "src": "2097:151:13",
               "text": "@dev Returns a single Project\n @param _projectId project unique id\n @return the Project struct instance corresponding to _projectId"
             },
             "functionSelector": "f0f3f2c8",
-            "id": 3053,
+            "id": 3059,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1314,17 +1314,17 @@
             "nameLocation": "2263:10:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3048,
+              "id": 3054,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3047,
+                  "id": 3053,
                   "mutability": "mutable",
                   "name": "_projectId",
                   "nameLocation": "2279:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3053,
+                  "scope": 3059,
                   "src": "2274:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1333,7 +1333,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3046,
+                    "id": 3052,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2274:4:13",
@@ -1348,38 +1348,38 @@
               "src": "2273:17:13"
             },
             "returnParameters": {
-              "id": 3052,
+              "id": 3058,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3051,
+                  "id": 3057,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3053,
+                  "scope": 3059,
                   "src": "2313:14:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Project_$3000_memory_ptr",
+                    "typeIdentifier": "t_struct$_Project_$3006_memory_ptr",
                     "typeString": "struct IEocProject.Project"
                   },
                   "typeName": {
-                    "id": 3050,
+                    "id": 3056,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 3049,
+                      "id": 3055,
                       "name": "Project",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 3000,
+                      "referencedDeclaration": 3006,
                       "src": "2313:7:13"
                     },
-                    "referencedDeclaration": 3000,
+                    "referencedDeclaration": 3006,
                     "src": "2313:7:13",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Project_$3000_storage_ptr",
+                      "typeIdentifier": "t_struct$_Project_$3006_storage_ptr",
                       "typeString": "struct IEocProject.Project"
                     }
                   },
@@ -1388,7 +1388,7 @@
               ],
               "src": "2312:16:13"
             },
-            "scope": 3061,
+            "scope": 3067,
             "src": "2254:75:13",
             "stateMutability": "view",
             "virtual": false,
@@ -1396,13 +1396,13 @@
           },
           {
             "documentation": {
-              "id": 3054,
+              "id": 3060,
               "nodeType": "StructuredDocumentation",
               "src": "2337:75:13",
               "text": "@dev  get all projects\n @return returns an array of all Project"
             },
             "functionSelector": "dcc60128",
-            "id": 3060,
+            "id": 3066,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -1410,44 +1410,44 @@
             "nameLocation": "2427:11:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3055,
+              "id": 3061,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2438:2:13"
             },
             "returnParameters": {
-              "id": 3059,
+              "id": 3065,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3058,
+                  "id": 3064,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3060,
+                  "scope": 3066,
                   "src": "2463:14:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Project_$3000_memory_ptr",
+                    "typeIdentifier": "t_struct$_Project_$3006_memory_ptr",
                     "typeString": "struct IEocProject.Project"
                   },
                   "typeName": {
-                    "id": 3057,
+                    "id": 3063,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 3056,
+                      "id": 3062,
                       "name": "Project",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 3000,
+                      "referencedDeclaration": 3006,
                       "src": "2463:7:13"
                     },
-                    "referencedDeclaration": 3000,
+                    "referencedDeclaration": 3006,
                     "src": "2463:7:13",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Project_$3000_storage_ptr",
+                      "typeIdentifier": "t_struct$_Project_$3006_storage_ptr",
                       "typeString": "struct IEocProject.Project"
                     }
                   },
@@ -1456,14 +1456,14 @@
               ],
               "src": "2462:16:13"
             },
-            "scope": 3061,
+            "scope": 3067,
             "src": "2418:61:13",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 3062,
+        "scope": 3068,
         "src": "171:2317:13",
         "usedErrors": []
       }
@@ -1474,15 +1474,15 @@
     "absolutePath": "project:/contracts/IEocProject.sol",
     "exportedSymbols": {
       "IEocProject": [
-        3061
+        3067
       ]
     },
-    "id": 3062,
+    "id": 3068,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2965,
+        "id": 2971,
         "literals": [
           "solidity",
           "0.8",
@@ -1498,15 +1498,15 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 2966,
+          "id": 2972,
           "nodeType": "StructuredDocumentation",
           "src": "61:110:13",
           "text": "@title IEocDonor \n @author Lahcen E. Dev / Jérôme Gauthier\n @notice Interface to manage Donors"
         },
         "fullyImplemented": false,
-        "id": 3061,
+        "id": 3067,
         "linearizedBaseContracts": [
-          3061
+          3067
         ],
         "name": "IEocProject",
         "nameLocation": "181:11:13",
@@ -1514,16 +1514,16 @@
         "nodes": [
           {
             "canonicalName": "IEocProject.Project",
-            "id": 3000,
+            "id": 3006,
             "members": [
               {
                 "constant": false,
-                "id": 2968,
+                "id": 2974,
                 "mutability": "mutable",
                 "name": "projectId",
                 "nameLocation": "237:9:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "232:14:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1532,7 +1532,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2967,
+                  "id": 2973,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "232:4:13",
@@ -1545,12 +1545,12 @@
               },
               {
                 "constant": false,
-                "id": 2970,
+                "id": 2976,
                 "mutability": "mutable",
                 "name": "startDate",
                 "nameLocation": "279:9:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "274:14:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1559,7 +1559,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2969,
+                  "id": 2975,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "274:4:13",
@@ -1572,12 +1572,12 @@
               },
               {
                 "constant": false,
-                "id": 2972,
+                "id": 2978,
                 "mutability": "mutable",
                 "name": "endDate",
                 "nameLocation": "304:7:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "299:12:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1586,7 +1586,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2971,
+                  "id": 2977,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "299:4:13",
@@ -1599,12 +1599,12 @@
               },
               {
                 "constant": false,
-                "id": 2974,
+                "id": 2980,
                 "mutability": "mutable",
                 "name": "campaignStartDate",
                 "nameLocation": "327:17:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "322:22:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1613,7 +1613,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2973,
+                  "id": 2979,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "322:4:13",
@@ -1626,12 +1626,12 @@
               },
               {
                 "constant": false,
-                "id": 2976,
+                "id": 2982,
                 "mutability": "mutable",
                 "name": "campaignDurationInDays",
                 "nameLocation": "360:22:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "355:27:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1640,7 +1640,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2975,
+                  "id": 2981,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "355:4:13",
@@ -1653,12 +1653,12 @@
               },
               {
                 "constant": false,
-                "id": 2978,
+                "id": 2984,
                 "mutability": "mutable",
                 "name": "minAmount",
                 "nameLocation": "398:9:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "393:14:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1667,7 +1667,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2977,
+                  "id": 2983,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "393:4:13",
@@ -1680,12 +1680,12 @@
               },
               {
                 "constant": false,
-                "id": 2980,
+                "id": 2986,
                 "mutability": "mutable",
                 "name": "maxAmount",
                 "nameLocation": "423:9:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "418:14:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1694,7 +1694,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2979,
+                  "id": 2985,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "418:4:13",
@@ -1707,12 +1707,12 @@
               },
               {
                 "constant": false,
-                "id": 2982,
+                "id": 2988,
                 "mutability": "mutable",
                 "name": "projectBalance",
                 "nameLocation": "448:14:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "443:19:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1721,7 +1721,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 2981,
+                  "id": 2987,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "443:4:13",
@@ -1734,12 +1734,12 @@
               },
               {
                 "constant": false,
-                "id": 2984,
+                "id": 2990,
                 "mutability": "mutable",
                 "name": "npoErc20Address",
                 "nameLocation": "481:15:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "473:23:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1748,7 +1748,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 2983,
+                  "id": 2989,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "473:7:13",
@@ -1762,33 +1762,33 @@
               },
               {
                 "constant": false,
-                "id": 2987,
+                "id": 2993,
                 "mutability": "mutable",
                 "name": "cause",
                 "nameLocation": "520:5:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "507:18:13",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_ProjectCause_$3008",
+                  "typeIdentifier": "t_enum$_ProjectCause_$3014",
                   "typeString": "enum IEocProject.ProjectCause"
                 },
                 "typeName": {
-                  "id": 2986,
+                  "id": 2992,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 2985,
+                    "id": 2991,
                     "name": "ProjectCause",
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 3008,
+                    "referencedDeclaration": 3014,
                     "src": "507:12:13"
                   },
-                  "referencedDeclaration": 3008,
+                  "referencedDeclaration": 3014,
                   "src": "507:12:13",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ProjectCause_$3008",
+                    "typeIdentifier": "t_enum$_ProjectCause_$3014",
                     "typeString": "enum IEocProject.ProjectCause"
                   }
                 },
@@ -1796,12 +1796,12 @@
               },
               {
                 "constant": false,
-                "id": 2989,
+                "id": 2995,
                 "mutability": "mutable",
                 "name": "title",
                 "nameLocation": "543:5:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "536:12:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1810,7 +1810,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2988,
+                  "id": 2994,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "536:6:13",
@@ -1823,12 +1823,12 @@
               },
               {
                 "constant": false,
-                "id": 2991,
+                "id": 2997,
                 "mutability": "mutable",
                 "name": "description",
                 "nameLocation": "566:11:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "559:18:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1837,7 +1837,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2990,
+                  "id": 2996,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "559:6:13",
@@ -1850,12 +1850,12 @@
               },
               {
                 "constant": false,
-                "id": 2993,
+                "id": 2999,
                 "mutability": "mutable",
                 "name": "geographicalArea",
                 "nameLocation": "595:16:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "588:23:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1864,7 +1864,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 2992,
+                  "id": 2998,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "588:6:13",
@@ -1877,12 +1877,12 @@
               },
               {
                 "constant": false,
-                "id": 2996,
+                "id": 3002,
                 "mutability": "mutable",
                 "name": "donationIds",
                 "nameLocation": "629:11:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "622:18:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1892,7 +1892,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 2994,
+                    "id": 3000,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "622:4:13",
@@ -1901,7 +1901,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 2995,
+                  "id": 3001,
                   "nodeType": "ArrayTypeName",
                   "src": "622:6:13",
                   "typeDescriptions": {
@@ -1913,12 +1913,12 @@
               },
               {
                 "constant": false,
-                "id": 2999,
+                "id": 3005,
                 "mutability": "mutable",
                 "name": "withdrawalIds",
                 "nameLocation": "658:13:13",
                 "nodeType": "VariableDeclaration",
-                "scope": 3000,
+                "scope": 3006,
                 "src": "651:20:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1928,7 +1928,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 2997,
+                    "id": 3003,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "651:4:13",
@@ -1937,7 +1937,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 2998,
+                  "id": 3004,
                   "nodeType": "ArrayTypeName",
                   "src": "651:6:13",
                   "typeDescriptions": {
@@ -1951,58 +1951,58 @@
             "name": "Project",
             "nameLocation": "213:7:13",
             "nodeType": "StructDefinition",
-            "scope": 3061,
+            "scope": 3067,
             "src": "206:473:13",
             "visibility": "public"
           },
           {
             "canonicalName": "IEocProject.ProjectCause",
-            "id": 3008,
+            "id": 3014,
             "members": [
               {
-                "id": 3001,
+                "id": 3007,
                 "name": "LutteContreLaPauvreteEtExclusion",
                 "nameLocation": "717:32:13",
                 "nodeType": "EnumValue",
                 "src": "717:32:13"
               },
               {
-                "id": 3002,
+                "id": 3008,
                 "name": "EnvironnementEtLesAnimaux",
                 "nameLocation": "760:25:13",
                 "nodeType": "EnumValue",
                 "src": "760:25:13"
               },
               {
-                "id": 3003,
+                "id": 3009,
                 "name": "Education",
                 "nameLocation": "796:9:13",
                 "nodeType": "EnumValue",
                 "src": "796:9:13"
               },
               {
-                "id": 3004,
+                "id": 3010,
                 "name": "ArtEtLaCulture",
                 "nameLocation": "816:14:13",
                 "nodeType": "EnumValue",
                 "src": "816:14:13"
               },
               {
-                "id": 3005,
+                "id": 3011,
                 "name": "SanteEtLaRecherche",
                 "nameLocation": "841:18:13",
                 "nodeType": "EnumValue",
                 "src": "841:18:13"
               },
               {
-                "id": 3006,
+                "id": 3012,
                 "name": "DroitsDeLHomme",
                 "nameLocation": "870:14:13",
                 "nodeType": "EnumValue",
                 "src": "870:14:13"
               },
               {
-                "id": 3007,
+                "id": 3013,
                 "name": "InfrastructureRoutiere",
                 "nameLocation": "895:22:13",
                 "nodeType": "EnumValue",
@@ -2016,23 +2016,23 @@
           },
           {
             "anonymous": false,
-            "id": 3022,
+            "id": 3028,
             "name": "ProjectAdded",
             "nameLocation": "936:12:13",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 3021,
+              "id": 3027,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3010,
+                  "id": 3016,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_projectId",
                   "nameLocation": "954:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "949:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2041,7 +2041,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3009,
+                    "id": 3015,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "949:4:13",
@@ -2054,13 +2054,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3012,
+                  "id": 3018,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_title",
                   "nameLocation": "973:6:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "966:13:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2069,7 +2069,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 3011,
+                    "id": 3017,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "966:6:13",
@@ -2082,13 +2082,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3014,
+                  "id": 3020,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_startDate",
                   "nameLocation": "986:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "981:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2097,7 +2097,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3013,
+                    "id": 3019,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "981:4:13",
@@ -2110,13 +2110,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3016,
+                  "id": 3022,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_endDate",
                   "nameLocation": "1003:8:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "998:13:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2125,7 +2125,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3015,
+                    "id": 3021,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "998:4:13",
@@ -2138,13 +2138,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3018,
+                  "id": 3024,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_minAmount",
                   "nameLocation": "1018:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "1013:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2153,7 +2153,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3017,
+                    "id": 3023,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1013:4:13",
@@ -2166,13 +2166,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 3020,
+                  "id": 3026,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "_maxAmount",
                   "nameLocation": "1035:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3022,
+                  "scope": 3028,
                   "src": "1030:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2181,7 +2181,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3019,
+                    "id": 3025,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1030:4:13",
@@ -2199,13 +2199,13 @@
           },
           {
             "documentation": {
-              "id": 3023,
+              "id": 3029,
               "nodeType": "StructuredDocumentation",
               "src": "1055:707:13",
               "text": "@dev This function will allow to add a project, the owner will be the one who calls the function. \n @param _title The title of the project\n @param _description description of the project\n @param _geographicalArea the geographical area where the project will be located.\n @param _startDate The start date of the project\n @param _endDate The end of the project\n @param _campaignStartDate the beginning of the collection of funds\n @param _campaignDurationInDays the duration of the collection of funds\n @param _minAmount The minimum price for the project to be valid\n @param _maxAmount The maximum price to make the project a success "
             },
             "functionSelector": "1f1ffb1c",
-            "id": 3044,
+            "id": 3050,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -2213,17 +2213,17 @@
             "nameLocation": "1777:10:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3042,
+              "id": 3048,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3025,
+                  "id": 3031,
                   "mutability": "mutable",
                   "name": "_title",
                   "nameLocation": "1812:6:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1798:20:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -2232,7 +2232,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 3024,
+                    "id": 3030,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1798:6:13",
@@ -2245,12 +2245,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3027,
+                  "id": 3033,
                   "mutability": "mutable",
                   "name": "_description",
                   "nameLocation": "1843:12:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1829:26:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -2259,7 +2259,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 3026,
+                    "id": 3032,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1829:6:13",
@@ -2272,12 +2272,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3029,
+                  "id": 3035,
                   "mutability": "mutable",
                   "name": "_geographicalArea",
                   "nameLocation": "1880:17:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1866:31:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -2286,7 +2286,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 3028,
+                    "id": 3034,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1866:6:13",
@@ -2299,12 +2299,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3031,
+                  "id": 3037,
                   "mutability": "mutable",
                   "name": "_startDate",
                   "nameLocation": "1913:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1908:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2313,7 +2313,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3030,
+                    "id": 3036,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1908:4:13",
@@ -2326,12 +2326,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3033,
+                  "id": 3039,
                   "mutability": "mutable",
                   "name": "_endDate",
                   "nameLocation": "1939:8:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1934:13:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2340,7 +2340,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3032,
+                    "id": 3038,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1934:4:13",
@@ -2353,12 +2353,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3035,
+                  "id": 3041,
                   "mutability": "mutable",
                   "name": "_campaignStartDate",
                   "nameLocation": "1963:18:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1958:23:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2367,7 +2367,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3034,
+                    "id": 3040,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1958:4:13",
@@ -2380,12 +2380,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3037,
+                  "id": 3043,
                   "mutability": "mutable",
                   "name": "_campaignDurationInDays",
                   "nameLocation": "1997:23:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "1992:28:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2394,7 +2394,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3036,
+                    "id": 3042,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "1992:4:13",
@@ -2407,12 +2407,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3039,
+                  "id": 3045,
                   "mutability": "mutable",
                   "name": "_minAmount",
                   "nameLocation": "2036:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "2031:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2421,7 +2421,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3038,
+                    "id": 3044,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2031:4:13",
@@ -2434,12 +2434,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3041,
+                  "id": 3047,
                   "mutability": "mutable",
                   "name": "_maxAmount",
                   "nameLocation": "2062:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3044,
+                  "scope": 3050,
                   "src": "2057:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2448,7 +2448,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3040,
+                    "id": 3046,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2057:4:13",
@@ -2463,12 +2463,12 @@
               "src": "1787:292:13"
             },
             "returnParameters": {
-              "id": 3043,
+              "id": 3049,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2088:0:13"
             },
-            "scope": 3061,
+            "scope": 3067,
             "src": "1768:321:13",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -2476,13 +2476,13 @@
           },
           {
             "documentation": {
-              "id": 3045,
+              "id": 3051,
               "nodeType": "StructuredDocumentation",
               "src": "2097:151:13",
               "text": "@dev Returns a single Project\n @param _projectId project unique id\n @return the Project struct instance corresponding to _projectId"
             },
             "functionSelector": "f0f3f2c8",
-            "id": 3053,
+            "id": 3059,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -2490,17 +2490,17 @@
             "nameLocation": "2263:10:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3048,
+              "id": 3054,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3047,
+                  "id": 3053,
                   "mutability": "mutable",
                   "name": "_projectId",
                   "nameLocation": "2279:10:13",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3053,
+                  "scope": 3059,
                   "src": "2274:15:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2509,7 +2509,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3046,
+                    "id": 3052,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "2274:4:13",
@@ -2524,38 +2524,38 @@
               "src": "2273:17:13"
             },
             "returnParameters": {
-              "id": 3052,
+              "id": 3058,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3051,
+                  "id": 3057,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3053,
+                  "scope": 3059,
                   "src": "2313:14:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Project_$3000_memory_ptr",
+                    "typeIdentifier": "t_struct$_Project_$3006_memory_ptr",
                     "typeString": "struct IEocProject.Project"
                   },
                   "typeName": {
-                    "id": 3050,
+                    "id": 3056,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 3049,
+                      "id": 3055,
                       "name": "Project",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 3000,
+                      "referencedDeclaration": 3006,
                       "src": "2313:7:13"
                     },
-                    "referencedDeclaration": 3000,
+                    "referencedDeclaration": 3006,
                     "src": "2313:7:13",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Project_$3000_storage_ptr",
+                      "typeIdentifier": "t_struct$_Project_$3006_storage_ptr",
                       "typeString": "struct IEocProject.Project"
                     }
                   },
@@ -2564,7 +2564,7 @@
               ],
               "src": "2312:16:13"
             },
-            "scope": 3061,
+            "scope": 3067,
             "src": "2254:75:13",
             "stateMutability": "view",
             "virtual": false,
@@ -2572,13 +2572,13 @@
           },
           {
             "documentation": {
-              "id": 3054,
+              "id": 3060,
               "nodeType": "StructuredDocumentation",
               "src": "2337:75:13",
               "text": "@dev  get all projects\n @return returns an array of all Project"
             },
             "functionSelector": "dcc60128",
-            "id": 3060,
+            "id": 3066,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -2586,44 +2586,44 @@
             "nameLocation": "2427:11:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3055,
+              "id": 3061,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2438:2:13"
             },
             "returnParameters": {
-              "id": 3059,
+              "id": 3065,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3058,
+                  "id": 3064,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3060,
+                  "scope": 3066,
                   "src": "2463:14:13",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Project_$3000_memory_ptr",
+                    "typeIdentifier": "t_struct$_Project_$3006_memory_ptr",
                     "typeString": "struct IEocProject.Project"
                   },
                   "typeName": {
-                    "id": 3057,
+                    "id": 3063,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 3056,
+                      "id": 3062,
                       "name": "Project",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 3000,
+                      "referencedDeclaration": 3006,
                       "src": "2463:7:13"
                     },
-                    "referencedDeclaration": 3000,
+                    "referencedDeclaration": 3006,
                     "src": "2463:7:13",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Project_$3000_storage_ptr",
+                      "typeIdentifier": "t_struct$_Project_$3006_storage_ptr",
                       "typeString": "struct IEocProject.Project"
                     }
                   },
@@ -2632,14 +2632,14 @@
               ],
               "src": "2462:16:13"
             },
-            "scope": 3061,
+            "scope": 3067,
             "src": "2418:61:13",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 3062,
+        "scope": 3068,
         "src": "171:2317:13",
         "usedErrors": []
       }
@@ -2652,7 +2652,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-11T17:56:45.369Z",
+  "updatedAt": "2022-01-12T06:34:30.788Z",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",
     "kind": "dev",

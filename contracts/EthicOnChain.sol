@@ -64,6 +64,9 @@ contract EthicOnChain is Ownable {
     
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
+    /// @param _eocNpoAddress NPO Contract address
+    /// @param _eocDonorAddress Donor Contract address
+    /// @param _eocProjectAddress Project Contract address
     constructor(address _eocTokenAddress, address _eocNpoAddress, address _eocDonorAddress, address _eocProjectAddress) {
        eocTokenAddress =  _eocTokenAddress;
        eocNpoAddress = _eocNpoAddress;
@@ -227,7 +230,7 @@ contract EthicOnChain is Ownable {
     /// @param _amount Amount of withdrawal
     /// @param _title title of the withdrawal
     /// @param _description description of the withdrawal
-    function withdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
+    function withdrawTokens(uint _projectId, uint _amount,string memory _title,string memory _description) public {
         IEocNpo.NPO memory withdrawalNpo = getNpo(msg.sender);
         require(bytes(withdrawalNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");

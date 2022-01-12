@@ -44,13 +44,14 @@ contract EocProject  {
     // NPO deployed contract address
     address eocNpoAddress;
 
+    event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
+
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocNpoAddress EOC Token address
     constructor(address _eocNpoAddress) {
        eocNpoAddress = _eocNpoAddress;
     }
-    event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
-
+    
     /// @dev This function will allow to add a project, the owner will be the one who calls the function. 
     /// @param _title The title of the project
     /// @param _description description of the project
@@ -61,7 +62,7 @@ contract EocProject  {
     /// @param _campaignDurationInDays the duration of the collection of funds
     /// @param _minAmount The minimum price for the project to be valid
     /// @param _maxAmount The maximum price to make the project a success 
-    function addProject(
+    function addProject (
         string memory _title,
         string memory _description,
         string memory _geographicalArea,
@@ -72,8 +73,9 @@ contract EocProject  {
         uint _minAmount,
         uint _maxAmount
     ) public {
-        IEocNpo.NPO memory projectNpo = IEocNpo(eocNpoAddress).getNpo(msg.sender);
-        require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
+        // IEocNpo.NPO memory projectNpo = IEocNpo(eocNpoAddress).getNpo(msg.sender);
+        // string memory invalidNpo = string(abi.encodePacked(unicode"Vous n'êtes pas enregistré en tant que NPO (eocpNoAddress : ", eocNpoAddress, " - msg.sender : ", msg.sender, ")"));
+        // require(bytes(projectNpo.denomination).length != 0, invalidNpo);
         // Mandatory fields
         require(bytes(_title).length > 0, "Le titre est obligatoire");
         require(bytes(_description).length > 0, "La description est obligatoire");
@@ -112,8 +114,6 @@ contract EocProject  {
     function getProject(uint _projectId) public view returns(Project memory) {
         return projectMap[_projectId];
     }
-
-    
 
     /// @dev  get all projects
     /// @return returns an array of all Project

@@ -48,20 +48,20 @@ contract EocDonor {
     /// @dev  get a Donor via its erc20 address
     /// @param _donorErc20Address erc20 address of the Donor
     /// @return returns the corresponding Donor struct
-    function getDonor(address _donorErc20Address) public view returns(Donor memory) {
+    function getDonor(address _donorErc20Address) public view returns (Donor memory) {
         return donorAddresses[_donorErc20Address];
     }
 
     /// @dev  get a Donor via its id
     /// @param _donorId id of the Donor
     /// @return returns the corresponding Donor struct
-    function getDonorByIndex(uint _donorId) internal view returns(Donor memory) {
+    function getDonorByIndex(uint _donorId) public view returns (Donor memory) {
         return donorAddresses[donorMap[_donorId]];
     }
 
     /// @dev  get all Donors
     /// @return returns an array of all Donors
-    function getDonors() public view returns(Donor [] memory) {
+    function getDonors() public view returns (Donor [] memory) {
         uint arraySize = donorCount;
         Donor [] memory result = new Donor[](arraySize);
         for(uint i; i < arraySize; i++) {

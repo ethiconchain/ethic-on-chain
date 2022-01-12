@@ -49,6 +49,4 @@ interface IEocNpo {
     /// @return returns an array of all NPOs
     function getNpos() external view returns(NPO [] memory);
 
-
-
 }

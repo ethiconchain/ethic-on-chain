@@ -33,6 +33,7 @@ interface IEocProject {
         DroitsDeLHomme,
         InfrastructureRoutiere
     }
+    
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
 
     /// @dev This function will allow to add a project, the owner will be the one who calls the function. 
@@ -65,7 +66,5 @@ interface IEocProject {
     /// @dev  get all projects
     /// @return returns an array of all Project
     function getProjects() external view returns(Project memory);
-
-
 
 }

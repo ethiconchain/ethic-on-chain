@@ -44,7 +44,6 @@ contract('EthicOnChain', function (accounts) {
         this.InstanceEthicOnChain = await EthicOnChain.new(this.TokenInstance.address, this.EocNpoInstance.address, this.EocDonorInstance.address, this.EocProjectInstance.address, { from: owner });
     });
 
-/*
     it('Add NPO', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let InformationNpo = await this.EocNpoInstance.npoAddresses(_newNpoErc20Address);
@@ -103,7 +102,6 @@ contract('EthicOnChain', function (accounts) {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
         expectRevert(this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress),"Donor déjà enregistré");
     });
-*/
 
     it('Event For AddDonor', async function () {
         const receipt = await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
@@ -112,7 +110,7 @@ contract('EthicOnChain', function (accounts) {
             _donorErc20Address:_newDonorErc20Address,
             _donorName:_donorName
         });
-    });  
+    });
 
     it('Add and Get Project', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
@@ -149,10 +147,9 @@ contract('EthicOnChain', function (accounts) {
     it('Does not add a project if the sender is not an NPO', async function () {
         expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount),"Vous n'êtes pas enregistré en tant que NPO");
     });
-
     it('Require a title for a project - ExpectRevert', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        expectRevert(this.InstanceEthicOnChain.addProject("", _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount,{from: _newNpoErc20Address}),"Le titre est obligatoire");
+        expectRevert(this.InstanceEthicOnChain.addProject("", _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount, {from: _newNpoErc20Address}),"Le titre est obligatoire");
     });
 
     it('Require a description for a project - ExpectRevert', async function () {
@@ -468,6 +465,5 @@ contract('EthicOnChain', function (accounts) {
         let arrWithdrawal = await this.InstanceEthicOnChain.getWithdrawalPerNpo(_newNpoErc20Address);
         expect(arrWithdrawal.length).to.equal(1);
     });
-
 
 });
