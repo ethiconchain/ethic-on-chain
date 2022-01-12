@@ -4,8 +4,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
-import { grey } from '@mui/material/colors';
 
 import EthicOnChainContract from "./contracts/EthicOnChain.json";
 import EthicTokenContract from "./contracts/EthicToken.json";
@@ -26,6 +24,7 @@ import MyProjects from "./pages/npo/MyProjects";
 import Withdrawal from "./pages/npo/Withdrawal";
 import MyWithdrawals from "./pages/npo/MyWithdrawals";
 import Page404 from "./pages/Page404";
+import LoaderGlobal from "./components/LoaderGlobal";
 
 const theme = createTheme({
   palette: {
@@ -44,8 +43,6 @@ const theme = createTheme({
     fontWeightBold: 700,
   }
 });
-
-const greyColor = grey[400]
 
 const App = () => {
   let navigate = useNavigate();
@@ -146,17 +143,7 @@ const App = () => {
   const { web3, isAdmin, isDonor, isNpo } = data
   return !web3 ? (
     <ThemeProvider theme={theme}>
-      <Box sx={{ bgcolor: '#f9f9f9', display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center' }}>
-        <Box sx={{ fzIndex: 'tooltip', position: 'absolute' }}>
-          <Typography sx={{ fontSize: 25 }} >
-            Chargement
-          </Typography>
-          <Typography sx={{ fontSize: 25, textAlign: 'center' }} >
-            en cours
-          </Typography>
-        </Box>
-        <CircularProgress size="250px" thickness="4" sx={{ color: greyColor, zIndex: 'modal', position: 'absolute' }} />
-      </Box>
+      <LoaderGlobal />
     </ThemeProvider>
   ) : (
     <ThemeProvider theme={theme}>
