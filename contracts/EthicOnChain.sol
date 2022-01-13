@@ -202,9 +202,9 @@ contract EthicOnChain is Ownable {
         EthicOnChainLib.NPO storage withdrawalNpo = npoAddresses[msg.sender];
         require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
+        require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
         uint256 balance = projectMap[_projectId].projectBalance;
         require(balance >= _amount, "Balance insuffisante");
-        require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
 
         EthicOnChainLib.Withdrawal storage newWithdrawal = withdrawalMap[withdrawalCount];
         newWithdrawal.withdrawalId = withdrawalCount;

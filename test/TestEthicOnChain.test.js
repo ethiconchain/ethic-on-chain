@@ -38,7 +38,6 @@ contract('EthicOnChain', function (accounts) {
         this.InstanceEthicOnChain = await EthicOnChain.new(this.TokenInstance.address, { from: owner });
     });
 
-/*
     it('Add NPO', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let InformationNpo = await this.InstanceEthicOnChain.npoAddresses(_newNpoErc20Address);
@@ -343,7 +342,6 @@ contract('EthicOnChain', function (accounts) {
         await time.increaseTo(blockLastest.timestamp+90000);
         expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(300),_title,_description, { from : _newNpoErc20Address} ),"Balance insuffisante");
     });
-*/
 
     it('WithdrawTokens- Require Revert campaign not started', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
@@ -386,7 +384,6 @@ contract('EthicOnChain', function (accounts) {
         let arrNpo = await this.InstanceEthicOnChain.getNpos();
         expect(arrNpo.length).to.equal(1);
     });
-/*
     it('Get all Donors', async function () {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
         let arrDonors = await this.InstanceEthicOnChain.getDonors();
@@ -449,5 +446,4 @@ contract('EthicOnChain', function (accounts) {
         let arrWithdrawal = await this.InstanceEthicOnChain.getWithdrawalPerNpo(_newNpoErc20Address);
         expect(arrWithdrawal.length).to.equal(1);
     });
-*/
 });
