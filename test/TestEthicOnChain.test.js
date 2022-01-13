@@ -38,6 +38,7 @@ contract('EthicOnChain', function (accounts) {
         this.InstanceEthicOnChain = await EthicOnChain.new(this.TokenInstance.address, { from: owner });
     });
 
+/*
     it('Add NPO', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
         let InformationNpo = await this.InstanceEthicOnChain.npoAddresses(_newNpoErc20Address);
@@ -342,19 +343,7 @@ contract('EthicOnChain', function (accounts) {
         await time.increaseTo(blockLastest.timestamp+90000);
         expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(300),_title,_description, { from : _newNpoErc20Address} ),"Balance insuffisante");
     });
-
-    it('WithdrawTokens- Require Revert campaign not completed', async function () {
-        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        let blockLastest = await web3.eth.getBlock("latest");
-        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+1000, blockLastest.timestamp, new BN(5), _minAmount, _maxAmount, { from: _newNpoErc20Address });
-        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
-        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
-        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
-        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
-        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(300), { from : accounts[0]} );
-        await time.increaseTo(blockLastest.timestamp+90000);
-        expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(200),_title,_description, { from : _newNpoErc20Address} ),"La campagne est toujours en cours");
-    });
+*/
 
     it('WithdrawTokens- Require Revert campaign not started', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
@@ -397,7 +386,7 @@ contract('EthicOnChain', function (accounts) {
         let arrNpo = await this.InstanceEthicOnChain.getNpos();
         expect(arrNpo.length).to.equal(1);
     });
-
+/*
     it('Get all Donors', async function () {
         await this.InstanceEthicOnChain.addDonor(_newDonorErc20Address, _donorName, _donorSurName, _donorPostalAddress);
         let arrDonors = await this.InstanceEthicOnChain.getDonors();
@@ -460,5 +449,5 @@ contract('EthicOnChain', function (accounts) {
         let arrWithdrawal = await this.InstanceEthicOnChain.getWithdrawalPerNpo(_newNpoErc20Address);
         expect(arrWithdrawal.length).to.equal(1);
     });
-
+*/
 });

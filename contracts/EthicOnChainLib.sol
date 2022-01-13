@@ -37,6 +37,7 @@ library EthicOnChainLib {
         uint projectBalance;
         address npoErc20Address;
         ProjectCause cause;
+        ProjectStatus status;
         string title;
         string description;
         string geographicalArea;
@@ -72,10 +73,10 @@ library EthicOnChainLib {
     }
 
     enum ProjectStatus {
-        ProjectProposal, 
-        WaitingOpening,
-        OpenFundRaising,
-        CloseFundRaising
+        UnderCreation, 
+        UnderCampaign,
+        InProgress,
+        Unknown
     }
 
     /// @dev Get an NPO via its erc20 address
@@ -145,7 +146,10 @@ library EthicOnChainLib {
     /// @param _projectId project unique id
     /// @return the Project struct instance corresponding to _projectId
     function libGetProject(mapping (uint => Project) storage _projectMap, uint _projectId) public view returns(Project memory) {
-        return _projectMap[_projectId];
+        Project memory returnedProject;
+        returnedProject = _projectMap[_projectId];
+        returnedProject.status = getProjectStatus(returnedProject);
+        return returnedProject;
     }
 
     /// @dev  get all projects
@@ -172,105 +176,6 @@ library EthicOnChainLib {
         for(uint i; i < arraySize; i++) {
             uint index = _npoAddresses[_addressNpo].projectIds[i];
             result[i] = libGetProject(_projectMap, index);     
-        }
-        return result;
-    }
-
-    /// @dev Allows to know all the projects of a single NPO that are under creation (means today's date lower than campaign start date)
-    /// @param _npoAddresses mapping of NPO addresses to NPO Struct
-    /// @param _projectMap mapping of Project id to Project Struct
-    /// @param _addressNpo ERC20 address of the NPO
-    /// @return Returns an array of projects
-    function libGetProjectsUnderCreationPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) public view  returns(Project [] memory ) {
-        uint arraySize = _npoAddresses[_addressNpo].projectIds.length;
-        uint projectIndex;
-        
-        // première boucle pour connaitre le nombre d'éléments du tableau à retourner
-        for (uint i; i < arraySize; i++) {
-            uint index = _npoAddresses[_addressNpo].projectIds[i];
-            Project memory currentProject = libGetProject(_projectMap, index);
-            if (currentProject.campaignStartDate > block.timestamp) {
-                projectIndex++;
-            }
-        }
-
-        Project [] memory result = new Project[](projectIndex);
-        projectIndex = 0;
-        for (uint i; i < arraySize; i++) {
-            uint index = _npoAddresses[_addressNpo].projectIds[i];
-            Project memory currentProject = libGetProject(_projectMap, index);
-            if (currentProject.campaignStartDate > block.timestamp) {
-                result[projectIndex] = currentProject;
-                projectIndex++;
-            }
-        }
-        return result;
-    }
-    
-    /// @dev Allows to know all the projects of a single NPO that are under campaign (means today's date higher than or equal to campaign start date and lower or equal to campaign end date)
-    /// @param _npoAddresses mapping of NPO addresses to NPO Struct
-    /// @param _projectMap mapping of Project id to Project Struct
-    /// @param _addressNpo ERC20 address of the NPO
-    /// @return Returns an array of projects
-    function libGetProjectsUnderCampaignPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) public view  returns(Project [] memory ) {
-        uint arraySize = _npoAddresses[_addressNpo].projectIds.length;
-        uint projectIndex;
-        
-        // première boucle pour connaitre le nombre d'éléments du tableau à retourner
-        for (uint i; i < arraySize; i++) {
-            uint index = _npoAddresses[_addressNpo].projectIds[i];
-            Project memory currentProject = libGetProject(_projectMap, index);
-            uint campaignEndDate = currentProject.campaignStartDate + currentProject.campaignDurationInDays * 1 days;
-            if (currentProject.campaignStartDate <= block.timestamp && block.timestamp <= campaignEndDate) {
-                projectIndex++;
-            }
-        }
-
-        Project [] memory result = new Project[](projectIndex);
-        projectIndex = 0;
-        for (uint i; i < arraySize; i++) {
-            uint index = _npoAddresses[_addressNpo].projectIds[i];
-            Project memory currentProject = libGetProject(_projectMap, index);
-            uint campaignEndDate = currentProject.campaignStartDate + currentProject.campaignDurationInDays * 1 days;
-            if (currentProject.campaignStartDate <= block.timestamp && block.timestamp <= campaignEndDate) {
-                result[projectIndex] = currentProject;
-                projectIndex++;
-            }
-        }
-        return result;
-    }
-
-    /// @dev Allows to know all the projects of a single NPO that are in progress (means today's date higher than campaign end date, minimum donation amount achieved and today's date between start and end date of the project)
-    /// @param _npoAddresses mapping of NPO addresses to NPO Struct
-    /// @param _projectMap mapping of Project id to Project Struct
-    /// @param _addressNpo ERC20 address of the NPO
-    /// @return Returns an array of projects
-    function libGetProjectsInProgressPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) public view  returns(Project [] memory ) {
-        uint arraySize = _npoAddresses[_addressNpo].projectIds.length;
-        uint projectIndex;
-        
-        // première boucle pour connaitre le nombre d'éléments du tableau à retourner
-        for (uint i; i < arraySize; i++) {
-            uint index = _npoAddresses[_addressNpo].projectIds[i];
-            Project memory currentProject = libGetProject(_projectMap, index);
-            uint campaignEndDate = currentProject.campaignStartDate + currentProject.campaignDurationInDays * 1 days;
-            if (block.timestamp > campaignEndDate && currentProject.projectBalance >= currentProject.minAmount &&
-                currentProject.startDate <= block.timestamp && block.timestamp <= currentProject.endDate) {
-                projectIndex++;
-            }
-        }
-
-        Project [] memory result = new Project[](projectIndex);
-        projectIndex = 0;
-        for (uint i; i < arraySize; i++) {
-            uint index = _npoAddresses[_addressNpo].projectIds[i];
-            Project memory currentProject = libGetProject(_projectMap, index);
-            uint campaignEndDate = currentProject.campaignStartDate + currentProject.campaignDurationInDays * 1 days;
-            if (block.timestamp > campaignEndDate && currentProject.projectBalance >= currentProject.minAmount &&
-                currentProject.startDate <= block.timestamp && block.timestamp <= currentProject.endDate) {
-                result[projectIndex] = currentProject;
-                projectIndex++;
-            }
         }
         return result;
     }
@@ -321,9 +226,26 @@ library EthicOnChainLib {
         return result;
     }
 
-
-    function libGetTime () public view returns(uint){
-        return block.timestamp;
+    /// @dev get the project status
+    /// @param _project Project
+    /// @return _status the Project status based on Project information
+    function getProjectStatus(Project memory _project) public view returns(ProjectStatus _status) {
+        ProjectStatus returnedStatus;
+        uint campaignEndDate = _project.campaignStartDate + _project.campaignDurationInDays * 1 days;
+        if (_project.campaignStartDate > block.timestamp) {
+            returnedStatus = ProjectStatus.UnderCreation;
+        }
+        else if (_project.campaignStartDate <= block.timestamp && block.timestamp <= campaignEndDate) {
+            returnedStatus = ProjectStatus.UnderCampaign;
+        }
+        else if (block.timestamp > campaignEndDate && _project.projectBalance >= _project.minAmount &&
+                 _project.startDate <= block.timestamp && block.timestamp <= _project.endDate) {
+            returnedStatus = ProjectStatus.InProgress;
+        }
+        else {
+            returnedStatus = ProjectStatus.Unknown;
+        }
+        return returnedStatus;
     }
 
 }

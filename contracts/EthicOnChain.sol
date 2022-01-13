@@ -10,23 +10,6 @@ import "./EthicOnChainLib.sol";
 /// @notice EthicOnChain contract to manage NPOs, Projects and Donors
 contract EthicOnChain is Ownable {
     
-    enum ProjectCause {
-        LutteContreLaPauvreteEtExclusion,
-        EnvironnementEtLesAnimaux,
-        Education,
-        ArtEtLaCulture,
-        SanteEtLaRecherche,
-        DroitsDeLHomme,
-        InfrastructureRoutiere
-    }
-
-    enum ProjectStatus {
-        ProjectProposal, 
-        WaitingOpening,
-        OpenFundRaising,
-        CloseFundRaising
-    }
-
     // NPOs
     mapping (address => EthicOnChainLib.NPO) public npoAddresses; //Mapping of all NPO 
     mapping (uint => address) private npoMap;
@@ -221,10 +204,7 @@ contract EthicOnChain is Ownable {
         require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
         uint256 balance = projectMap[_projectId].projectBalance;
         require(balance >= _amount, "Balance insuffisante");
-        // Widthdraw possible si seulement la campagne est terminée
-        uint campaignEndDate = projectMap[_projectId].campaignStartDate + projectMap[_projectId].campaignDurationInDays * 1 days;
         require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
-        // require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
 
         EthicOnChainLib.Withdrawal storage newWithdrawal = withdrawalMap[withdrawalCount];
         newWithdrawal.withdrawalId = withdrawalCount;
@@ -301,27 +281,6 @@ contract EthicOnChain is Ownable {
     /// @return Returns an array of projects
     function getProjectsPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
         return EthicOnChainLib.libGetProjectsPerNpo(npoAddresses, projectMap, _addressNpo);
-    }
-
-    /// @dev Allows to know all the projects of a single NPO that are under creation (means today's date lower than campaign start date)
-    /// @param _addressNpo ERC20 address of the NPO
-    /// @return Returns an array of projects
-    function getProjectsUnderCreationPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
-        return EthicOnChainLib.libGetProjectsUnderCreationPerNpo(npoAddresses, projectMap, _addressNpo);
-    }
-
-    /// @dev Allows to know all the projects of a single NPO that are under campaign (means today's date higher than or equal to campaign start date and lower or equal to campaign end date)
-    /// @param _addressNpo ERC20 address of the NPO
-    /// @return Returns an array of projects
-    function getProjectsUnderCampaignPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
-        return EthicOnChainLib.libGetProjectsUnderCampaignPerNpo(npoAddresses, projectMap, _addressNpo);
-    }
-
-    /// @dev Allows to know all the projects of a single NPO that are in progress (means today's date higher than campaign end date, minimum donation amount achieved and today's date between start and end date of the project)
-    /// @param _addressNpo ERC20 address of the NPO
-    /// @return Returns an array of projects
-    function getProjectsInProgressPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
-        return EthicOnChainLib.libGetProjectsInProgressPerNpo(npoAddresses, projectMap, _addressNpo);
     }
 
     /// @dev  get Donation by id
