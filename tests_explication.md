@@ -70,6 +70,7 @@ addDonation
 
 withdrawTokens
 * it('WithdrawTokens') : effectue un retrait et vérifie que la nouvelle balance correspond bien à l'ancienne moins le montant du retrait.
+* it('Check balance vs total donations') : effectue plusieurs dons suivis de plusieurs retrait pour vérifier la balance et le total des dons.
 * it('WithdrawTokens - Require a known NPO - ExpectRevert') : le retrait ne peut être effectué que par un NPO déclaré dans la blockchain.
 * it('WithdrawTokens- Require Revert Projet Inconnu') : le projet à partir duquel on désire effectuer le retrait doit être déclaré dans la blockchain.
 * it('Add WithdrawTokens- Require Revert withdraw > Balance') : le retrait demandé doit être inférieur ou égal à la balance du projet (dons effectués moins les retraits déjà réalisés)

@@ -232,7 +232,6 @@ contract('EthicOnChain', function (accounts) {
         expect(donorId).to.be.bignumber.equal(new BN(0));
         expect(donationDate).to.be.bignumber.equal(new BN(blockForAddDonation.timestamp));
         expect(donationAmount).to.be.bignumber.equal(new BN(10));
-
     });
 
     it('Require a known donor - ExpectRevert', async function () {
@@ -314,6 +313,27 @@ contract('EthicOnChain', function (accounts) {
         let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
         let verifBalance = InformationProject.projectBalance;
         expect(verifBalance).to.be.bignumber.equal(new BN(500));
+    });
+
+    it('Check balance vs total donations', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+40, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(900), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(600), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(500), { from : accounts[0]} );
+        // at this stage total donation should be 2000 (900 + 600 + 500)
+        await time.increaseTo(blockLastest.timestamp+90000);
+        await this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(300),_title,_description, { from : _newNpoErc20Address} );
+        await this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(700),_title,_description, { from : _newNpoErc20Address} );
+        // at this stage balance should be 1000 (total donations 2000 - 300 - 700)
+        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
+        let verifBalance = InformationProject.projectBalance;
+        let verifTotalDonations = InformationProject.projectTotalDonations;
+        expect(verifBalance).to.be.bignumber.equal(new BN(1000));
+        expect(verifTotalDonations).to.be.bignumber.equal(new BN(2000));
     });
 
     it('WithdrawTokens - Require a known NPO - ExpectRevert', async function () {

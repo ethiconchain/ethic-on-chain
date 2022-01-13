@@ -27,7 +27,7 @@ library EthicOnChainLib {
     }
 
     struct Project {
-        uint projectId; // clé primaire
+        uint projectId; // primary key
         uint startDate;
         uint endDate;
         uint campaignStartDate;
@@ -35,6 +35,7 @@ library EthicOnChainLib {
         uint minAmount;
         uint maxAmount;
         uint projectBalance;
+        uint projectTotalDonations;
         address npoErc20Address;
         ProjectCause cause;
         ProjectStatus status;
@@ -46,7 +47,7 @@ library EthicOnChainLib {
     } 
 
     struct Donation {
-        uint donationId; // clé primaire
+        uint donationId; // primary key
         uint projectId;
         uint donorId;
         uint donationDate;
@@ -54,7 +55,7 @@ library EthicOnChainLib {
     }     
 
     struct Withdrawal {
-        uint withdrawalId;
+        uint withdrawalId; // primary key
         uint projectId;
         uint amount;
         uint withdrawalDate;
@@ -243,16 +244,16 @@ library EthicOnChainLib {
             returnedStatus = ProjectStatus.UnderCampaign;
         }
         // In Progress
-        else if (block.timestamp > campaignEndDate && _project.projectBalance >= _project.minAmount &&
+        else if (block.timestamp > campaignEndDate && _project.projectTotalDonations >= _project.minAmount &&
                  _project.startDate <= block.timestamp && block.timestamp <= _project.endDate) {
             returnedStatus = ProjectStatus.InProgress;
         }
         // Cancelled
-        else if (block.timestamp > campaignEndDate && _project.projectBalance < _project.minAmount) {
+        else if (block.timestamp > campaignEndDate && _project.projectTotalDonations < _project.minAmount) {
             returnedStatus = ProjectStatus.InProgress;
         }
         // Closed
-        else if (block.timestamp > _project.endDate && _project.projectBalance >= _project.minAmount) {
+        else if (block.timestamp > _project.endDate && _project.projectTotalDonations >= _project.minAmount) {
             returnedStatus = ProjectStatus.InProgress;
         }
         // otherwise Undefined

@@ -182,6 +182,7 @@ contract EthicOnChain is Ownable {
         donationDonor.donationIds.push(donationCount); // mise à jour de l'historique des donations pour le donateur
         
         donationProject.projectBalance += _donationAmount; // mise à jour de la balance du projet
+        donationProject.projectTotalDonations += _donationAmount; // et du total des donations
         donationProject.donationIds.push(donationCount); // mise à jour de l'historique des donations pour le projet
         donationCount++;
         
