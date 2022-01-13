@@ -14,6 +14,7 @@ import Button from '@mui/material/Button';
 
 const MyProjects = (props) => {
   const { data, msToDate } = props
+  const { web3 } = data
   const [allMyProjects, setAllMyProjects] = useState(null)
 
   useEffect(() => {
@@ -55,6 +56,8 @@ const MyProjects = (props) => {
                 <TableCell>Description</TableCell>
                 <TableCell>Début campagne</TableCell>
                 <TableCell>Durée campagne (j)</TableCell>
+                <TableCell>Montant actuel (EOC)</TableCell>
+                <TableCell>Montant requis (EOC)</TableCell>
                 <TableCell>Demande de retrait</TableCell>
               </TableRow>
             </TableHead>
@@ -70,6 +73,8 @@ const MyProjects = (props) => {
                   <TableCell>{project.description}</TableCell>
                   <TableCell>{msToDate(project.campaignStartDate)}</TableCell>
                   <TableCell>{project.campaignDurationInDays}</TableCell>
+                  <TableCell>{web3.utils.fromWei(project.projectBalance.toString())}</TableCell>
+                    <TableCell>{web3.utils.fromWei(project.minAmount.toString())}</TableCell>
                   <TableCell>
                     <Link to={`/retrait/${project.projectId}`}>
                       <Button variant="contained" color='secondary'
