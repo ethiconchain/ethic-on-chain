@@ -73,10 +73,12 @@ library EthicOnChainLib {
     }
 
     enum ProjectStatus {
+        Undefined,
         UnderCreation, 
         UnderCampaign,
         InProgress,
-        Unknown
+        Cancelled,
+        Closed
     }
 
     /// @dev Get an NPO via its erc20 address
@@ -232,18 +234,30 @@ library EthicOnChainLib {
     function getProjectStatus(Project memory _project) public view returns(ProjectStatus _status) {
         ProjectStatus returnedStatus;
         uint campaignEndDate = _project.campaignStartDate + _project.campaignDurationInDays * 1 days;
+        // Under Creation
         if (_project.campaignStartDate > block.timestamp) {
             returnedStatus = ProjectStatus.UnderCreation;
         }
+        // Under Campaign
         else if (_project.campaignStartDate <= block.timestamp && block.timestamp <= campaignEndDate) {
             returnedStatus = ProjectStatus.UnderCampaign;
         }
+        // In Progress
         else if (block.timestamp > campaignEndDate && _project.projectBalance >= _project.minAmount &&
                  _project.startDate <= block.timestamp && block.timestamp <= _project.endDate) {
             returnedStatus = ProjectStatus.InProgress;
         }
+        // Cancelled
+        else if (block.timestamp > campaignEndDate && _project.projectBalance < _project.minAmount) {
+            returnedStatus = ProjectStatus.InProgress;
+        }
+        // Closed
+        else if (block.timestamp > _project.endDate && _project.projectBalance >= _project.minAmount) {
+            returnedStatus = ProjectStatus.InProgress;
+        }
+        // otherwise Undefined
         else {
-            returnedStatus = ProjectStatus.Unknown;
+            returnedStatus = ProjectStatus.Undefined;
         }
         return returnedStatus;
     }
