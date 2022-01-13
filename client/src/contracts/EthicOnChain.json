@@ -83149,14 +83149,14 @@
         }
       },
       "links": {
-        "EthicOnChainLib": "0x2E5CA2EE5F00AC12298075d9A1EC3c63e90494df"
+        "EthicOnChainLib": "0x3BbfcBfc4Ef6d8f0615cC031E125Eb3a43396f18"
       },
-      "address": "0x56F253454faa9C688AB204D0CE9bc37872A8cd72",
-      "transactionHash": "0x2dfea6017fca9814480e272a2c64f55c48bd509822ce2268cf5dfd419452f1f3"
+      "address": "0xcFFb596CA3EFF66fe9A8faa6Dd1e21F69CC06596",
+      "transactionHash": "0x5d4a44246d57f99b103428cda67f9e7757d150148d31870bcd3bad09d138e7e2"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-08T16:24:22.434Z",
+  "updatedAt": "2022-01-13T16:08:27.044Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",
