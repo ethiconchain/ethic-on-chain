@@ -77,6 +77,13 @@ withdrawTokens
 * it('WithdrawTokens- Require Revert campaign not started') : le retrait ne peut commencer qu'une fois la campagne terminée donc après le début de la campagne.
 * it('Event For TokensWithdrawn') : vérifie que l'événement TokensWithdrawn est bien émis après un retrait.
 
+TestStatus
+* it('Status Under Creation') : Vérification du status du projet,le status doit etre Under Creation, Il est toujours en attente d'ouverture de sa campagne.
+* it('Status UnderCampaign') : Vérification du status du projet,le status doit etre Under Campaign, à partir de ce status les donateurs pourront investir dans ce projet
+* it('Status In Progress') :  Vérification du status du projet, le status doit être et en progression d'ouverture de sa campagne, cela signifie que le projet en attente de retrait pour être investit dans le projet.
+* it('Status Cancelled') : Le projet est annulé, il n'est plus possible d'investir dans ce projet.
+* it('Status Closed') : Le projet est terminé, il n'est plus possible d'investir dans ce projet.
+  
 getNpo
 * it('Get NPO') : ajoute un NPO puis invoque getNpo pour vérifier si les données stockées dans la blockchain sont bien identiques aux paramètres passés.
 
