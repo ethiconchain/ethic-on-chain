@@ -315,60 +315,7 @@ contract('EthicOnChain', function (accounts) {
         expect(verifBalance).to.be.bignumber.equal(new BN(500));
     });
 
-    it('Status Under Creation', async function () {
-        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        let blockLastest = await web3.eth.getBlock("latest");
-        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+40, blockLastest.timestamp+100, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
-        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
-        expect(InformationProject.status).to.be.bignumber.equal(new BN(1));
-    });
 
-    it('Status UnderCampaign', async function () {
-        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        let blockLastest = await web3.eth.getBlock("latest");
-        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+40, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
-        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
-        expect(InformationProject.status).to.be.bignumber.equal(new BN(2));
-    });
-
-    it('Status In Progress', async function () {
-        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        let blockLastest = await web3.eth.getBlock("latest");
-        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp+95000, blockLastest.timestamp+100000, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
-        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
-        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
-        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
-        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
-        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(1000), { from : accounts[0]} );
-        await time.increaseTo(blockLastest.timestamp+97000);
-        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
-        expect(InformationProject.status).to.be.bignumber.equal(new BN(3));
-    });
-
-    it('Status Cancelled', async function () {
-        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        let blockLastest = await web3.eth.getBlock("latest");
-        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp+95000, blockLastest.timestamp+100000, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
-        await time.increaseTo(blockLastest.timestamp+90000);
-        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
-        expect(InformationProject.status).to.be.bignumber.equal(new BN(4));
-    });
-
-    it('Status Closed', async function () {
-        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
-        let blockLastest = await web3.eth.getBlock("latest");
-        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp+95000, blockLastest.timestamp+100000, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
-        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
-        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
-        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
-        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
-        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(1000), { from : accounts[0]} );
-        await time.increaseTo(blockLastest.timestamp+90000);
-        await this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(1000),_title,_description, { from : _newNpoErc20Address} );
-        await time.increaseTo(blockLastest.timestamp+110000);
-        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
-        expect(InformationProject.status).to.be.bignumber.equal(new BN(5));
-    });
 
     it('Check balance vs total donations', async function () {
         await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
@@ -523,5 +470,59 @@ contract('EthicOnChain', function (accounts) {
         await this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(500),_title,_description, { from : _newNpoErc20Address} );
         let arrWithdrawal = await this.InstanceEthicOnChain.getWithdrawalPerNpo(_newNpoErc20Address);
         expect(arrWithdrawal.length).to.equal(1);
+    });
+    it('Status Under Creation', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+40, blockLastest.timestamp+100, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
+        expect(InformationProject.status).to.be.bignumber.equal(new BN(1));
+    });
+
+    it('Status UnderCampaign', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+40, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
+        expect(InformationProject.status).to.be.bignumber.equal(new BN(2));
+    });
+
+    it('Status In Progress', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp+95000, blockLastest.timestamp+100000, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
+        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
+        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(1000), { from : accounts[0]} );
+        await time.increaseTo(blockLastest.timestamp+97000);
+        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
+        expect(InformationProject.status).to.be.bignumber.equal(new BN(3));
+    });
+
+    it('Status Cancelled', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp+95000, blockLastest.timestamp+100000, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await time.increaseTo(blockLastest.timestamp+90000);
+        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
+        expect(InformationProject.status).to.be.bignumber.equal(new BN(4));
+    });
+
+    it('Status Closed', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp+95000, blockLastest.timestamp+100000, blockLastest.timestamp, new BN(1), _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
+        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
+        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(1000), { from : accounts[0]} );
+        await time.increaseTo(blockLastest.timestamp+90000);
+        await this.InstanceEthicOnChain.withdrawTokens(new BN(0), new BN(1000),_title,_description, { from : _newNpoErc20Address} );
+        await time.increaseTo(blockLastest.timestamp+110000);
+        let InformationProject = await this.InstanceEthicOnChain.getProject(new BN(0));
+        expect(InformationProject.status).to.be.bignumber.equal(new BN(5));
     });
 });
