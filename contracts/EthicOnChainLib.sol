@@ -27,7 +27,7 @@ library EthicOnChainLib {
     }
 
     struct Project {
-        uint projectId; // clé primaire
+        uint projectId; // primary key
         uint startDate;
         uint endDate;
         uint campaignStartDate;
@@ -35,8 +35,10 @@ library EthicOnChainLib {
         uint minAmount;
         uint maxAmount;
         uint projectBalance;
+        uint projectTotalDonations;
         address npoErc20Address;
         ProjectCause cause;
+        ProjectStatus status;
         string title;
         string description;
         string geographicalArea;
@@ -45,7 +47,7 @@ library EthicOnChainLib {
     } 
 
     struct Donation {
-        uint donationId; // clé primaire
+        uint donationId; // primary key
         uint projectId;
         uint donorId;
         uint donationDate;
@@ -53,7 +55,7 @@ library EthicOnChainLib {
     }     
 
     struct Withdrawal {
-        uint withdrawalId;
+        uint withdrawalId; // primary key
         uint projectId;
         uint amount;
         uint withdrawalDate;
@@ -72,10 +74,12 @@ library EthicOnChainLib {
     }
 
     enum ProjectStatus {
-        ProjectProposal, 
-        WaitingOpening,
-        OpenFundRaising,
-        CloseFundRaising
+        Undefined,
+        UnderCreation, 
+        UnderCampaign,
+        InProgress,
+        Cancelled,
+        Closed
     }
 
     /// @dev Get an NPO via its erc20 address
@@ -145,7 +149,10 @@ library EthicOnChainLib {
     /// @param _projectId project unique id
     /// @return the Project struct instance corresponding to _projectId
     function libGetProject(mapping (uint => Project) storage _projectMap, uint _projectId) public view returns(Project memory) {
-        return _projectMap[_projectId];
+        Project memory returnedProject;
+        returnedProject = _projectMap[_projectId];
+        returnedProject.status = getProjectStatus(returnedProject);
+        return returnedProject;
     }
 
     /// @dev  get all projects
@@ -161,14 +168,14 @@ library EthicOnChainLib {
         return result;
     }
     
-    /// @dev Allows to know all the projects of a single NPO
+    /// @dev Allows to know all the projects of an NPO
     /// @param _npoAddresses mapping of NPO addresses to NPO Struct
     /// @param _projectMap mapping of Project id to Project Struct
-    /// @param _addressNpo id which represents the index
-    /// @return Returns an array of all projects of a single NPO
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
     function libGetProjectsPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) public view  returns(Project [] memory ) {
         uint arraySize = _npoAddresses[_addressNpo].projectIds.length;
-        Project [] memory result= new Project[](arraySize);
+        Project [] memory result = new Project[](arraySize);
         for(uint i; i < arraySize; i++) {
             uint index = _npoAddresses[_addressNpo].projectIds[i];
             result[i] = libGetProject(_projectMap, index);     
@@ -222,9 +229,38 @@ library EthicOnChainLib {
         return result;
     }
 
-
-    function libGetTime () public view returns(uint){
-        return block.timestamp;
+    /// @dev get the project status
+    /// @param _project Project
+    /// @return _status the Project status based on Project information
+    function getProjectStatus(Project memory _project) public view returns(ProjectStatus _status) {
+        ProjectStatus returnedStatus;
+        uint campaignEndDate = _project.campaignStartDate + _project.campaignDurationInDays * 1 days;
+        // Under Creation
+        if (_project.campaignStartDate > block.timestamp) {
+            returnedStatus = ProjectStatus.UnderCreation;
+        }
+        // Under Campaign
+        else if (_project.campaignStartDate <= block.timestamp && block.timestamp <= campaignEndDate) {
+            returnedStatus = ProjectStatus.UnderCampaign;
+        }
+        // In Progress
+        else if (block.timestamp > campaignEndDate && _project.projectTotalDonations >= _project.minAmount &&
+                 _project.startDate <= block.timestamp && block.timestamp <= _project.endDate) {
+            returnedStatus = ProjectStatus.InProgress;
+        }
+        // Cancelled
+        else if (block.timestamp > campaignEndDate && _project.projectTotalDonations < _project.minAmount) {
+            returnedStatus = ProjectStatus.InProgress;
+        }
+        // Closed
+        else if (block.timestamp > _project.endDate && _project.projectTotalDonations >= _project.minAmount) {
+            returnedStatus = ProjectStatus.InProgress;
+        }
+        // otherwise Undefined
+        else {
+            returnedStatus = ProjectStatus.Undefined;
+        }
+        return returnedStatus;
     }
 
 }

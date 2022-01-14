@@ -70,12 +70,12 @@ addDonation
 
 withdrawTokens
 * it('WithdrawTokens') : effectue un retrait et vérifie que la nouvelle balance correspond bien à l'ancienne moins le montant du retrait.
+* it('Check balance vs total donations') : effectue plusieurs dons suivis de plusieurs retrait pour vérifier la balance et le total des dons.
 * it('WithdrawTokens - Require a known NPO - ExpectRevert') : le retrait ne peut être effectué que par un NPO déclaré dans la blockchain.
 * it('WithdrawTokens- Require Revert Projet Inconnu') : le projet à partir duquel on désire effectuer le retrait doit être déclaré dans la blockchain.
 * it('Add WithdrawTokens- Require Revert withdraw > Balance') : le retrait demandé doit être inférieur ou égal à la balance du projet (dons effectués moins les retraits déjà réalisés)
 * it('WithdrawTokens- Require Revert campaign not started') : le retrait ne peut commencer qu'une fois la campagne terminée donc après le début de la campagne.
-* it('WithdrawTokens- Require Revert campaign not completed') : le retrait ne peut commencer qu'une fois la campagne terminée.
-* it('Event For WithdrawalAdded') : vérifie que l'événement WithdrawalAdded est bien émis après un retrait.
+* it('Event For TokensWithdrawn') : vérifie que l'événement TokensWithdrawn est bien émis après un retrait.
 
 getNpo
 * it('Get NPO') : ajoute un NPO puis invoque getNpo pour vérifier si les données stockées dans la blockchain sont bien identiques aux paramètres passés.

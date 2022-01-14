@@ -10,23 +10,6 @@ import "./EthicOnChainLib.sol";
 /// @notice EthicOnChain contract to manage NPOs, Projects and Donors
 contract EthicOnChain is Ownable {
     
-    enum ProjectCause {
-        LutteContreLaPauvreteEtExclusion,
-        EnvironnementEtLesAnimaux,
-        Education,
-        ArtEtLaCulture,
-        SanteEtLaRecherche,
-        DroitsDeLHomme,
-        InfrastructureRoutiere
-    }
-
-    enum ProjectStatus {
-        ProjectProposal, 
-        WaitingOpening,
-        OpenFundRaising,
-        CloseFundRaising
-    }
-
     // NPOs
     mapping (address => EthicOnChainLib.NPO) public npoAddresses; //Mapping of all NPO 
     mapping (uint => address) private npoMap;
@@ -56,7 +39,7 @@ contract EthicOnChain is Ownable {
     event DonorAdded(uint _donorId, address _donorErc20Address, string _donorName);
     event ProjectAdded(uint _projectId, string _title, uint _startDate, uint _endDate, uint _minAmount, uint _maxAmount);
     event DonationAdded(uint _donationId, uint _projectId, uint _donorId, uint _donationDate, uint donationAmount);
-    event WithdrawalAdded(uint _withdrawalId ,uint _projectId, uint _amount, address _addressRecipent);
+    event TokensWithdrawn(uint _withdrawalId ,uint _projectId, uint _amount, address _addressRecipent);
     
     /// @dev Initialise the deployed EOC token address for swap
     /// @param _eocTokenAddress EOC Token address
@@ -199,6 +182,7 @@ contract EthicOnChain is Ownable {
         donationDonor.donationIds.push(donationCount); // mise à jour de l'historique des donations pour le donateur
         
         donationProject.projectBalance += _donationAmount; // mise à jour de la balance du projet
+        donationProject.projectTotalDonations += _donationAmount; // et du total des donations
         donationProject.donationIds.push(donationCount); // mise à jour de l'historique des donations pour le projet
         donationCount++;
         
@@ -219,12 +203,9 @@ contract EthicOnChain is Ownable {
         EthicOnChainLib.NPO storage withdrawalNpo = npoAddresses[msg.sender];
         require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
+        require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
         uint256 balance = projectMap[_projectId].projectBalance;
         require(balance >= _amount, "Balance insuffisante");
-        // Widthdraw possible si seulement la campagne est terminée
-        uint campaignEndDate = projectMap[_projectId].campaignStartDate + projectMap[_projectId].campaignDurationInDays * 1 days;
-        require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
-        // require(block.timestamp > campaignEndDate, unicode"La campagne est toujours en cours");
 
         EthicOnChainLib.Withdrawal storage newWithdrawal = withdrawalMap[withdrawalCount];
         newWithdrawal.withdrawalId = withdrawalCount;
@@ -239,7 +220,7 @@ contract EthicOnChain is Ownable {
         projectMap[_projectId].withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le projet
         withdrawalCount++;
         IERC20(eocTokenAddress).transfer(msg.sender,_amount);
-        emit WithdrawalAdded(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
+        emit TokensWithdrawn(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
     }
 
 
@@ -296,9 +277,9 @@ contract EthicOnChain is Ownable {
         return EthicOnChainLib.libGetProjects(projectMap, projectCount);
     }
     
-    /// @dev Allows to know all the projects of a single NPO
-    /// @param _addressNpo id which represents the index
-    /// @return Returns an array of all projects of a single NPO
+    /// @dev Allows to know all the projects of an NPO
+    /// @param _addressNpo ERC20 address of the NPO
+    /// @return Returns an array of projects
     function getProjectsPerNpo(address _addressNpo) public view  returns(EthicOnChainLib.Project [] memory ) {
         return EthicOnChainLib.libGetProjectsPerNpo(npoAddresses, projectMap, _addressNpo);
     }
