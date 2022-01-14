@@ -163,7 +163,7 @@ library EthicOnChainLib {
         uint arraySize = _projectCount;
         Project [] memory result= new Project[](arraySize);
         for(uint i; i < arraySize; i++) {
-            result[i] = _projectMap[i];     
+            result[i] = libGetProject(_projectMap, i);
         }
         return result;
     }

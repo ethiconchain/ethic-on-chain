@@ -179,7 +179,7 @@ const MyProjects = (props) => {
             <TableCell>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
                 <Box sx={{ width: '70px', mr: 1 }}>
-                  <LinearProgress sx={{ height: '20px', borderRadius: '5px' }} color="secondary" variant="determinate" value={currentPercentage(project)} />
+                  <LinearProgress sx={{ height: '20px', borderRadius: '5px' }} color="secondary" variant="determinate" value={currentPercentage(project) > 100 ? 100 : currentPercentage(project)} />
                 </Box>
                 <Box sx={{ minWidth: 35 }}>
                   <Typography variant="body2" color="secondary">{Math.round(currentPercentage(project))}%</Typography>
@@ -201,7 +201,7 @@ const MyProjects = (props) => {
 
           <TableCell align="right">
             <Link to={`/retrait/${project.projectId}`}>
-              <Button disabled={project.status === "3" ? false : true}
+              <Button disabled={(project.status === "2" || project.status === "3") ? false : true}
                 variant="contained" color='secondary' sx={{ minWidth: '120px' }}>
                 <ShoppingCartCheckoutOutlinedIcon size="large" />
               </Button>
