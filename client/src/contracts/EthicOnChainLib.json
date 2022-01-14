@@ -42451,8 +42451,8 @@
     "3": {
       "events": {},
       "links": {},
-      "address": "0x7a72E98f049dBF841e3bF10CF1ED97B0B81CE2ff",
-      "transactionHash": "0xb245894105f571c70987a6e3df72843b045c1871a519dfb466bf67bbf978b3a0"
+      "address": "0x1654cEB36307C47a8d4BB4b03DaA5AE27b77A566",
+      "transactionHash": "0x1ebc67f4b11f015c9c0674f1412c7f033bc4f9776757638e9c9d60f4187b0528"
     },
     "5777": {
       "events": {},
@@ -42462,7 +42462,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-14T17:23:28.412Z",
+  "updatedAt": "2022-01-14T19:06:33.256Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",

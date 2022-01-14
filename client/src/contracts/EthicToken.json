@@ -10636,8 +10636,8 @@
         }
       },
       "links": {},
-      "address": "0x1599A29C38cacFF881E78985b05786a06678D4E3",
-      "transactionHash": "0xc0880c2ec30ed15ae20019d7f0facf1a0b8fc460d80d34a742df9973b25c291d"
+      "address": "0xc06dD53ca9CAa506aD6CC8a018CcB728420187aD",
+      "transactionHash": "0xfdd19a0532c5ffa0886300b51975af3ac78b5b46b0b68a00eb5502bb0a320455"
     },
     "5777": {
       "events": {
@@ -10698,7 +10698,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-14T17:23:28.367Z",
+  "updatedAt": "2022-01-14T19:06:33.237Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev",

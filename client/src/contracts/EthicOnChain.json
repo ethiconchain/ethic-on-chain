@@ -83435,13 +83435,44 @@
           ],
           "name": "WithdrawalAdded",
           "type": "event"
+        },
+        "0x6584d90ddbb422689586649f31c804fbe9302f09a265a73b622cc2516c010823": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_withdrawalId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_projectId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_addressRecipent",
+              "type": "address"
+            }
+          ],
+          "name": "TokensWithdrawn",
+          "type": "event"
         }
       },
       "links": {
-        "EthicOnChainLib": "0x7a72E98f049dBF841e3bF10CF1ED97B0B81CE2ff"
+        "EthicOnChainLib": "0x1654cEB36307C47a8d4BB4b03DaA5AE27b77A566"
       },
-      "address": "0x9F2B477D234386E49AD3697C228A545e72C6FEBD",
-      "transactionHash": "0xe7b4ec15dc44f45cdc4c53f0a396392329d0828976d6a43dbbe280cdf8cd115d"
+      "address": "0x52459e7f7327d48931159b5bf4c278fefA164c11",
+      "transactionHash": "0x3bec25949ba8c428242f354a52152242ac8ca11583ed7690efded8f367a05a4f"
     },
     "5777": {
       "events": {
@@ -83758,7 +83789,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-14T17:23:28.466Z",
+  "updatedAt": "2022-01-14T19:06:33.304Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",
