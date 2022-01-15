@@ -33,6 +33,22 @@ const ViewProjects = (props) => {
   const [allProjects, setAllProjects] = useState(null)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const statusProject = {
+    0: "Indéfini",
+    1: "A l'étude",
+    2: "Collecte en cours",
+    3: "Projet en cours",
+    4: "Projet annulé",
+    5: "Projet terminé"
+  }
+  const statusColor = {
+    0: "#90a4ae",
+    1: "#00b0ff",
+    2: "#00bfa5",
+    3: "#ce93d8",
+    4: "#ff3d00",
+    5: "#ff9800"
+  }
 
   useEffect(() => {
     getAllProjects()
@@ -41,8 +57,6 @@ const ViewProjects = (props) => {
   useEffect(() => {
     if (allProjects) {
       console.log('allProjects :>> ', allProjects);
-      allProjects.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-      console.log('allProjects :>> ', allProjects.length);
     }
   }, [allProjects]);
 
@@ -157,29 +171,42 @@ const ViewProjects = (props) => {
             {project.title}
           </TableCell>
           <TableCell component="th" scope="project">
-            CAMPAGNE
+            <Typography variant="button" sx={{ fontWeight: 'bold', color: 'white', bgcolor: statusColor[project.status], borderRadius: '3px', px: '5px', py: '1px' }}>{statusProject[project.status].toUpperCase()}</Typography>
           </TableCell>
           <TableCell>{web3.utils.fromWei(project.projectBalance.toString())} EOC</TableCell>
           <TableCell>{web3.utils.fromWei(project.minAmount.toString())} EOC</TableCell>
-          <TableCell>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-              <Box sx={{ width: '70px', mr: 1 }}>
-                <LinearProgress sx={{ height: '20px', borderRadius: '5px' }} color="secondary" variant="determinate" value={currentPercentage(project)} />
+
+          {(project.status === "1" || project.status === "0") ?
+            <TableCell align="center">-</TableCell>
+            :
+            <TableCell>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                <Box sx={{ width: '70px', mr: 1 }}>
+                  <LinearProgress sx={{ height: '20px', borderRadius: '5px' }} color="secondary" variant="determinate" value={currentPercentage(project) > 100 ? 100 : currentPercentage(project)} />
+                </Box>
+                <Box sx={{ minWidth: 35 }}>
+                  <Typography variant="body2" color="secondary">{Math.round(currentPercentage(project))}%</Typography>
+                </Box>
               </Box>
-              <Box sx={{ minWidth: 35 }}>
-                <Typography variant="body2" color="secondary">{Math.round(currentPercentage(project))}%</Typography>
+            </TableCell>
+          }
+
+          {project.status === "2" ?
+            <TableCell>
+              <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+                <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
+                <Typography variant="body1" color="text.secondary">J - {daysLeft(project)}</Typography>
               </Box>
-            </Box>
-          </TableCell>
-          <TableCell>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
-              <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
-              <Typography variant="body1" color="text.secondary">{daysLeft(project)} j</Typography>
-            </Box>
-          </TableCell>
-          <TableCell>
+            </TableCell>
+            :
+            <TableCell align="center">-</TableCell>
+          }
+
+
+          <TableCell align="right">
             <Link to={`/faireundon/${project.projectId}`}>
-              <Button variant="contained" color='secondary'>
+              <Button disabled={(project.status === "2" || project.status === "3") ? false : true}
+                variant="contained" color='secondary' sx={{ minWidth: '120px' }}>
                 <VolunteerActivismIcon size="large" />
               </Button>
             </Link>
@@ -241,9 +268,9 @@ const ViewProjects = (props) => {
                 <TableCell sx={{ typography: 'upper' }}>Statut</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Dons collectés</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Objectif min.</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Taux</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Jours restants</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>faire un don</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Financement</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Clôture</TableCell>
+                <TableCell sx={{ typography: 'upper' }} align="right">faire un don</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

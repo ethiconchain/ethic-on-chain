@@ -67,7 +67,7 @@ const MyWithdrawals = (props) => {
                   </TableCell>
                   <TableCell>{withdrawal.description}</TableCell>
                   <TableCell>{msToDate(withdrawal.withdrawalDate)}</TableCell>
-                  <TableCell sx={{ minWidth: '70px' }}>{web3.utils.fromWei(withdrawal.amount.toString())}</TableCell>
+                  <TableCell sx={{ minWidth: '70px' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
                 </TableRow>
               ))}
             </TableBody>
