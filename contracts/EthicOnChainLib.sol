@@ -163,7 +163,7 @@ library EthicOnChainLib {
         uint arraySize = _projectCount;
         Project [] memory result= new Project[](arraySize);
         for(uint i; i < arraySize; i++) {
-            result[i] = _projectMap[i];     
+            result[i] = libGetProject(_projectMap, i);
         }
         return result;
     }
@@ -232,7 +232,7 @@ library EthicOnChainLib {
     /// @dev get the project status
     /// @param _project Project
     /// @return _status the Project status based on Project information
-    function getProjectStatus(Project memory _project) public view returns(ProjectStatus _status) {
+    function getProjectStatus(Project memory _project) private view returns(ProjectStatus _status) {
         ProjectStatus returnedStatus;
         uint campaignEndDate = _project.campaignStartDate + _project.campaignDurationInDays * 1 days;
         // Under Creation
@@ -250,11 +250,11 @@ library EthicOnChainLib {
         }
         // Cancelled
         else if (block.timestamp > campaignEndDate && _project.projectTotalDonations < _project.minAmount) {
-            returnedStatus = ProjectStatus.InProgress;
+            returnedStatus = ProjectStatus.Cancelled;
         }
         // Closed
         else if (block.timestamp > _project.endDate && _project.projectTotalDonations >= _project.minAmount) {
-            returnedStatus = ProjectStatus.InProgress;
+            returnedStatus = ProjectStatus.Closed;
         }
         // otherwise Undefined
         else {
