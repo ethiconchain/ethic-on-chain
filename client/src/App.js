@@ -67,6 +67,16 @@ const App = () => {
   const [balance0, setBalance0] = useState(0)
   const [balanceActualAccount, setBalanceActualAccount] = useState(0)
 
+  const causeList = {
+    0: "Lutte contre la pauvreté et l'exclusion",
+    1: "Environnement et animaux",
+    2: "Éducation",
+    3: "Art et culture",
+    4: "Santé et recherche",
+    5: "Droits de l'homme",
+    6: "Infrastructure routière",
+  }
+
   // convertit date epoch (ms) en date JJ/MM/YY
   const msToDate = (x) => new Date(x * 1000).toLocaleDateString()
 
@@ -173,7 +183,7 @@ const App = () => {
         {isDonor &&
           <Route path="/" element={<LayoutDonor data={data} />}>
             <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
-            <Route path="/mesdons" element={<MyDonations data={data} msToDate={msToDate} />} />
+            <Route path="/mesdons" element={<MyDonations data={data} msToDate={msToDate} causeList={causeList} />} />
             <Route path="/faireundon/:id" element={<MakeDonation data={data} />} />
             <Route path="/historique" element={<Historic data={data} />} />
             <Route path="/*" element={<Page404 />} />

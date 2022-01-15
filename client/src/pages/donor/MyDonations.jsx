@@ -21,65 +21,33 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
 const MyDonations = (props) => {
-  const { data, msToDate } = props
+  const { data, msToDate, causeList } = props
   const { web3 } = data
   const [allMyDonations, setAllMyDonations] = useState(null)
   const [allProjects, setAllProjects] = useState(null)
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     getMyDonations()
   }, []);
 
   useEffect(() => {
-    console.log('allMyDonations :>> ', allMyDonations);
-    console.log('allProjects :>> ', allProjects);
-  }, [allMyDonations, allProjects]);
+    if (allMyDonations) {
+      console.log('allMyDonations :>> ', allMyDonations);
+    }
+  }, [allMyDonations]);
 
-  const findProjectPropertyValue = (id, propertyName) => {
+  useEffect(() => {
+    if (allProjects) {
+      console.log('allProjects :>> ', allProjects);
+    }
+  }, [allProjects]);
+
+  const findProjectPropertyValue = (id) => {
     for (const key in allProjects) {
       if (allProjects[key].projectId === id.toString()) {
-        let tempValue = allProjects[key][propertyName];
-        let returnedValue = tempValue;
-        switch(propertyName) {
-          case "cause":
-            switch(tempValue) {
-              case "0":
-                returnedValue = "Lutte contre la pauvreté et l'exclusion";
-                break;
-              case "1":
-                returnedValue = "Environnement et animaux";
-                break;
-              case "2":
-                returnedValue = "Education";
-                break;
-              case "3":
-                returnedValue = "Art et culture";
-                break;
-              case "4":
-                returnedValue = "Sante et recherche";
-                break;
-              case "5":
-                returnedValue = "Droits de l'homme";
-                break;
-              case "6":
-                returnedValue = "Infrastructure routière";
-                break;
-              default:
-                returnedValue = "Cause inconnue";
-            }
-            break;            
-          case "minAmount":
-          case "maxAmount":
-          case "projectTotalDonations":
-              returnedValue = web3.utils.fromWei(tempValue);
-            break;            
-          default:
-            returnedValue = tempValue;
-            break;            
-        }
-        return returnedValue;
+        return allProjects[key];
       }
     }
   }
@@ -180,24 +148,24 @@ const MyDonations = (props) => {
             </IconButton>
           </TableCell>
           <TableCell component="th" scope="donation">
-            {findProjectPropertyValue(donation.projectId, "title")}
+            {findProjectPropertyValue(donation.projectId).title}
           </TableCell>
-          <TableCell>{findProjectPropertyValue(donation.projectId, "description")}</TableCell>
+          <TableCell>{findProjectPropertyValue(donation.projectId).description}</TableCell>
           <TableCell>{msToDate(donation.donationDate)}</TableCell>
-          <TableCell>{web3.utils.fromWei(donation.donationAmount.toString())}</TableCell>
+          <TableCell sx={{ minWidth: '70px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
         </TableRow>
 
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5} >
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ mb: 3 }}>
-                <div>Cause : {findProjectPropertyValue(donation.projectId, "cause")}</div>
-                <div>Montant minimum : {findProjectPropertyValue(donation.projectId, "minAmount")} EOC</div>
-                <div>Montant maximum : {findProjectPropertyValue(donation.projectId, "maxAmount")} EOC</div>
-                <div>Total dons : {findProjectPropertyValue(donation.projectId, "projectTotalDonations")} EOC</div>
-                <div>Zone géographique : {findProjectPropertyValue(donation.projectId, "geographicalArea")}</div>
-                <div>Dates projet : du {msToDate(findProjectPropertyValue(donation.projectId, "startDate"))} au {msToDate(findProjectPropertyValue(donation.projectId, "endDate"))}</div>
-                <div>Campagne : début {msToDate(findProjectPropertyValue(donation.projectId, "campaignStartDate"))} pour une durée de {findProjectPropertyValue(donation.projectId, "campaignDurationInDays")} jour(s)</div>
+              <Box sx={{ mb: 3, ml: 5, mt: 2 }}>
+                <Box>Cause : {causeList[findProjectPropertyValue(donation.projectId).cause]}</Box>
+                <Box>Montant minimum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).minAmount)} EOC</Box>
+                <Box>Montant maximum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).maxAmount)} EOC</Box>
+                <Box>Total dons : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).projectBalance)} EOC</Box>
+                <Box>Zone géographique : {findProjectPropertyValue(donation.projectId).geographicalArea}</Box>
+                <Box>Dates projet : du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</Box>
+                <Box>Campagne : début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</Box>
               </Box>
             </Collapse>
           </TableCell>
@@ -218,24 +186,24 @@ const MyDonations = (props) => {
         Liste de mes dons
       </Typography>
 
-      {allMyDonations &&
+      {allMyDonations && allProjects &&
         <TableContainer component={Paper}>
           <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow selected>
-                <TableCell/>
-                <TableCell>Projet</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Montant (EOC)</TableCell>
+                <TableCell />
+                <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Description</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {(rowsPerPage > 0
                 ? allMyDonations.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : allMyDonations
-                ).map((donation) => (
-                  <DonationRow key={donation.donationId} donation={donation} />
+              ).map((donation) => (
+                <DonationRow key={donation.donationId} donation={donation} />
               ))}
             </TableBody>
             <TableFooter >
