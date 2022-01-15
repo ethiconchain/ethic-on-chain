@@ -194,14 +194,27 @@ library EthicOnChainLib {
     /// @dev Allows to know all the donations of a single donor
     /// @param _donorAddresses mapping of Donors addresses to Donor Struct
     /// @param _donationMap mapping of Donation id to Donation Struct
-    /// @param _addressNpo id which represents the index
+    /// @param _donorAddress id which represents the index
     /// @return Returns an array of all donation of a single donor
-    function libGetDonationPerDonor(mapping (address => Donor) storage _donorAddresses, mapping (uint => Donation) storage _donationMap, address _addressNpo) public view  returns(Donation [] memory ) {
-        uint arraySize = _donorAddresses[_addressNpo].donationIds.length;
+    function libGetDonationPerDonor(mapping (address => Donor) storage _donorAddresses, mapping (uint => Donation) storage _donationMap, address _donorAddress) public view  returns(Donation [] memory ) {
+        uint arraySize = _donorAddresses[_donorAddress].donationIds.length;
         Donation [] memory result= new Donation[](arraySize);
         for(uint i; i < arraySize; i++) {
-            uint index = _donorAddresses[_addressNpo].donationIds[i];
+            uint index = _donorAddresses[_donorAddress].donationIds[i];
             result[i] = libGetDonation(_donationMap, index);     
+        }
+        return result;
+    }
+
+    /// @dev list all the donations made in the contract, whatever the Donor and the NPO
+    /// @param _donationMap mapping of Donation id to Donation Struct
+    /// @param _donationCount total number of donations
+    /// @return Returns an array of all donation of a single donor
+    function libGetDonations(mapping (uint => Donation) storage _donationMap, uint _donationCount) public view  returns(Donation [] memory ) {
+        uint arraySize = _donationCount;
+        Donation [] memory result = new Donation[](arraySize);
+        for(uint i; i < arraySize; i++) {
+            result[i] = libGetDonation(_donationMap, i);
         }
         return result;
     }

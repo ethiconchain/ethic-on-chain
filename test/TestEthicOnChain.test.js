@@ -27,7 +27,7 @@ contract('EthicOnChain', function (accounts) {
     const _campaignStartDate = new BN(3600000); ;
     const _campaignDurationInDays = new BN(11005);
     const _projectIndex = new BN(1);
-    const _projectStatusInProgress = "3"; // 3 = ProjectStatus.InProgress
+    const _projectStatusCancelled = "4"; // 4 = ProjectStatus.Cancelled
 
     const _newDonorErc20Address = accounts[1];
     const _donorName = "Jeff";
@@ -130,7 +130,7 @@ contract('EthicOnChain', function (accounts) {
         expect(verifCampaignDurationInDays).to.be.bignumber.equal(_campaignDurationInDays);
         expect(verifMinAmount).to.be.bignumber.equal(_minAmount);
         expect(verifMaxAmount).to.be.bignumber.equal(_maxAmount);
-        expect(projectStatus).to.be.equal(_projectStatusInProgress);
+        expect(projectStatus).to.be.equal(_projectStatusCancelled);
     });
 
     it('Add Project - Increase projectCount', async function () {
@@ -142,7 +142,7 @@ contract('EthicOnChain', function (accounts) {
     });  
 
     it('Does not add a project if the sender is not an NPO', async function () {
-        expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount),"Vous n'êtes pas enregistré en tant que NPO");
+        expectRevert(this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, _startDate, _endDate, _campaignStartDate, _campaignDurationInDays, _minAmount, _maxAmount),"NPO inconnu");
     });
 
     it('Require a title for a project - ExpectRevert', async function () {
@@ -241,7 +241,7 @@ contract('EthicOnChain', function (accounts) {
         //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
         //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
         await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
-        expectRevert(this.InstanceEthicOnChain.addDonation(new BN(0), new BN(10), { from : accounts[0]} ),"Vous n'êtes pas enregistré en tant que donateur");
+        expectRevert(this.InstanceEthicOnChain.addDonation(new BN(0), new BN(10), { from : accounts[0]} ),"Donateur inconnu");
     });
 
     it('Require a project for a donation (Unknown project) - ExpectRevert', async function () {
@@ -339,7 +339,7 @@ contract('EthicOnChain', function (accounts) {
     });
 
     it('WithdrawTokens - Require a known NPO - ExpectRevert', async function () {
-        expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(1), new BN(500),_title,_description, { from : _newNpoErc20Address} ),"Vous n'êtes pas enregistré en tant que NPO");
+        expectRevert(this.InstanceEthicOnChain.withdrawTokens(new BN(1), new BN(500),_title,_description, { from : _newNpoErc20Address} ),"NPO inconnu");
     });
 
     it('WithdrawTokens - Require Revert Projet Inconnu', async function () {
@@ -440,6 +440,21 @@ contract('EthicOnChain', function (accounts) {
         await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(10), { from : accounts[0]} );
         let arrDonations = await this.InstanceEthicOnChain.getDonationPerDonor(accounts[0]);
         expect(arrDonations.length).to.equal(1);
+    });
+
+    it('Get all Donations', async function () {
+        await this.InstanceEthicOnChain.addNpo(_newNpoErc20Address, _denomination, _npoPostalAddress, _object, _npoType);
+        let blockLastest = await web3.eth.getBlock("latest");
+        await this.InstanceEthicOnChain.addProject(_title, _description, _geographicalArea, blockLastest.timestamp, blockLastest.timestamp+1000, blockLastest.timestamp, blockLastest.timestamp, _minAmount, _maxAmount, { from: _newNpoErc20Address });
+        await this.InstanceEthicOnChain.addDonor(accounts[0], _donorName, _donorSurName, _donorPostalAddress);
+        //C'est l'accounts[0] qui possède tous les tokens EOC car il n'a toujours pas réalise la distribution
+        //On doit augmenter l'allocation qui correspond au montant qu'on peut donner à l'address
+        await this.TokenInstance.increaseAllowance( this.InstanceEthicOnChain.address,new BN(1000000000), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(100), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(200), { from : accounts[0]} );
+        await this.InstanceEthicOnChain.addDonation(new BN(0), new BN(150), { from : accounts[0]} );
+        let arrDonations = await this.InstanceEthicOnChain.getDonations();
+        expect(arrDonations.length).to.equal(3);
     });
 
     it('get Withdrawal', async function () {

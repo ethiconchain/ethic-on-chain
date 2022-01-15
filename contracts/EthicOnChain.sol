@@ -126,7 +126,7 @@ contract EthicOnChain is Ownable {
         uint _maxAmount
     ) public {
         EthicOnChainLib.NPO storage projectNpo = npoAddresses[msg.sender];
-        require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
+        require(bytes(projectNpo.denomination).length != 0, "NPO inconnu");
         // Mandatory fields
         require(bytes(_title).length > 0, "Le titre est obligatoire");
         require(bytes(_description).length > 0, "La description est obligatoire");
@@ -164,7 +164,7 @@ contract EthicOnChain is Ownable {
     /// @param _donationAmount amount of the donation in EOC tokens
     function addDonation(uint _projectId, uint _donationAmount) public {
         EthicOnChainLib.Donor storage donationDonor = donorAddresses[msg.sender];
-        require(donationDonor.donorErc20Address != address(0), unicode"Vous n'êtes pas enregistré en tant que donateur"); // concept de KYC
+        require(donationDonor.donorErc20Address != address(0), "Donateur inconnu"); // concept de KYC
         EthicOnChainLib.Project storage donationProject = projectMap[_projectId];
         require(bytes(donationProject.title).length != 0, "Projet inconnu");
         // donation possible seulement si dans période de campagne
@@ -201,7 +201,7 @@ contract EthicOnChain is Ownable {
     /// @param _description description of the withdrawal
     function withdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
         EthicOnChainLib.NPO storage withdrawalNpo = npoAddresses[msg.sender];
-        require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
+        require(bytes(npoAddresses[msg.sender].denomination).length != 0, "NPO inconnu");
         require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
         require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
         uint256 balance = projectMap[_projectId].projectBalance;
@@ -292,10 +292,16 @@ contract EthicOnChain is Ownable {
     }
 
     /// @dev Allows to know all the donations of a single donor
-    /// @param _addressNpo id which represents the index
+    /// @param _donorAddress id which represents the index
     /// @return Returns an array of all donation of a single donor
-    function getDonationPerDonor(address _addressNpo) public view  returns(EthicOnChainLib.Donation [] memory ) {
-        return EthicOnChainLib.libGetDonationPerDonor(donorAddresses, donationMap, _addressNpo);
+    function getDonationPerDonor(address _donorAddress) public view  returns(EthicOnChainLib.Donation [] memory ) {
+        return EthicOnChainLib.libGetDonationPerDonor(donorAddresses, donationMap, _donorAddress);
+    }
+
+    /// @dev list all the donations made in the contract, whatever the Donor and the NPO
+    /// @return Returns an array of all donation of a single donor
+    function getDonations() public view  returns(EthicOnChainLib.Donation [] memory ) {
+        return EthicOnChainLib.libGetDonations(donationMap, donationCount);
     }
 
     /// @dev  get Withdrawal by id

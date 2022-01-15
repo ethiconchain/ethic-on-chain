@@ -111,6 +111,9 @@ getDonation
 getDonationPerDonor
 * it('Get Donations per Donor') : ajoute un don puis invoque getDonationPerDonor pour le donateur pour vérifier que la longueur du tableau renvoyée est bien de 1.
 
+getDonations
+* it('Get all Donations') : ajoute trois dons puis invoque getDonationd pour vérifier que la longueur du tableau renvoyée est bien de 3.
+
 getWithdrawal
 * it('get Withdrawal') : effectue un retrait de tokens pour un NPO puis vérifie que le montant stocké dans l'historique des retraits est bien égal à celui demandé lors du retrait.
 
