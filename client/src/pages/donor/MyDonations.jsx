@@ -191,13 +191,13 @@ const MyDonations = (props) => {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5} >
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ mb: 3 }}>
-                <div>Cause : {findProjectPropertyValue(donation.projectId, "cause")}</div>
-                <div>Montant minimum : {findProjectPropertyValue(donation.projectId, "minAmount")} EOC</div>
-                <div>Montant maximum : {findProjectPropertyValue(donation.projectId, "maxAmount")} EOC</div>
-                <div>Total dons : {findProjectPropertyValue(donation.projectId, "projectTotalDonations")} EOC</div>
-                <div>Zone géographique : {findProjectPropertyValue(donation.projectId, "geographicalArea")}</div>
-                <div>Dates projet : du {msToDate(findProjectPropertyValue(donation.projectId, "startDate"))} au {msToDate(findProjectPropertyValue(donation.projectId, "endDate"))}</div>
-                <div>Campagne : début {msToDate(findProjectPropertyValue(donation.projectId, "campaignStartDate"))} pour une durée de {findProjectPropertyValue(donation.projectId, "campaignDurationInDays")} jour(s)</div>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>Cause : {findProjectPropertyValue(donation.projectId, "cause")}</Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>Montant minimum : {findProjectPropertyValue(donation.projectId, "minAmount")} EOC</Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>Montant maximum : {findProjectPropertyValue(donation.projectId, "maxAmount")} EOC</Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>Total dons : {findProjectPropertyValue(donation.projectId, "projectTotalDonations")} EOC</Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>Zone géographique : {findProjectPropertyValue(donation.projectId, "geographicalArea")}</Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>Dates projet : du {msToDate(findProjectPropertyValue(donation.projectId, "startDate"))} au {msToDate(findProjectPropertyValue(donation.projectId, "endDate"))}</Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>Campagne : début {msToDate(findProjectPropertyValue(donation.projectId, "campaignStartDate"))} pour une durée de {findProjectPropertyValue(donation.projectId, "campaignDurationInDays")} jour(s)</Box>
               </Box>
             </Collapse>
           </TableCell>
