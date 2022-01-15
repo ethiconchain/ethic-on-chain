@@ -131,7 +131,7 @@ export default function MakeDonation(props) {
             <br />
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Box sx={{ width: '100%', mr: 1 }}>
-                <LinearProgress sx={{ height: '8px', borderRadius: '4px' }} color="secondary" variant="determinate" value={currentPercentage()} />
+                <LinearProgress sx={{ height: '8px', borderRadius: '4px' }} color="secondary" variant="determinate" value={currentPercentage() > 100 ? 100 : currentPercentage()} />
               </Box>
               <Box sx={{ minWidth: 35 }}>
                 <Typography variant="body2" color="secondary">{Math.round(currentPercentage())}%</Typography>
@@ -155,7 +155,8 @@ export default function MakeDonation(props) {
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                   <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
-                  <Typography variant="body1" color="text.secondary">{daysLeft()} jours</Typography>
+                  {daysLeft() > 0 &&
+                    <Typography variant="body1" color="text.secondary">{daysLeft()} jours</Typography>}
                 </Box>
               </Box>
               <Button

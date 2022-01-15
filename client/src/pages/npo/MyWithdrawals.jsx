@@ -51,7 +51,7 @@ const MyWithdrawals = (props) => {
                 <TableCell>Projet</TableCell>
                 <TableCell>Description</TableCell>
                 <TableCell>Date</TableCell>
-                <TableCell>Montant (EOC)</TableCell>
+                <TableCell>Montant</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -65,7 +65,7 @@ const MyWithdrawals = (props) => {
                   </TableCell>
                   <TableCell>{withdrawal.description}</TableCell>
                   <TableCell>{msToDate(withdrawal.withdrawalDate)}</TableCell>
-                  <TableCell>{web3.utils.fromWei(withdrawal.amount.toString())}</TableCell>
+                  <TableCell sx={{minWidth: '100px'}}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
                 </TableRow>
               ))}
             </TableBody>

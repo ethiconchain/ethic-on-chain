@@ -64,7 +64,7 @@ const MyDonations = (props) => {
                 <TableCell>Projet</TableCell>
                 <TableCell>Description</TableCell>
                 <TableCell>Date</TableCell>
-                <TableCell>Montant (EOC)</TableCell>
+                <TableCell>Montant</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -78,7 +78,7 @@ const MyDonations = (props) => {
                   </TableCell>
                   <TableCell>{findProjectInfos(donation.projectId, "description")}</TableCell>
                   <TableCell>{msToDate(donation.donationDate)}</TableCell>
-                  <TableCell>{web3.utils.fromWei(donation.donationAmount.toString())}</TableCell>
+                  <TableCell sx={{minWidth: '100px'}}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
                 </TableRow>
               ))}
             </TableBody>
