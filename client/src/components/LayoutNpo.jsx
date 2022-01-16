@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { Divider, Drawer, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import List from '@mui/material/List';
@@ -16,6 +16,7 @@ const drawerWidth = 240;
 const LayoutNpo = (props) => {
   const { data } = props
   const { accounts } = data
+  const [connectedNpo, setConnectedNpo] = useState(null)
   let navigate = useNavigate();
   const location = useLocation()
   const menuItems = [
@@ -41,6 +42,26 @@ const LayoutNpo = (props) => {
     },
   ]
 
+  useEffect(() => {
+    getConnectedNpo()
+  }, []);
+
+  useEffect(() => {
+    if (connectedNpo) {
+      console.log('connectedNpo :>> ', connectedNpo);
+    }
+  }, [connectedNpo]);
+
+  const getConnectedNpo = async () => {
+    try {
+      const { contract, accounts } = data
+      await contract.methods.getNpo(accounts[0]).call()
+        .then(x => setConnectedNpo(x))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
       {/* app bar */}
@@ -52,7 +73,7 @@ const LayoutNpo = (props) => {
       >
         <Toolbar>
           <Typography sx={{ flexGrow: 1 }}>
-            {accounts[0]}
+          { connectedNpo && connectedNpo[2] + ' (' + accounts[0] + ')' }
           </Typography>
           <img src="EthicOnChainLogo2.svg" alt="logo" height="30px" />
         </Toolbar>

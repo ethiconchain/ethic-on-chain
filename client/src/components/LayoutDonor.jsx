@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { Divider, Drawer, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import List from '@mui/material/List';
@@ -15,6 +15,7 @@ const drawerWidth = 240;
 const LayoutDonor = (props) => {
   const { data } = props
   const { accounts } = data
+  const [connectedDonor, setConnectedDonor] = useState(null)
   let navigate = useNavigate();
   const location = useLocation()
   const menuItems = [
@@ -35,6 +36,26 @@ const LayoutDonor = (props) => {
     },
   ]
 
+  useEffect(() => {
+    getConnectedDonor()
+  }, []);
+
+  useEffect(() => {
+    if (connectedDonor) {
+      console.log('connectedDonor :>> ', connectedDonor);
+    }
+  }, [connectedDonor]);
+
+  const getConnectedDonor = async () => {
+    try {
+      const { contract, accounts } = data
+      await contract.methods.getDonor(accounts[0]).call()
+        .then(x => setConnectedDonor(x))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
       {/* app bar */}
@@ -46,7 +67,7 @@ const LayoutDonor = (props) => {
       >
         <Toolbar>
           <Typography sx={{ flexGrow: 1 }}>
-            {accounts[0]}
+          { connectedDonor && connectedDonor[3] + ' ' + connectedDonor[2] + ' (' + accounts[0] + ')' }
           </Typography>
           <img src="EthicOnChainLogo2.svg" alt="logo" height="30px" />
         </Toolbar>
