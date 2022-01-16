@@ -18,7 +18,9 @@ const MyWithdrawals = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log('allMyWithdrawals :>> ', allMyWithdrawals);
+    if (allMyWithdrawals) {
+      console.log('allMyWithdrawals :>> ', allMyWithdrawals);
+    }
   }, [allMyWithdrawals]);
 
   const getMyWithdrawals = async () => {
@@ -65,7 +67,7 @@ const MyWithdrawals = (props) => {
                   </TableCell>
                   <TableCell>{withdrawal.description}</TableCell>
                   <TableCell>{msToDate(withdrawal.withdrawalDate)}</TableCell>
-                  <TableCell sx={{minWidth: '100px'}}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
+                  <TableCell sx={{ minWidth: '100px' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
                 </TableRow>
               ))}
             </TableBody>
