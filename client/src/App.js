@@ -81,6 +81,7 @@ const App = () => {
   const msToDate = (x) => new Date(x * 1000).toLocaleDateString()
 
   useEffect(() => {
+    document.title = "Ethic On Chain";
     init();
   }, []);
 
