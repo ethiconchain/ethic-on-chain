@@ -1,32 +1,53 @@
 import React, { useState, useEffect } from "react";
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import IconButton from '@mui/material/IconButton';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import LastPageIcon from '@mui/icons-material/LastPage';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import TableFooter from '@mui/material/TableFooter';
 import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
 const MyDonations = (props) => {
-  const { data, msToDate } = props
+  const { data, msToDate, causeList } = props
   const { web3 } = data
   const [allMyDonations, setAllMyDonations] = useState(null)
   const [allProjects, setAllProjects] = useState(null)
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     getMyDonations()
   }, []);
 
   useEffect(() => {
-    console.log('allMyDonations :>> ', allMyDonations);
-    console.log('allProjects :>> ', allProjects);
-  }, [allMyDonations, allProjects]);
+    if (allMyDonations) {
+      console.log('allMyDonations :>> ', allMyDonations);
+    }
+  }, [allMyDonations]);
 
-  const findProjectInfos = (id, info) => {
+  useEffect(() => {
+    if (allProjects) {
+      console.log('allProjects :>> ', allProjects);
+    }
+  }, [allProjects]);
+
+  const findProjectPropertyValue = (id) => {
     for (const key in allProjects) {
       if (allProjects[key].projectId === id.toString()) {
-        return allProjects[key][info]
+        return allProjects[key];
       }
     }
   }
@@ -44,6 +65,125 @@ const MyDonations = (props) => {
     }
   }
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  function TablePaginationActions(props) {
+    const theme = useTheme();
+    const { count, page, rowsPerPage, onPageChange } = props;
+
+    const handleFirstPageButtonClick = (event) => {
+      onPageChange(event, 0);
+    };
+
+    const handleBackButtonClick = (event) => {
+      onPageChange(event, page - 1);
+    };
+
+    const handleNextButtonClick = (event) => {
+      onPageChange(event, page + 1);
+    };
+
+    const handleLastPageButtonClick = (event) => {
+      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    };
+
+    return (
+      <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+        <IconButton
+          onClick={handleFirstPageButtonClick}
+          disabled={page === 0}
+          aria-label="first page"
+        >
+          {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        </IconButton>
+        <IconButton
+          onClick={handleBackButtonClick}
+          disabled={page === 0}
+          aria-label="previous page"
+        >
+          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        </IconButton>
+        <IconButton
+          onClick={handleNextButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          aria-label="next page"
+        >
+          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        </IconButton>
+        <IconButton
+          onClick={handleLastPageButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          aria-label="last page"
+        >
+          {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        </IconButton>
+      </Box>
+    );
+  }
+
+  const DonationRow = (props) => {
+    const { donation } = props
+    const [open, setOpen] = useState(false);
+
+    return (
+      <>
+        <TableRow
+          key={donation.donationId}
+          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        >
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+          <TableCell component="th" scope="donation">
+            {findProjectPropertyValue(donation.projectId).title}
+          </TableCell>
+          <TableCell>{findProjectPropertyValue(donation.projectId).description}</TableCell>
+          <TableCell>{msToDate(donation.donationDate)}</TableCell>
+          <TableCell sx={{ minWidth: '70px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
+        </TableRow>
+
+        <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5} >
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box sx={{ mb: 3, ml: 5, mt: 2 }}>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', flexDirection: 'row'}}>
+                  <Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Cause : {causeList[findProjectPropertyValue(donation.projectId).cause]}</Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Montant minimum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).minAmount)} EOC</Box>
+                  </Box>
+                  <Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Montant maximum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).maxAmount)} EOC</Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Total dons : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).projectBalance)} EOC</Box>
+                  </Box>
+                  <Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Zone géographique : {findProjectPropertyValue(donation.projectId).geographicalArea}</Box>
+                  </Box>
+                  <Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Dates projet : du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Campagne : début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</Box>
+                  </Box>
+                </Box>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </>
+    )
+  }
+
   return (
     <>
       <Typography
@@ -53,35 +193,50 @@ const MyDonations = (props) => {
         gutterBottom
         sx={{ mb: 2 }}
       >
-        Liste de mes donations
+        Liste de mes dons
       </Typography>
 
-      {allMyDonations &&
+      {allMyDonations && allProjects &&
         <TableContainer component={Paper}>
           <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow selected>
-                <TableCell>Projet</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Montant</TableCell>
+                <TableCell />
+                <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Description</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {allMyDonations.map((donation) => (
-                <TableRow
-                  key={donation.donationId}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="donation">
-                    {findProjectInfos(donation.projectId, "title")}
-                  </TableCell>
-                  <TableCell>{findProjectInfos(donation.projectId, "description")}</TableCell>
-                  <TableCell>{msToDate(donation.donationDate)}</TableCell>
-                  <TableCell sx={{minWidth: '100px'}}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
-                </TableRow>
+              {(rowsPerPage > 0
+                ? allMyDonations.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                : allMyDonations
+              ).map((donation) => (
+                <DonationRow key={donation.donationId} donation={donation} />
               ))}
             </TableBody>
+            <TableFooter >
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                  colSpan={5}
+                  count={allMyDonations.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  labelRowsPerPage="Lignes par page"
+                  SelectProps={{
+                    inputProps: {
+                      'aria-label': 'Lignes par page',
+                    },
+                    native: true,
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
           </Table>
         </TableContainer>}
     </>

@@ -18,7 +18,9 @@ const MyWithdrawals = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log('allMyWithdrawals :>> ', allMyWithdrawals);
+    if (allMyWithdrawals) {
+      console.log('allMyWithdrawals :>> ', allMyWithdrawals);
+    }
   }, [allMyWithdrawals]);
 
   const getMyWithdrawals = async () => {
@@ -48,10 +50,10 @@ const MyWithdrawals = (props) => {
           <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow selected>
-                <TableCell>Projet</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Montant</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Description</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -65,7 +67,7 @@ const MyWithdrawals = (props) => {
                   </TableCell>
                   <TableCell>{withdrawal.description}</TableCell>
                   <TableCell>{msToDate(withdrawal.withdrawalDate)}</TableCell>
-                  <TableCell sx={{minWidth: '100px'}}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
+                  <TableCell sx={{ minWidth: '70px' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
                 </TableRow>
               ))}
             </TableBody>
