@@ -21,6 +21,10 @@ export default function Withdrawal(props) {
   let navigate = useNavigate();
   const { id } = useParams();
   const [selectedProject, setSelectedProject] = useState(null)
+  const [title, setTitle] = useState('')
+  const [titleError, setTitleError] = useState(false)
+  const [description, setDescription] = useState('')
+  const [descriptionError, setDescriptionError] = useState(false)
   const [amoutMin, setAmoutMin] = useState(0)
   const [amoutMinError, setAmoutMinError] = useState(false)
 
@@ -60,8 +64,13 @@ export default function Withdrawal(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setTitleError(false)
+    setDescriptionError(false)
+    setAmoutMinError(false)
+    if (title === '') { setTitleError(true) }
+    if (description === '') { setDescriptionError(true) }
     if (amoutMin === 0) { setAmoutMinError(true) }
-    if (amoutMin) {
+    if (title && description && amoutMin) {
       withdrawalRequest()
     }
   }
@@ -77,7 +86,7 @@ export default function Withdrawal(props) {
       })
       setProgress(true)
       setLoaderIsOpen(true)
-      await contract.methods.withdrawTokens(id, web3.utils.toWei(amoutMin.toString()), selectedProject.title, selectedProject.description).send({ from: accounts[0], gas: 2000000 })
+      await contract.methods.withdrawTokens(id, web3.utils.toWei(amoutMin.toString()), title, description).send({ from: accounts[0], gas: 2000000 })
       setProgress(false)
       setSuccess(true)
       setTimeout(() => navigate('/mesretraits'), 2000)
@@ -95,36 +104,59 @@ export default function Withdrawal(props) {
       {selectedProject &&
         <Card sx={{ maxWidth: 450, borderRadius: '15px' }}>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {selectedProject.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {selectedProject.description}
-            </Typography>
-            <br />
-            <br />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Box>
-                <Typography variant="body2" sx={{ mb: 1 }}>Montant actuel</Typography>
-                <Typography variant="button" sx={{ backgroundColor: greenColor, borderRadius: '5px', p: 0.7 }}>{web3.utils.fromWei(selectedProject.projectBalance.toString())} EOC</Typography>
-              </Box>
-              <Box>
-                <Typography variant="body2" sx={{ mb: 1, textAlign: 'right' }}>Objectif</Typography>
-                <Typography variant="button" sx={{ backgroundColor: greenColor, borderRadius: '5px', p: 0.7, textAlign: 'right' }}>{web3.utils.fromWei(selectedProject.minAmount.toString())} EOC</Typography>
-              </Box>
-            </Box>
-            <br />
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Box sx={{ width: '100%', mr: 1 }}>
-                <LinearProgress sx={{ height: '8px', borderRadius: '4px' }} color="secondary" variant="determinate" value={currentPercentage() > 100 ? 100 : currentPercentage()} />
-              </Box>
-              <Box sx={{ minWidth: 35 }}>
-                <Typography variant="body2" color="secondary">{Math.round(currentPercentage())}%</Typography>
-              </Box>
-            </Box>
-            <br />
-            <br />
             <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+              <Typography gutterBottom variant="h5" component="div">
+                {selectedProject.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {selectedProject.description}
+              </Typography>
+              <br />
+              <br />
+              <TextField
+                onChange={(e) => setTitle(e.target.value)}
+                label="Projet"
+                variant='outlined'
+                color='secondary'
+                fullWidth
+                required
+                sx={{ mb: 3 }}
+                error={titleError}
+              />
+              <TextField
+                onChange={(e) => setDescription(e.target.value)}
+                label="Comment allez vous utiliser le montant de ce retrait"
+                variant='outlined'
+                color='secondary'
+                multiline
+                rows={5}
+                fullWidth
+                required
+                sx={{ mb: 3 }}
+                error={descriptionError}
+              />
+              <br />
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Box>
+                  <Typography variant="body2" sx={{ mb: 1 }}>Montant actuel</Typography>
+                  <Typography variant="button" sx={{ backgroundColor: greenColor, borderRadius: '5px', p: 0.7 }}>{web3.utils.fromWei(selectedProject.projectBalance.toString())} EOC</Typography>
+                </Box>
+                <Box>
+                  <Typography variant="body2" sx={{ mb: 1, textAlign: 'right' }}>Objectif</Typography>
+                  <Typography variant="button" sx={{ backgroundColor: greenColor, borderRadius: '5px', p: 0.7, textAlign: 'right' }}>{web3.utils.fromWei(selectedProject.minAmount.toString())} EOC</Typography>
+                </Box>
+              </Box>
+              <br />
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ width: '100%', mr: 1 }}>
+                  <LinearProgress sx={{ height: '8px', borderRadius: '4px' }} color="secondary" variant="determinate" value={currentPercentage() > 100 ? 100 : currentPercentage()} />
+                </Box>
+                <Box sx={{ minWidth: 35 }}>
+                  <Typography variant="body2" color="secondary">{Math.round(currentPercentage())}%</Typography>
+                </Box>
+              </Box>
+              <br />
+              <br />
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <TextField
                   onChange={(e) => setAmoutMin(e.target.value)}
@@ -141,7 +173,7 @@ export default function Withdrawal(props) {
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                   <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
                   {daysLeft() > 0 &&
-                  <Typography variant="body1" color="text.secondary">{daysLeft()} jours</Typography>}
+                    <Typography variant="body1" color="text.secondary">{daysLeft()} jours</Typography>}
                 </Box>
               </Box>
               <Button

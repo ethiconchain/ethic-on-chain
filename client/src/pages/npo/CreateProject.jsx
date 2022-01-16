@@ -57,7 +57,7 @@ export default function CreateProject(props) {
     if (nbDays === 0) { setNbDaysError(true) }
     if (amoutMin === 0) { setAmoutMinError(true) }
     if (amoutMax === 0) { setAmoutMaxError(true) }
-    if (title && description) {
+    if (title && description && zone && nbDays && amoutMin && amoutMax) {
       plusProject()
     }
   }
