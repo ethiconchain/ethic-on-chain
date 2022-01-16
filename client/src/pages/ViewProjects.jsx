@@ -229,11 +229,11 @@ const ViewProjects = (props) => {
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell sx={{ border: 0 }}>{project.description}</TableCell>
-                      <TableCell sx={{ border: 0, width: '150px' }}>{msToDate(project.campaignStartDate)}</TableCell>
-                      <TableCell sx={{ border: 0, width: '150px' }}>{project.campaignDurationInDays} j</TableCell>
-                      <TableCell sx={{ border: 0, width: '150px' }}>{msToDate(project.startDate)}</TableCell>
-                      <TableCell sx={{ border: 0 }}>{project.npoErc20Address.match(/^.{8}/)}...</TableCell>
+                      <TableCell sx={{ border: 0, verticalAlign: 'top' }}>{project.description}</TableCell>
+                      <TableCell sx={{ border: 0, width: '150px', verticalAlign: 'top' }}>{msToDate(project.campaignStartDate)}</TableCell>
+                      <TableCell sx={{ border: 0, width: '150px', verticalAlign: 'top' }}>{project.campaignDurationInDays} j</TableCell>
+                      <TableCell sx={{ border: 0, width: '150px', verticalAlign: 'top' }}>{msToDate(project.startDate)}</TableCell>
+                      <TableCell sx={{ border: 0, verticalAlign: 'top' }}>{project.npoErc20Address.match(/^.{8}/)}...</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
