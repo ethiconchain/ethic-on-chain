@@ -42447,9 +42447,17 @@
     "name": "solc",
     "version": "0.8.11+commit.d7f03943.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0xb2Ce9395FeA2dAdd80dbA80983a07fFf68C28844",
+      "transactionHash": "0x3fbd6c677b8866379b8531a7202caa58fb8221c42a74b5af26e278d3c792628e"
+    }
+  },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-16T13:19:50.594Z",
+  "updatedAt": "2022-01-16T13:28:09.334Z",
+  "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",
     "kind": "dev",

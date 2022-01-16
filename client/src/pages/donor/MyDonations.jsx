@@ -159,13 +159,23 @@ const MyDonations = (props) => {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5} >
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ mb: 3, ml: 5, mt: 2 }}>
-                <Box>Cause : {causeList[findProjectPropertyValue(donation.projectId).cause]}</Box>
-                <Box>Montant minimum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).minAmount)} EOC</Box>
-                <Box>Montant maximum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).maxAmount)} EOC</Box>
-                <Box>Total dons : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).projectBalance)} EOC</Box>
-                <Box>Zone géographique : {findProjectPropertyValue(donation.projectId).geographicalArea}</Box>
-                <Box>Dates projet : du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</Box>
-                <Box>Campagne : début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</Box>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', flexDirection: 'row'}}>
+                  <Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Cause : {causeList[findProjectPropertyValue(donation.projectId).cause]}</Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Montant minimum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).minAmount)} EOC</Box>
+                  </Box>
+                  <Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Montant maximum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).maxAmount)} EOC</Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Total dons : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).projectBalance)} EOC</Box>
+                  </Box>
+                  <Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Zone géographique : {findProjectPropertyValue(donation.projectId).geographicalArea}</Box>
+                  </Box>
+                  <Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Dates projet : du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</Box>
+                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Campagne : début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</Box>
+                  </Box>
+                </Box>
               </Box>
             </Collapse>
           </TableCell>

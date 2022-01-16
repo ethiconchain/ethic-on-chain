@@ -229,7 +229,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -273,7 +274,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -286,7 +288,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -527,7 +530,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -582,7 +586,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -633,7 +638,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -678,7 +684,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -784,7 +791,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -884,7 +892,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -990,7 +999,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -1036,7 +1046,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -1082,7 +1093,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -1133,7 +1145,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -1184,7 +1197,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_eocTokenAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_donationId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_projectId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_donorId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_donationDate\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"donationAmount\",\"type\":\"uint256\"}],\"name\":\"DonationAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_donorId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_donorErc20Address\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"_donorName\",\"type\":\"string\"}],\"name\":\"DonorAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_poId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_npoErc20Address\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"_denomination\",\"type\":\"string\"}],\"name\":\"NpoAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_projectId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"_title\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_startDate\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_endDate\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_minAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_maxAmount\",\"type\":\"uint256\"}],\"name\":\"ProjectAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_withdrawalId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_projectId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_addressRecipent\",\"type\":\"address\"}],\"name\":\"TokensWithdrawn\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_donationAmount\",\"type\":\"uint256\"}],\"name\":\"addDonation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_donorErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_surName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_postalAddress\",\"type\":\"string\"}],\"name\":\"addDonor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_denomination\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_postalAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_object\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_npoType\",\"type\":\"string\"}],\"name\":\"addNpo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_geographicalArea\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_startDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_endDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_campaignStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_campaignDurationInDays\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_minAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_maxAmount\",\"type\":\"uint256\"}],\"name\":\"addProject\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"donorAddresses\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"donorId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"donorErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"surName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"postalAddress\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"getDonation\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"donationId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"donorId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"donationDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"donationAmount\",\"type\":\"uint256\"}],\"internalType\":\"struct EthicOnChainLib.Donation\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_addressNpo\",\"type\":\"address\"}],\"name\":\"getDonationPerDonor\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"donationId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"donorId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"donationDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"donationAmount\",\"type\":\"uint256\"}],\"internalType\":\"struct EthicOnChainLib.Donation[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_donorErc20Address\",\"type\":\"address\"}],\"name\":\"getDonor\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"donorId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"donorErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"surName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"postalAddress\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"donationIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct EthicOnChainLib.Donor\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDonors\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"donorId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"donorErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"surName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"postalAddress\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"donationIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct EthicOnChainLib.Donor[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_npoErc20Address\",\"type\":\"address\"}],\"name\":\"getNpo\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"npoId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"denomination\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"postalAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"object\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"npoType\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"projectIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"withdrawalIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct EthicOnChainLib.NPO\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getNpos\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"npoId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"denomination\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"postalAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"object\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"npoType\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"projectIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"withdrawalIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct EthicOnChainLib.NPO[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_projectId\",\"type\":\"uint256\"}],\"name\":\"getProject\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"campaignStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"campaignDurationInDays\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectBalance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectTotalDonations\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"enum EthicOnChainLib.ProjectCause\",\"name\":\"cause\",\"type\":\"uint8\"},{\"internalType\":\"enum EthicOnChainLib.ProjectStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"geographicalArea\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"donationIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"withdrawalIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct EthicOnChainLib.Project\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProjects\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"campaignStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"campaignDurationInDays\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectBalance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectTotalDonations\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"enum EthicOnChainLib.ProjectCause\",\"name\":\"cause\",\"type\":\"uint8\"},{\"internalType\":\"enum EthicOnChainLib.ProjectStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"geographicalArea\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"donationIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"withdrawalIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct EthicOnChainLib.Project[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_addressNpo\",\"type\":\"address\"}],\"name\":\"getProjectsPerNpo\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"startDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"campaignStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"campaignDurationInDays\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectBalance\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectTotalDonations\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"enum EthicOnChainLib.ProjectCause\",\"name\":\"cause\",\"type\":\"uint8\"},{\"internalType\":\"enum EthicOnChainLib.ProjectStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"geographicalArea\",\"type\":\"string\"},{\"internalType\":\"uint256[]\",\"name\":\"donationIds\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"withdrawalIds\",\"type\":\"uint256[]\"}],\"internalType\":\"struct EthicOnChainLib.Project[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"getWithdrawal\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"withdrawalId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"withdrawalDate\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"}],\"internalType\":\"struct EthicOnChainLib.Withdrawal\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_addressNpo\",\"type\":\"address\"}],\"name\":\"getWithdrawalPerNpo\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"withdrawalId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"withdrawalDate\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"}],\"internalType\":\"struct EthicOnChainLib.Withdrawal[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"npoAddresses\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"npoId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"npoErc20Address\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"denomination\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"postalAddress\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"object\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"npoType\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_projectId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_description\",\"type\":\"string\"}],\"name\":\"withdrawTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Lahcen E. Dev / J\\u00e9r\\u00f4me Gauthier\",\"kind\":\"dev\",\"methods\":{\"addDonation(uint256,uint256)\":{\"details\":\"Add a Donation struct in global donationMap\",\"params\":{\"_donationAmount\":\"amount of the donation in EOC tokens\",\"_projectId\":\"id of the project for which the donation is done\"}},\"addDonor(address,string,string,string)\":{\"details\":\"The administrator/contract can add a new Donor\",\"params\":{\"_donorErc20Address\":\"ERC20 address of the donor\",\"_name\":\"Name of the Donor\",\"_postalAddress\":\"postal address of the donor\",\"_surName\":\"Surname of the Donor\"}},\"addNpo(address,string,string,string,string)\":{\"details\":\"The administrator can add a new NPO\",\"params\":{\"_denomination\":\"Demonination of the NPO\",\"_npoErc20Address\":\"the ERC20 address of the npo\",\"_npoType\":\"Type of npo organization\",\"_object\":\"object of NPO\",\"_postalAddress\":\"Postal address of the NPO\"}},\"addProject(string,string,string,uint256,uint256,uint256,uint256,uint256,uint256)\":{\"details\":\"This function will allow to add a project, the owner will be the one who calls the function. \",\"params\":{\"_campaignDurationInDays\":\"the duration of the collection of funds\",\"_campaignStartDate\":\"the beginning of the collection of funds\",\"_description\":\"description of the project\",\"_endDate\":\"The end of the project\",\"_geographicalArea\":\"the geographical area where the project will be located.\",\"_maxAmount\":\"The maximum price to make the project a success \",\"_minAmount\":\"The minimum price for the project to be valid\",\"_startDate\":\"The start date of the project\",\"_title\":\"The title of the project\"}},\"constructor\":{\"details\":\"Initialise the deployed EOC token address for swap\",\"params\":{\"_eocTokenAddress\":\"EOC Token address\"}},\"getDonation(uint256)\":{\"details\":\"get Donation by id param _id index pour retrouver la donation a retourner\",\"returns\":{\"_0\":\"a struct donation \"}},\"getDonationPerDonor(address)\":{\"details\":\"Allows to know all the donations of a single donor\",\"params\":{\"_addressNpo\":\"id which represents the index\"},\"returns\":{\"_0\":\"Returns an array of all donation of a single donor\"}},\"getDonor(address)\":{\"details\":\"get a Donor via its erc20 address\",\"params\":{\"_donorErc20Address\":\"erc20 address of the Donor\"},\"returns\":{\"_0\":\"returns the corresponding Donor struct\"}},\"getDonors()\":{\"details\":\"get all Donors\",\"returns\":{\"_0\":\"returns an array of all Donors\"}},\"getNpo(address)\":{\"details\":\"get an NPO via its erc20 address\",\"params\":{\"_npoErc20Address\":\"erc20 address of the NPO\"},\"returns\":{\"_0\":\"returns the corresponding NPO struct\"}},\"getNpos()\":{\"details\":\"get all NPOs\",\"returns\":{\"_0\":\"returns an array of all NPOs\"}},\"getProject(uint256)\":{\"details\":\"Returns a single Project\",\"params\":{\"_projectId\":\"project unique id\"},\"returns\":{\"_0\":\"the Project struct instance corresponding to _projectId\"}},\"getProjects()\":{\"details\":\"get all projects\",\"returns\":{\"_0\":\"returns an array of all Project\"}},\"getProjectsPerNpo(address)\":{\"details\":\"Allows to know all the projects of an NPO\",\"params\":{\"_addressNpo\":\"ERC20 address of the NPO\"},\"returns\":{\"_0\":\"Returns an array of projects\"}},\"getWithdrawal(uint256)\":{\"details\":\"get Withdrawal by id param _id index pour retrouver le withdrawal a retourner\",\"returns\":{\"_0\":\"a struct retait \"}},\"getWithdrawalPerNpo(address)\":{\"details\":\"Allows to know all the donations of a single donor\",\"params\":{\"_addressNpo\":\"id which represents the index\"},\"returns\":{\"_0\":\"Returns an array of all donation of a single donor\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"withdrawTokens(uint256,uint256,string,string)\":{\"details\":\"Allows an NPO to withdraw funds from a project \",\"params\":{\"_amount\":\"Amount of withdrawal\",\"_description\":\"description of the withdrawal\",\"_projectId\":\"project id \",\"_title\":\"title of the withdrawal\"}}},\"title\":\"EthicOnChain \",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"EthicOnChain contract to manage NPOs, Projects and Donors\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/EthicOnChain.sol\":\"EthicOnChain\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0x24e0364e503a9bbde94c715d26573a76f14cd2a202d45f96f52134ab806b67b9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e12cbaa7378fd9b62280e4e1d164bedcb4399ce238f5f98fc0eefb7e50577981\",\"dweb:/ipfs/QmXRoFGUgfsaRkoPT5bxNMtSayKTQ8GZATLPXf69HcRA51\"]},\"@openzeppelin/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0xd1d8caaeb45f78e0b0715664d56c220c283c89bf8b8c02954af86404d6b367f8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://300a0cc7be3b26c96c22a47ffa9530a585e1c4f2dba3021d9bf309dc63007487\",\"dweb:/ipfs/QmQmxsvxK6CaJmQ4D8vDCYPLHMqcMmZLcBqedG4GFAbzu9\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x61437cb513a887a1bbad006e7b1c8b414478427d33de47c5600af3c748f108da\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2c3d0973630ed74f2b5ce3944677a885dc70ec32fc83b35f55045a10224da32b\",\"dweb:/ipfs/QmbefZ5RoEZKNHXCALfh683PnaNYzKPcKMFjyY1DVAgq8A\"]},\"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol\":{\"keccak256\":\"0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5a376d3dda2cb70536c0a45c208b29b34ac560c4cb4f513a42079f96ba47d2dd\",\"dweb:/ipfs/QmZQg6gn1sUpM8wHzwNvSnihumUCAhxD119MpXeKp8B9s8\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"project:/contracts/EthicOnChain.sol\":{\"keccak256\":\"0x25c2525bfab9241bc95f476934939465bd82a0284f076885abf26371a62418f4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://df14f6b1b2364631faf7776f1b6b76464d5a18aae7f66671329a376c791a31c6\",\"dweb:/ipfs/QmUnnVBjF6gbZ3a9u5ZSNSPkk1Ez9sBqZjbepywTGzfFgb\"]},\"project:/contracts/EthicOnChainLib.sol\":{\"keccak256\":\"0x17bdb2e40f4156c29d027b0f511cc290f5864bb3eac06a1c0848661cbe94a415\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7bbd61d5db839d32f17d26ae3a08b2681d9bbfbb675636aff6ac0fb96c814497\",\"dweb:/ipfs/QmTy8jPt2pBS8ZREmDkLVmUAKbvjEC4SiRviqP4c9nSkgf\"]}},\"version\":1}",
@@ -83239,9 +83253,200 @@
     "name": "solc",
     "version": "0.8.11+commit.d7f03943.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {
+        "0x5b01b3cbb79f6d6de617795637d44cf4ec173dab689fb0804ab8dbbd88f4302b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_donationId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_projectId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_donorId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_donationDate",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "donationAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "DonationAdded",
+          "type": "event"
+        },
+        "0xf1a73eeb2b4ddced9fb956e389a13618a37205f30bf1694dbf5ba71b1bbfc25c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_donorId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_donorErc20Address",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_donorName",
+              "type": "string"
+            }
+          ],
+          "name": "DonorAdded",
+          "type": "event"
+        },
+        "0x1a9e41b629a15a636da77b06f2707c109021423f307b3f34f33ded411423ef14": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_poId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_npoErc20Address",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_denomination",
+              "type": "string"
+            }
+          ],
+          "name": "NpoAdded",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0xf9702874e260ae597ee7c3acbf77aad0ce01f26c14650d5afbc5b43a62b34af3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_projectId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_title",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_startDate",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_endDate",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_minAmount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_maxAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProjectAdded",
+          "type": "event"
+        },
+        "0x6584d90ddbb422689586649f31c804fbe9302f09a265a73b622cc2516c010823": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_withdrawalId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_projectId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_addressRecipent",
+              "type": "address"
+            }
+          ],
+          "name": "TokensWithdrawn",
+          "type": "event"
+        }
+      },
+      "links": {
+        "EthicOnChainLib": "0xb2Ce9395FeA2dAdd80dbA80983a07fFf68C28844"
+      },
+      "address": "0x910DD24F2E20504D6DD502A7C8EDA1C1994816B1",
+      "transactionHash": "0xf739e6a0cba4fc2efb8a569ed4d8e9360324946ff838a56b476857d0048e4109"
+    }
+  },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-16T13:19:50.504Z",
+  "updatedAt": "2022-01-16T13:28:09.405Z",
+  "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",
     "kind": "dev",
