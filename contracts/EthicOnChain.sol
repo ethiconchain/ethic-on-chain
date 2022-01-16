@@ -60,12 +60,12 @@ contract EthicOnChain is Ownable {
         string memory _object,
         string memory _npoType) public onlyOwner {
         // Mandatory fields
-        require(_npoErc20Address > address(0), "ERR 0");
-        require(bytes(_denomination).length > 0, "ERR 1");
-        require(bytes(_postalAddress).length > 0, "ERR 2");
-        require(bytes(_object).length > 0, "ERR 3");
-        require(bytes(_npoType).length > 0, "ERR 4");
-        require(bytes(npoAddresses[_npoErc20Address].denomination).length == 0, "ERR 5");
+        require(_npoErc20Address > address(0), unicode"L'adresse du NPO doit être différente de zéro");
+        require(bytes(_denomination).length > 0, unicode"La dénomination est obligatoire");
+        require(bytes(_postalAddress).length > 0, "L'adresse est obligatoire");
+        require(bytes(_object).length > 0, "L'objet est obligatoire");
+        require(bytes(_npoType).length > 0, "Le type est obligatoire");
+        require(bytes(npoAddresses[_npoErc20Address].denomination).length == 0, unicode"NPO déjà enregistré");
         
         EthicOnChainLib.NPO storage newNpo = npoAddresses[_npoErc20Address];
         newNpo.npoId = npoCount;
@@ -90,8 +90,8 @@ contract EthicOnChain is Ownable {
         string memory _surName,
         string memory _postalAddress) public onlyOwner {
         // Mandatory fields
-        require(_donorErc20Address > address(0), "ERR 6");
-        require(donorAddresses[_donorErc20Address].donorErc20Address == address(0), "ERR 7");
+        require(_donorErc20Address > address(0), unicode"L'adresse du donateur doit être différente de zéro");
+        require(donorAddresses[_donorErc20Address].donorErc20Address == address(0), unicode"Donor déjà enregistré");
 
         EthicOnChainLib.Donor storage newDonor = donorAddresses[_donorErc20Address];
         newDonor.donorId = donorCount;
@@ -126,19 +126,19 @@ contract EthicOnChain is Ownable {
         uint _maxAmount
     ) public {
         EthicOnChainLib.NPO storage projectNpo = npoAddresses[msg.sender];
-        require(bytes(projectNpo.denomination).length != 0, "ERR 8");
+        require(bytes(projectNpo.denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
         // Mandatory fields
-        require(bytes(_title).length > 0, "ERR 9");
-        require(bytes(_description).length > 0, "ERR 10");
-        require(_startDate > 0, "ERR 11");
-        require(_endDate > 0, "ERR 12");
-        require(_minAmount > 0, "ERR 13");
-        require(_maxAmount > 0, "ERR 14 ");
-        require(_campaignStartDate > 0, "ERR 15");
-        require(_campaignDurationInDays > 0, "ERR 16");
+        require(bytes(_title).length > 0, "Le titre est obligatoire");
+        require(bytes(_description).length > 0, "La description est obligatoire");
+        require(_startDate > 0, unicode"Date de début de projet obligatoire");
+        require(_endDate > 0, "Date de fin de projet obligatoire");
+        require(_minAmount > 0, "Montant minimal obligatoire");
+        require(_maxAmount > 0, "Montant maximal obligatoire");
+        require(_campaignStartDate > 0, unicode"Date de début de campagne obligatoire");
+        require(_campaignDurationInDays > 0, unicode"Durée de campagne obligatoire");
         // Comparisons
-        require(_startDate < _endDate, "ERR 17");
-        require(_minAmount < _maxAmount, "ERR 18");
+        require(_startDate < _endDate, unicode"La date début de projet doit être avant la fin");
+        require(_minAmount < _maxAmount, unicode"Le montant minimal doit être inférieur au montant maximal");
 
         EthicOnChainLib.Project storage newProject = projectMap[projectCount];
         newProject.projectId = projectCount;
@@ -164,13 +164,13 @@ contract EthicOnChain is Ownable {
     /// @param _donationAmount amount of the donation in EOC tokens
     function addDonation(uint _projectId, uint _donationAmount) public {
         EthicOnChainLib.Donor storage donationDonor = donorAddresses[msg.sender];
-        require(donationDonor.donorErc20Address != address(0), unicode"ERR 19"); // concept de KYC
+        require(donationDonor.donorErc20Address != address(0), unicode"Vous n'êtes pas enregistré en tant que donateur"); // concept de KYC
         EthicOnChainLib.Project storage donationProject = projectMap[_projectId];
-        require(bytes(donationProject.title).length != 0, "ERR 20 ");
+        require(bytes(donationProject.title).length != 0, "Projet inconnu");
         // donation possible seulement si dans période de campagne
         uint campaignEndDate = donationProject.campaignStartDate + donationProject.campaignDurationInDays * 1 days;
-        require(block.timestamp > donationProject.campaignStartDate, "ERR 21");
-        require(block.timestamp < campaignEndDate, "ERR 22");
+        require(block.timestamp > donationProject.campaignStartDate, unicode"La campagne n'est pas commencée");
+        require(block.timestamp < campaignEndDate, unicode"La campagne est terminée");
 
         EthicOnChainLib.Donation storage newDonation = donationMap[donationCount];
         newDonation.donationId = donationCount;
@@ -189,9 +189,10 @@ contract EthicOnChain is Ownable {
         // transfert de la donation du donateur vers le contrat
         // le donateur devra avoir préalablement approuvé (fonction approve du token - un minimum = le montant à transférer)
         // le contrat à transférer les tokens de l'addresse du donateur vers l'adresse du contrat
-        IERC20(eocTokenAddress).transferFrom(msg.sender, address(this), _donationAmount);
-        //TODO PLUS TARD creation d'un escrow contract pour ne pas verser tous les tokens dans le même contrat général
-        emit DonationAdded(newDonation.donationId, newDonation.projectId, newDonation.donorId, newDonation.donationDate, newDonation.donationAmount);
+        if(IERC20(eocTokenAddress).transferFrom(msg.sender, address(this), _donationAmount)){
+            //TODO PLUS TARD creation d'un escrow contract pour ne pas verser tous les tokens dans le même contrat général
+            emit DonationAdded(newDonation.donationId, newDonation.projectId, newDonation.donorId, newDonation.donationDate, newDonation.donationAmount);
+        }
     }
 
     /// @dev Allows an NPO to withdraw funds from a project 
@@ -201,11 +202,11 @@ contract EthicOnChain is Ownable {
     /// @param _description description of the withdrawal
     function withdrawTokens (uint _projectId, uint _amount,string memory _title,string memory _description) public {
         EthicOnChainLib.NPO storage withdrawalNpo = npoAddresses[msg.sender];
-        require(bytes(npoAddresses[msg.sender].denomination).length != 0, "ERR 23");
-        require(bytes(projectMap[_projectId].title).length != 0, "ERR 20");
-        require(block.timestamp > projectMap[_projectId].campaignStartDate, "ERR 21");
+        require(bytes(npoAddresses[msg.sender].denomination).length != 0, unicode"Vous n'êtes pas enregistré en tant que NPO");
+        require(bytes(projectMap[_projectId].title).length != 0, "Projet inconnu");
+        require(block.timestamp > projectMap[_projectId].campaignStartDate, unicode"La campagne n'est pas commencée");
         uint256 balance = projectMap[_projectId].projectBalance;
-        require(balance >= _amount, "ERR 24");
+        require(balance >= _amount, "Balance insuffisante");
 
         EthicOnChainLib.Withdrawal storage newWithdrawal = withdrawalMap[withdrawalCount];
         newWithdrawal.withdrawalId = withdrawalCount;
@@ -219,8 +220,9 @@ contract EthicOnChain is Ownable {
         projectMap[_projectId].projectBalance -= _amount; // mise à jour de la balance du projet
         projectMap[_projectId].withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le projet
         withdrawalCount++;
-        IERC20(eocTokenAddress).transfer(msg.sender,_amount);
-        emit TokensWithdrawn(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
+        if(IERC20(eocTokenAddress).transfer(msg.sender,_amount)){
+            emit TokensWithdrawn(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
+        }
     }
 
 
