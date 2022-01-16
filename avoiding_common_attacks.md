@@ -3,6 +3,7 @@
 Les points suivants de sécurité sont issues de la [documentation Alyra](https://ecole.alyra.fr/mod/page/view.php?id=900)
 TODO: tester également l'utilisation d'un outil comme [Mythril](https://github.com/ConsenSys/mythril)
 TODO: tester également l'utilisation d'un outil comme [Slither ](https://github.com/crytic/slither)
+TODO: tester également l'utilisation d'un outil comme [Manticore  ](https://github.com/trailofbits/manticore)
 
 
 ### Appel à l’inconnu - Call to the unknown
@@ -12,7 +13,7 @@ La fonction send n'est pas non plus utilisée et nous n'avons pas défini de fon
 
 ### Désordre d’exception - Exception disorder
 
-Les seules fonctions qui mettent en jeu une transaction n'ont pas d'appels croisés.
+Les seules fonctions qui mettent en jeu une transaction n'ont pas d'appels croisés. Nous n'avons aucune boucle for dans le contract EthicOnChain.sol.
 
 ### Envoi sans gas - Gasless send
 
@@ -24,7 +25,10 @@ Les seules fonctions qui mettent en jeu une transaction n'ont pas d'appels crois
 
 ### Réentrance - Reentrancy 
 
-[EthicOnChain.sol](contracts/EthicOnChain.sol), fonctions addDonation et withdrawTokens: les appels à IERC20(eocTokenAddress).transfer et trasnferFrom sont faits en dernier.
+[EthicOnChain.sol](contracts/EthicOnChain.sol), fonctions addDonation et withdrawTokens: les appels à IERC20(eocTokenAddress).transfer et trasnferFrom sont faits en dernier. Vu et vérifié par l'outil Slithissait.
+
+### Timestamp:
+Pas d'interaction avec le contrat . Pas d'utilisation du nombre de block, ou de délais dans le contrat.
 
 ### Tx.origin
 
@@ -43,5 +47,8 @@ Les risques d'underflow/overflow ont été réglé depuis Solidity 0.8 et supér
 ### Limite de la taille de la pile - Stack size limit
 
 ### Déni de service - DOS (Deny-of-Service)
-
+Si besoin favoriser les paiements "pull over push".
 ### Déni de service avec la limite en gas du bloc
+
+
+
