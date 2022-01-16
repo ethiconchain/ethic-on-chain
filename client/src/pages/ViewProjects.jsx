@@ -29,7 +29,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const ViewProjects = (props) => {
   const { data, msToDate } = props
-  const { web3 } = data
+  const { web3, isAdmin } = data
   const [allProjects, setAllProjects] = useState(null)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -202,15 +202,19 @@ const ViewProjects = (props) => {
             <TableCell align="center">-</TableCell>
           }
 
-
-          <TableCell align="right">
-            <Link to={`/faireundon/${project.projectId}`}>
-              <Button disabled={(project.status === "2" || project.status === "3") ? false : true}
-                variant="contained" color='secondary' sx={{ minWidth: '120px' }}>
-                <VolunteerActivismIcon size="large" />
-              </Button>
-            </Link>
-          </TableCell>
+          {
+            isAdmin ?
+              <TableCell />
+              :
+              <TableCell align="right">
+                <Link to={`/faireundon/${project.projectId}`}>
+                  <Button disabled={(project.status === "2" || project.status === "3") ? false : true}
+                    variant="contained" color='secondary' sx={{ minWidth: '120px' }}>
+                    <VolunteerActivismIcon size="large" />
+                  </Button>
+                </Link>
+              </TableCell>
+          }
         </TableRow>
 
         <TableRow>
@@ -270,7 +274,12 @@ const ViewProjects = (props) => {
                 <TableCell sx={{ typography: 'upper' }}>Objectif min.</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Financement</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Clôture</TableCell>
-                <TableCell sx={{ typography: 'upper' }} align="right">faire un don</TableCell>
+                {
+                  isAdmin ?
+                    <TableCell />
+                    :
+                    <TableCell sx={{ typography: 'upper' }} align="right">faire un don</TableCell>
+                }
               </TableRow>
             </TableHead>
             <TableBody>
@@ -304,7 +313,8 @@ const ViewProjects = (props) => {
               </TableRow>
             </TableFooter>
           </Table>
-        </TableContainer>}
+        </TableContainer>
+      }
     </>
   )
 }

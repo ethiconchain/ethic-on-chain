@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import IconButton from '@mui/material/IconButton';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -163,10 +160,10 @@ const Historic = (props) => {
           <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow selected>
-                <TableCell>Projet</TableCell>
-                <TableCell>Donateur</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Montant</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Donateur</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -210,7 +207,6 @@ const Historic = (props) => {
             </TableFooter>
           </Table>
         </TableContainer>}
-
     </>
   )
 }
