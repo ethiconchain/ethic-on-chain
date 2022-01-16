@@ -27,7 +27,7 @@ contract('EthicOnChain', function (accounts) {
     const _campaignStartDate = new BN(3600000); ;
     const _campaignDurationInDays = new BN(11005);
     const _projectIndex = new BN(1);
-    const _projectStatusInProgress = "3"; // 3 = ProjectStatus.InProgress
+    const _projectStatusInProgress = "4"; // 3 = ProjectStatus.InProgress
 
     const _newDonorErc20Address = accounts[1];
     const _donorName = "Jeff";
