@@ -86,7 +86,7 @@ library EthicOnChainLib {
     /// @param _npoAddresses mapping of NPO addresses to NPO Struct
     /// @param _npoErc20Address erc20 address of the NPO Struct
     /// @return returns the corresponding NPO struct
-    function libGetNpo(mapping (address => NPO) storage _npoAddresses, address _npoErc20Address) public view returns(NPO memory) {
+    function libGetNpo(mapping (address => NPO) storage _npoAddresses, address _npoErc20Address) external view returns(NPO memory) {
         return _npoAddresses[_npoErc20Address];
     }
     
@@ -104,7 +104,7 @@ library EthicOnChainLib {
     /// @param _npoMap mapping of NPO id to NPO Struct
     /// @param _npoCount current index for NPO = total count of NPOs
     /// @return returns an array of all NPOs
-    function libGetNpos(mapping (address => NPO) storage _npoAddresses, mapping (uint => address) storage _npoMap, uint _npoCount) public view returns(NPO [] memory) {
+    function libGetNpos(mapping (address => NPO) storage _npoAddresses, mapping (uint => address) storage _npoMap, uint _npoCount) external view returns(NPO [] memory) {
         uint arraySize = _npoCount;
         NPO [] memory result= new NPO[](arraySize);
         for(uint i; i < arraySize; i++) {
@@ -117,7 +117,7 @@ library EthicOnChainLib {
     /// @param _donorAddresses mapping of Donors addresses to Donor Struct
     /// @param _donorErc20Address erc20 address of the Donor
     /// @return returns the corresponding Donor struct
-    function libGetDonor(mapping (address => Donor) storage _donorAddresses, address _donorErc20Address) public view returns(Donor memory) {
+    function libGetDonor(mapping (address => Donor) storage _donorAddresses, address _donorErc20Address) external view returns(Donor memory) {
         return _donorAddresses[_donorErc20Address];
     }
 
@@ -135,7 +135,7 @@ library EthicOnChainLib {
     /// @param _donorMap mapping of Donor id to Donor Struct
     /// @param _donorCount current index for Donor = total count of Donors
     /// @return returns an array of all Donors
-    function libGetDonors(mapping (address => Donor) storage _donorAddresses, mapping (uint => address) storage _donorMap, uint _donorCount) public view returns(Donor [] memory) {
+    function libGetDonors(mapping (address => Donor) storage _donorAddresses, mapping (uint => address) storage _donorMap, uint _donorCount) external view returns(Donor [] memory) {
         uint arraySize = _donorCount;
         Donor [] memory result = new Donor[](arraySize);
         for(uint i; i < arraySize; i++) {
@@ -159,7 +159,7 @@ library EthicOnChainLib {
     /// @param _projectMap mapping of Project id to Project Struct
     /// @param _projectCount current index for Project = total count of Projects
     /// @return returns an array of all Project
-    function libGetProjects(mapping (uint => Project) storage _projectMap, uint _projectCount) public view returns(Project [] memory) {
+    function libGetProjects(mapping (uint => Project) storage _projectMap, uint _projectCount) external view returns(Project [] memory) {
         uint arraySize = _projectCount;
         Project [] memory result= new Project[](arraySize);
         for(uint i; i < arraySize; i++) {
@@ -173,7 +173,7 @@ library EthicOnChainLib {
     /// @param _projectMap mapping of Project id to Project Struct
     /// @param _addressNpo ERC20 address of the NPO
     /// @return Returns an array of projects
-    function libGetProjectsPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) public view  returns(Project [] memory ) {
+    function libGetProjectsPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Project) storage _projectMap, address _addressNpo) external view  returns(Project [] memory ) {
         uint arraySize = _npoAddresses[_addressNpo].projectIds.length;
         Project [] memory result = new Project[](arraySize);
         for(uint i; i < arraySize; i++) {
@@ -196,7 +196,7 @@ library EthicOnChainLib {
     /// @param _donationMap mapping of Donation id to Donation Struct
     /// @param _addressNpo id which represents the index
     /// @return Returns an array of all donation of a single donor
-    function libGetDonationPerDonor(mapping (address => Donor) storage _donorAddresses, mapping (uint => Donation) storage _donationMap, address _addressNpo) public view  returns(Donation [] memory ) {
+    function libGetDonationPerDonor(mapping (address => Donor) storage _donorAddresses, mapping (uint => Donation) storage _donationMap, address _addressNpo) external view  returns(Donation [] memory ) {
         uint arraySize = _donorAddresses[_addressNpo].donationIds.length;
         Donation [] memory result= new Donation[](arraySize);
         for(uint i; i < arraySize; i++) {
@@ -219,7 +219,7 @@ library EthicOnChainLib {
     /// @param _withdrawalMap mapping of Withdrawal id to Withdrawal Struct
     /// @param _addressNpo id which represents the index
     /// @return Returns an array of all donation of a single donor
-    function libGetWithdrawalPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Withdrawal) storage _withdrawalMap, address _addressNpo) public view  returns(Withdrawal [] memory ) {
+    function libGetWithdrawalPerNpo(mapping (address => NPO) storage _npoAddresses, mapping (uint => Withdrawal) storage _withdrawalMap, address _addressNpo)  external view  returns(Withdrawal [] memory ) {
         uint arraySize = _npoAddresses[_addressNpo].withdrawalIds.length;
         Withdrawal [] memory result= new Withdrawal[](arraySize);
         for(uint i; i < arraySize; i++) {

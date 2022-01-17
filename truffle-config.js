@@ -7,9 +7,10 @@ module.exports = {
   contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   networks: {
     develop: {
-      host: "localhost",     // Localhost (default: none)
+      host: "127.0.0.1",     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "5777",       // Any network (default: none)
+      gas: 6721975,
     },
     development: {
       host: "127.0.0.1",     // Localhost (default: none)
@@ -37,6 +38,15 @@ module.exports = {
         return new HDWalletProvider(`${process.env.MNEMONIC}`, `https://kovan.infura.io/v3/${process.env.IDINFURA}`)
       },
       network_id: 42
+    },    
+    matic: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, 
+      `https://polygon-mumbai.infura.io/v3/4c2aef8f0b8d4b19b85e3bef915da9ba`),
+      network_id: 80001,
+      networkCheckTimeout: 10000, 
+      networkCheckTimeout: 5000,
+      timeoutBlocks: 5000,
+      skipDryRun: true
     }
   },
   compilers: {
@@ -45,7 +55,7 @@ module.exports = {
       settings: {  // Voir les documents de solidity pour des conseils sur l'optimisation et l'evmVersion
         optimizer: {
           enabled: false,
-          runs: 200
+          runs: 20
         },
       }
     },
