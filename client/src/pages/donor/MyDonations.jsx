@@ -128,62 +128,6 @@ const MyDonations = (props) => {
     );
   }
 
-  const DonationRow = (props) => {
-    const { donation } = props
-    const [open, setOpen] = useState(false);
-
-    return (
-      <>
-        <TableRow
-          key={donation.donationId}
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell>
-          <TableCell component="th" scope="donation">
-            {findProjectPropertyValue(donation.projectId).title}
-          </TableCell>
-          <TableCell>{findProjectPropertyValue(donation.projectId).description}</TableCell>
-          <TableCell>{msToDate(donation.donationDate)}</TableCell>
-          <TableCell sx={{ minWidth: '100px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
-        </TableRow>
-
-        <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5} >
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ mb: 3, ml: 5, mt: 2 }}>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', flexDirection: 'row'}}>
-                  <Box>
-                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Cause : {causeList[findProjectPropertyValue(donation.projectId).cause]}</Box>
-                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Montant minimum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).minAmount)} EOC</Box>
-                  </Box>
-                  <Box>
-                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Montant maximum : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).maxAmount)} EOC</Box>
-                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Total dons : {web3.utils.fromWei(findProjectPropertyValue(donation.projectId).projectBalance)} EOC</Box>
-                  </Box>
-                  <Box>
-                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Zone géographique : {findProjectPropertyValue(donation.projectId).geographicalArea}</Box>
-                  </Box>
-                  <Box>
-                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Dates projet : du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</Box>
-                    <Box sx={{ boxShadow: 1, m:1, p:1, display: 'flex' }}>Campagne : début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</Box>
-                  </Box>
-                </Box>
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
-      </>
-    )
-  }
-
   return (
     <>
       <Typography
@@ -201,9 +145,11 @@ const MyDonations = (props) => {
           <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow selected>
-                <TableCell />
                 <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Zone</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Description</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Dates du projet</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Campagne</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
               </TableRow>
@@ -213,7 +159,20 @@ const MyDonations = (props) => {
                 ? allMyDonations.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : allMyDonations
               ).map((donation) => (
-                <DonationRow key={donation.donationId} donation={donation} />
+                <TableRow
+                  key={donation.donationId}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="donation">
+                    {findProjectPropertyValue(donation.projectId).title}
+                  </TableCell>
+                  <TableCell>{findProjectPropertyValue(donation.projectId).geographicalArea}</TableCell>
+                  <TableCell>{findProjectPropertyValue(donation.projectId).description}</TableCell>
+                  <TableCell>Du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</TableCell>
+                  <TableCell>Début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</TableCell>
+                  <TableCell>{msToDate(donation.donationDate)}</TableCell>
+                  <TableCell sx={{ minWidth: '100px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
+                </TableRow>
               ))}
             </TableBody>
             <TableFooter >

@@ -43663,12 +43663,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x08969E24C8C0fEbFAbA3B5e698F8ECE0fD9800dA",
-      "transactionHash": "0x525e8f7901de5873477310cdf2b198b7ec7d4d88cced6072970ddd094c7c1e5c"
+      "address": "0xe27BF036269BeAf963c9112a15A70BeB34BDFCDc",
+      "transactionHash": "0x37cdbcaa62b5f24662900c66da723f0b948c8f1cabdb6c0dd679a947e9209d55"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-16T16:26:52.803Z",
+  "updatedAt": "2022-01-17T16:57:25.000Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",

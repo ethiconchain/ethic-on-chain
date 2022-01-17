@@ -185,7 +185,7 @@ export default function MakeDonation(props) {
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                   <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
                   {daysLeft() > 0 &&
-                    <Typography variant="body1" color="text.secondary">{daysLeft()} jours</Typography>}
+                    <Typography variant="body1" color="text.secondary">{daysLeft()} jour(s)</Typography>}
                 </Box>
               </Box>
               <Button

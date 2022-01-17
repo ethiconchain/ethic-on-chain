@@ -176,7 +176,7 @@ export default function CreateProject(props) {
                 variant='outlined'
                 color='secondary'
                 InputProps={{
-                  endAdornment: <InputAdornment position="end">jours</InputAdornment>,
+                  endAdornment: <InputAdornment position="end">jour(s)</InputAdornment>,
                 }}
                 fullWidth
                 required
