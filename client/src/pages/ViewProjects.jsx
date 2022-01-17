@@ -167,10 +167,9 @@ const ViewProjects = (props) => {
             </IconButton>
           </TableCell>
 
-          <TableCell component="th" scope="project">
-            {project.title}
-          </TableCell>
-          <TableCell component="th" scope="project">
+          <TableCell component="th" scope="project">{project.title}</TableCell>
+          <TableCell>{project.geographicalArea}</TableCell>
+          <TableCell>
             <Typography variant="button" sx={{ fontWeight: 'bold', color: 'white', bgcolor: statusColor[project.status], borderRadius: '3px', px: '5px', py: '1px' }}>{statusProject[project.status].toUpperCase()}</Typography>
           </TableCell>
           <TableCell>{web3.utils.fromWei(project.projectBalance.toString())} EOC</TableCell>
@@ -218,7 +217,7 @@ const ViewProjects = (props) => {
         </TableRow>
 
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8} >
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={9} >
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ mb: 3 }}>
                 <Table size="small" aria-label="purchases">
@@ -269,6 +268,7 @@ const ViewProjects = (props) => {
               <TableRow selected>
                 <TableCell />
                 <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>Zone</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Statut</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Dons collectés</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Objectif min.</TableCell>

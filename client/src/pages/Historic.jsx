@@ -161,6 +161,7 @@ const Historic = (props) => {
             <TableHead>
               <TableRow selected>
                 <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
+                <TableCell sx={{ typography: 'upper' }}>NPO</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Donateur</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
                 <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
@@ -178,6 +179,7 @@ const Historic = (props) => {
                   <TableCell component="th" scope="donation">
                     {findProjectInfos(donation.projectId, "title")}
                   </TableCell>
+                  <TableCell>{findProjectInfos(donation.projectId, "npoErc20Address").match(/^.{8}/)}...{findProjectInfos(donation.projectId, "npoErc20Address").match(/.{6}$/)}</TableCell>
                   <TableCell>{findDonorInfos(donation.donorId, "surName")} {findDonorInfos(donation.donorId, "name")}</TableCell>
                   <TableCell>{msToDate(donation.donationDate)}</TableCell>
                   <TableCell sx={{ minWidth: '100px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>

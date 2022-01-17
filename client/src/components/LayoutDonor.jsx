@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { Divider, Drawer, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import List from '@mui/material/List';
@@ -8,7 +9,8 @@ import ListItemText from '@mui/material/ListItemText';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { SubjectOutlined, VolunteerActivismOutlined, ListAltOutlined } from '@mui/icons-material';
-import { useNavigate, useLocation, Outlet } from 'react-router-dom';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 const drawerWidth = 240;
 
@@ -66,9 +68,16 @@ const LayoutDonor = (props) => {
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
-          <Typography sx={{ flexGrow: 1 }}>
-          { connectedDonor && connectedDonor[3] + ' ' + connectedDonor[2] + ' (' + accounts[0] + ')' }
-          </Typography>
+          <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <AccountBoxIcon />
+            <Typography variant="h6" sx={{ mx: 1 }}>
+              {connectedDonor && ' ' + connectedDonor[3] + ' ' + connectedDonor[2]}
+            </Typography>
+            <ArrowRightAltIcon color="disabled" fontSize="large" />
+            <Typography sx={{ ml: 1 }}>
+              {accounts[0]}
+            </Typography>
+          </Box>
           <img src="EthicOnChainLogo2.svg" alt="logo" height="30px" />
         </Toolbar>
       </AppBar>
