@@ -32,7 +32,7 @@ const MyProjects = (props) => {
   const { web3 } = data
   const [allMyProjects, setAllMyProjects] = useState(null)
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const statusProject = {
     0: "Indéfini",
     1: "A l'étude",

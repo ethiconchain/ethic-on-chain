@@ -115,7 +115,7 @@ export default function Withdrawal(props) {
               <br />
               <TextField
                 onChange={(e) => setTitle(e.target.value)}
-                label="Projet"
+                label="Titre"
                 variant='outlined'
                 color='secondary'
                 fullWidth
