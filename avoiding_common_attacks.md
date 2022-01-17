@@ -5,7 +5,7 @@ TODO: tester également l'utilisation d'un outil comme [Mythril](https://github.
 TODO: tester également l'utilisation d'un outil comme [Manticore  ](https://github.com/trailofbits/manticore)
 
 Utilisation de Slither dans notre smart contract EthicOnChain,[Slither ](https://github.com/crytic/slither),
-2 erreurs ont pu être trouvé à grace à Slither qui ont pu être corrigé.
+2 erreurs ont pu être trouvées grace à Slither et ont pu être corrigées.
 ![Cover](./images/avoiding_common_attacks/Slither.JPG)
 
 
@@ -41,17 +41,7 @@ Nous n'utilisons que msg.sender comme recommandé.
 
 Les risques d'underflow/overflow ont été réglé depuis Solidity 0.8 et supérieur.
 
-## TODO : les points suivants sont à revoir pour vérifier la bonne pratique
 
-### Contraintes de temps - time constraints
-
-### Ether perdu lors du transfer - Ether lost in transfer
-
-### Limite de la taille de la pile - Stack size limit
-
-### Déni de service - DOS (Deny-of-Service)
-Si besoin favoriser les paiements "pull over push".
-### Déni de service avec la limite en gas du bloc
 
 
 
