@@ -1,7 +1,9 @@
 ## avoiding_common_attacks.md
 
 Les points suivants de sécurité sont issues de la [documentation Alyra](https://ecole.alyra.fr/mod/page/view.php?id=900)
+
 TODO: tester également l'utilisation d'un outil comme [Mythril](https://github.com/ConsenSys/mythril)
+
 TODO: tester également l'utilisation d'un outil comme [Manticore  ](https://github.com/trailofbits/manticore)
 
 Utilisation de Slither dans notre smart contract EthicOnChain,[Slither ](https://github.com/crytic/slither),
