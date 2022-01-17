@@ -1,6 +1,8 @@
 ## Optimisation du code SOLIDITY
 Les points suivants d'optimisation sont issues de la [documentation Alyra](https://ecole.alyra.fr/mod/page/view.php?id=899)
+
 TODO: tester également l'utilisation d'un outil comme [Slither ](https://github.com/crytic/slither)
+
 TODO: tester également l'utilisation d'un outil comme [Solhint ](https://github.com/protofire/solhint)
 
 * Regroupement des variables : les Struct sont organisées de façon à regrouper les variables de même type.
