@@ -27,7 +27,7 @@ contract('EthicOnChain', function (accounts) {
     const _campaignStartDate = new BN(3600000); ;
     const _campaignDurationInDays = new BN(11005);
     const _projectIndex = new BN(1);
-    const _projectStatusInProgress = "4"; // 3 = ProjectStatus.InProgress
+    const _projectStatusCancelled  = "4"; // 4 = ProjectStatus.Cancelled
 
     const _newDonorErc20Address = accounts[1];
     const _donorName = "Jeff";
@@ -130,7 +130,7 @@ contract('EthicOnChain', function (accounts) {
         expect(verifCampaignDurationInDays).to.be.bignumber.equal(_campaignDurationInDays);
         expect(verifMinAmount).to.be.bignumber.equal(_minAmount);
         expect(verifMaxAmount).to.be.bignumber.equal(_maxAmount);
-        expect(projectStatus).to.be.equal(_projectStatusInProgress);
+        expect(projectStatus).to.be.equal(_projectStatusCancelled);
     });
 
     it('Add Project - Increase projectCount', async function () {
