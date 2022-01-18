@@ -38,7 +38,7 @@ module.exports = async function(deployer, _network, accounts) {
   console.log("Adresse du owner du contrat", ContractOwner);
   console.log("Adresse du donateur Jeff", DonorJeff);
   console.log("Adresse du donateur Bill", DonorBill);
-  console.log("Adresse du donateur Leonardo", DonorPinault);
+  console.log("Adresse du donateur Pinault", DonorPinault);
   console.log("Adresse du donateur Elon", DonorElon);
 
   console.log("Montant de la balance du owner", ContractOwnerBalance.toString());
