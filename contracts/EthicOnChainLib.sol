@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
- 
-/// @title EthicOnChainLib 
+
+/// @title EthicOnChainLib
 /// @author Lahcen E. Dev / Jérôme Gauthier
 /// @notice EthicOnChain library to manage struct and getters
 library EthicOnChainLib {
-    
+
     struct NPO {
         uint npoId;
         address npoErc20Address;
@@ -44,7 +44,7 @@ library EthicOnChainLib {
         string geographicalArea;
         uint[] donationIds;
         uint[] withdrawalIds;
-    } 
+    }
 
     struct Donation {
         uint donationId; // primary key
@@ -52,7 +52,7 @@ library EthicOnChainLib {
         uint donorId;
         uint donationDate;
         uint donationAmount;
-    }     
+    }
 
     struct Withdrawal {
         uint withdrawalId; // primary key
@@ -75,7 +75,7 @@ library EthicOnChainLib {
 
     enum ProjectStatus {
         Undefined,
-        UnderCreation, 
+        UnderCreation,
         UnderCampaign,
         InProgress,
         Cancelled,
@@ -89,7 +89,7 @@ library EthicOnChainLib {
     function libGetNpo(mapping (address => NPO) storage _npoAddresses, address _npoErc20Address) external view returns(NPO memory) {
         return _npoAddresses[_npoErc20Address];
     }
-    
+
     /// @dev Get an NPO via its id
     /// @param _npoAddresses mapping of NPO addresses to NPO Struct
     /// @param _npoMap mapping of NPO id to NPO Struct
@@ -108,7 +108,7 @@ library EthicOnChainLib {
         uint arraySize = _npoCount;
         NPO [] memory result= new NPO[](arraySize);
         for(uint i; i < arraySize; i++) {
-            result[i] = libGetNpoByIndex(_npoAddresses, _npoMap, i);     
+            result[i] = libGetNpoByIndex(_npoAddresses, _npoMap, i);
         }
         return result;
     }
@@ -167,7 +167,7 @@ library EthicOnChainLib {
         }
         return result;
     }
-    
+
     /// @dev Allows to know all the projects of an NPO
     /// @param _npoAddresses mapping of NPO addresses to NPO Struct
     /// @param _projectMap mapping of Project id to Project Struct
@@ -178,7 +178,7 @@ library EthicOnChainLib {
         Project [] memory result = new Project[](arraySize);
         for(uint i; i < arraySize; i++) {
             uint index = _npoAddresses[_addressNpo].projectIds[i];
-            result[i] = libGetProject(_projectMap, index);     
+            result[i] = libGetProject(_projectMap, index);
         }
         return result;
     }
@@ -186,7 +186,7 @@ library EthicOnChainLib {
     /// @dev  get Donation by id
     /// @param _donationMap mapping of Donation id to Donation Struct
     /// @param _id index pour retrouver la donation a retourner
-    /// @return a struct donation 
+    /// @return a struct donation
     function libGetDonation(mapping (uint => Donation) storage _donationMap, uint _id) public view returns(Donation memory) {
         return _donationMap[_id];
     }
@@ -194,14 +194,27 @@ library EthicOnChainLib {
     /// @dev Allows to know all the donations of a single donor
     /// @param _donorAddresses mapping of Donors addresses to Donor Struct
     /// @param _donationMap mapping of Donation id to Donation Struct
-    /// @param _addressNpo id which represents the index
+    /// @param _donorAddress id which represents the index
     /// @return Returns an array of all donation of a single donor
     function libGetDonationPerDonor(mapping (address => Donor) storage _donorAddresses, mapping (uint => Donation) storage _donationMap, address _addressNpo) external view  returns(Donation [] memory ) {
         uint arraySize = _donorAddresses[_addressNpo].donationIds.length;
         Donation [] memory result= new Donation[](arraySize);
         for(uint i; i < arraySize; i++) {
-            uint index = _donorAddresses[_addressNpo].donationIds[i];
-            result[i] = libGetDonation(_donationMap, index);     
+            uint index = _donorAddresses[_donorAddress].donationIds[i];
+            result[i] = libGetDonation(_donationMap, index);
+        }
+        return result;
+    }
+
+    /// @dev list all the donations made in the contract, whatever the Donor and the NPO
+    /// @param _donationMap mapping of Donation id to Donation Struct
+    /// @param _donationCount total number of donations
+    /// @return Returns an array of all donation of a single donor
+    function libGetDonations(mapping (uint => Donation) storage _donationMap, uint _donationCount) public view  returns(Donation [] memory ) {
+        uint arraySize = _donationCount;
+        Donation [] memory result = new Donation[](arraySize);
+        for(uint i; i < arraySize; i++) {
+            result[i] = libGetDonation(_donationMap, i);
         }
         return result;
     }
@@ -209,7 +222,7 @@ library EthicOnChainLib {
     /// @dev  get Withdrawal by id
     /// @param _withdrawalMap mapping of Withdrawal id to Withdrawal Struct
     /// @param _id index pour retrouver le withdrawal a retourner
-    /// @return a struct retait 
+    /// @return a struct retait
     function libGetWithdrawal(mapping (uint => Withdrawal) storage _withdrawalMap, uint _id) public view returns(Withdrawal memory) {
         return _withdrawalMap[_id];
     }
@@ -224,7 +237,7 @@ library EthicOnChainLib {
         Withdrawal [] memory result= new Withdrawal[](arraySize);
         for(uint i; i < arraySize; i++) {
             uint index = _npoAddresses[_addressNpo].withdrawalIds[i];
-            result[i] = libGetWithdrawal(_withdrawalMap, index);     
+            result[i] = libGetWithdrawal(_withdrawalMap, index);
         }
         return result;
     }

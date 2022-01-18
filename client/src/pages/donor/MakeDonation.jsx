@@ -11,6 +11,11 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import { green } from '@mui/material/colors';
+import CardHeader from '@mui/material/CardHeader';
+import IconButton from '@mui/material/IconButton';
+import Avatar from '@mui/material/Avatar';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import PublicIcon from '@mui/icons-material/Public';
 
 import { Loader } from '../../components/Loader';
 
@@ -21,6 +26,7 @@ export default function MakeDonation(props) {
   let navigate = useNavigate();
   const { id } = useParams();
   const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedNpo, setSelectedNpo] = useState(null)
   const [amoutMin, setAmoutMin] = useState(0)
   const [amoutMinError, setAmoutMinError] = useState(false)
 
@@ -40,8 +46,15 @@ export default function MakeDonation(props) {
   }, []);
 
   useEffect(() => {
-    if (selectedProject) { console.log('selectedProject :>> ', selectedProject) }
+    if (selectedProject) {
+      console.log('selectedProject :>> ', selectedProject)
+      getSelectedNpo()
+    }
   }, [selectedProject]);
+
+  useEffect(() => {
+    if (selectedNpo) { console.log('selectedNpo :>> ', selectedNpo) }
+  }, [selectedNpo]);
 
   const daysLeft = () => {
     let dateNow = new Date()
@@ -56,6 +69,12 @@ export default function MakeDonation(props) {
     const { contract } = data;
     await contract.methods.getProject(params).call()
       .then(x => setSelectedProject(x))
+  }
+
+  const getSelectedNpo = async () => {
+    const { contract } = data;
+    await contract.methods.getNpo(selectedProject.npoErc20Address).call()
+      .then(x => setSelectedNpo(x))
   }
 
   const handleSubmit = (e) => {
@@ -107,7 +126,7 @@ export default function MakeDonation(props) {
 
   return (
     <>
-      {selectedProject &&
+      {selectedProject && selectedNpo &&
         <Card sx={{ maxWidth: 450, borderRadius: '15px' }}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -116,6 +135,16 @@ export default function MakeDonation(props) {
             <Typography variant="body2" color="text.secondary">
               {selectedProject.description}
             </Typography>
+            <br />
+            <CardHeader sx={{ bgcolor: '#f9f9f9', borderRadius: '10px' }}
+              avatar={
+                <Avatar sx={{ bgcolor: '#11cb5f' }} variant="rounded" aria-label="recipe">
+                  <VerifiedUserIcon />
+                </Avatar>
+              }
+              title={selectedNpo.denomination}
+              subheader={selectedNpo.postalAddress}
+            />
             <br />
             <br />
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -156,7 +185,7 @@ export default function MakeDonation(props) {
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                   <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
                   {daysLeft() > 0 &&
-                    <Typography variant="body1" color="text.secondary">{daysLeft()} jours</Typography>}
+                    <Typography variant="body1" color="text.secondary">{daysLeft()} jour(s)</Typography>}
                 </Box>
               </Box>
               <Button

@@ -115,7 +115,7 @@ export default function Withdrawal(props) {
               <br />
               <TextField
                 onChange={(e) => setTitle(e.target.value)}
-                label="Projet"
+                label="Titre"
                 variant='outlined'
                 color='secondary'
                 fullWidth
@@ -173,7 +173,7 @@ export default function Withdrawal(props) {
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                   <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
                   {daysLeft() > 0 &&
-                    <Typography variant="body1" color="text.secondary">{daysLeft()} jours</Typography>}
+                    <Typography variant="body1" color="text.secondary">{daysLeft()} jour(s)</Typography>}
                 </Box>
               </Box>
               <Button

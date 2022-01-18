@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { Divider, Drawer, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import List from '@mui/material/List';
@@ -9,13 +10,15 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { AddCircleOutlineOutlined, ListAltOutlined, SubjectOutlined } from '@mui/icons-material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { useNavigate, useLocation, Outlet } from 'react-router-dom';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import PublicIcon from '@mui/icons-material/Public';
 
 const drawerWidth = 240;
 
 const LayoutNpo = (props) => {
   const { data } = props
   const { accounts } = data
+  const [connectedNpo, setConnectedNpo] = useState(null)
   let navigate = useNavigate();
   const location = useLocation()
   const menuItems = [
@@ -41,6 +44,26 @@ const LayoutNpo = (props) => {
     },
   ]
 
+  useEffect(() => {
+    getConnectedNpo()
+  }, []);
+
+  useEffect(() => {
+    if (connectedNpo) {
+      console.log('connectedNpo :>> ', connectedNpo);
+    }
+  }, [connectedNpo]);
+
+  const getConnectedNpo = async () => {
+    try {
+      const { contract, accounts } = data
+      await contract.methods.getNpo(accounts[0]).call()
+        .then(x => setConnectedNpo(x))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
       {/* app bar */}
@@ -51,9 +74,16 @@ const LayoutNpo = (props) => {
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
-          <Typography sx={{ flexGrow: 1 }}>
-            {accounts[0]}
-          </Typography>
+          <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <PublicIcon />
+            <Typography variant="h6" sx={{ mx: 1 }}>
+              {connectedNpo && connectedNpo[2]}
+            </Typography>
+            <ArrowRightAltIcon color="disabled" fontSize="large" />
+            <Typography sx={{ ml: 1 }}>
+              {accounts[0]}
+            </Typography>
+          </Box>
           <img src="EthicOnChainLogo2.svg" alt="logo" height="30px" />
         </Toolbar>
       </AppBar>
