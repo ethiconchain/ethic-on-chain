@@ -25,5 +25,6 @@ Un fichier [developer_checklist.md](developer_checklist.md) a été créé dans 
 |Exécution de la dapp|Voir [developer_checklist.md](developer_checklist.md)|Installation/validation|
 |Lancement des tests|Voir [developer_checklist.md](developer_checklist.md)|Installation/validation|
 
+La documentation générée au format NatSpec est disponible sur https://ipfs.io à cette [adresse](https://ipfs.io/ipfs/QmRbXUaYVpxeLcGhWM4iUP8jDxuMJYQtF6dagsNsnGsixr)
 
 ![Cover](./images/readme/githubReadmeFooter.png)
