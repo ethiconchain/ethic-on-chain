@@ -189,9 +189,10 @@ contract EthicOnChain is Ownable {
         // transfert de la donation du donateur vers le contrat
         // le donateur devra avoir préalablement approuvé (fonction approve du token - un minimum = le montant à transférer)
         // le contrat à transférer les tokens de l'addresse du donateur vers l'adresse du contrat
-        IERC20(eocTokenAddress).transferFrom(msg.sender, address(this), _donationAmount);
-        //TODO PLUS TARD creation d'un escrow contract pour ne pas verser tous les tokens dans le même contrat général
-        emit DonationAdded(newDonation.donationId, newDonation.projectId, newDonation.donorId, newDonation.donationDate, newDonation.donationAmount);
+        if(IERC20(eocTokenAddress).transferFrom(msg.sender, address(this), _donationAmount)){
+            //TODO PLUS TARD creation d'un escrow contract pour ne pas verser tous les tokens dans le même contrat général
+            emit DonationAdded(newDonation.donationId, newDonation.projectId, newDonation.donorId, newDonation.donationDate, newDonation.donationAmount);
+        }
     }
 
     /// @dev Allows an NPO to withdraw funds from a project 
@@ -219,8 +220,9 @@ contract EthicOnChain is Ownable {
         projectMap[_projectId].projectBalance -= _amount; // mise à jour de la balance du projet
         projectMap[_projectId].withdrawalIds.push(withdrawalCount); // mise à jour de l'historique des retraits pour le projet
         withdrawalCount++;
-        IERC20(eocTokenAddress).transfer(msg.sender,_amount);
-        emit TokensWithdrawn(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
+        if(IERC20(eocTokenAddress).transfer(msg.sender,_amount)){
+            emit TokensWithdrawn(newWithdrawal.withdrawalId,newWithdrawal.projectId,newWithdrawal.amount,msg.sender);
+        }
     }
 
 
