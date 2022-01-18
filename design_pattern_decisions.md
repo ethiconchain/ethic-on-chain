@@ -17,12 +17,12 @@ Ce document liste tous les Patterns Solidity issus de https://fravoll.github.io/
 
 - Utilisation : OUI
 - Nous avons besoin de réagir différemment suivant le statut du projet.
-- Exemple d'utilisation : ...
+- Exemple d'utilisation : [EthicOnChain.sol](contracts/EthicOnChain.sol), les fonctions addDonation et withdrawTokens dépendent d'informations du projet donc de son statut. 
 
 #### Oracle
 
 - Utilisation : PEUT-ETRE
-- Si nous avons besoin - et le temps - d'utiliser un Oracle tel que Chainlink pour des conversions.
+- Si nous avons besoin - et le temps - d'utiliser un Oracle tel que Chainlink pour des conversions si nous acceptons les dons en crypto-monnaies. Nous pourrions également avoir besoin d'un trigger pour calculer régulièrement le statut d'un projet (Chainlink Keeper)
 - Exemple d'utilisation : ...
 
 #### Randomness
@@ -48,7 +48,7 @@ Ce document liste tous les Patterns Solidity issus de https://fravoll.github.io/
 
 - Utilisation : OUI
 - nous devons réfléchir à la meilleure méthode / la plus appropriée en cas de transfert de tokens (parmi les méthodes send, transfer et call.value)
-- Exemple d'utilisation : [EthicOnChain.sol](contracts/EthicOnChain.sol), les fonctions addDonation et withdrawTokens utilisent les appels à IERC20(eocTokenAddress).transfer et trasnferFrom
+- Exemple d'utilisation : [EthicOnChain.sol](contracts/EthicOnChain.sol), les fonctions addDonation et withdrawTokens utilisent les appels à IERC20(eocTokenAddress).transfer et transferFrom. L'utilisation de Slither nous a permis de détecter que nous avions oublié de tester le retour de ces fonctions pour n'émettre un événement que si le transfert s'est corectement effectué.
 
 #### Pull over Push
 
