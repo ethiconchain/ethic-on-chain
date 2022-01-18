@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { useTheme } from '@mui/material/styles';
+import Container from '@mui/material/Container';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -251,70 +252,72 @@ const ViewProjects = (props) => {
 
   return (
     <>
-      <Typography
-        variant="h6"
-        color="textSecondary"
-        component="h2"
-        gutterBottom
-        sx={{ mb: 2 }}
-      >
-        Liste des projets
-      </Typography>
+      <Container maxWidth="xl">
+        <Typography
+          variant="h6"
+          color="textSecondary"
+          component="h2"
+          gutterBottom
+          sx={{ mb: 2 }}
+        >
+          Liste des projets
+        </Typography>
 
-      {allProjects &&
-        <TableContainer component={Paper}>
-          <Table size="small" sx={{ minWidth: 650 }} aria-label="collapsible table">
-            <TableHead>
-              <TableRow selected>
-                <TableCell />
-                <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Zone</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Statut</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Dons collectés</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Objectif min.</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Financement</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Clôture</TableCell>
-                {
-                  isAdmin ?
-                    <TableCell />
-                    :
-                    <TableCell sx={{ typography: 'upper' }} align="right">faire un don</TableCell>
-                }
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {(rowsPerPage > 0
-                ? allProjects.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                : allProjects
-              ).map((project) => (
-                <Row key={project.projectId} project={project} />
-              ))}
-            </TableBody>
+        {allProjects &&
+          <TableContainer component={Paper}>
+            <Table size="small" sx={{ minWidth: 650 }} aria-label="collapsible table">
+              <TableHead>
+                <TableRow selected>
+                  <TableCell />
+                  <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Zone</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Statut</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Dons collectés</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Objectif min.</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Financement</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Clôture</TableCell>
+                  {
+                    isAdmin ?
+                      <TableCell />
+                      :
+                      <TableCell sx={{ typography: 'upper' }} align="right">faire un don</TableCell>
+                  }
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {(rowsPerPage > 0
+                  ? allProjects.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : allProjects
+                ).map((project) => (
+                  <Row key={project.projectId} project={project} />
+                ))}
+              </TableBody>
 
-            <TableFooter >
-              <TableRow>
-                <TablePagination
-                  rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                  colSpan={7}
-                  count={allProjects.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  labelRowsPerPage="Lignes par page"
-                  SelectProps={{
-                    inputProps: {
-                      'aria-label': 'Lignes par page',
-                    },
-                    native: true,
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
-          </Table>
-        </TableContainer>
-      }
+              <TableFooter >
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                    colSpan={7}
+                    count={allProjects.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    labelRowsPerPage="Lignes par page"
+                    SelectProps={{
+                      inputProps: {
+                        'aria-label': 'Lignes par page',
+                      },
+                      native: true,
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
+        }
+      </Container>
     </>
   )
 }

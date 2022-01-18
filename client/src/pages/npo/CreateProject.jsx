@@ -137,7 +137,7 @@ export default function CreateProject(props) {
             sx={{ mb: 3 }}
             error={zoneError}
           />
-          <Grid container spacing={3}>
+          <Grid container spacing={3} justifyContent="space-between">
             <Grid item >
               <DatePicker
                 label="Départ du projet"

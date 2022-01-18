@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from '@mui/material/styles';
+import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import IconButton from '@mui/material/IconButton';
@@ -132,68 +133,70 @@ const MyWithdrawals = (props) => {
 
   return (
     <>
-      <Typography
-        variant="h6"
-        color="textSecondary"
-        component="h2"
-        gutterBottom
-        sx={{ mb: 2 }}
-      >
-        Liste de mes demandes de retrait
-      </Typography>
+      <Container maxWidth="xl">
+        <Typography
+          variant="h6"
+          color="textSecondary"
+          component="h2"
+          gutterBottom
+          sx={{ mb: 2 }}
+        >
+          Liste de mes demandes de retrait
+        </Typography>
 
-      {allMyWithdrawals && allMyProjects &&
-        <TableContainer component={Paper}>
-          <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow selected>
-                <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Retrait pour</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Description des dépenses</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {(rowsPerPage > 0
-                ? allMyWithdrawals.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                : allMyWithdrawals
-              ).map((withdrawal) => (
-                <TableRow
-                  key={withdrawal.withdrawalId}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="donation">{findProjectInfos(withdrawal.projectId, "title")}</TableCell>
-                  <TableCell>{withdrawal.title}</TableCell>
-                  <TableCell>{withdrawal.description}</TableCell>
-                  <TableCell>{msToDate(withdrawal.withdrawalDate)}</TableCell>
-                  <TableCell sx={{ minWidth: '100px' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
+        {allMyWithdrawals && allMyProjects &&
+          <TableContainer component={Paper}>
+            <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow selected>
+                  <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Retrait pour</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Description des dépenses</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-            <TableFooter >
-              <TableRow>
-                <TablePagination
-                  rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                  colSpan={5}
-                  count={allMyWithdrawals.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  labelRowsPerPage="Lignes par page"
-                  SelectProps={{
-                    inputProps: {
-                      'aria-label': 'Lignes par page',
-                    },
-                    native: true,
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
-          </Table>
-        </TableContainer>}
+              </TableHead>
+              <TableBody>
+                {(rowsPerPage > 0
+                  ? allMyWithdrawals.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : allMyWithdrawals
+                ).map((withdrawal) => (
+                  <TableRow
+                    key={withdrawal.withdrawalId}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="donation">{findProjectInfos(withdrawal.projectId, "title")}</TableCell>
+                    <TableCell>{withdrawal.title}</TableCell>
+                    <TableCell>{withdrawal.description}</TableCell>
+                    <TableCell>{msToDate(withdrawal.withdrawalDate)}</TableCell>
+                    <TableCell sx={{ minWidth: '80px' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+              <TableFooter >
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                    colSpan={5}
+                    count={allMyWithdrawals.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    labelRowsPerPage="Lignes par page"
+                    SelectProps={{
+                      inputProps: {
+                        'aria-label': 'Lignes par page',
+                      },
+                      native: true,
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>}
+      </Container>
     </>
   )
 }

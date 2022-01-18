@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from '@mui/material/styles';
+import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import IconButton from '@mui/material/IconButton';
@@ -92,69 +93,71 @@ const ViewNpos = (props) => {
 
   return (
     <>
-      <Typography
-        variant="h6"
-        color="textSecondary"
-        component="h2"
-        gutterBottom
-        sx={{ mb: 2 }}
-      >
-        Liste des NPO
-      </Typography>
+      <Container maxWidth="xl">
+        <Typography
+          variant="h6"
+          color="textSecondary"
+          component="h2"
+          gutterBottom
+          sx={{ mb: 2 }}
+        >
+          Liste des NPO
+        </Typography>
 
-      {allNpos &&
-        <TableContainer component={Paper}>
-          <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow selected>
-                <TableCell sx={{ typography: 'upper' }}>Dénomination</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Adresse</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Objet</TableCell>
-                <TableCell sx={{ typography: 'upper' }}>Type</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {(rowsPerPage > 0
-                ? allNpos.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                : allNpos
-              ).map((npo) => (
-                <TableRow
-                  key={npo.denomination}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="npo">
-                    {npo.denomination}
-                  </TableCell>
-                  <TableCell>{npo.postalAddress}</TableCell>
-                  <TableCell>{npo.object}</TableCell>
-                  <TableCell>{npo.npoType}</TableCell>
+        {allNpos &&
+          <TableContainer component={Paper}>
+            <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow selected>
+                  <TableCell sx={{ typography: 'upper' }}>Dénomination</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Adresse</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Objet</TableCell>
+                  <TableCell sx={{ typography: 'upper' }}>Type</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-            <TableFooter >
-              <TableRow>
-                <TablePagination
-                  rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                  colSpan={5}
-                  count={allNpos.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  labelRowsPerPage="Lignes par page"
-                  SelectProps={{
-                    inputProps: {
-                      'aria-label': 'Lignes par page',
-                    },
-                    native: true,
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
-          </Table>
-        </TableContainer>
-      }
+              </TableHead>
+              <TableBody>
+                {(rowsPerPage > 0
+                  ? allNpos.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : allNpos
+                ).map((npo) => (
+                  <TableRow
+                    key={npo.denomination}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="npo">
+                      {npo.denomination}
+                    </TableCell>
+                    <TableCell>{npo.postalAddress}</TableCell>
+                    <TableCell>{npo.object}</TableCell>
+                    <TableCell>{npo.npoType}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+              <TableFooter >
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                    colSpan={5}
+                    count={allNpos.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    labelRowsPerPage="Lignes par page"
+                    SelectProps={{
+                      inputProps: {
+                        'aria-label': 'Lignes par page',
+                      },
+                      native: true,
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
+        }
+      </Container>
     </>
   )
 }
