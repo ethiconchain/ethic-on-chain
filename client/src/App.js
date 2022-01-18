@@ -169,7 +169,7 @@ const App = () => {
             <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
             <Route path="/npos" element={<ViewNpos data={data} allNpos={allNpos} />} />
             <Route path="/donateurs" element={<ViewDonors data={data} allDonors={allDonors} />} />
-            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} />} />
+            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
             <Route path="/*" element={<Page404 />} />
           </Route>}
         {isNpo &&
@@ -178,7 +178,7 @@ const App = () => {
             <Route path="/creerprojet" element={<CreateProject data={data} />} />
             <Route path="/mesretraits" element={<MyWithdrawals data={data} msToDate={msToDate} />} />
             <Route path="/retrait/:id" element={<Withdrawal data={data} />} />
-            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} />} />
+            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
             <Route path="/*" element={<Page404 />} />
           </Route>}
         {isDonor &&
@@ -186,7 +186,7 @@ const App = () => {
             <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
             <Route path="/mesdons" element={<MyDonations data={data} msToDate={msToDate} causeList={causeList} />} />
             <Route path="/faireundon/:id" element={<MakeDonation data={data} />} />
-            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} />} />
+            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
             <Route path="/*" element={<Page404 />} />
           </Route>}
       </Routes>

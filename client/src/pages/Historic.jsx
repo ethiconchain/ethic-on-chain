@@ -18,7 +18,7 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
 const Historic = (props) => {
-  const { data, msToDate } = props
+  const { data, msToDate, allNpos } = props
   const { web3 } = data
   const [allDonations, setAllDonations] = useState(null)
   const [allProjects, setAllProjects] = useState(null)
@@ -55,6 +55,10 @@ const Historic = (props) => {
 
   const findDonorInfos = (id, info) => {
     return allDonors.find(x => x.donorId === id.toString())[info]
+  }
+
+  const findNpoInfos = (npoErc20Address, info) => {
+    return allNpos.find(x => x.npoErc20Address === npoErc20Address.toString())[info]
   }
 
   const getAllDonations = async () => {
@@ -147,7 +151,7 @@ const Historic = (props) => {
         Historique des dons
       </Typography>
 
-      {allDonations && allProjects && allDonors &&
+      {allDonations && allProjects && allDonors && allNpos &&
         <TableContainer component={Paper}>
           <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -171,7 +175,7 @@ const Historic = (props) => {
                   <TableCell component="th" scope="donation">
                     {findProjectInfos(donation.projectId, "title")}
                   </TableCell>
-                  <TableCell>{findProjectInfos(donation.projectId, "npoErc20Address").match(/^.{8}/)}...{findProjectInfos(donation.projectId, "npoErc20Address").match(/.{6}$/)}</TableCell>
+                  <TableCell>{findNpoInfos(findProjectInfos(donation.projectId, "npoErc20Address"), "denomination")}</TableCell>
                   <TableCell>{findDonorInfos(donation.donorId, "surName")} {findDonorInfos(donation.donorId, "name")}</TableCell>
                   <TableCell>{msToDate(donation.donationDate)}</TableCell>
                   <TableCell sx={{ minWidth: '100px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>

@@ -159,15 +159,15 @@ const MyDonations = (props) => {
                   key={donation.donationId}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell component="th" scope="donation">
+                  <TableCell sx={{ verticalAlign: 'top' }} component="th" scope="donation">
                     {findProjectPropertyValue(donation.projectId).title}
                   </TableCell>
-                  <TableCell>{findProjectPropertyValue(donation.projectId).geographicalArea}</TableCell>
-                  <TableCell>{findProjectPropertyValue(donation.projectId).description}</TableCell>
-                  <TableCell>Du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</TableCell>
-                  <TableCell>Début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</TableCell>
-                  <TableCell>{msToDate(donation.donationDate)}</TableCell>
-                  <TableCell sx={{ minWidth: '100px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
+                  <TableCell sx={{ verticalAlign: 'top' }}>{findProjectPropertyValue(donation.projectId).geographicalArea}</TableCell>
+                  <TableCell sx={{ verticalAlign: 'top' }}>{findProjectPropertyValue(donation.projectId).description}</TableCell>
+                  <TableCell sx={{ verticalAlign: 'top' }}>Du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</TableCell>
+                  <TableCell sx={{ verticalAlign: 'top' }}>Début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</TableCell>
+                  <TableCell sx={{ verticalAlign: 'top' }}>{msToDate(donation.donationDate)}</TableCell>
+                  <TableCell sx={{ verticalAlign: 'top', minWidth: '100px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
                 </TableRow>
               ))}
             </TableBody>
