@@ -44,7 +44,7 @@ module.exports = async function(deployer, _network, accounts) {
   console.log("Montant de la balance du owner", ContractOwnerBalance.toString());
   console.log("Montant de la balance de Jeff", DonorJeffBalance.toString());
   console.log("Montant de la balance de Bill", DonorBillBalance.toString());
-  console.log("Montant de la balance de Leonardo", DonorPinaultBalance.toString());
+  console.log("Montant de la balance de Pinault", DonorPinaultBalance.toString());
   console.log("Montant de la balance de Elon", DonorElonBalance.toString());
 
   ////////////////////
