@@ -30,7 +30,7 @@ Les seules fonctions qui mettent en jeu une transaction n'ont pas d'appels crois
 
 ### Réentrance - Reentrancy 
 
-[EthicOnChain.sol](contracts/EthicOnChain.sol), fonctions addDonation et withdrawTokens: les appels à IERC20(eocTokenAddress).transfer et trasnferFrom sont faits en dernier. Vu et vérifié par l'outil Slithissait.
+[EthicOnChain.sol](contracts/EthicOnChain.sol), fonctions addDonation et withdrawTokens: les appels à IERC20(eocTokenAddress).transfer et trasnferFrom sont faits en dernier. Vu et vérifié par l'outil Slither.
 
 ### Timestamp:
 Pas d'interaction avec le contrat . Pas d'utilisation du nombre de block, ou de délais dans le contrat.
