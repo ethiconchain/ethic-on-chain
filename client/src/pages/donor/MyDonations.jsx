@@ -44,12 +44,8 @@ const MyDonations = (props) => {
     }
   }, [allProjects]);
 
-  const findProjectPropertyValue = (id) => {
-    for (const key in allProjects) {
-      if (allProjects[key].projectId === id.toString()) {
-        return allProjects[key];
-      }
-    }
+  const findProjectPropertyValue = (id, info) => {
+    return allProjects.find(x => x.projectId === id.toString())
   }
 
   const getMyDonations = async () => {

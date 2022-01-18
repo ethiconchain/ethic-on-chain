@@ -44,11 +44,7 @@ const MyWithdrawals = (props) => {
   }, [allMyProjects]);
 
   const findProjectInfos = (id, info) => {
-    for (const key in allMyProjects) {
-      if (allMyProjects[key].projectId === id.toString()) {
-        return allMyProjects[key][info]
-      }
-    }
+    return allMyProjects.find(x => x.projectId === id.toString())[info]
   }
 
   const getMyWithdrawals = async () => {

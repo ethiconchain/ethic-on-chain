@@ -50,19 +50,11 @@ const Historic = (props) => {
   }, [allDonors]);
 
   const findProjectInfos = (id, info) => {
-    for (const key in allProjects) {
-      if (allProjects[key].projectId === id.toString()) {
-        return allProjects[key][info]
-      }
-    }
+    return allProjects.find(x => x.projectId === id.toString())[info]
   }
 
   const findDonorInfos = (id, info) => {
-    for (const key in allDonors) {
-      if (allDonors[key].donorId === id.toString()) {
-        return allDonors[key][info]
-      }
-    }
+    return allDonors.find(x => x.donorId === id.toString())[info]
   }
 
   const getAllDonations = async () => {
