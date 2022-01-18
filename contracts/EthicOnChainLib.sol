@@ -196,8 +196,8 @@ library EthicOnChainLib {
     /// @param _donationMap mapping of Donation id to Donation Struct
     /// @param _donorAddress id which represents the index
     /// @return Returns an array of all donation of a single donor
-    function libGetDonationPerDonor(mapping (address => Donor) storage _donorAddresses, mapping (uint => Donation) storage _donationMap, address _addressNpo) external view  returns(Donation [] memory ) {
-        uint arraySize = _donorAddresses[_addressNpo].donationIds.length;
+    function libGetDonationPerDonor(mapping (address => Donor) storage _donorAddresses, mapping (uint => Donation) storage _donationMap, address _donorAddress) external view  returns(Donation [] memory ) {
+        uint arraySize = _donorAddresses[_donorAddress].donationIds.length;
         Donation [] memory result= new Donation[](arraySize);
         for(uint i; i < arraySize; i++) {
             uint index = _donorAddresses[_donorAddress].donationIds[i];
