@@ -35,7 +35,7 @@ Rappel de quelques grandes règles de styling
 * Privilégier le Mapping à l'Array
 * Privilégier les variables de taille fixe, toujours moins chères que les variables dynamiques.
 * Penser à supprimer les variables non utilisées dès que possible = remboursement de Gas.
-* Storage/Memory : ne pas hésiter à passer par des variables de type memory en phase de calcul/maipulation (boucles ou autre) et n'affecter à une variable de type storage qu'à la fin
+* Storage/Memory : ne pas hésiter à passer par des variables de type memory en phase de calcul/manipulation (boucles ou autre) et n'affecter à une variable de type storage qu'à la fin
 
 ### Test Unitaires
 Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/)
