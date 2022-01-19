@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -25,6 +25,7 @@ import Withdrawal from "./pages/npo/Withdrawal";
 import MyWithdrawals from "./pages/npo/MyWithdrawals";
 import Page404 from "./pages/Page404";
 import LoaderGlobal from "./components/LoaderGlobal";
+import Homepage from "./pages/Homepage";
 
 const theme = createTheme({
   palette: {
@@ -32,7 +33,10 @@ const theme = createTheme({
       main: '#653442',
     },
     secondary: {
-      main: '#11cb5f',
+      main: '#72A03E',
+      light: '#A1E959',
+      // main: '#A1E959',
+      // main: '#11cb5f',
     },
   },
   typography: {
@@ -45,12 +49,16 @@ const theme = createTheme({
       fontFamily: 'Roboto Condensed',
       textTransform: 'uppercase',
       fontWeight: 400,
+    },
+    passionOne: {
+      fontFamily: 'Passion One',
     }
   }
 });
 
 const App = () => {
   let navigate = useNavigate();
+  const location = useLocation();
   const addressZero = "0x0000000000000000000000000000000000000000"
   const [data, setData] = useState({
     web3: null,
@@ -82,7 +90,9 @@ const App = () => {
 
   useEffect(() => {
     document.title = "Ethic On Chain";
-    init();
+    if (location.pathname !== "/homepage") {
+      init();
+    }
   }, []);
 
   useEffect(() => {
@@ -135,7 +145,6 @@ const App = () => {
         .then(x => x[1] !== addressZero ? isADonor = true : isADonor = false)
 
       setData({ web3, accounts, contract: instance, contractTokenEOC: instanceTokenEOC, isAdmin: isAnAdmin, isNpo: isANpo, isDonor: isADonor });
-
     } catch (error) {
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
@@ -159,7 +168,12 @@ const App = () => {
   const { web3, isAdmin, isDonor, isNpo } = data
   return !web3 ? (
     <ThemeProvider theme={theme}>
-      <LoaderGlobal />
+      <Routes>
+        <Route path="/homepage" element={<Homepage init={init} />} />
+      </Routes>
+      {location.pathname !== "/homepage" &&
+        <LoaderGlobal />
+      }
     </ThemeProvider>
   ) : (
     <ThemeProvider theme={theme}>
