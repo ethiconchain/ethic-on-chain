@@ -297,7 +297,7 @@ const ViewProjects = (props) => {
                 <TableRow>
                   <TablePagination
                     rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                    colSpan={7}
+                    colSpan={9}
                     count={allProjects.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
