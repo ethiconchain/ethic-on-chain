@@ -225,18 +225,18 @@ const ViewProjects = (props) => {
                   <TableHead >
                     <TableRow sx={{ bgcolor: '#f9f9f9' }}>
                       <TableCell sx={{ typography: 'upper' }}>Description</TableCell>
+                      <TableCell sx={{ typography: 'upper' }}>Dates du projet</TableCell>
                       <TableCell sx={{ typography: 'upper' }}>Départ campagne</TableCell>
                       <TableCell sx={{ typography: 'upper' }}>Durée campagne</TableCell>
-                      <TableCell sx={{ typography: 'upper' }}>Départ projet</TableCell>
                       <TableCell sx={{ typography: 'upper' }}>NPO</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     <TableRow>
                       <TableCell sx={{ border: 0, verticalAlign: 'top' }}>{project.description}</TableCell>
-                      <TableCell sx={{ border: 0, width: '150px', verticalAlign: 'top' }}>{msToDate(project.campaignStartDate)}</TableCell>
-                      <TableCell sx={{ border: 0, width: '150px', verticalAlign: 'top' }}>{project.campaignDurationInDays} j</TableCell>
-                      <TableCell sx={{ border: 0, width: '150px', verticalAlign: 'top' }}>{msToDate(project.startDate)}</TableCell>
+                      <TableCell sx={{ border: 0, width: '110px', verticalAlign: 'top' }}>Du {msToDate(project.startDate)} au {msToDate(project.endDate)}</TableCell>
+                      <TableCell sx={{ border: 0, width: '120px', verticalAlign: 'top' }}>{msToDate(project.campaignStartDate)}</TableCell>
+                      <TableCell sx={{ border: 0, width: '120px', verticalAlign: 'top' }}>{project.campaignDurationInDays} j</TableCell>
                       <TableCell sx={{ border: 0, verticalAlign: 'top' }}>{project.npoErc20Address.match(/^.{8}/)}...</TableCell>
                     </TableRow>
                   </TableBody>
@@ -297,7 +297,7 @@ const ViewProjects = (props) => {
                 <TableRow>
                   <TablePagination
                     rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                    colSpan={7}
+                    colSpan={9}
                     count={allProjects.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
