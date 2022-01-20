@@ -202,7 +202,7 @@ const MyProjects = (props) => {
 
           <TableCell align="right">
             <Link to={`/retrait/${project.projectId}`}>
-              <Button disabled={(project.status === "2" || project.status === "3") ? false : true}
+              <Button disabled={((project.status === "2" || project.status === "3") && project.projectBalance > 0) ? false : true}
                 variant="contained" color='secondary' sx={{ minWidth: '120px' }}>
                 <ShoppingCartCheckoutOutlinedIcon size="large" />
               </Button>
