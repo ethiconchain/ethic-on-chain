@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,7 +12,7 @@ import HomeImg from "../img/Home.jpg"
 
 const Homepage = () => {
   let navigate = useNavigate();
- 
+
   const go = () => {
     navigate("/")
     window.location.reload()
@@ -22,38 +22,47 @@ const Homepage = () => {
     <Box sx={{
       backgroundImage: `url(${HomeImg})`, minHeight: "100vh",
       backgroundRepeat: "no-repeat", backgroundSize: "cover",
-      display: 'flex', alignItems: 'flex-end', justifyContent: 'center'
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'flex-start', justifyContent: 'flex-start'
     }}>
       <AppBar
         color='secondary'
         position="fixed"
         elevation={0}
       >
-        <Toolbar sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-          <Box>
-            <Button
-              onClick={go}
-              variant="contained" startIcon={<LoginIcon />}>Connexion</Button>
+        <Toolbar>
+          <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <img src="EthicOnChainLogo2.svg" alt="logo" height="30px" />
           </Box>
+          <Button
+            onClick={go}
+            variant="contained" size="large" startIcon={<LoginIcon />}>Connexion</Button>
         </Toolbar>
       </AppBar>
-
-      <Box sx={{ mb: 10 }}>
-        <Box sx={{ textAlign: 'center' }}>
-          <img src="EthicOnChainLogo2.svg" alt="logo" height="120px" />
+      <Box sx={{
+        maxWidth: 590,
+        mt: '11%', ml: '7%', p: 5,
+        bgcolor: '#36072b',
+        opacity: '0.8', borderRadius: '10px'
+      }}>
+        <Box>
+          <img src="philanthropie.svg" alt="logo" height="230px" />
         </Box>
         <Typography sx={{
-          fontSize: 50, textAlign: 'center',
-          color: 'secondary.light',
-          fontFamily: 'Passion One',
-          letterSpacing: 3,
-          bgcolor: '#242323',
-          opacity: '0.9',
-          px: 3, pb: 0.5,
-          borderRadius: '5px',
+          mt: 4.5,
+          fontSize: 19,
+          color: 'white'
         }} >
-          La blockchain au service de la philantropie
+          Ethic-On-Chain est une plateforme de crowdfunding en faveur de projets philanthropiques. Nous mettons en relation donateurs et fondations, tout en garantissant la transparence et le respect de la réglementation.
         </Typography>
+      </Box>
+      <Box sx={{
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        mb: 5, mr: 5
+      }} >
+        <img src="EthicOnChainLogoSquareFondBlanc.svg" alt="logo" height="200px" />
       </Box>
     </Box>
   )
