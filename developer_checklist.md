@@ -14,7 +14,9 @@ Retrouvez ici tous les éléments à prendre en compte pour un bon développemen
 
 ### Style
 Pour s'assurer que les smart contracts sont bien écrits, consulter le [Style Guide](https://docs.soliditylang.org/en/latest/style-guide.html)
+
 Sous Remix, installer Solhint Linter disponible depuis le plugin manager.
+
 Rappel de quelques grandes règles de styling
 * Indentation 4 espaces (éviter les tabulations)
 * 2 lignes vides avant chaque déclaration de contract, 1 ligne avant chaque déclaration
