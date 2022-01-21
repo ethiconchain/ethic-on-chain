@@ -13,7 +13,7 @@ Retrouvez ici tous les éléments à prendre en compte pour un bon développemen
 * [StackEdit](https://stackedit.io/app#) pour éditer les fichiers *.md en mode wysiwig ("what you see is what you get")
 
 ### Style
-Pour s'assurer que les smart contracts sont bien écrits, consulter le [Style Guide](https://docs.soliditylang.org/en/latest/style-guide.html)
+Pour s'assurer que les smart contracts sont bien écrits, consulter le [Style Guide](https://docs.soliditylang.org/en/latest/style-guide.html).
 
 Sous Remix, installer Solhint Linter disponible depuis le plugin manager.
 
