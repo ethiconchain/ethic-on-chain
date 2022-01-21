@@ -3,7 +3,7 @@
 # Présentation
 *Ethic-On-Chain* est une plateforme de crowdfunding de projets philanthropiques qui met en relation donateur et fondation tout en garantissant la transparence et le respect de la réglementation.
 
-## Fonctionalités
+## Fonctionnalités
 * Gestion d'un token ERC20 "EOC" (pour Ethic On Chain)
 * Création de NPO (non profit organisation)
 * Création de donateur
