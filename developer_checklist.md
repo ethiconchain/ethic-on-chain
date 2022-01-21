@@ -38,11 +38,11 @@ Rappel de quelques grandes règles de styling
 * Storage/Memory : ne pas hésiter à passer par des variables de type memory en phase de calcul/manipulation (boucles ou autre) et n'affecter à une variable de type storage qu'à la fin
 
 ### Test Unitaires
-Nous utiliserons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/)
+Nous utilisons [Mocha](https://mochajs.org/) et [Chai](https://www.chaijs.com/), ainsi que les librairies [test-helpers](https://docs.openzeppelin.com/test-helpers) d'OpenZeppelin, ce afin d'utiliser les fonctions BN, expectRevert, expectEvent et time.
 
 ### Documentation techique
-* La documentation générée par le plugin Remix "ETHDOC - Documentation Generator" devrait suffire. A noter qu'il ne génère que la doc dev mais suffisant dans le cadre du projet final.
-* Rappel : pour le format [NatSpec](https://docs.soliditylang.org/en/latest/natspec-format.html) VS Code et l'extension Solidity permettent de faciliment insérer le format NatSpec pré-rempli
+* La documentation est générée par le plugin Remix "ETHDOC - Documentation Generator".
+* Rappel : pour le format [NatSpec](https://docs.soliditylang.org/en/latest/natspec-format.html) VS Code et l'extension Solidity permettent de facilement insérer le format NatSpec pré-rempli.
 
 ### GitHub - branches et pull requests
 * Une branche par tache Trello, reprenant le format SPx-99 où x = le numéro du sprint et 99 le numéro de la tache dans le sprint. Exemple : SP1-02 est la deuxième tache du sprint 1.

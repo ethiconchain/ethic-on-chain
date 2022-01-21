@@ -1,9 +1,7 @@
 ## Optimisation du code SOLIDITY
 Les points suivants d'optimisation sont issues de la [documentation Alyra](https://ecole.alyra.fr/mod/page/view.php?id=899)
 
-TODO: tester également l'utilisation d'un outil comme [Slither ](https://github.com/crytic/slither)
-
-TODO: tester également l'utilisation d'un outil comme [Solhint ](https://github.com/protofire/solhint)
+[Solhint ](https://github.com/protofire/solhint) nous permet de détecter différents problèmes de styling et d'optimisation.
 
 * Regroupement des variables : les Struct sont organisées de façon à regrouper les variables de même type.
   Comme chaque emplacement de stockage coûte du gas, le regroupement des variables nous aide à optimiser notre utilisation du gas en réduisant le nombre d'emplacements requis par notre contrat.
