@@ -158,7 +158,7 @@ const ViewProjects = (props) => {
     return (
       <>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-          <TableCell>
+          <TableCell sx={{ bgcolor: 'bckGrd.lighten' }}>
             <IconButton
               aria-label="expand row"
               size="small"
@@ -168,13 +168,13 @@ const ViewProjects = (props) => {
             </IconButton>
           </TableCell>
 
-          <TableCell component="th" scope="project">{project.title}</TableCell>
+          <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }} component="th" scope="project">{project.title}</TableCell>
           <TableCell>{project.geographicalArea}</TableCell>
           <TableCell>
             <Typography variant="button" sx={{ fontWeight: 'bold', color: 'white', bgcolor: statusColor[project.status], borderRadius: '3px', px: '5px', py: '1px' }}>{statusProject[project.status].toUpperCase()}</Typography>
           </TableCell>
-          <TableCell>{web3.utils.fromWei(project.projectBalance.toString())} EOC</TableCell>
-          <TableCell>{web3.utils.fromWei(project.minAmount.toString())} EOC</TableCell>
+          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', minWidth: '80px' }}>{web3.utils.fromWei(project.projectBalance.toString())} EOC</TableCell>
+          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten2', minWidth: '80px' }}>{web3.utils.fromWei(project.minAmount.toString())} EOC</TableCell>
 
           {(project.status === "1" || project.status === "0") ?
             <TableCell align="center">-</TableCell>
@@ -206,7 +206,7 @@ const ViewProjects = (props) => {
             isAdmin ?
               <TableCell />
               :
-              <TableCell align="right">
+              <TableCell>
                 <Link to={`/faireundon/${project.projectId}`}>
                   <Button disabled={(project.status === "2" || project.status === "3") ? false : true}
                     variant="contained" color='secondary' sx={{ minWidth: '120px' }}>
@@ -222,8 +222,8 @@ const ViewProjects = (props) => {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ mb: 3 }}>
                 <Table size="small" aria-label="purchases">
-                  <TableHead >
-                    <TableRow sx={{ bgcolor: '#f9f9f9' }}>
+                  <TableHead>
+                    <TableRow sx={{ bgcolor: 'bckGrd.light' }}>
                       <TableCell sx={{ typography: 'upper' }}>Description</TableCell>
                       <TableCell sx={{ typography: 'upper' }}>Départ campagne</TableCell>
                       <TableCell sx={{ typography: 'upper' }}>Durée campagne</TableCell>
@@ -266,21 +266,21 @@ const ViewProjects = (props) => {
         {allProjects &&
           <TableContainer component={Paper}>
             <Table size="small" sx={{ minWidth: 650 }} aria-label="collapsible table">
-              <TableHead>
+              <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
                   <TableCell />
-                  <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Zone</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Statut</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Dons collectés</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Objectif min.</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Financement</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Clôture</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Zone</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Statut</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Dons collectés</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Objectif min.</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Financement</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Clôture</TableCell>
                   {
                     isAdmin ?
                       <TableCell />
                       :
-                      <TableCell sx={{ typography: 'upper' }} align="right">faire un don</TableCell>
+                      <TableCell sx={{ typography: 'upper', color: 'white' }}>faire un don</TableCell>
                   }
                 </TableRow>
               </TableHead>

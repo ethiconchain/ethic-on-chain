@@ -35,6 +35,7 @@ const Homepage = () => {
             <img src="EthicOnChainLogo2.svg" alt="logo" height="30px" />
           </Box>
           <Button
+            color="cherry"
             onClick={go}
             variant="contained" size="large" startIcon={<LoginIcon />}>Connexion</Button>
         </Toolbar>
@@ -42,7 +43,7 @@ const Homepage = () => {
       <Box sx={{
         maxWidth: 590,
         mt: '11%', ml: '7%', p: 5,
-        bgcolor: '#36072b',
+        bgcolor: '#232222',
         opacity: '0.8', borderRadius: '10px'
       }}>
         <Box>

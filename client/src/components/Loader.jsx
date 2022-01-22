@@ -8,7 +8,6 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Fade from '@mui/material/Fade';
 
-
 export const Loader = (props) => {
   const { loaderIsOpen, progress, success, fail, loaderText } = props
   const { text1, text2, text3, text4 } = loaderText
@@ -24,7 +23,7 @@ export const Loader = (props) => {
       }}>
         {progress &&
           <CardContent sx={{ textAlign: 'center' }}>
-            <CircularProgress color='secondary' size="90px" thickness="15" />
+            <CircularProgress sx={{ color: 'cherry.light' }} size="90px" thickness="15" />
             <br />
             <br />
             <Typography sx={{ fontSize: 19 }}>
@@ -38,7 +37,7 @@ export const Loader = (props) => {
         {success &&
           <CardContent sx={{ textAlign: 'center' }}>
             <Fade in={success}>
-              <CheckCircleOutlineIcon sx={{ fontSize: 100 }} color='secondary' />
+              <CheckCircleOutlineIcon sx={{ fontSize: 100 }} color='success' />
             </Fade>
             <Fade in={success}>
               <Typography sx={{ fontSize: 25 }} >

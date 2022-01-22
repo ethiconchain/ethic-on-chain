@@ -30,14 +30,28 @@ import Homepage from "./pages/Homepage";
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#653442',
+      main: '#100f0f',
     },
     secondary: {
       main: '#72A03E',
-      light: '#A1E959',
-      // main: '#A1E959',
-      // main: '#11cb5f',
+      light: '#a3d16c',
+      lighten: '#dcedc8',
+      lighten2: '#f1f8e9',
+      dark: '#1b5e20',
+      darken: '#154500'
+      // light: '#A1E959',
     },
+    cherry: {
+      main: '#560027',
+      light: '#87334f',
+      dark: '#2f0000',
+    },
+    bckGrd: {
+      main: '#605f5f',
+      light: '#e9e7e7',
+      lighten: '#f9f9f9',
+      dark: '#363535',
+    }
   },
   typography: {
     fontFamily: 'Mulish',
@@ -50,9 +64,6 @@ const theme = createTheme({
       textTransform: 'uppercase',
       fontWeight: 400,
     },
-    passionOne: {
-      fontFamily: 'Passion One',
-    }
   }
 });
 
@@ -206,7 +217,7 @@ const App = () => {
       </Routes>
 
       {!isAdmin && !isNpo && !isDonor &&
-        <Box sx={{ bgcolor: '#f9f9f9', display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+        <Box sx={{ bgcolor: 'bckGrd.lighten', display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
           <Typography sx={{ fontSize: 25, textAlign: 'center' }} >
             Votre addresse n'est pas enregistrée
           </Typography>

@@ -107,12 +107,12 @@ const ViewNpos = (props) => {
         {allNpos &&
           <TableContainer component={Paper}>
             <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
+              <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
-                  <TableCell sx={{ typography: 'upper' }}>Dénomination</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Adresse</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Objet</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Type</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Dénomination</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Adresse</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Objet</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Type</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -124,7 +124,7 @@ const ViewNpos = (props) => {
                     key={npo.denomination}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="npo">
+                    <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }} component="th" scope="npo">
                       {npo.denomination}
                     </TableCell>
                     <TableCell>{npo.postalAddress}</TableCell>

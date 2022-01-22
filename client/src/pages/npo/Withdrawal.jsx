@@ -117,33 +117,33 @@ export default function Withdrawal(props) {
                 onChange={(e) => setTitle(e.target.value)}
                 label="Titre"
                 variant='outlined'
-                color='secondary'
+                color='cherry'
                 fullWidth
                 required
-                sx={{ mb: 3 }}
+                sx={{ mb: 3, bgcolor: 'secondary.lighten2' }}
                 error={titleError}
               />
               <TextField
                 onChange={(e) => setDescription(e.target.value)}
                 label="Comment allez vous utiliser le montant de ce retrait"
                 variant='outlined'
-                color='secondary'
+                color='cherry'
                 multiline
                 rows={5}
                 fullWidth
                 required
-                sx={{ mb: 3 }}
+                sx={{ mb: 3, bgcolor: 'secondary.lighten2' }}
                 error={descriptionError}
               />
               <br />
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box>
-                  <Typography variant="body2" sx={{ mb: 1 }}>Montant actuel</Typography>
-                  <Typography variant="button" sx={{ backgroundColor: greenColor, borderRadius: '5px', p: 0.7 }}>{web3.utils.fromWei(selectedProject.projectBalance.toString())} EOC</Typography>
+                  <Typography variant="body2" sx={{ mb: 1 }}>Montant collecté</Typography>
+                  <Typography variant="button" sx={{ bgcolor: 'secondary.lighten', borderRadius: '5px', p: 0.7 }}>{web3.utils.fromWei(selectedProject.projectBalance.toString())} EOC</Typography>
                 </Box>
                 <Box>
                   <Typography variant="body2" sx={{ mb: 1, textAlign: 'right' }}>Objectif</Typography>
-                  <Typography variant="button" sx={{ backgroundColor: greenColor, borderRadius: '5px', p: 0.7, textAlign: 'right' }}>{web3.utils.fromWei(selectedProject.minAmount.toString())} EOC</Typography>
+                  <Typography variant="button" sx={{ bgcolor: 'secondary.lighten', borderRadius: '5px', p: 0.7, textAlign: 'right' }}>{web3.utils.fromWei(selectedProject.minAmount.toString())} EOC</Typography>
                 </Box>
               </Box>
               <br />
@@ -162,12 +162,12 @@ export default function Withdrawal(props) {
                   onChange={(e) => setAmoutMin(e.target.value)}
                   label="Montant du retrait"
                   variant='outlined'
-                  color='secondary'
+                  color='cherry'
                   InputProps={{
                     endAdornment: <InputAdornment position="end">EOC</InputAdornment>,
                   }}
                   required
-                  sx={{ mb: 3 }}
+                  sx={{ mb: 3, bgcolor: 'secondary.lighten2' }}
                   error={amoutMinError}
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
