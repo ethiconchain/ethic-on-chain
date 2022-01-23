@@ -23,22 +23,22 @@ const LayoutAdmin = (props) => {
     {
       text: 'Projets',
       icon: <SubjectOutlined color='secondary' />,
-      path: '/projets'
+      path: '/routes/projets'
     },
     {
       text: 'NPOs',
       icon: <CorporateFareOutlined color='secondary' />,
-      path: '/npos'
+      path: '/routes/npos'
     },
     {
       text: 'Donateurs',
       icon: <VolunteerActivismOutlined color='secondary' />,
-      path: '/donateurs'
+      path: '/routes/donateurs'
     },
     {
       text: 'Historique',
       icon: <ListAltOutlined color='secondary' />,
-      path: '/historique'
+      path: '/routes/historique'
     },
   ]
 

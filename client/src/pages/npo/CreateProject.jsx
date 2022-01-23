@@ -81,7 +81,7 @@ export default function CreateProject(props) {
         web3.utils.toWei(amoutMax.toString())).send({ from: accounts[0] })
       setProgress(false)
       setSuccess(true)
-      setTimeout(() => navigate('/mesprojets'), 2000)
+      setTimeout(() => navigate('/routes/mesprojets'), 2000)
 
     } catch (error) {
       console.log(error)

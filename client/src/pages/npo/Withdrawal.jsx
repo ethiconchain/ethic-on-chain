@@ -10,12 +10,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
-import { green } from '@mui/material/colors';
 
 import { Loader } from '../../components/Loader';
 
 export default function Withdrawal(props) {
-  const greenColor = green['A100'];
   const { data } = props
   const { web3 } = data
   let navigate = useNavigate();
@@ -89,7 +87,7 @@ export default function Withdrawal(props) {
       await contract.methods.withdrawTokens(id, web3.utils.toWei(amoutMin.toString()), title, description).send({ from: accounts[0], gas: 2000000 })
       setProgress(false)
       setSuccess(true)
-      setTimeout(() => navigate('/mesretraits'), 2000)
+      setTimeout(() => navigate('/routes/mesretraits'), 2000)
 
     } catch (error) {
       console.log(error)

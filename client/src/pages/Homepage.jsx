@@ -14,7 +14,7 @@ const Homepage = () => {
   let navigate = useNavigate();
 
   const go = () => {
-    navigate("/")
+    navigate("/routes/")
     window.location.reload()
   }
 

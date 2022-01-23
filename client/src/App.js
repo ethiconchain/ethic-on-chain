@@ -83,9 +83,6 @@ const App = () => {
   const [allNpos, setAllNpos] = useState(null)
   const [allDonors, setAllDonors] = useState(null)
 
-  const [balance0, setBalance0] = useState(0)
-  const [balanceActualAccount, setBalanceActualAccount] = useState(0)
-
   const causeList = {
     0: "Lutte contre la pauvreté et l'exclusion",
     1: "Environnement et animaux",
@@ -100,16 +97,15 @@ const App = () => {
   const msToDate = (x) => new Date(x * 1000).toLocaleDateString()
 
   useEffect(() => {
-    document.title = "Ethic On Chain";
-    if (location.pathname !== "/homepage") {
+    if (location.pathname !== "/") {
       init();
     }
   }, []);
 
   useEffect(() => {
-    window.ethereum.on('accountsChanged', (accounts) => {
+    window.ethereum.on('accountsChanged', () => {
       // reload la page aprés changement de compte dans Metamask
-      navigate("/")
+      navigate("/routes/")
       window.location.reload()
     });
   });
@@ -164,25 +160,13 @@ const App = () => {
     }
   };
 
-  const getBalanceOwner = async (acc) => {
-    const { contract } = data
-    await contract.methods.balanceOf(acc).call()
-      .then(a => setBalance0(web3.utils.fromWei(a)))
-  };
-
-  const getBalanceActualAccount = async (acc) => {
-    const { contract } = data
-    await contract.methods.balanceOf(acc).call()
-      .then(a => setBalanceActualAccount(web3.utils.fromWei(a)))
-  };
-
   const { web3, isAdmin, isDonor, isNpo } = data
   return !web3 ? (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="/homepage" element={<Homepage init={init} />} />
+        <Route path="/" element={<Homepage init={init} />} />
       </Routes>
-      {location.pathname !== "/homepage" &&
+      {location.pathname !== "/" &&
         <LoaderGlobal />
       }
     </ThemeProvider>
@@ -190,29 +174,29 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Routes>
         {isAdmin &&
-          <Route path="/" element={<LayoutAdmin data={data} />}>
-            <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
-            <Route path="/npos" element={<ViewNpos data={data} allNpos={allNpos} />} />
-            <Route path="/donateurs" element={<ViewDonors data={data} allDonors={allDonors} />} />
-            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
-            <Route path="/*" element={<Page404 />} />
+          <Route path="/routes/" element={<LayoutAdmin data={data} />}>
+            <Route path="/routes/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
+            <Route path="/routes/npos" element={<ViewNpos data={data} allNpos={allNpos} />} />
+            <Route path="/routes/donateurs" element={<ViewDonors data={data} allDonors={allDonors} />} />
+            <Route path="/routes/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
+            <Route path="/routes/*" element={<Page404 />} />
           </Route>}
         {isNpo &&
-          <Route path="/" element={<LayoutNpo data={data} />}>
-            <Route path="/mesprojets" element={<MyProjects data={data} msToDate={msToDate} />} />
-            <Route path="/creerprojet" element={<CreateProject data={data} />} />
-            <Route path="/mesretraits" element={<MyWithdrawals data={data} msToDate={msToDate} />} />
-            <Route path="/retrait/:id" element={<Withdrawal data={data} />} />
-            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
-            <Route path="/*" element={<Page404 />} />
+          <Route path="/routes/" element={<LayoutNpo data={data} />}>
+            <Route path="/routes/mesprojets" element={<MyProjects data={data} msToDate={msToDate} />} />
+            <Route path="/routes/creerprojet" element={<CreateProject data={data} />} />
+            <Route path="/routes/mesretraits" element={<MyWithdrawals data={data} msToDate={msToDate} />} />
+            <Route path="/routes/retrait/:id" element={<Withdrawal data={data} />} />
+            <Route path="/routes/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
+            <Route path="/routes/*" element={<Page404 />} />
           </Route>}
         {isDonor &&
-          <Route path="/" element={<LayoutDonor data={data} />}>
-            <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
-            <Route path="/mesdons" element={<MyDonations data={data} msToDate={msToDate} causeList={causeList} />} />
-            <Route path="/faireundon/:id" element={<MakeDonation data={data} />} />
-            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
-            <Route path="/*" element={<Page404 />} />
+          <Route path="/routes/" element={<LayoutDonor data={data} />}>
+            <Route path="/routes/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
+            <Route path="/routes/mesdons" element={<MyDonations data={data} msToDate={msToDate} causeList={causeList} />} />
+            <Route path="/routes/faireundon/:id" element={<MakeDonation data={data} />} />
+            <Route path="/routes/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
+            <Route path="/routes/*" element={<Page404 />} />
           </Route>}
       </Routes>
 

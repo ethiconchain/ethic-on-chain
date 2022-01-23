@@ -170,7 +170,7 @@ const ViewProjects = (props) => {
 
           <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }} component="th" scope="project">{project.title}</TableCell>
           <TableCell>{project.geographicalArea}</TableCell>
-          <TableCell>
+          <TableCell sx={{ width: 'auto', whiteSpace: 'nowrap' }}>
             <Typography variant="button" sx={{ fontWeight: 'bold', color: 'white', bgcolor: statusColor[project.status], borderRadius: '3px', px: '5px', py: '1px' }}>{statusProject[project.status].toUpperCase()}</Typography>
           </TableCell>
           <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', minWidth: '80px' }}>{web3.utils.fromWei(project.projectBalance.toString())} EOC</TableCell>
@@ -192,7 +192,7 @@ const ViewProjects = (props) => {
           }
 
           {project.status === "2" ?
-            <TableCell>
+            <TableCell sx={{ width: 'auto', whiteSpace: 'nowrap' }}>
               <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
                 <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
                 <Typography variant="body1" color="text.secondary">J - {daysLeft(project)}</Typography>
@@ -207,7 +207,7 @@ const ViewProjects = (props) => {
               <TableCell />
               :
               <TableCell>
-                <Link to={`/faireundon/${project.projectId}`}>
+                <Link to={`/routes/faireundon/${project.projectId}`}>
                   <Button disabled={(project.status === "2" || project.status === "3") ? false : true}
                     variant="contained" color='secondary' sx={{ minWidth: '120px' }}>
                     <VolunteerActivismIcon size="large" />
@@ -272,8 +272,8 @@ const ViewProjects = (props) => {
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Zone</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Statut</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Dons collectés</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Objectif min.</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white', width: 'auto', whiteSpace: 'nowrap' }}>Dons collectés</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white', width: 'auto', whiteSpace: 'nowrap' }}>Objectif min.</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Financement</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Clôture</TableCell>
                   {

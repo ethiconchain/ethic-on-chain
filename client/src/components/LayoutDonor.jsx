@@ -24,17 +24,17 @@ const LayoutDonor = (props) => {
     {
       text: 'Projets',
       icon: <SubjectOutlined color='secondary' />,
-      path: '/projets'
+      path: '/routes/projets'
     },
     {
       text: 'Mes Dons',
       icon: <VolunteerActivismOutlined color='secondary' />,
-      path: '/mesdons'
+      path: '/routes/mesdons'
     },
     {
       text: 'Historique',
       icon: <ListAltOutlined color='secondary' />,
-      path: '/historique'
+      path: '/routes/historique'
     },
   ]
 
