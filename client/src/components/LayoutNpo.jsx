@@ -25,22 +25,22 @@ const LayoutNpo = (props) => {
     {
       text: 'Mes projets',
       icon: <SubjectOutlined color='secondary' />,
-      path: '/routes/mesprojets'
+      path: '/mesprojets'
     },
     {
       text: 'Créer un projet',
       icon: <AddCircleOutlineOutlined color='secondary' />,
-      path: '/routes/creerprojet'
+      path: '/creerprojet'
     },
     {
       text: 'Mes demandes de retrait',
       icon: <ShoppingCartOutlinedIcon color='secondary' />,
-      path: '/routes/mesretraits'
+      path: '/mesretraits'
     },
     {
       text: 'Historique',
       icon: <ListAltOutlined color='secondary' />,
-      path: '/routes/historique'
+      path: '/historique'
     },
   ]
 
