@@ -83,9 +83,6 @@ const App = () => {
   const [allNpos, setAllNpos] = useState(null)
   const [allDonors, setAllDonors] = useState(null)
 
-  const [balance0, setBalance0] = useState(0)
-  const [balanceActualAccount, setBalanceActualAccount] = useState(0)
-
   const causeList = {
     0: "Lutte contre la pauvreté et l'exclusion",
     1: "Environnement et animaux",
@@ -162,18 +159,6 @@ const App = () => {
       );
       console.error(error);
     }
-  };
-
-  const getBalanceOwner = async (acc) => {
-    const { contract } = data
-    await contract.methods.balanceOf(acc).call()
-      .then(a => setBalance0(web3.utils.fromWei(a)))
-  };
-
-  const getBalanceActualAccount = async (acc) => {
-    const { contract } = data
-    await contract.methods.balanceOf(acc).call()
-      .then(a => setBalanceActualAccount(web3.utils.fromWei(a)))
   };
 
   const { web3, isAdmin, isDonor, isNpo } = data

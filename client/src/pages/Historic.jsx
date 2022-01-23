@@ -178,9 +178,9 @@ const Historic = (props) => {
                       {findProjectInfos(donation.projectId, "title")}
                     </TableCell>
                     <TableCell>{findNpoInfos(findProjectInfos(donation.projectId, "npoErc20Address"), "denomination")}</TableCell>
-                    <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }}>{findDonorInfos(donation.donorId, "surName")} {findDonorInfos(donation.donorId, "name")}</TableCell>
+                    <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold', whiteSpace: 'nowrap' }}>{findDonorInfos(donation.donorId, "surName")} {findDonorInfos(donation.donorId, "name")}</TableCell>
                     <TableCell>{msToDate(donation.donationDate)}</TableCell>
-                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', minWidth: '80px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
+                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

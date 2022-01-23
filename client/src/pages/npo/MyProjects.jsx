@@ -169,10 +169,10 @@ const MyProjects = (props) => {
             {project.title}
           </TableCell>
           <TableCell component="th" scope="project">
-            <Typography variant="button" sx={{ fontWeight: 'bold', color: 'white', bgcolor: statusColor[project.status], borderRadius: '3px', px: '5px', py: '1px' }}>{statusProject[project.status].toUpperCase()}</Typography>
+            <Typography variant="button" sx={{ whiteSpace: 'nowrap', fontWeight: 'bold', color: 'white', bgcolor: statusColor[project.status], borderRadius: '3px', px: '5px', py: '1px' }}>{statusProject[project.status].toUpperCase()}</Typography>
           </TableCell>
-          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', minWidth: '80px' }}>{web3.utils.fromWei(project.projectBalance.toString())} EOC</TableCell>
-          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten2', minWidth: '80px' }}>{web3.utils.fromWei(project.minAmount.toString())} EOC</TableCell>
+          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(project.projectBalance.toString())} EOC</TableCell>
+          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten2', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(project.minAmount.toString())} EOC</TableCell>
 
           {(project.status === "1" || project.status === "0") ?
             <TableCell align="center">-</TableCell>
@@ -191,7 +191,7 @@ const MyProjects = (props) => {
 
           {project.status === "2" ?
             <TableCell>
-              <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', whiteSpace: 'nowrap' }}>
                 <AccessTimeIcon color="disabled" sx={{ fontSize: 20, mr: 1 }} />
                 <Typography variant="body1" color="text.secondary">J - {daysLeft(project)}</Typography>
               </Box>
@@ -264,11 +264,11 @@ const MyProjects = (props) => {
                   <TableCell />
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Statut</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Dons collectés</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Objectif min.</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Dons collectés</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Objectif min.</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Financement</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Clôture</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Demander un retrait</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Demander un retrait</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

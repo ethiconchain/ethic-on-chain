@@ -143,7 +143,7 @@ const MyDonations = (props) => {
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Zone</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Description</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Dates du projet</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Dates du projet</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Campagne</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Date</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Montant</TableCell>
@@ -166,7 +166,7 @@ const MyDonations = (props) => {
                     <TableCell sx={{ verticalAlign: 'top' }}>Du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</TableCell>
                     <TableCell sx={{ verticalAlign: 'top' }}>Début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</TableCell>
                     <TableCell sx={{ verticalAlign: 'top' }}>{msToDate(donation.donationDate)}</TableCell>
-                    <TableCell sx={{ verticalAlign: 'top', fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', minWidth: '100px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
+                    <TableCell sx={{ verticalAlign: 'top', fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
