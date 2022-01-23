@@ -2,12 +2,10 @@
 
 Les points suivants de sécurité sont issues de la [documentation Alyra](https://ecole.alyra.fr/mod/page/view.php?id=900)
 
-TODO: tester également l'utilisation d'un outil comme [Mythril](https://github.com/ConsenSys/mythril)
+A prévoir pour les prochaines versions : utilisation d'outils comme [Mythril](https://github.com/ConsenSys/mythril) et [Manticore](https://github.com/trailofbits/manticore)
 
-TODO: tester également l'utilisation d'un outil comme [Manticore  ](https://github.com/trailofbits/manticore)
+Utilisation de [Slither ](https://github.com/crytic/slither) dans notre smart contract EthicOnChain : deux erreurs ont pu être détectées et corrigées grâce à cet outil.
 
-Utilisation de Slither dans notre smart contract EthicOnChain,[Slither ](https://github.com/crytic/slither),
-2 erreurs ont pu être trouvées grace à Slither et ont pu être corrigées.
 ![Cover](./images/avoiding_common_attacks/Slither.JPG)
 
 

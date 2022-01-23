@@ -71,7 +71,7 @@ Ce document liste tous les Patterns Solidity issus de https://fravoll.github.io/
 #### Eternal Storage
 
 - Utilisation : PEUT-ETRE si nous avons le temps
-- Un tel pattern est vraiment très utile car il donne un moyen relativement simple de ne pas perdre les données stockées en cas de modifications fonctionnelles (si la structure / le stockage des données reste le même et que seules les fonctionalités / méthodes évoluent)
+- Un tel pattern est vraiment très utile car il donne un moyen relativement simple de ne pas perdre les données stockées en cas de modifications fonctionnelles (si la structure / le stockage des données reste le même et que seules les fonctionnalités / méthodes évoluent)
 
 ### Economic Patterns
 

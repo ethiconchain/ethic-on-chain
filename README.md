@@ -3,7 +3,7 @@
 # Présentation
 *Ethic-On-Chain* est une plateforme de crowdfunding de projets philanthropiques qui met en relation donateur et fondation tout en garantissant la transparence et le respect de la réglementation.
 
-## Fonctionalités
+## Fonctionnalités
 * Gestion d'un token ERC20 "EOC" (pour Ethic On Chain)
 * Création de NPO (non profit organisation)
 * Création de donateur
@@ -25,6 +25,6 @@ Un fichier [developer_checklist.md](developer_checklist.md) a été créé dans 
 |Exécution de la dapp|Voir [developer_checklist.md](developer_checklist.md)|Installation/validation|
 |Lancement des tests|Voir [developer_checklist.md](developer_checklist.md)|Installation/validation|
 
-La documentation générée au format NatSpec est disponible sur https://ipfs.io à cette [adresse](https://ipfs.io/ipfs/QmRbXUaYVpxeLcGhWM4iUP8jDxuMJYQtF6dagsNsnGsixr)
+La documentation générée au format NatSpec est disponible sur https://ipfs.io à cette adresse pour [EthicOnChain](https://ipfs.io/ipfs/QmRbXUaYVpxeLcGhWM4iUP8jDxuMJYQtF6dagsNsnGsixr) et celle-ci pour [EthicToken](https://ipfs.io/ipfs/QmPjuh2DD14U4zdznMs7EwX4mSYr4FYP5XKKSm1D2bgq6z)
 
 ![Cover](./images/readme/githubReadmeFooter.png)
