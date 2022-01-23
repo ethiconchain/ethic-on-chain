@@ -12,7 +12,7 @@ import { SubjectOutlined, VolunteerActivismOutlined, ListAltOutlined } from '@mu
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
-const drawerWidth = 240;
+const drawerWidth = 245;
 
 const LayoutDonor = (props) => {
   const { data } = props
@@ -69,12 +69,12 @@ const LayoutDonor = (props) => {
       >
         <Toolbar>
           <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <AccountBoxIcon />
+            <AccountBoxIcon color="cherry" fontSize="large" />
             <Typography variant="h6" sx={{ mx: 1 }}>
               {connectedDonor && ' ' + connectedDonor[3] + ' ' + connectedDonor[2]}
             </Typography>
             <ArrowRightAltIcon color="disabled" fontSize="large" />
-            <Typography sx={{ ml: 1 }}>
+            <Typography variant="h6" sx={{ ml: 1 }}>
               {accounts[0]}
             </Typography>
           </Box>
@@ -95,13 +95,12 @@ const LayoutDonor = (props) => {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar sx={{ bgcolor: '#f9f9f9' }}>
-          <Typography variant='h5'>
+        <Toolbar sx={{ bgcolor: 'bckGrd.dark', color: 'bckGrd.light' }}>
+          <Typography variant='h5' sx={{ fontWeight: 'fontWeightBold' }}>
             Espace Donateur
           </Typography>
         </Toolbar>
         <Divider />
-
 
         {/* list / links */}
         <List>
@@ -110,7 +109,10 @@ const LayoutDonor = (props) => {
               button
               key={id}
               onClick={() => navigate(item.path)}
-              sx={{ bgcolor: location.pathname === item.path ? '#f4f4f4' : null }}
+              sx={location.pathname === item.path ?
+                { bgcolor: 'bckGrd.light', borderRightWidth: '5px', borderRightStyle: 'solid', borderRightColor: 'secondary.main' } :
+                null
+              }
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
@@ -125,7 +127,7 @@ const LayoutDonor = (props) => {
 
       <Box
         component="main"
-        sx={{ bgcolor: '#f9f9f9', width: '100%', flexGrow: 1, p: 3 }}>
+        sx={{ bgcolor: 'bckGrd.light', width: '100%', flexGrow: 1, p: 3 }}>
         <Toolbar />
         <Outlet />
 

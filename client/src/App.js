@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -25,15 +25,33 @@ import Withdrawal from "./pages/npo/Withdrawal";
 import MyWithdrawals from "./pages/npo/MyWithdrawals";
 import Page404 from "./pages/Page404";
 import LoaderGlobal from "./components/LoaderGlobal";
+import Homepage from "./pages/Homepage";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#653442',
+      main: '#100f0f',
     },
     secondary: {
-      main: '#11cb5f',
+      main: '#72A03E',
+      light: '#a3d16c',
+      lighten: '#dcedc8',
+      lighten2: '#f1f8e9',
+      dark: '#1b5e20',
+      darken: '#154500'
+      // light: '#A1E959',
     },
+    cherry: {
+      main: '#560027',
+      light: '#87334f',
+      dark: '#2f0000',
+    },
+    bckGrd: {
+      main: '#605f5f',
+      light: '#e9e7e7',
+      lighten: '#f9f9f9',
+      dark: '#363535',
+    }
   },
   typography: {
     fontFamily: 'Mulish',
@@ -45,12 +63,13 @@ const theme = createTheme({
       fontFamily: 'Roboto Condensed',
       textTransform: 'uppercase',
       fontWeight: 400,
-    }
+    },
   }
 });
 
 const App = () => {
   let navigate = useNavigate();
+  const location = useLocation();
   const addressZero = "0x0000000000000000000000000000000000000000"
   const [data, setData] = useState({
     web3: null,
@@ -82,7 +101,9 @@ const App = () => {
 
   useEffect(() => {
     document.title = "Ethic On Chain";
-    init();
+    if (location.pathname !== "/homepage") {
+      init();
+    }
   }, []);
 
   useEffect(() => {
@@ -135,7 +156,6 @@ const App = () => {
         .then(x => x[1] !== addressZero ? isADonor = true : isADonor = false)
 
       setData({ web3, accounts, contract: instance, contractTokenEOC: instanceTokenEOC, isAdmin: isAnAdmin, isNpo: isANpo, isDonor: isADonor });
-
     } catch (error) {
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
@@ -159,7 +179,12 @@ const App = () => {
   const { web3, isAdmin, isDonor, isNpo } = data
   return !web3 ? (
     <ThemeProvider theme={theme}>
-      <LoaderGlobal />
+      <Routes>
+        <Route path="/homepage" element={<Homepage init={init} />} />
+      </Routes>
+      {location.pathname !== "/homepage" &&
+        <LoaderGlobal />
+      }
     </ThemeProvider>
   ) : (
     <ThemeProvider theme={theme}>
@@ -192,7 +217,7 @@ const App = () => {
       </Routes>
 
       {!isAdmin && !isNpo && !isDonor &&
-        <Box sx={{ bgcolor: '#f9f9f9', display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+        <Box sx={{ bgcolor: 'bckGrd.lighten', display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
           <Typography sx={{ fontSize: 25, textAlign: 'center' }} >
             Votre addresse n'est pas enregistrée
           </Typography>

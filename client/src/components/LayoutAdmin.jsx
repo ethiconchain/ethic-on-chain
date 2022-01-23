@@ -12,7 +12,7 @@ import { VolunteerActivismOutlined, ListAltOutlined, SubjectOutlined, CorporateF
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
-const drawerWidth = 240;
+const drawerWidth = 245;
 
 const LayoutAdmin = (props) => {
   const { data } = props
@@ -53,12 +53,12 @@ const LayoutAdmin = (props) => {
       >
         <Toolbar>
           <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <AdminPanelSettingsIcon />
+            <AdminPanelSettingsIcon color="cherry" fontSize="large" />
             <Typography variant="h6" sx={{ mx: 1 }}>
               Administrateur
             </Typography>
             <ArrowRightAltIcon color="disabled" fontSize="large" />
-            <Typography sx={{ ml: 1 }}>
+            <Typography variant="h6" sx={{ ml: 1 }}>
               {accounts[0]}
             </Typography>
           </Box>
@@ -79,8 +79,8 @@ const LayoutAdmin = (props) => {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar sx={{ bgcolor: '#f9f9f9' }}>
-          <Typography variant='h5'>
+        <Toolbar sx={{ bgcolor: 'bckGrd.dark', color: 'bckGrd.light' }}>
+          <Typography variant='h5' sx={{ fontWeight: 'fontWeightBold' }}>
             Espace Admin
           </Typography>
         </Toolbar>
@@ -94,7 +94,10 @@ const LayoutAdmin = (props) => {
               button
               key={id}
               onClick={() => navigate(item.path)}
-              sx={{ bgcolor: location.pathname === item.path ? '#f4f4f4' : null }}
+              sx={location.pathname === item.path ?
+                { bgcolor: 'bckGrd.light', borderRightWidth: '5px', borderRightStyle: 'solid', borderRightColor: 'secondary.main' } :
+                null
+              }
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
@@ -109,7 +112,7 @@ const LayoutAdmin = (props) => {
 
       <Box
         component="main"
-        sx={{ bgcolor: '#f9f9f9', width: '100%', flexGrow: 1, p: 3 }}>
+        sx={{ bgcolor: 'bckGrd.light', width: '100%', flexGrow: 1, p: 3 }}>
         <Toolbar />
         <Outlet />
 

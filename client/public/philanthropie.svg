@@ -1,0 +1,41 @@
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 758.38477 349.30029">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 100px;
+        fill: #72a03e;
+        font-family: DINPro, DIN Pro;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5, .cls-7, .cls-8 {
+        fill: #a1e959;
+      }
+
+      .cls-3, .cls-4, .cls-5, .cls-7, .cls-8 {
+        font-family: DINPro-Black, DIN Pro;
+        font-weight: 800;
+      }
+
+      .cls-4 {
+        letter-spacing: -0.01em;
+      }
+
+      .cls-5 {
+        letter-spacing: -0.04em;
+      }
+
+      .cls-6 {
+        letter-spacing: -0.015em;
+      }
+
+      .cls-7 {
+        letter-spacing: -0.03em;
+      }
+
+      .cls-8 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(0 85.6001)">La<tspan class="cls-2" x="109.89844" y="0"> </tspan><tspan class="cls-3" x="134.79785" y="0">b</tspan><tspan class="cls-4" x="191.69629" y="0">l</tspan><tspan class="cls-3" x="224.79541" y="0">oc</tspan><tspan class="cls-5" x="327.29346" y="0">k</tspan><tspan class="cls-3" x="380.59375" y="0">chain</tspan><tspan x="0" y="120">au servi</tspan><tspan class="cls-6" x="348.29395" y="120">c</tspan><tspan x="395.79297" y="120">e de </tspan><tspan x="0" y="240">la</tspan><tspan class="cls-2" x="81.99756" y="240"> </tspan><tspan class="cls-3" x="106.89697" y="240">philanth</tspan><tspan class="cls-7" x="490.29102" y="240">r</tspan><tspan class="cls-8" x="534.79004" y="240">opie</tspan><tspan x="731.38574" y="240">.</tspan></text>
+</svg>

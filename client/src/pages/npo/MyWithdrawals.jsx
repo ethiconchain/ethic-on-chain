@@ -147,13 +147,13 @@ const MyWithdrawals = (props) => {
         {allMyWithdrawals && allMyProjects &&
           <TableContainer component={Paper}>
             <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
+              <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
-                  <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Retrait pour</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Description des dépenses</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Retrait pour</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Description des dépenses</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Date</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Montant</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -165,11 +165,11 @@ const MyWithdrawals = (props) => {
                     key={withdrawal.withdrawalId}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="donation">{findProjectInfos(withdrawal.projectId, "title")}</TableCell>
+                    <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }} component="th" scope="donation">{findProjectInfos(withdrawal.projectId, "title")}</TableCell>
                     <TableCell>{withdrawal.title}</TableCell>
                     <TableCell>{withdrawal.description}</TableCell>
                     <TableCell>{msToDate(withdrawal.withdrawalDate)}</TableCell>
-                    <TableCell sx={{ minWidth: '80px' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
+                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', minWidth: '80px' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

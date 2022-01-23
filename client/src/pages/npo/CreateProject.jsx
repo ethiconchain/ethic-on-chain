@@ -109,32 +109,32 @@ export default function CreateProject(props) {
             onChange={(e) => setTitle(e.target.value)}
             label="Titre"
             variant='outlined'
-            color='secondary'
+            color='cherry'
             fullWidth
             required
-            sx={{ mb: 3 }}
+            sx={{ mb: 3, bgcolor: 'white' }}
             error={titleError}
           />
           <TextField
             onChange={(e) => setDescription(e.target.value)}
             label="Description"
             variant='outlined'
-            color='secondary'
+            color='cherry'
             multiline
             rows={4}
             fullWidth
             required
-            sx={{ mb: 3 }}
+            sx={{ mb: 3, bgcolor: 'white' }}
             error={descriptionError}
           />
           <TextField
             onChange={(e) => setZone(e.target.value)}
             label="Zone géographique"
             variant='outlined'
-            color='secondary'
+            color='cherry'
             fullWidth
             required
-            sx={{ mb: 3 }}
+            sx={{ mb: 3, bgcolor: 'white' }}
             error={zoneError}
           />
           <Grid container spacing={3} justifyContent="space-between">
@@ -145,7 +145,7 @@ export default function CreateProject(props) {
                 onChange={(newValue) => {
                   setTimeValueBegin(newValue.valueOf());
                 }}
-                renderInput={(params) => <TextField {...params} />}
+                renderInput={(params) => <TextField color='cherry' sx={{ bgcolor: 'white' }} {...params} />}
                 sx={{ mr: 3 }}
               />
             </Grid>
@@ -156,7 +156,7 @@ export default function CreateProject(props) {
                 onChange={(newValue) => {
                   setTimeValueEnd(newValue.valueOf());
                 }}
-                renderInput={(params) => <TextField {...params} />}
+                renderInput={(params) => <TextField color='cherry' sx={{ bgcolor: 'white' }} {...params} />}
               />
             </Grid>
             <Grid item >
@@ -166,7 +166,7 @@ export default function CreateProject(props) {
                 onChange={(newValue) => {
                   setTimeValueCampaign(newValue.valueOf());
                 }}
-                renderInput={(params) => <TextField {...params} />}
+                renderInput={(params) => <TextField color='cherry' sx={{ bgcolor: 'white' }} {...params} />}
               />
             </Grid>
             <Grid item >
@@ -174,13 +174,13 @@ export default function CreateProject(props) {
                 onChange={(e) => setNbDays(e.target.value)}
                 label="Durée de la campagne"
                 variant='outlined'
-                color='secondary'
+                color='cherry'
                 InputProps={{
                   endAdornment: <InputAdornment position="end">jour(s)</InputAdornment>,
                 }}
                 fullWidth
                 required
-                sx={{ mb: 3 }}
+                sx={{ mb: 3, bgcolor: 'white' }}
                 error={nbDaysError}
               />
             </Grid>
@@ -191,13 +191,13 @@ export default function CreateProject(props) {
                 onChange={(e) => setAmoutMin(e.target.value)}
                 label="Montant min. valide"
                 variant='outlined'
-                color='secondary'
+                color='cherry'
                 InputProps={{
                   endAdornment: <InputAdornment position="end">EOC</InputAdornment>,
                 }}
                 fullWidth
                 required
-                sx={{ mb: 3 }}
+                sx={{ mb: 3, bgcolor: 'white' }}
                 error={amoutMinError}
               />
             </Grid>
@@ -206,13 +206,13 @@ export default function CreateProject(props) {
                 onChange={(e) => setAmoutMax(e.target.value)}
                 label="Montant max. valide"
                 variant='outlined'
-                color='secondary'
+                color='cherry'
                 InputProps={{
                   endAdornment: <InputAdornment position="end">EOC</InputAdornment>,
                 }}
                 fullWidth
                 required
-                sx={{ mb: 3 }}
+                sx={{ mb: 3, bgcolor: 'white' }}
                 error={amoutMaxError}
               />
             </Grid>
@@ -220,7 +220,7 @@ export default function CreateProject(props) {
           <br />
 
           <Button
-            // disabled="false"
+            fullWidth
             type="submit"
             color="secondary"
             variant="contained"

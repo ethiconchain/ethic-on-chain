@@ -6,3 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.Home {
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}

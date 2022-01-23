@@ -107,11 +107,11 @@ const ViewDonors = (props) => {
         {allDonors &&
           <TableContainer component={Paper}>
             <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
+              <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
-                  <TableCell sx={{ typography: 'upper' }}>Prénom</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Nom</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Adresse</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Prénom</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Nom</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Adresse</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -123,10 +123,10 @@ const ViewDonors = (props) => {
                     key={id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="donor">
+                    <TableCell sx={{ fontWeight: 'fontWeightBold' }} component="th" scope="donor">
                       {donor.surName}
                     </TableCell>
-                    <TableCell>{donor.name}</TableCell>
+                    <TableCell sx={{ fontWeight: 'fontWeightBold' }}>{donor.name}</TableCell>
                     <TableCell>{donor.postalAddress}</TableCell>
                   </TableRow>
                 ))}

@@ -156,13 +156,13 @@ const Historic = (props) => {
         {allDonations && allProjects && allDonors && allNpos &&
           <TableContainer component={Paper}>
             <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
+              <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
-                  <TableCell sx={{ typography: 'upper' }}>Projet</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>NPO</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Donateur</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Date</TableCell>
-                  <TableCell sx={{ typography: 'upper' }}>Montant</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>NPO</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Donateur</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Date</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Montant</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -174,13 +174,13 @@ const Historic = (props) => {
                     key={donation.donationId}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="donation">
+                    <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }} component="th" scope="donation">
                       {findProjectInfos(donation.projectId, "title")}
                     </TableCell>
                     <TableCell>{findNpoInfos(findProjectInfos(donation.projectId, "npoErc20Address"), "denomination")}</TableCell>
-                    <TableCell>{findDonorInfos(donation.donorId, "surName")} {findDonorInfos(donation.donorId, "name")}</TableCell>
+                    <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }}>{findDonorInfos(donation.donorId, "surName")} {findDonorInfos(donation.donorId, "name")}</TableCell>
                     <TableCell>{msToDate(donation.donationDate)}</TableCell>
-                    <TableCell sx={{ minWidth: '80px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
+                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', minWidth: '80px' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

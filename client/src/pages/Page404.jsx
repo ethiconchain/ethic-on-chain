@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 
 const Page404 = () => {
   return (
-    <Box sx={{ bgcolor: '#f9f9f9', display: 'flex', height: '100vh' }}>
+    <Box sx={{ bgcolor: 'bckGrd.lighten', display: 'flex', height: '100vh' }}>
       <Typography variant="h5" >
         Cette page n'existe pas
       </Typography>
