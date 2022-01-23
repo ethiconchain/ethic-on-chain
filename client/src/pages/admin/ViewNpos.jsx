@@ -137,7 +137,7 @@ const ViewNpos = (props) => {
                 <TableRow>
                   <TablePagination
                     rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                    colSpan={5}
+                    colSpan={4}
                     count={allNpos.length}
                     rowsPerPage={rowsPerPage}
                     page={page}

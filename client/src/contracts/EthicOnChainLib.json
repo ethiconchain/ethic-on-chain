@@ -43663,12 +43663,18 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xd49B997A6B5709B1E80EdcDd2c60d579299ec201",
-      "transactionHash": "0x54cb6202430e3b877f25acfdc5e838337a49878dc1bff39d13bada393aabea80"
+      "address": "0xe27BF036269BeAf963c9112a15A70BeB34BDFCDc",
+      "transactionHash": "0x37cdbcaa62b5f24662900c66da723f0b948c8f1cabdb6c0dd679a947e9209d55"
+    },
+    "80001": {
+      "events": {},
+      "links": {},
+      "address": "0x126Ef4C8C1e7169174aa3630ED17522588e5F552",
+      "transactionHash": "0x38dcece079ccf3e47f3a2319ca6e1ae7e124c3b93009dc2cd2c1dcee9e56b66b"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-19T11:08:46.083Z",
+  "updatedAt": "2022-01-18T18:04:06.744Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Lahcen E. Dev / Jérôme Gauthier",
