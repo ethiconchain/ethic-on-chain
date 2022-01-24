@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import orderBy from "lodash/orderBy";
 import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -17,6 +18,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Historic = (props) => {
   const { data, msToDate, allNpos } = props
@@ -24,9 +27,9 @@ const Historic = (props) => {
   const [allDonations, setAllDonations] = useState(null)
   const [allProjects, setAllProjects] = useState(null)
   const [allDonors, setAllDonors] = useState(null)
-
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
+  const [direction, setDirection] = useState('desc');
 
   useEffect(() => {
     getAllDonations()
@@ -66,7 +69,7 @@ const Historic = (props) => {
     try {
       const { contract } = data
       await contract.methods.getDonations().call()
-        .then(x => setAllDonations(x))
+        .then(x => setAllDonations(orderBy(x, ['donationDate'], 'desc')))
       await contract.methods.getProjects().call()
         .then(x => setAllProjects(x))
       await contract.methods.getDonors().call()
@@ -76,6 +79,22 @@ const Historic = (props) => {
       console.log(error)
     }
   }
+
+  const handleSort = (columnName) => {
+    direction === 'desc' ? setDirection('asc') : setDirection('desc')
+    let res = orderBy(allDonations, [columnName], direction)
+    setAllDonations(res)
+  };
+
+  const SortTheTable = (props) => {
+    const { name, columnName } = props
+
+    return (
+      <Button onClick={() => handleSort(columnName)} variant="text" sx={{ color: 'white', typography: 'upper' }}
+        endIcon={<ArrowDropDownIcon />}
+      >{name}</Button>
+    )
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -161,7 +180,7 @@ const Historic = (props) => {
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>NPO</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Donateur</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Date</TableCell>
+                  <TableCell><SortTheTable name='Date' columnName='donationDate' /></TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Montant</TableCell>
                 </TableRow>
               </TableHead>
@@ -187,7 +206,7 @@ const Historic = (props) => {
               <TableFooter >
                 <TableRow>
                   <TablePagination
-                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                    rowsPerPageOptions={[5, 10, 20, { label: 'All', value: -1 }]}
                     colSpan={5}
                     count={allDonations.length}
                     rowsPerPage={rowsPerPage}

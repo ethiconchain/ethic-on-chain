@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import orderBy from "lodash/orderBy";
+
 import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -17,6 +19,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const MyDonations = (props) => {
   const { data, msToDate } = props
@@ -25,6 +29,7 @@ const MyDonations = (props) => {
   const [allProjects, setAllProjects] = useState(null)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [direction, setDirection] = useState('desc');
 
   useEffect(() => {
     getMyDonations()
@@ -50,7 +55,7 @@ const MyDonations = (props) => {
     try {
       const { contract, accounts } = data
       await contract.methods.getDonationPerDonor(accounts[0]).call()
-        .then(x => setAllMyDonations(x))
+        .then(x => setAllMyDonations(orderBy(x, ['donationDate'], 'desc')))
       await contract.methods.getProjects().call()
         .then(x => setAllProjects(x))
 
@@ -58,6 +63,22 @@ const MyDonations = (props) => {
       console.log(error)
     }
   }
+
+  const handleSort = (columnName) => {
+    direction === 'desc' ? setDirection('asc') : setDirection('desc')
+    let res = orderBy(allMyDonations, [columnName], direction)
+    setAllMyDonations(res)
+  };
+
+  const SortTheTable = (props) => {
+    const { name, columnName } = props
+
+    return (
+      <Button onClick={() => handleSort(columnName)} variant="text" sx={{ color: 'white', typography: 'upper' }}
+        endIcon={<ArrowDropDownIcon />}
+      >{name}</Button>
+    )
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -145,7 +166,7 @@ const MyDonations = (props) => {
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Description</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Dates du projet</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Campagne</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Date</TableCell>
+                  <TableCell><SortTheTable name='Date' columnName='donationDate' /></TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Montant</TableCell>
                 </TableRow>
               </TableHead>
