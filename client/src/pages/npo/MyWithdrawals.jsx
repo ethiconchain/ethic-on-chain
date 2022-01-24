@@ -150,8 +150,8 @@ const MyWithdrawals = (props) => {
               <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Retrait pour</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Description des dépenses</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Retrait pour</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Description des dépenses</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Date</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Montant</TableCell>
                 </TableRow>
@@ -169,7 +169,7 @@ const MyWithdrawals = (props) => {
                     <TableCell>{withdrawal.title}</TableCell>
                     <TableCell>{withdrawal.description}</TableCell>
                     <TableCell>{msToDate(withdrawal.withdrawalDate)}</TableCell>
-                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', minWidth: '80px' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
+                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

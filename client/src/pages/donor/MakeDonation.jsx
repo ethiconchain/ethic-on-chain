@@ -10,17 +10,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
-import { green } from '@mui/material/colors';
 import CardHeader from '@mui/material/CardHeader';
-import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import PublicIcon from '@mui/icons-material/Public';
 
 import { Loader } from '../../components/Loader';
 
 export default function MakeDonation(props) {
-  const greenColor = green['A100'];
   const { data } = props
   const { web3 } = data
   let navigate = useNavigate();

@@ -10,12 +10,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
-import { green } from '@mui/material/colors';
 
 import { Loader } from '../../components/Loader';
 
 export default function Withdrawal(props) {
-  const greenColor = green['A100'];
   const { data } = props
   const { web3 } = data
   let navigate = useNavigate();
