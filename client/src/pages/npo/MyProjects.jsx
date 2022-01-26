@@ -28,13 +28,19 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import LinearProgress from '@mui/material/LinearProgress';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
 
 const MyProjects = (props) => {
-  const { data, msToDate } = props
+  const { data, msToDate, stringValue } = props
   const { web3 } = data
   const [allMyProjects, setAllMyProjects] = useState(null)
+  const [allProjectsByStatus, setAllProjectsByStatus] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [direction, setDirection] = useState('desc');
+  const [selectedStatus, setSelectedStatus] = useState(6);
+
   const statusProject = {
     0: "Indéfini",
     1: "Projet à l'étude",
@@ -60,6 +66,18 @@ const MyProjects = (props) => {
     console.log('allMyProjects :>> ', allMyProjects);
   }, [allMyProjects]);
 
+  useEffect(() => {
+    selectedStatus === 6 ?
+      setAllProjectsByStatus(allMyProjects) :
+      setAllProjectsByStatus(allMyProjects.filter(x => x.status === selectedStatus.toString()))
+    console.log('selectedStatus :>> ', selectedStatus)
+  }, [selectedStatus]);
+
+  const handleSelectedStatus = () => {
+    selectedStatus === 6 ? setSelectedStatus(1) : setSelectedStatus(selectedStatus + 1)
+  };
+
+
   const daysLeft = (x) => {
     let dateNow = new Date()
     return Math.ceil(((+x.campaignStartDate + +x.campaignDurationInDays * 86400) - dateNow.valueOf() / 1000) / 86400)
@@ -72,12 +90,44 @@ const MyProjects = (props) => {
   const getMyProjects = async () => {
     try {
       const { contract, accounts } = data
-      await contract.methods.getProjectsPerNpo(accounts[0]).call()
-        .then(x => setAllMyProjects(orderBy(x, ['projectId'], 'desc')))
+      const projects = await contract.methods.getProjectsPerNpo(accounts[0]).call()
+      setAllMyProjects(orderBy(projects, projects => +projects['projectId'], 'desc'))
+      setAllProjectsByStatus(orderBy(projects, projects => +projects['projectId'], 'desc'))
+
     } catch (error) {
       console.log(error)
     }
   }
+
+  const handleSort = (columnName) => {
+    direction === 'desc' ? setDirection('asc') : setDirection('desc')
+    if (columnName === 'currentPercentage') {
+      let res = orderBy(allProjectsByStatus,
+        x => currentPercentage(x),
+        direction)
+      setAllProjectsByStatus(res)
+    } else if (columnName === 'daysLeft') {
+      let res = orderBy(allProjectsByStatus,
+        x => daysLeft(x),
+        direction)
+      setAllProjectsByStatus(res)
+    } else {
+      let res = stringValue.includes(columnName) ?
+        orderBy(allProjectsByStatus, [columnName], direction) :
+        orderBy(allProjectsByStatus, x => +x[columnName], direction)
+      setAllProjectsByStatus(res)
+    }
+  };
+
+  const SortTheTable = (props) => {
+    const { name, columnName } = props
+
+    return (
+      <Button onClick={() => handleSort(columnName)} variant="text" sx={{ p: 0, color: 'white', typography: 'upper' }}
+        endIcon={<ArrowDropDownIcon />}
+      >{name}</Button>
+    )
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -156,7 +206,7 @@ const MyProjects = (props) => {
     return (
       <>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-          <TableCell sx={{ bgcolor: 'bckGrd.lighten' }}>
+          <TableCell>
             <IconButton
               aria-label="expand row"
               size="small"
@@ -166,14 +216,14 @@ const MyProjects = (props) => {
             </IconButton>
           </TableCell>
 
-          <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }} component="th" scope="project">
-            {project.title}
-          </TableCell>
           <TableCell component="th" scope="project">
             <Typography variant="button" sx={{ whiteSpace: 'nowrap', fontWeight: 'bold', color: 'white', bgcolor: statusColor[project.status], borderRadius: '3px', px: '5px', py: '1px' }}>{statusProject[project.status].toUpperCase()}</Typography>
           </TableCell>
-          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(project.projectBalance.toString())} EOC</TableCell>
-          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten2', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(project.minAmount.toString())} EOC</TableCell>
+          <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }} component="th" scope="project">
+            {project.title}
+          </TableCell>
+          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{(+web3.utils.fromWei(project.projectBalance.toString())).toLocaleString()} EOC</TableCell>
+          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten2', whiteSpace: 'nowrap' }}>{(+web3.utils.fromWei(project.minAmount.toString())).toLocaleString()} EOC</TableCell>
 
           {(project.status === "1" || project.status === "0") ?
             <TableCell align="center">-</TableCell>
@@ -257,25 +307,29 @@ const MyProjects = (props) => {
           Liste de mes projets
         </Typography>
 
-        {allMyProjects &&
+        {allMyProjects && allProjectsByStatus &&
           <TableContainer component={Paper}>
             <Table size="small" sx={{ minWidth: 650 }} aria-label="collapsible table">
               <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
                   <TableCell />
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Statut</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Dons collectés</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Objectif min.</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Financement</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Clôture</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>
+                    <Button onClick={() => handleSelectedStatus()} variant="text" sx={{ p: 0, color: 'white', typography: 'upper' }}
+                      endIcon={<PlaylistPlayIcon />}
+                    >Statut</Button>
+                  </TableCell>
+                  <TableCell><SortTheTable name='Projet' columnName='title' /></TableCell>
+                  <TableCell sx={{ whiteSpace: 'nowrap' }}><SortTheTable name='Dons collectés' columnName='projectBalance' /></TableCell>
+                  <TableCell sx={{ whiteSpace: 'nowrap' }}><SortTheTable name='Objectif min.' columnName='minAmount' /></TableCell>
+                  <TableCell><SortTheTable name='Financement' columnName='currentPercentage' /></TableCell>
+                  <TableCell><SortTheTable name='Clôture' columnName='daysLeft' /></TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Demander un retrait</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {(rowsPerPage > 0
-                  ? allMyProjects.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  : allMyProjects
+                  ? allProjectsByStatus.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : allProjectsByStatus
                 ).map((project) => (
                   <Row key={project.projectId} project={project} />
                 ))}
@@ -286,7 +340,7 @@ const MyProjects = (props) => {
                   <TablePagination
                     rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                     colSpan={8}
-                    count={allMyProjects.length}
+                    count={allProjectsByStatus.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     labelRowsPerPage="Lignes par page"

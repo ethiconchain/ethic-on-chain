@@ -23,7 +23,7 @@ import Button from '@mui/material/Button';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const MyDonations = (props) => {
-  const { data, msToDate } = props
+  const { data, msToDate, stringValue } = props
   const { web3 } = data
   const [allMyDonations, setAllMyDonations] = useState(null)
   const [allProjects, setAllProjects] = useState(null)
@@ -55,7 +55,7 @@ const MyDonations = (props) => {
     try {
       const { contract, accounts } = data
       await contract.methods.getDonationPerDonor(accounts[0]).call()
-        .then(x => setAllMyDonations(orderBy(x, ['donationDate'], 'desc')))
+        .then(x => setAllMyDonations(orderBy(x, x => +x['donationDate'], 'desc')))
       await contract.methods.getProjects().call()
         .then(x => setAllProjects(x))
 
@@ -66,15 +66,29 @@ const MyDonations = (props) => {
 
   const handleSort = (columnName) => {
     direction === 'desc' ? setDirection('asc') : setDirection('desc')
-    let res = orderBy(allMyDonations, [columnName], direction)
-    setAllMyDonations(res)
+    if (columnName === 'projet') {
+      let res = orderBy(allMyDonations,
+        x => findProjectPropertyValue(x.projectId).title,
+        direction)
+      setAllMyDonations(res)
+    } else if (columnName === 'zone') {
+      let res = orderBy(allMyDonations,
+        x => findProjectPropertyValue(x.projectId).geographicalArea,
+        direction)
+      setAllMyDonations(res)
+    } else {
+      let res = stringValue.includes(columnName) ?
+        orderBy(allMyDonations, [columnName], direction) :
+        orderBy(allMyDonations, x => +x[columnName], direction)
+      setAllMyDonations(res)
+    }
   };
 
   const SortTheTable = (props) => {
     const { name, columnName } = props
 
     return (
-      <Button onClick={() => handleSort(columnName)} variant="text" sx={{ color: 'white', typography: 'upper' }}
+      <Button onClick={() => handleSort(columnName)} variant="text" sx={{ p: 0, color: 'white', typography: 'upper' }}
         endIcon={<ArrowDropDownIcon />}
       >{name}</Button>
     )
@@ -161,13 +175,13 @@ const MyDonations = (props) => {
             <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Zone</TableCell>
+                  <TableCell><SortTheTable name='Projet' columnName='projet' /></TableCell>
+                  <TableCell><SortTheTable name='Zone' columnName='zone' /></TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Description</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Dates du projet</TableCell>
                   <TableCell sx={{ typography: 'upper', color: 'white' }}>Campagne</TableCell>
                   <TableCell><SortTheTable name='Date' columnName='donationDate' /></TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Montant</TableCell>
+                  <TableCell><SortTheTable name='Montant' columnName='donationAmount' /></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -187,11 +201,11 @@ const MyDonations = (props) => {
                     <TableCell sx={{ verticalAlign: 'top' }}>Du {msToDate(findProjectPropertyValue(donation.projectId).startDate)} au {msToDate(findProjectPropertyValue(donation.projectId).endDate)}</TableCell>
                     <TableCell sx={{ verticalAlign: 'top' }}>Début {msToDate(findProjectPropertyValue(donation.projectId).campaignStartDate)} pour une durée de {findProjectPropertyValue(donation.projectId).campaignDurationInDays} jour(s)</TableCell>
                     <TableCell sx={{ verticalAlign: 'top' }}>{msToDate(donation.donationDate)}</TableCell>
-                    <TableCell sx={{ verticalAlign: 'top', fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
+                    <TableCell sx={{ verticalAlign: 'top', fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{(+web3.utils.fromWei(donation.donationAmount.toString())).toLocaleString()} EOC</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
-              <TableFooter >
+              <TableFooter>
                 <TableRow>
                   <TablePagination
                     rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}

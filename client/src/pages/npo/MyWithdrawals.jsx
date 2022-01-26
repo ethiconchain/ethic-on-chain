@@ -19,15 +19,18 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 
 const MyWithdrawals = (props) => {
-  const { data, msToDate } = props
+  const { data, msToDate, stringValue } = props
   const { web3 } = data
   const [allMyWithdrawals, setAllMyWithdrawals] = useState(null)
   const [allMyProjects, setAllMyProjects] = useState(null)
-
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [direction, setDirection] = useState('desc');
 
   useEffect(() => {
     getMyWithdrawals()
@@ -54,7 +57,7 @@ const MyWithdrawals = (props) => {
     try {
       const { contract, accounts } = data
       await contract.methods.getWithdrawalPerNpo(accounts[0]).call()
-        .then(x => setAllMyWithdrawals(orderBy(x, ['withdrawalDate'], 'desc')))
+        .then(x => setAllMyWithdrawals(orderBy(x, x => +x['withdrawalDate'], 'desc')))
     } catch (error) {
       console.log(error)
     }
@@ -69,6 +72,31 @@ const MyWithdrawals = (props) => {
       console.log(error)
     }
   }
+
+  const handleSort = (columnName) => {
+    direction === 'desc' ? setDirection('asc') : setDirection('desc')
+    if (columnName === 'projet') {
+      let res = orderBy(allMyWithdrawals,
+        x => findProjectInfos(x.projectId, "title"),
+        direction)
+      setAllMyWithdrawals(res)
+    } else {
+      let res = stringValue.includes(columnName) ?
+        orderBy(allMyWithdrawals, [columnName], direction) :
+        orderBy(allMyWithdrawals, x => +x[columnName], direction)
+      setAllMyWithdrawals(res)
+    }
+  };
+
+  const SortTheTable = (props) => {
+    const { name, columnName } = props
+
+    return (
+      <Button onClick={() => handleSort(columnName)} variant="text" sx={{ p: 0, color: 'white', typography: 'upper' }}
+        endIcon={<ArrowDropDownIcon />}
+      >{name}</Button>
+    )
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -151,11 +179,11 @@ const MyWithdrawals = (props) => {
             <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Retrait pour</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Description des dépenses</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Date</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Montant</TableCell>
+                  <TableCell><SortTheTable name='Projet' columnName='projet' /></TableCell>
+                  <TableCell><SortTheTable name='Retrait pour' columnName='title' /></TableCell>
+                  <TableCell><SortTheTable name='Description des dépenses' columnName='description' /></TableCell>
+                  <TableCell><SortTheTable name='Date' columnName='withdrawalDate' /></TableCell>
+                  <TableCell><SortTheTable name='Montant' columnName='amount' /></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -171,7 +199,7 @@ const MyWithdrawals = (props) => {
                     <TableCell>{withdrawal.title}</TableCell>
                     <TableCell>{withdrawal.description}</TableCell>
                     <TableCell>{msToDate(withdrawal.withdrawalDate)}</TableCell>
-                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(withdrawal.amount.toString())} EOC</TableCell>
+                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{(+web3.utils.fromWei(withdrawal.amount.toString())).toLocaleString()} EOC</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
