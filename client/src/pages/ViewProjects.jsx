@@ -28,13 +28,19 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import LinearProgress from '@mui/material/LinearProgress';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
 
 const ViewProjects = (props) => {
-  const { data, msToDate } = props
+  const { data, msToDate, stringValue } = props
   const { web3, isAdmin } = data
   const [allProjects, setAllProjects] = useState(null)
+  const [allProjectsByStatus, setAllProjectsByStatus] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [direction, setDirection] = useState('desc');
+  const [selectedStatus, setSelectedStatus] = useState(6);
+
   const statusProject = {
     0: "Indéfini",
     1: "Projet à l'étude",
@@ -57,10 +63,27 @@ const ViewProjects = (props) => {
   }, []);
 
   useEffect(() => {
+    if (allProjectsByStatus) {
+      console.log('allProjectsByStatus :>> ', allProjectsByStatus);
+    }
+  }, [allProjectsByStatus]);
+
+  useEffect(() => {
     if (allProjects) {
       console.log('allProjects :>> ', allProjects);
     }
   }, [allProjects]);
+
+  useEffect(() => {
+    selectedStatus === 6 ?
+      setAllProjectsByStatus(allProjects) :
+      setAllProjectsByStatus(allProjects.filter(x => x.status === selectedStatus.toString()))
+    console.log('selectedStatus :>> ', selectedStatus)
+  }, [selectedStatus]);
+
+  const handleSelectedStatus = () => {
+    selectedStatus === 6 ? setSelectedStatus(1) : setSelectedStatus(selectedStatus + 1)
+  };
 
   const daysLeft = (x) => {
     let dateNow = new Date()
@@ -74,13 +97,44 @@ const ViewProjects = (props) => {
   const getAllProjects = async () => {
     try {
       const { contract } = data
-      await contract.methods.getProjects().call()
-        .then(x => setAllProjects(orderBy(x, ['projectId'], 'desc')))
+      const projects = await contract.methods.getProjects().call()
+      setAllProjects(orderBy(projects, projects => +projects['projectId'], 'desc'))
+      setAllProjectsByStatus(orderBy(projects, projects => +projects['projectId'], 'desc'))
 
     } catch (error) {
       console.log(error)
     }
   }
+
+  const handleSort = (columnName) => {
+    direction === 'desc' ? setDirection('asc') : setDirection('desc')
+    if (columnName === 'currentPercentage') {
+      let res = orderBy(allProjectsByStatus,
+        x => currentPercentage(x),
+        direction)
+      setAllProjectsByStatus(res)
+    } else if (columnName === 'daysLeft') {
+      let res = orderBy(allProjectsByStatus,
+        x => daysLeft(x),
+        direction)
+      setAllProjectsByStatus(res)
+    } else {
+      let res = stringValue.includes(columnName) ?
+        orderBy(allProjectsByStatus, [columnName], direction) :
+        orderBy(allProjectsByStatus, x => +x[columnName], direction)
+      setAllProjectsByStatus(res)
+    }
+  };
+
+  const SortTheTable = (props) => {
+    const { name, columnName } = props
+
+    return (
+      <Button onClick={() => handleSort(columnName)} variant="text" sx={{ p: 0, color: 'white', typography: 'upper' }}
+        endIcon={<ArrowDropDownIcon />}
+      >{name}</Button>
+    )
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -159,7 +213,7 @@ const ViewProjects = (props) => {
     return (
       <>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-          <TableCell sx={{ bgcolor: 'bckGrd.lighten' }}>
+          <TableCell>
             <IconButton
               aria-label="expand row"
               size="small"
@@ -169,13 +223,13 @@ const ViewProjects = (props) => {
             </IconButton>
           </TableCell>
 
-          <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }} component="th" scope="project">{project.title}</TableCell>
-          <TableCell>{project.geographicalArea}</TableCell>
           <TableCell>
             <Typography variant="button" sx={{ whiteSpace: 'nowrap', fontWeight: 'bold', color: 'white', bgcolor: statusColor[project.status], borderRadius: '3px', px: '5px', py: '1px' }}>{statusProject[project.status].toUpperCase()}</Typography>
           </TableCell>
-          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(project.projectBalance.toString())} EOC</TableCell>
-          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten2', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(project.minAmount.toString())} EOC</TableCell>
+          <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold' }} component="th" scope="project">{project.title}</TableCell>
+          <TableCell>{project.geographicalArea}</TableCell>
+          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten' }}>{(+web3.utils.fromWei(project.projectBalance.toString())).toLocaleString()} EOC</TableCell>
+          <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten2', whiteSpace: 'nowrap' }}>{(+web3.utils.fromWei(project.minAmount.toString())).toLocaleString()} EOC</TableCell>
 
           {(project.status === "1" || project.status === "0") ?
             <TableCell align="center">-</TableCell>
@@ -203,18 +257,17 @@ const ViewProjects = (props) => {
             <TableCell align="center">-</TableCell>
           }
 
-          {
-            isAdmin ?
-              <TableCell />
-              :
-              <TableCell>
-                <Link to={`/faireundon/${project.projectId}`}>
-                  <Button disabled={(project.status === "2" || project.status === "3") ? false : true}
-                    variant="contained" color='secondary' sx={{ minWidth: '120px' }}>
-                    <VolunteerActivismIcon size="large" />
-                  </Button>
-                </Link>
-              </TableCell>
+          {isAdmin ?
+            <TableCell />
+            :
+            <TableCell>
+              <Link to={`/faireundon/${project.projectId}`}>
+                <Button disabled={(project.status === "2" || project.status === "3") ? false : true}
+                  variant="contained" color='secondary' sx={{ minWidth: '120px' }}>
+                  <VolunteerActivismIcon size="large" />
+                </Button>
+              </Link>
+            </TableCell>
           }
         </TableRow>
 
@@ -264,31 +317,35 @@ const ViewProjects = (props) => {
           Liste des projets
         </Typography>
 
-        {allProjects &&
+        {allProjects && allProjectsByStatus &&
           <TableContainer component={Paper}>
             <Table size="small" sx={{ minWidth: 650 }} aria-label="collapsible table">
               <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
                   <TableCell />
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Zone</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Statut</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Dons collectés</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white', whiteSpace: 'nowrap' }}>Objectif min.</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Financement</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Clôture</TableCell>
-                  {
-                    isAdmin ?
-                      <TableCell />
-                      :
-                      <TableCell sx={{ typography: 'upper', color: 'white' }}>faire un don</TableCell>
+                  <TableCell sx={{ typography: 'upper', color: 'white' }}>
+                    <Button onClick={() => handleSelectedStatus()} variant="text" sx={{ p: 0, color: 'white', typography: 'upper' }}
+                      endIcon={<PlaylistPlayIcon />}
+                    >Statut</Button>
+                  </TableCell>
+                  <TableCell><SortTheTable name='Projet' columnName='title' /></TableCell>
+                  <TableCell><SortTheTable name='Zone' columnName='geographicalArea' /></TableCell>
+                  <TableCell sx={{ whiteSpace: 'nowrap' }}><SortTheTable name='Dons collectés' columnName='projectBalance' /></TableCell>
+                  <TableCell sx={{ whiteSpace: 'nowrap' }}><SortTheTable name='Objectif min.' columnName='minAmount' /></TableCell>
+                  <TableCell><SortTheTable name='Financement' columnName='currentPercentage' /></TableCell>
+                  <TableCell><SortTheTable name='Clôture' columnName='daysLeft' /></TableCell>
+
+                  {isAdmin ?
+                    <TableCell />
+                    :
+                    <TableCell sx={{ typography: 'upper', color: 'white' }}>faire un don</TableCell>
                   }
                 </TableRow>
               </TableHead>
               <TableBody>
                 {(rowsPerPage > 0
-                  ? allProjects.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  : allProjects
+                  ? allProjectsByStatus.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : allProjectsByStatus
                 ).map((project) => (
                   <Row key={project.projectId} project={project} />
                 ))}
@@ -299,7 +356,7 @@ const ViewProjects = (props) => {
                   <TablePagination
                     rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                     colSpan={9}
-                    count={allProjects.length}
+                    count={allProjectsByStatus.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     labelRowsPerPage="Lignes par page"

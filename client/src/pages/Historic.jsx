@@ -22,7 +22,7 @@ import Button from '@mui/material/Button';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Historic = (props) => {
-  const { data, msToDate, allNpos } = props
+  const { data, msToDate, allNpos, stringValue } = props
   const { web3 } = data
   const [allDonations, setAllDonations] = useState(null)
   const [allProjects, setAllProjects] = useState(null)
@@ -82,15 +82,34 @@ const Historic = (props) => {
 
   const handleSort = (columnName) => {
     direction === 'desc' ? setDirection('asc') : setDirection('desc')
-    let res = orderBy(allDonations, [columnName], direction)
-    setAllDonations(res)
+    if (columnName === 'projet') {
+      let res = orderBy(allDonations,
+        x => findProjectInfos(x.projectId, "title"),
+        direction)
+      setAllDonations(res)
+    } else if (columnName === 'npo') {
+      let res = orderBy(allDonations,
+        x => findNpoInfos(findProjectInfos(x.projectId, "npoErc20Address"), "denomination"),
+        direction)
+      setAllDonations(res)
+    } else if (columnName === 'donateur') {
+      let res = orderBy(allDonations,
+        x => findDonorInfos(x.donorId, "surName"),
+        direction)
+      setAllDonations(res)
+    } else {
+      let res = stringValue.includes(columnName) ?
+        orderBy(allDonations, [columnName], direction) :
+        orderBy(allDonations, x => +x[columnName], direction)
+      setAllDonations(res)
+    }
   };
 
   const SortTheTable = (props) => {
     const { name, columnName } = props
 
     return (
-      <Button onClick={() => handleSort(columnName)} variant="text" sx={{ color: 'white', typography: 'upper' }}
+      <Button onClick={() => handleSort(columnName)} variant="text" sx={{ p: 0, color: 'white', typography: 'upper' }}
         endIcon={<ArrowDropDownIcon />}
       >{name}</Button>
     )
@@ -177,11 +196,11 @@ const Historic = (props) => {
             <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead sx={{ bgcolor: 'bckGrd.main' }}>
                 <TableRow selected>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Projet</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>NPO</TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Donateur</TableCell>
+                  <TableCell><SortTheTable name='Projet' columnName='projet' /></TableCell>
+                  <TableCell><SortTheTable name='NPO' columnName='npo' /></TableCell>
+                  <TableCell><SortTheTable name='Donateur' columnName='donateur' /></TableCell>
                   <TableCell><SortTheTable name='Date' columnName='donationDate' /></TableCell>
-                  <TableCell sx={{ typography: 'upper', color: 'white' }}>Montant</TableCell>
+                  <TableCell><SortTheTable name='Montant' columnName='donationAmount' /></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -199,7 +218,7 @@ const Historic = (props) => {
                     <TableCell>{findNpoInfos(findProjectInfos(donation.projectId, "npoErc20Address"), "denomination")}</TableCell>
                     <TableCell sx={{ bgcolor: 'bckGrd.lighten', fontWeight: 'fontWeightBold', whiteSpace: 'nowrap' }}>{findDonorInfos(donation.donorId, "surName")} {findDonorInfos(donation.donorId, "name")}</TableCell>
                     <TableCell>{msToDate(donation.donationDate)}</TableCell>
-                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{web3.utils.fromWei(donation.donationAmount.toString())} EOC</TableCell>
+                    <TableCell sx={{ fontWeight: 'fontWeightMedium', color: 'secondary.darken', bgcolor: 'secondary.lighten', whiteSpace: 'nowrap' }}>{(+web3.utils.fromWei(donation.donationAmount.toString())).toLocaleString()} EOC</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

@@ -92,6 +92,14 @@ const App = () => {
     5: "Droits de l'homme",
     6: "Infrastructure routière",
   }
+  const stringValue = [
+    'description',
+    'geographicalArea',
+    'title',
+    'name',
+    'surName',
+    'denomination'
+  ]
 
   // convertit date epoch (ms) en date JJ/MM/YY
   const msToDate = (x) => new Date(x * 1000).toLocaleDateString()
@@ -176,27 +184,27 @@ const App = () => {
       <Routes>
         {isAdmin &&
           <Route path="/" element={<LayoutAdmin data={data} />}>
-            <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
+            <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} stringValue={stringValue} />} />
             <Route path="/npos" element={<ViewNpos data={data} allNpos={allNpos} />} />
             <Route path="/donateurs" element={<ViewDonors data={data} allDonors={allDonors} />} />
-            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
+            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} stringValue={stringValue} />} />
             <Route path="/*" element={<Page404 />} />
           </Route>}
         {isNpo &&
           <Route path="/" element={<LayoutNpo data={data} />}>
-            <Route path="/mesprojets" element={<MyProjects data={data} msToDate={msToDate} />} />
+            <Route path="/mesprojets" element={<MyProjects data={data} msToDate={msToDate} stringValue={stringValue} />} />
             <Route path="/creerprojet" element={<CreateProject data={data} />} />
-            <Route path="/mesretraits" element={<MyWithdrawals data={data} msToDate={msToDate} />} />
+            <Route path="/mesretraits" element={<MyWithdrawals data={data} msToDate={msToDate} stringValue={stringValue} />} />
             <Route path="/retrait/:id" element={<Withdrawal data={data} />} />
-            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
+            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} stringValue={stringValue} />} />
             <Route path="/*" element={<Page404 />} />
           </Route>}
         {isDonor &&
           <Route path="/" element={<LayoutDonor data={data} />}>
-            <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} />} />
-            <Route path="/mesdons" element={<MyDonations data={data} msToDate={msToDate} causeList={causeList} />} />
+            <Route path="/projets" element={<ViewProjects data={data} msToDate={msToDate} stringValue={stringValue} />} />
+            <Route path="/mesdons" element={<MyDonations data={data} msToDate={msToDate} causeList={causeList} stringValue={stringValue} />} />
             <Route path="/faireundon/:id" element={<MakeDonation data={data} />} />
-            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} />} />
+            <Route path="/historique" element={<Historic data={data} msToDate={msToDate} allNpos={allNpos} stringValue={stringValue} />} />
             <Route path="/*" element={<Page404 />} />
           </Route>}
       </Routes>
