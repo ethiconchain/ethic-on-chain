@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import orderBy from "lodash/orderBy";
 
 import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
@@ -36,7 +37,7 @@ const MyProjects = (props) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const statusProject = {
     0: "Indéfini",
-    1: "A l'étude",
+    1: "Projet à l'étude",
     2: "Collecte en cours",
     3: "Projet en cours",
     4: "Projet annulé",
@@ -72,7 +73,7 @@ const MyProjects = (props) => {
     try {
       const { contract, accounts } = data
       await contract.methods.getProjectsPerNpo(accounts[0]).call()
-        .then(x => setAllMyProjects(x))
+        .then(x => setAllMyProjects(orderBy(x, ['projectId'], 'desc')))
     } catch (error) {
       console.log(error)
     }

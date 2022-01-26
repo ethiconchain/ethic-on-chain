@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import orderBy from "lodash/orderBy";
+
 import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -52,7 +54,7 @@ const MyWithdrawals = (props) => {
     try {
       const { contract, accounts } = data
       await contract.methods.getWithdrawalPerNpo(accounts[0]).call()
-        .then(x => setAllMyWithdrawals(x))
+        .then(x => setAllMyWithdrawals(orderBy(x, ['withdrawalDate'], 'desc')))
     } catch (error) {
       console.log(error)
     }
